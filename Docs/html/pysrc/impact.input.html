@@ -1,0 +1,894 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Input class / base of Sequence class &mdash; Adv. IMPACT 1.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="Adv. IMPACT 1.0.0 documentation" href="../index.html"/>
+        <link rel="up" title="Class Library" href="../classlib.html"/>
+        <link rel="next" title="Result class / base of Sequence class" href="impact.result.html"/>
+        <link rel="prev" title="Sequence class – run control API" href="impact.control.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Adv. IMPACT
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Table of Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../parallel.html">Parallel Computing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../element.html">Lattice Elements</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../classlib.html">Class Library</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="impact.control.html">Sequence class – run control API</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Input class / base of Sequence class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="impact.result.html">Result class / base of Sequence class</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Adv. IMPACT</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../classlib.html">Class Library</a> &raquo;</li>
+        
+      <li>Input class / base of Sequence class</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/pysrc/impact.input.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-impact.input">
+<span id="input-class-base-of-sequence-class"></span><h1>Input class / base of Sequence class<a class="headerlink" href="#module-impact.input" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="impact.input.Input">
+<em class="property">class </em><code class="descclassname">impact.input.</code><code class="descname">Input</code><a class="reference internal" href="../_modules/impact/input.html#Input"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#impact.input.Input" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>Base class for input parameters of Advanced IMPACT.</p>
+<ul class="simple">
+<li><strong>Attributes for simulation parameter</strong></li>
+</ul>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#impact.input.Input.Mpisize" title="impact.input.Input.Mpisize"><code class="xref py py-obj docutils literal"><span class="pre">Mpisize</span></code></a></td>
+<td>int: Number of processors in MPI communicator.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#impact.input.Input.Ndim" title="impact.input.Input.Ndim"><code class="xref py py-obj docutils literal"><span class="pre">Ndim</span></code></a></td>
+<td>int: Dimension of the simulation space (dummy parameter).</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#impact.input.Input.Nxgrid" title="impact.input.Input.Nxgrid"><code class="xref py py-obj docutils literal"><span class="pre">Nxgrid</span></code></a></td>
+<td>int: Number of x mesh grid for space charge (PIC) calculation.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#impact.input.Input.Nygrid" title="impact.input.Input.Nygrid"><code class="xref py py-obj docutils literal"><span class="pre">Nygrid</span></code></a></td>
+<td>int: Number of y mesh grid for space charge (PIC) calculation.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#impact.input.Input.Nzgrid" title="impact.input.Input.Nzgrid"><code class="xref py py-obj docutils literal"><span class="pre">Nzgrid</span></code></a></td>
+<td>int: Number of z mesh grid for space charge (PIC) calculation.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#impact.input.Input.Xbound" title="impact.input.Input.Xbound"><code class="xref py py-obj docutils literal"><span class="pre">Xbound</span></code></a></td>
+<td>float: x (horizontal) pipe width for space charge (PIC) calculation (unit is [m]).</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#impact.input.Input.Ybound" title="impact.input.Input.Ybound"><code class="xref py py-obj docutils literal"><span class="pre">Ybound</span></code></a></td>
+<td>float: y (vertical) pipe width for space charge (PIC) calculation (unit is [m]).</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#impact.input.Input.Zperiod" title="impact.input.Input.Zperiod"><code class="xref py py-obj docutils literal"><span class="pre">Zperiod</span></code></a></td>
+<td>float: z periodic length for space charge (PIC) calculation (unit is [m]).</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#impact.input.Input.Flaginteg" title="impact.input.Input.Flaginteg"><code class="xref py py-obj docutils literal"><span class="pre">Flaginteg</span></code></a></td>
+<td>int: Flag for integration method. 1 for linear map, 2 for nonlinear Lorentz integrator.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#impact.input.Input.Flagerror" title="impact.input.Input.Flagerror"><code class="xref py py-obj docutils literal"><span class="pre">Flagerror</span></code></a></td>
+<td>int: Flag for error study.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#impact.input.Input.Flagdiag" title="impact.input.Input.Flagdiag"><code class="xref py py-obj docutils literal"><span class="pre">Flagdiag</span></code></a></td>
+<td>int: Flag for diagnostic routine. 1 or 3 for standard, 2 or 4 for <cite>n</cite> % emittance, radius output.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#impact.input.Input.Flagbc" title="impact.input.Input.Flagbc"><code class="xref py py-obj docutils literal"><span class="pre">Flagbc</span></code></a></td>
+<td>int: Flag of boundary condition for space charge (PIC) calculation.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#impact.input.Input.Flagsubstep" title="impact.input.Input.Flagsubstep"><code class="xref py py-obj docutils literal"><span class="pre">Flagsubstep</span></code></a></td>
+<td>bool: Flag of sub-cycle for space charge calculation.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#impact.input.Input.Flagrestart" title="impact.input.Input.Flagrestart"><code class="xref py py-obj docutils literal"><span class="pre">Flagrestart</span></code></a></td>
+<td>bool: Flag for restarting the simulation (dummy parameter).</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#impact.input.Input.Flagsc" title="impact.input.Input.Flagsc"><code class="xref py py-obj docutils literal"><span class="pre">Flagsc</span></code></a></td>
+<td>bool: Flag of space-charge calculation.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#impact.input.Input.Outputemit" title="impact.input.Input.Outputemit"><code class="xref py py-obj docutils literal"><span class="pre">Outputemit</span></code></a></td>
+<td>float: Percentage for emittance and radius output (unit is [%]).</td>
+</tr>
+</tbody>
+</table>
+<ul class="simple">
+<li><strong>Attributes for beam parameter</strong></li>
+</ul>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#impact.input.Input.Nptot" title="impact.input.Input.Nptot"><code class="xref py py-obj docutils literal"><span class="pre">Nptot</span></code></a></td>
+<td>int: Total number of macro particles.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#impact.input.Input.Ncharge" title="impact.input.Input.Ncharge"><code class="xref py py-obj docutils literal"><span class="pre">Ncharge</span></code></a></td>
+<td>int: Number of charge states</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#impact.input.Input.Nplist" title="impact.input.Input.Nplist"><code class="xref py py-obj docutils literal"><span class="pre">Nplist</span></code></a></td>
+<td>list of int: List of particle number for each charge state.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#impact.input.Input.Curlist" title="impact.input.Input.Curlist"><code class="xref py py-obj docutils literal"><span class="pre">Curlist</span></code></a></td>
+<td>list of float: List of beam current for each charge state. (unit is [A])</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#impact.input.Input.Ctmlist" title="impact.input.Input.Ctmlist"><code class="xref py py-obj docutils literal"><span class="pre">Ctmlist</span></code></a></td>
+<td>list of float: List of charge to mass ratio for each charge state. (unit is [c^2/eV])</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#impact.input.Input.Energy" title="impact.input.Input.Energy"><code class="xref py py-obj docutils literal"><span class="pre">Energy</span></code></a></td>
+<td>float: Initial kinetic energy (unit is [eV]).</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#impact.input.Input.Mass" title="impact.input.Input.Mass"><code class="xref py py-obj docutils literal"><span class="pre">Mass</span></code></a></td>
+<td>float: Mass of the reference particle (unit is [eV/c^2]).</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#impact.input.Input.Frequency" title="impact.input.Input.Frequency"><code class="xref py py-obj docutils literal"><span class="pre">Frequency</span></code></a></td>
+<td>float: Scaling frequency (unit is [Hz]).</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#impact.input.Input.Chargestate" title="impact.input.Input.Chargestate"><code class="xref py py-obj docutils literal"><span class="pre">Chargestate</span></code></a></td>
+<td>float: Charge state of the reference particle (unit is [1]).</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#impact.input.Input.Phaseini" title="impact.input.Input.Phaseini"><code class="xref py py-obj docutils literal"><span class="pre">Phaseini</span></code></a></td>
+<td>float: Initial phase of the reference particle (unit is [rad]).</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#impact.input.Input.Disttype" title="impact.input.Input.Disttype"><code class="xref py py-obj docutils literal"><span class="pre">Disttype</span></code></a></td>
+<td>int: Initial distribution type.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#impact.input.Input.Distxsigma" title="impact.input.Input.Distxsigma"><code class="xref py py-obj docutils literal"><span class="pre">Distxsigma</span></code></a></td>
+<td>float: x standard deviation of the initial distribution (IMPACT internal unit).</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#impact.input.Input.Distysigma" title="impact.input.Input.Distysigma"><code class="xref py py-obj docutils literal"><span class="pre">Distysigma</span></code></a></td>
+<td>float: y standard deviation of the initial distribution (IMPACT internal unit).</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#impact.input.Input.Distzsigma" title="impact.input.Input.Distzsigma"><code class="xref py py-obj docutils literal"><span class="pre">Distzsigma</span></code></a></td>
+<td>float: z standard deviation of the initial distribution (IMPACT internal unit).</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#impact.input.Input.Distxlambda" title="impact.input.Input.Distxlambda"><code class="xref py py-obj docutils literal"><span class="pre">Distxlambda</span></code></a></td>
+<td>float: x’ (xp, px) standard deviation of the initial distribution (IMPACT internal unit).</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#impact.input.Input.Distylambda" title="impact.input.Input.Distylambda"><code class="xref py py-obj docutils literal"><span class="pre">Distylambda</span></code></a></td>
+<td>float: y’ (yp, py) standard deviation of the initial distribution (IMPACT internal unit).</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#impact.input.Input.Distzlambda" title="impact.input.Input.Distzlambda"><code class="xref py py-obj docutils literal"><span class="pre">Distzlambda</span></code></a></td>
+<td>float: z’ (zp, pz) standard deviation of the initial distribution (IMPACT internal unit).</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#impact.input.Input.Distxmu" title="impact.input.Input.Distxmu"><code class="xref py py-obj docutils literal"><span class="pre">Distxmu</span></code></a></td>
+<td>float: x-x’ coupling term of the initial distribution (IMPACT internal unit).</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#impact.input.Input.Distymu" title="impact.input.Input.Distymu"><code class="xref py py-obj docutils literal"><span class="pre">Distymu</span></code></a></td>
+<td>float: y-y’ coupling term of the initial distribution (IMPACT internal unit).</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#impact.input.Input.Distzmu" title="impact.input.Input.Distzmu"><code class="xref py py-obj docutils literal"><span class="pre">Distzmu</span></code></a></td>
+<td>float: z-z’ coupling term of the initial distribution (IMPACT internal unit).</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#impact.input.Input.Distxtwiss" title="impact.input.Input.Distxtwiss"><code class="xref py py-obj docutils literal"><span class="pre">Distxtwiss</span></code></a></td>
+<td>list of float: x twiss parameter for the initial distribution.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#impact.input.Input.Distytwiss" title="impact.input.Input.Distytwiss"><code class="xref py py-obj docutils literal"><span class="pre">Distytwiss</span></code></a></td>
+<td>list of float: y twiss parameter for the initial distribution.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#impact.input.Input.Distztwiss" title="impact.input.Input.Distztwiss"><code class="xref py py-obj docutils literal"><span class="pre">Distztwiss</span></code></a></td>
+<td>list of float: z twiss parameter for the initial distribution.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#impact.input.Input.Distxquadratic" title="impact.input.Input.Distxquadratic"><code class="xref py py-obj docutils literal"><span class="pre">Distxquadratic</span></code></a></td>
+<td>list of float: x quadratic parameter (IMPACT default) for the initial distribution.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#impact.input.Input.Distyquadratic" title="impact.input.Input.Distyquadratic"><code class="xref py py-obj docutils literal"><span class="pre">Distyquadratic</span></code></a></td>
+<td>list of float: y quadratic parameter (IMPACT default) for the initial distribution.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#impact.input.Input.Distzquadratic" title="impact.input.Input.Distzquadratic"><code class="xref py py-obj docutils literal"><span class="pre">Distzquadratic</span></code></a></td>
+<td>list of float: z quadratic parameter (IMPACT default) for the initial distribution.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#impact.input.Input.Distxoffset" title="impact.input.Input.Distxoffset"><code class="xref py py-obj docutils literal"><span class="pre">Distxoffset</span></code></a></td>
+<td>float: x position offset of the initial distribution (IMPACT internal unit).</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#impact.input.Input.Distyoffset" title="impact.input.Input.Distyoffset"><code class="xref py py-obj docutils literal"><span class="pre">Distyoffset</span></code></a></td>
+<td>float: y position offset of the initial distribution (IMPACT internal unit).</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#impact.input.Input.Distzoffset" title="impact.input.Input.Distzoffset"><code class="xref py py-obj docutils literal"><span class="pre">Distzoffset</span></code></a></td>
+<td>float: z position offset of the initial distribution (IMPACT internal unit).</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#impact.input.Input.Distxpoffset" title="impact.input.Input.Distxpoffset"><code class="xref py py-obj docutils literal"><span class="pre">Distxpoffset</span></code></a></td>
+<td>float: x’ (xp, px) momentum offset of the initial distribution (IMPACT internal unit).</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#impact.input.Input.Distypoffset" title="impact.input.Input.Distypoffset"><code class="xref py py-obj docutils literal"><span class="pre">Distypoffset</span></code></a></td>
+<td>float: y’ (yp, py) momentum offset of the initial distribution (IMPACT internal unit).</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#impact.input.Input.Distzpoffset" title="impact.input.Input.Distzpoffset"><code class="xref py py-obj docutils literal"><span class="pre">Distzpoffset</span></code></a></td>
+<td>float: z’ (zp, pz) offset of the initial distribution (IMPACT internal unit).</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#impact.input.Input.Distxoffset_m" title="impact.input.Input.Distxoffset_m"><code class="xref py py-obj docutils literal"><span class="pre">Distxoffset_m</span></code></a></td>
+<td>float: x position offset of the initial distribution (unit is [m]).</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#impact.input.Input.Distyoffset_m" title="impact.input.Input.Distyoffset_m"><code class="xref py py-obj docutils literal"><span class="pre">Distyoffset_m</span></code></a></td>
+<td>float: y position offset of the initial distribution (unit is [m]).</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#impact.input.Input.Distzoffset_deg" title="impact.input.Input.Distzoffset_deg"><code class="xref py py-obj docutils literal"><span class="pre">Distzoffset_deg</span></code></a></td>
+<td>float: z position offset of the initial distribution (unit is [deg]).</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#impact.input.Input.Distxpoffset_rad" title="impact.input.Input.Distxpoffset_rad"><code class="xref py py-obj docutils literal"><span class="pre">Distxpoffset_rad</span></code></a></td>
+<td>float: x’ (xp, px) momentum offset of the initial distribution (unit is [rad]).</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#impact.input.Input.Distypoffset_rad" title="impact.input.Input.Distypoffset_rad"><code class="xref py py-obj docutils literal"><span class="pre">Distypoffset_rad</span></code></a></td>
+<td>float: y’ (yp, py) momentum offset of the initial distribution (unit is [rad]).</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#impact.input.Input.Distzpoffset_eV" title="impact.input.Input.Distzpoffset_eV"><code class="xref py py-obj docutils literal"><span class="pre">Distzpoffset_eV</span></code></a></td>
+<td>float: z’ (zp, pz) offset of the initial distribution (unit is [eV]).</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#impact.input.Input.Distxmismatch" title="impact.input.Input.Distxmismatch"><code class="xref py py-obj docutils literal"><span class="pre">Distxmismatch</span></code></a></td>
+<td>float: x mismatch factor of the initial distribution (unit is [1]).</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#impact.input.Input.Distymismatch" title="impact.input.Input.Distymismatch"><code class="xref py py-obj docutils literal"><span class="pre">Distymismatch</span></code></a></td>
+<td>float: y mismatch factor of the initial distribution (unit is [1]).</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#impact.input.Input.Distzmismatch" title="impact.input.Input.Distzmismatch"><code class="xref py py-obj docutils literal"><span class="pre">Distzmismatch</span></code></a></td>
+<td>float: z mismatch factor of the initial distribution (unit is [1]).</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#impact.input.Input.Distxpmismatch" title="impact.input.Input.Distxpmismatch"><code class="xref py py-obj docutils literal"><span class="pre">Distxpmismatch</span></code></a></td>
+<td>float: x’ (xp, px) mismatch factor of the initial distribution (unit is [1]).</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#impact.input.Input.Distypmismatch" title="impact.input.Input.Distypmismatch"><code class="xref py py-obj docutils literal"><span class="pre">Distypmismatch</span></code></a></td>
+<td>float: x’ (xp, px) mismatch factor of the initial distribution (unit is [1]).</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#impact.input.Input.Distzpmismatch" title="impact.input.Input.Distzpmismatch"><code class="xref py py-obj docutils literal"><span class="pre">Distzpmismatch</span></code></a></td>
+<td>float: z’ (zp, pz) mismatch factor of the initial distribution (unit is [1]).</td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="impact.input.Input.Mpisize">
+<code class="descname">Mpisize</code><a class="headerlink" href="#impact.input.Input.Mpisize" title="Permalink to this definition">¶</a></dt>
+<dd><p>int: Number of processors in MPI communicator.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="impact.input.Input.Ndim">
+<code class="descname">Ndim</code><a class="headerlink" href="#impact.input.Input.Ndim" title="Permalink to this definition">¶</a></dt>
+<dd><p>int: Dimension of the simulation space (dummy parameter).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="impact.input.Input.Nptot">
+<code class="descname">Nptot</code><a class="headerlink" href="#impact.input.Input.Nptot" title="Permalink to this definition">¶</a></dt>
+<dd><p>int: Total number of macro particles.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="impact.input.Input.Flaginteg">
+<code class="descname">Flaginteg</code><a class="headerlink" href="#impact.input.Input.Flaginteg" title="Permalink to this definition">¶</a></dt>
+<dd><p>int: Flag for integration method. 1 for linear map, 2 for nonlinear Lorentz integrator.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="impact.input.Input.Flagerror">
+<code class="descname">Flagerror</code><a class="headerlink" href="#impact.input.Input.Flagerror" title="Permalink to this definition">¶</a></dt>
+<dd><p>int: Flag for error study.</p>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>0 : No error simulation</li>
+<li>1 : Use <code class="docutils literal"><span class="pre">dx</span></code>, <code class="docutils literal"><span class="pre">dy</span></code>, <code class="docutils literal"><span class="pre">pitch</span></code>, <code class="docutils literal"><span class="pre">yaw</span></code> and <code class="docutils literal"><span class="pre">roll</span></code> errors to the lattice element.</li>
+<li>2 : Use entrance offsets (<code class="docutils literal"><span class="pre">dx0</span></code>, <code class="docutils literal"><span class="pre">dy0</span></code>), exit offsets (<code class="docutils literal"><span class="pre">dx1</span></code>, <code class="docutils literal"><span class="pre">dy1</span></code>), and <code class="docutils literal"><span class="pre">roll</span></code> errors to the lattice element.</li>
+</ul>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="impact.input.Input.Flagdiag">
+<code class="descname">Flagdiag</code><a class="headerlink" href="#impact.input.Input.Flagdiag" title="Permalink to this definition">¶</a></dt>
+<dd><p>int: Flag for diagnostic routine. 1 or 3 for standard, 2 or 4 for <cite>n</cite> % emittance, radius output.</p>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>1 or 2 : Diagnostic routine is called for each segment.</li>
+<li>3 or 4 : Diagnostic routine is called in case of element type = -23 (monitor).</li>
+</ul>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="impact.input.Input.Nxgrid">
+<code class="descname">Nxgrid</code><a class="headerlink" href="#impact.input.Input.Nxgrid" title="Permalink to this definition">¶</a></dt>
+<dd><p>int: Number of x mesh grid for space charge (PIC) calculation.</p>
+<p class="rubric">Notes</p>
+<p>The x mesh number must be <span class="math">\(2^n\)</span> (for <a class="reference internal" href="#impact.input.Input.Flagbc" title="impact.input.Input.Flagbc"><code class="xref py py-func docutils literal"><span class="pre">Flagbc</span></code></a> equals to 1, 2, 3, or 4)
+or <span class="math">\(2^n+1\)</span> (for <a class="reference internal" href="#impact.input.Input.Flagbc" title="impact.input.Input.Flagbc"><code class="xref py py-func docutils literal"><span class="pre">Flagbc</span></code></a> equals to 5 or 6).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="impact.input.Input.Nygrid">
+<code class="descname">Nygrid</code><a class="headerlink" href="#impact.input.Input.Nygrid" title="Permalink to this definition">¶</a></dt>
+<dd><p>int: Number of y mesh grid for space charge (PIC) calculation.</p>
+<p class="rubric">Notes</p>
+<p>The y mesh number must be <span class="math">\(2^n\)</span> (for <a class="reference internal" href="#impact.input.Input.Flagbc" title="impact.input.Input.Flagbc"><code class="xref py py-func docutils literal"><span class="pre">Flagbc</span></code></a> equals to 1 or 2)
+or <span class="math">\(2^n+1\)</span> (for <a class="reference internal" href="#impact.input.Input.Flagbc" title="impact.input.Input.Flagbc"><code class="xref py py-func docutils literal"><span class="pre">Flagbc</span></code></a> equals to 3, 4, 5, or 6).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="impact.input.Input.Nzgrid">
+<code class="descname">Nzgrid</code><a class="headerlink" href="#impact.input.Input.Nzgrid" title="Permalink to this definition">¶</a></dt>
+<dd><p>int: Number of z mesh grid for space charge (PIC) calculation.</p>
+<p class="rubric">Notes</p>
+<p>The z mesh number must be <span class="math">\(2^n\)</span> (for <a class="reference internal" href="#impact.input.Input.Flagbc" title="impact.input.Input.Flagbc"><code class="xref py py-func docutils literal"><span class="pre">Flagbc</span></code></a> equals to 1, 3, or 5)
+or <span class="math">\(2^n+1\)</span> (for <a class="reference internal" href="#impact.input.Input.Flagbc" title="impact.input.Input.Flagbc"><code class="xref py py-func docutils literal"><span class="pre">Flagbc</span></code></a> equals to 2, 4, or 6).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="impact.input.Input.Flagbc">
+<code class="descname">Flagbc</code><a class="headerlink" href="#impact.input.Input.Flagbc" title="Permalink to this definition">¶</a></dt>
+<dd><p>int: Flag of boundary condition for space charge (PIC) calculation.</p>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>1 : 3D open. In this case, all mesh number (<a class="reference internal" href="#impact.input.Input.Nxgrid" title="impact.input.Input.Nxgrid"><code class="xref py py-func docutils literal"><span class="pre">Nxgrid</span></code></a>,
+<a class="reference internal" href="#impact.input.Input.Nygrid" title="impact.input.Input.Nygrid"><code class="xref py py-func docutils literal"><span class="pre">Nygrid</span></code></a>, <a class="reference internal" href="#impact.input.Input.Nzgrid" title="impact.input.Input.Nzgrid"><code class="xref py py-func docutils literal"><span class="pre">Nzgrid</span></code></a>) must be <span class="math">\(2^n\)</span>.</li>
+<li>2 : Transverse open, longitudinal periodic. In this case,
+<a class="reference internal" href="#impact.input.Input.Nxgrid" title="impact.input.Input.Nxgrid"><code class="xref py py-func docutils literal"><span class="pre">Nxgrid</span></code></a> and <a class="reference internal" href="#impact.input.Input.Nygrid" title="impact.input.Input.Nygrid"><code class="xref py py-func docutils literal"><span class="pre">Nygrid</span></code></a> must be <span class="math">\(2^n\)</span>,
+<a class="reference internal" href="#impact.input.Input.Nzgrid" title="impact.input.Input.Nzgrid"><code class="xref py py-func docutils literal"><span class="pre">Nzgrid</span></code></a> must be <span class="math">\(2^n+1\)</span>.</li>
+<li>3 : Transverse finite, longitudinal open round pipe. In this case,
+<a class="reference internal" href="#impact.input.Input.Nxgrid" title="impact.input.Input.Nxgrid"><code class="xref py py-func docutils literal"><span class="pre">Nxgrid</span></code></a> and <a class="reference internal" href="#impact.input.Input.Nzgrid" title="impact.input.Input.Nzgrid"><code class="xref py py-func docutils literal"><span class="pre">Nzgrid</span></code></a> must be <span class="math">\(2^n\)</span>,
+<a class="reference internal" href="#impact.input.Input.Nygrid" title="impact.input.Input.Nygrid"><code class="xref py py-func docutils literal"><span class="pre">Nygrid</span></code></a> must be <span class="math">\(2^n+1\)</span>.</li>
+<li>4 : Transverse finite, longitudinal periodic round pipe. In this case
+<a class="reference internal" href="#impact.input.Input.Nxgrid" title="impact.input.Input.Nxgrid"><code class="xref py py-func docutils literal"><span class="pre">Nxgrid</span></code></a> must be <span class="math">\(2^n\)</span>,
+<a class="reference internal" href="#impact.input.Input.Nygrid" title="impact.input.Input.Nygrid"><code class="xref py py-func docutils literal"><span class="pre">Nygrid</span></code></a> and <a class="reference internal" href="#impact.input.Input.Nzgrid" title="impact.input.Input.Nzgrid"><code class="xref py py-func docutils literal"><span class="pre">Nzgrid</span></code></a> must be <span class="math">\(2^n+1\)</span>.</li>
+<li>5 : Transverse finite, longitudinal open rectangular pipe. In this case,
+<a class="reference internal" href="#impact.input.Input.Nzgrid" title="impact.input.Input.Nzgrid"><code class="xref py py-func docutils literal"><span class="pre">Nzgrid</span></code></a> must be <span class="math">\(2^n\)</span>,
+<a class="reference internal" href="#impact.input.Input.Nxgrid" title="impact.input.Input.Nxgrid"><code class="xref py py-func docutils literal"><span class="pre">Nxgrid</span></code></a> and <a class="reference internal" href="#impact.input.Input.Nygrid" title="impact.input.Input.Nygrid"><code class="xref py py-func docutils literal"><span class="pre">Nygrid</span></code></a> must be <span class="math">\(2^n+1\)</span>.</li>
+<li>6 : Transverse finite, longitudinal periodic rectangular pipe. In this case,
+all mesh number ( <a class="reference internal" href="#impact.input.Input.Nxgrid" title="impact.input.Input.Nxgrid"><code class="xref py py-func docutils literal"><span class="pre">Nxgrid</span></code></a>, <a class="reference internal" href="#impact.input.Input.Nygrid" title="impact.input.Input.Nygrid"><code class="xref py py-func docutils literal"><span class="pre">Nygrid</span></code></a>,
+<a class="reference internal" href="#impact.input.Input.Nzgrid" title="impact.input.Input.Nzgrid"><code class="xref py py-func docutils literal"><span class="pre">Nzgrid</span></code></a>) must be <span class="math">\(2^n+1\)</span>.</li>
+</ul>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="impact.input.Input.Xbound">
+<code class="descname">Xbound</code><a class="headerlink" href="#impact.input.Input.Xbound" title="Permalink to this definition">¶</a></dt>
+<dd><p>float: x (horizontal) pipe width for space charge (PIC) calculation (unit is [m]).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="impact.input.Input.Ybound">
+<code class="descname">Ybound</code><a class="headerlink" href="#impact.input.Input.Ybound" title="Permalink to this definition">¶</a></dt>
+<dd><p>float: y (vertical) pipe width for space charge (PIC) calculation (unit is [m]).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="impact.input.Input.Zperiod">
+<code class="descname">Zperiod</code><a class="headerlink" href="#impact.input.Input.Zperiod" title="Permalink to this definition">¶</a></dt>
+<dd><p>float: z periodic length for space charge (PIC) calculation (unit is [m]).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="impact.input.Input.Flagrestart">
+<code class="descname">Flagrestart</code><a class="headerlink" href="#impact.input.Input.Flagrestart" title="Permalink to this definition">¶</a></dt>
+<dd><p>bool: Flag for restarting the simulation (dummy parameter).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="impact.input.Input.Flagsubstep">
+<code class="descname">Flagsubstep</code><a class="headerlink" href="#impact.input.Input.Flagsubstep" title="Permalink to this definition">¶</a></dt>
+<dd><p>bool: Flag of sub-cycle for space charge calculation.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="impact.input.Input.Ncharge">
+<code class="descname">Ncharge</code><a class="headerlink" href="#impact.input.Input.Ncharge" title="Permalink to this definition">¶</a></dt>
+<dd><p>int: Number of charge states</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="impact.input.Input.Nplist">
+<code class="descname">Nplist</code><a class="headerlink" href="#impact.input.Input.Nplist" title="Permalink to this definition">¶</a></dt>
+<dd><p>list of int: List of particle number for each charge state.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="impact.input.Input.Curlist">
+<code class="descname">Curlist</code><a class="headerlink" href="#impact.input.Input.Curlist" title="Permalink to this definition">¶</a></dt>
+<dd><p>list of float: List of beam current for each charge state. (unit is [A])</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="impact.input.Input.Ctmlist">
+<code class="descname">Ctmlist</code><a class="headerlink" href="#impact.input.Input.Ctmlist" title="Permalink to this definition">¶</a></dt>
+<dd><p>list of float: List of charge to mass ratio for each charge state. (unit is [c^2/eV])</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="impact.input.Input.Flagsc">
+<code class="descname">Flagsc</code><a class="headerlink" href="#impact.input.Input.Flagsc" title="Permalink to this definition">¶</a></dt>
+<dd><p>bool: Flag of space-charge calculation.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="impact.input.Input.Energy">
+<code class="descname">Energy</code><a class="headerlink" href="#impact.input.Input.Energy" title="Permalink to this definition">¶</a></dt>
+<dd><p>float: Initial kinetic energy (unit is [eV]).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="impact.input.Input.Mass">
+<code class="descname">Mass</code><a class="headerlink" href="#impact.input.Input.Mass" title="Permalink to this definition">¶</a></dt>
+<dd><p>float: Mass of the reference particle (unit is [eV/c^2]).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="impact.input.Input.Chargestate">
+<code class="descname">Chargestate</code><a class="headerlink" href="#impact.input.Input.Chargestate" title="Permalink to this definition">¶</a></dt>
+<dd><p>float: Charge state of the reference particle (unit is [1]).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="impact.input.Input.Frequency">
+<code class="descname">Frequency</code><a class="headerlink" href="#impact.input.Input.Frequency" title="Permalink to this definition">¶</a></dt>
+<dd><p>float: Scaling frequency (unit is [Hz]).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="impact.input.Input.Phaseini">
+<code class="descname">Phaseini</code><a class="headerlink" href="#impact.input.Input.Phaseini" title="Permalink to this definition">¶</a></dt>
+<dd><p>float: Initial phase of the reference particle (unit is [rad]).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="impact.input.Input.Outputemit">
+<code class="descname">Outputemit</code><a class="headerlink" href="#impact.input.Input.Outputemit" title="Permalink to this definition">¶</a></dt>
+<dd><p>float: Percentage for emittance and radius output (unit is [%]).</p>
+<p class="rubric">Notes</p>
+<p>This value is used in case of <a class="reference internal" href="#impact.input.Input.Flagdiag" title="impact.input.Input.Flagdiag"><code class="xref py py-func docutils literal"><span class="pre">Flagdiag</span></code></a> equals to 2 or 4.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="impact.input.Input.Disttype">
+<code class="descname">Disttype</code><a class="headerlink" href="#impact.input.Input.Disttype" title="Permalink to this definition">¶</a></dt>
+<dd><p>int: Initial distribution type.</p>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>1 : 6D rectangle in phase space for single charge state.</li>
+<li>2 : 6D Gaussian distribution for single charge state.</li>
+<li>3 : 6D Waterbag distribution for single charge state.</li>
+<li>4 : Semi-Gaussian distribution for single charge state.</li>
+<li>5 : KV distribution for single charge state.</li>
+<li>16 : 6D Waterbag distribution for multi charge states (recommended).</li>
+<li>17 : 6D Gaussian distribution for multi charge states (recommended).</li>
+<li>19 : User input distribution (recommended). File path is defined in <a class="reference internal" href="impact.control.html#impact.control.Sequence.distribute" title="impact.control.Sequence.distribute"><code class="xref py py-func docutils literal"><span class="pre">distribute</span></code></a>.</li>
+</ul>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="impact.input.Input.Distxsigma">
+<code class="descname">Distxsigma</code><a class="headerlink" href="#impact.input.Input.Distxsigma" title="Permalink to this definition">¶</a></dt>
+<dd><p>float: x standard deviation of the initial distribution (IMPACT internal unit).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="impact.input.Input.Distxlambda">
+<code class="descname">Distxlambda</code><a class="headerlink" href="#impact.input.Input.Distxlambda" title="Permalink to this definition">¶</a></dt>
+<dd><p>float: x’ (xp, px) standard deviation of the initial distribution (IMPACT internal unit).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="impact.input.Input.Distxmu">
+<code class="descname">Distxmu</code><a class="headerlink" href="#impact.input.Input.Distxmu" title="Permalink to this definition">¶</a></dt>
+<dd><p>float: x-x’ coupling term of the initial distribution (IMPACT internal unit).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="impact.input.Input.Distysigma">
+<code class="descname">Distysigma</code><a class="headerlink" href="#impact.input.Input.Distysigma" title="Permalink to this definition">¶</a></dt>
+<dd><p>float: y standard deviation of the initial distribution (IMPACT internal unit).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="impact.input.Input.Distylambda">
+<code class="descname">Distylambda</code><a class="headerlink" href="#impact.input.Input.Distylambda" title="Permalink to this definition">¶</a></dt>
+<dd><p>float: y’ (yp, py) standard deviation of the initial distribution (IMPACT internal unit).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="impact.input.Input.Distymu">
+<code class="descname">Distymu</code><a class="headerlink" href="#impact.input.Input.Distymu" title="Permalink to this definition">¶</a></dt>
+<dd><p>float: y-y’ coupling term of the initial distribution (IMPACT internal unit).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="impact.input.Input.Distzsigma">
+<code class="descname">Distzsigma</code><a class="headerlink" href="#impact.input.Input.Distzsigma" title="Permalink to this definition">¶</a></dt>
+<dd><p>float: z standard deviation of the initial distribution (IMPACT internal unit).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="impact.input.Input.Distzlambda">
+<code class="descname">Distzlambda</code><a class="headerlink" href="#impact.input.Input.Distzlambda" title="Permalink to this definition">¶</a></dt>
+<dd><p>float: z’ (zp, pz) standard deviation of the initial distribution (IMPACT internal unit).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="impact.input.Input.Distzmu">
+<code class="descname">Distzmu</code><a class="headerlink" href="#impact.input.Input.Distzmu" title="Permalink to this definition">¶</a></dt>
+<dd><p>float: z-z’ coupling term of the initial distribution (IMPACT internal unit).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="impact.input.Input.Distxmismatch">
+<code class="descname">Distxmismatch</code><a class="headerlink" href="#impact.input.Input.Distxmismatch" title="Permalink to this definition">¶</a></dt>
+<dd><p>float: x mismatch factor of the initial distribution (unit is [1]).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="impact.input.Input.Distxpmismatch">
+<code class="descname">Distxpmismatch</code><a class="headerlink" href="#impact.input.Input.Distxpmismatch" title="Permalink to this definition">¶</a></dt>
+<dd><p>float: x’ (xp, px) mismatch factor of the initial distribution (unit is [1]).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="impact.input.Input.Distxoffset">
+<code class="descname">Distxoffset</code><a class="headerlink" href="#impact.input.Input.Distxoffset" title="Permalink to this definition">¶</a></dt>
+<dd><p>float: x position offset of the initial distribution (IMPACT internal unit).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="impact.input.Input.Distxpoffset">
+<code class="descname">Distxpoffset</code><a class="headerlink" href="#impact.input.Input.Distxpoffset" title="Permalink to this definition">¶</a></dt>
+<dd><p>float: x’ (xp, px) momentum offset of the initial distribution (IMPACT internal unit).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="impact.input.Input.Distymismatch">
+<code class="descname">Distymismatch</code><a class="headerlink" href="#impact.input.Input.Distymismatch" title="Permalink to this definition">¶</a></dt>
+<dd><p>float: y mismatch factor of the initial distribution (unit is [1]).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="impact.input.Input.Distypmismatch">
+<code class="descname">Distypmismatch</code><a class="headerlink" href="#impact.input.Input.Distypmismatch" title="Permalink to this definition">¶</a></dt>
+<dd><p>float: x’ (xp, px) mismatch factor of the initial distribution (unit is [1]).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="impact.input.Input.Distyoffset">
+<code class="descname">Distyoffset</code><a class="headerlink" href="#impact.input.Input.Distyoffset" title="Permalink to this definition">¶</a></dt>
+<dd><p>float: y position offset of the initial distribution (IMPACT internal unit).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="impact.input.Input.Distypoffset">
+<code class="descname">Distypoffset</code><a class="headerlink" href="#impact.input.Input.Distypoffset" title="Permalink to this definition">¶</a></dt>
+<dd><p>float: y’ (yp, py) momentum offset of the initial distribution (IMPACT internal unit).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="impact.input.Input.Distzmismatch">
+<code class="descname">Distzmismatch</code><a class="headerlink" href="#impact.input.Input.Distzmismatch" title="Permalink to this definition">¶</a></dt>
+<dd><p>float: z mismatch factor of the initial distribution (unit is [1]).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="impact.input.Input.Distzpmismatch">
+<code class="descname">Distzpmismatch</code><a class="headerlink" href="#impact.input.Input.Distzpmismatch" title="Permalink to this definition">¶</a></dt>
+<dd><p>float: z’ (zp, pz) mismatch factor of the initial distribution (unit is [1]).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="impact.input.Input.Distzoffset">
+<code class="descname">Distzoffset</code><a class="headerlink" href="#impact.input.Input.Distzoffset" title="Permalink to this definition">¶</a></dt>
+<dd><p>float: z position offset of the initial distribution (IMPACT internal unit).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="impact.input.Input.Distzpoffset">
+<code class="descname">Distzpoffset</code><a class="headerlink" href="#impact.input.Input.Distzpoffset" title="Permalink to this definition">¶</a></dt>
+<dd><p>float: z’ (zp, pz) offset of the initial distribution (IMPACT internal unit).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="impact.input.Input.Distxtwiss">
+<code class="descname">Distxtwiss</code><a class="headerlink" href="#impact.input.Input.Distxtwiss" title="Permalink to this definition">¶</a></dt>
+<dd><p>list of float: x twiss parameter for the initial distribution.</p>
+<p>List of input parameters and units is [alpha(1), beta(m), normalized emittance(m-rad)].</p>
+<p class="rubric">Notes</p>
+<p>Input list length must be 3.</p>
+<p>keywords: Courant Snyder parameters, horizontal</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="impact.input.Input.Distxquadratic">
+<code class="descname">Distxquadratic</code><a class="headerlink" href="#impact.input.Input.Distxquadratic" title="Permalink to this definition">¶</a></dt>
+<dd><p>list of float: x quadratic parameter (IMPACT default) for the initial distribution.</p>
+<p>List of input parameters is [sigma, lambda, mu], IMPACT internal units.</p>
+<p class="rubric">Notes</p>
+<p>Input list length must be 3.</p>
+<p>keywords: horizontal</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="impact.input.Input.Distytwiss">
+<code class="descname">Distytwiss</code><a class="headerlink" href="#impact.input.Input.Distytwiss" title="Permalink to this definition">¶</a></dt>
+<dd><p>list of float: y twiss parameter for the initial distribution.</p>
+<p>List of input parameters and units is [alpha(1), beta(m), normalized emittance(m-rad)].</p>
+<p class="rubric">Notes</p>
+<p>Input list length must be 3.</p>
+<p>keywords: Courant Snyder parameters, vertical</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="impact.input.Input.Distyquadratic">
+<code class="descname">Distyquadratic</code><a class="headerlink" href="#impact.input.Input.Distyquadratic" title="Permalink to this definition">¶</a></dt>
+<dd><p>list of float: y quadratic parameter (IMPACT default) for the initial distribution.</p>
+<p>List of input parameters is [sigma, lambda, mu], IMPACT internal units.</p>
+<p class="rubric">Notes</p>
+<p>Input list length must be 3.</p>
+<p>keywords: vertical</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="impact.input.Input.Distztwiss">
+<code class="descname">Distztwiss</code><a class="headerlink" href="#impact.input.Input.Distztwiss" title="Permalink to this definition">¶</a></dt>
+<dd><p>list of float: z twiss parameter for the initial distribution.</p>
+<p>List of input parameters and units is [alpha(1), beta(m), normalized emittance(m-rad)].</p>
+<p class="rubric">Notes</p>
+<p>Input list length must be 3.</p>
+<p>keywords: Courant Snyder parameters, longitudinal</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="impact.input.Input.Distzquadratic">
+<code class="descname">Distzquadratic</code><a class="headerlink" href="#impact.input.Input.Distzquadratic" title="Permalink to this definition">¶</a></dt>
+<dd><p>list of float: z quadratic parameter (IMPACT default) for the initial distribution.</p>
+<p>List of input parameters is [sigma, lambda, mu], IMPACT internal units.</p>
+<p class="rubric">Notes</p>
+<p>Input list length must be 3.</p>
+<p>keywords: vertical</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="impact.input.Input.Distxoffset_m">
+<code class="descname">Distxoffset_m</code><a class="headerlink" href="#impact.input.Input.Distxoffset_m" title="Permalink to this definition">¶</a></dt>
+<dd><p>float: x position offset of the initial distribution (unit is [m]).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="impact.input.Input.Distxpoffset_rad">
+<code class="descname">Distxpoffset_rad</code><a class="headerlink" href="#impact.input.Input.Distxpoffset_rad" title="Permalink to this definition">¶</a></dt>
+<dd><p>float: x’ (xp, px) momentum offset of the initial distribution (unit is [rad]).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="impact.input.Input.Distyoffset_m">
+<code class="descname">Distyoffset_m</code><a class="headerlink" href="#impact.input.Input.Distyoffset_m" title="Permalink to this definition">¶</a></dt>
+<dd><p>float: y position offset of the initial distribution (unit is [m]).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="impact.input.Input.Distypoffset_rad">
+<code class="descname">Distypoffset_rad</code><a class="headerlink" href="#impact.input.Input.Distypoffset_rad" title="Permalink to this definition">¶</a></dt>
+<dd><p>float: y’ (yp, py) momentum offset of the initial distribution (unit is [rad]).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="impact.input.Input.Distzoffset_deg">
+<code class="descname">Distzoffset_deg</code><a class="headerlink" href="#impact.input.Input.Distzoffset_deg" title="Permalink to this definition">¶</a></dt>
+<dd><p>float: z position offset of the initial distribution (unit is [deg]).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="impact.input.Input.Distzpoffset_eV">
+<code class="descname">Distzpoffset_eV</code><a class="headerlink" href="#impact.input.Input.Distzpoffset_eV" title="Permalink to this definition">¶</a></dt>
+<dd><p>float: z’ (zp, pz) offset of the initial distribution (unit is [eV]).</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="impact.result.html" class="btn btn-neutral float-right" title="Result class / base of Sequence class" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="impact.control.html" class="btn btn-neutral" title="Sequence class – run control API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Kei Fukushima.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.0.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -1,0 +1,384 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Parallel Computing &mdash; Adv. IMPACT 1.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="Adv. IMPACT 1.0.0 documentation" href="index.html"/>
+        <link rel="next" title="Lattice Elements" href="element.html"/>
+        <link rel="prev" title="Tutorial" href="tutorial.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Adv. IMPACT
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Table of Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Parallel Computing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#mpi-usage-in-command-line">MPI usage in command line</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mpi-usage-in-jupyter-notebook">MPI usage in jupyter-notebook</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tips">Tips</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="element.html">Lattice Elements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classlib.html">Class Library</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Adv. IMPACT</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Parallel Computing</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/parallel.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="parallel-computing">
+<h1>Parallel Computing<a class="headerlink" href="#parallel-computing" title="Permalink to this headline">¶</a></h1>
+<p>IMPACT supports MPI (Message Passing Interface) for Parallel computing.</p>
+<div class="section" id="mpi-usage-in-command-line">
+<h2>MPI usage in command line<a class="headerlink" href="#mpi-usage-in-command-line" title="Permalink to this headline">¶</a></h2>
+<p>Python API supports MPI by <a class="reference external" href="https://mpi4py.scipy.org/">mpi4py</a>,
+all <a class="reference internal" href="pysrc/impact.control.html#impact.control.Sequence" title="impact.control.Sequence"><code class="xref py py-class docutils literal"><span class="pre">Sequence</span></code></a> class objects are parallelized automatically.</p>
+<p>For example,</p>
+<p>run_parallel.py:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">impact</span> <span class="k">import</span> <span class="n">Sequence</span><span class="p">,</span> <span class="n">mpisize</span><span class="p">,</span> <span class="n">mpirank</span>
+<span class="kn">import</span> <span class="nn">scipy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="nb">print</span> <span class="s1">&#39;Launch with process &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">mpirank</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; of &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">mpisize</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.&#39;</span>
+<span class="n">sq</span> <span class="o">=</span> <span class="n">Sequence</span><span class="p">(</span><span class="s1">&#39;user-defined-input&#39;</span><span class="p">)</span>
+<span class="n">sq</span><span class="o">.</span><span class="n">subdir</span> <span class="o">=</span> <span class="s1">&#39;data&#39;</span>
+<span class="n">sq</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
+<span class="k">if</span> <span class="n">mpirank</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="nb">print</span> <span class="s1">&#39;Run Simulation&#39;</span>
+<span class="n">sq</span><span class="o">.</span><span class="n">distribute</span><span class="p">()</span>
+<span class="n">sq</span><span class="o">.</span><span class="n">run</span><span class="p">()</span> <span class="c1"># compute in parallel</span>
+
+<span class="k">if</span> <span class="n">mpirank</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="nb">print</span> <span class="s1">&#39;Output Simulation Result&#39;</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">savetxt</span><span class="p">(</span><span class="s1">&#39;result.dat&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">([</span><span class="n">sq</span><span class="o">.</span><span class="n">hrefz</span><span class="p">(),</span> <span class="n">sq</span><span class="o">.</span><span class="n">hxrms</span><span class="p">(),</span> <span class="n">sq</span><span class="o">.</span><span class="n">hyrms</span><span class="p">()]))</span>
+</pre></div>
+</div>
+<p>and user can execute this script by using <code class="docutils literal"><span class="pre">mpirun</span></code>.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ mpirun -np 4 python run_parallel.py
+Launch with process 3 of 4.
+Launch with process 1 of 4.
+Launch with process 0 of 4.
+Launch with process 2 of 4.
+Run Simulation
+Output Simulation Result
+</pre></div>
+</div>
+</div>
+<div class="section" id="mpi-usage-in-jupyter-notebook">
+<h2>MPI usage in jupyter-notebook<a class="headerlink" href="#mpi-usage-in-jupyter-notebook" title="Permalink to this headline">¶</a></h2>
+<p>Install <a class="reference external" href="https://github.com/ipython/ipyparallel">ipyparallel</a> with proper permissions.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ pip install ipyparallel # may need to install with sudo
+</pre></div>
+</div>
+<p>Launch MPI cluster.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ ipcluster start -n 4 --engines=MPIEngineSetLauncher # launch with 4 processes
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Cluster launched directory is defined as the working directory.
+If you input <strong>relative path</strong> in the notebook, the path is pursued form this working directory.</p>
+</div>
+<p>After the clusters are running with MPI, user can start <code class="docutils literal"><span class="pre">jupyter-notebook</span></code> in parallel.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ jupyter-notebook
+</pre></div>
+</div>
+<p>In the notebook, user need to create a <code class="docutils literal"><span class="pre">Client</span></code> to IPython parallel cluster.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ipyparallel</span> <span class="k">as</span> <span class="nn">ipp</span>
+<span class="n">rc</span> <span class="o">=</span> <span class="n">ipp</span><span class="o">.</span><span class="n">Client</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Then, user can write <strong>parallelized cell</strong> in notebook by using <code class="docutils literal"><span class="pre">%%px</span></code> command.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">px</span> <span class="c1"># execute cell in parallel</span>
+<span class="kn">from</span> <span class="nn">impact</span> <span class="k">import</span> <span class="n">Sequence</span><span class="p">,</span> <span class="n">mpisize</span><span class="p">,</span> <span class="n">mpirank</span>
+<span class="nb">print</span> <span class="s1">&#39;Launch with process &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">mpirank</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; of &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">mpisize</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.&#39;</span>
+<span class="o">--------------------------------------------------------------------</span>
+<span class="p">[</span><span class="n">stdout</span><span class="p">:</span><span class="mi">0</span><span class="p">]</span> <span class="n">Launch</span> <span class="k">with</span> <span class="n">process</span> <span class="mi">1</span> <span class="n">of</span> <span class="mf">4.</span>
+<span class="p">[</span><span class="n">stdout</span><span class="p">:</span><span class="mi">1</span><span class="p">]</span> <span class="n">Launch</span> <span class="k">with</span> <span class="n">process</span> <span class="mi">0</span> <span class="n">of</span> <span class="mf">4.</span>
+<span class="p">[</span><span class="n">stdout</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span> <span class="n">Launch</span> <span class="k">with</span> <span class="n">process</span> <span class="mi">2</span> <span class="n">of</span> <span class="mf">4.</span>
+<span class="p">[</span><span class="n">stdout</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span> <span class="n">Launch</span> <span class="k">with</span> <span class="n">process</span> <span class="mi">3</span> <span class="n">of</span> <span class="mf">4.</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">px</span> <span class="c1"># execute cell in parallel</span>
+<span class="n">sq</span> <span class="o">=</span> <span class="n">Sequence</span><span class="p">(</span><span class="s1">&#39;user-defined-input&#39;</span><span class="p">)</span>
+<span class="n">sq</span><span class="o">.</span><span class="n">subdir</span> <span class="o">=</span> <span class="s1">&#39;data&#39;</span>
+<span class="n">sq</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
+<span class="n">sq</span><span class="o">.</span><span class="n">distribute</span><span class="p">()</span>
+<span class="n">sq</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Simulation results are broadcasted to all processes by default. –
+<a class="reference internal" href="pysrc/impact.result.html#impact.result.Result.autobcast" title="impact.result.Result.autobcast"><code class="xref py py-func docutils literal"><span class="pre">autobcast</span></code></a></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">px</span>
+<span class="nb">print</span> <span class="n">sq</span><span class="o">.</span><span class="n">hxcen</span><span class="p">(</span><span class="s1">&#39;moni1&#39;</span><span class="p">,</span><span class="s1">&#39;mm&#39;</span><span class="p">)</span>
+<span class="o">--------------------------------------------------------------------</span>
+<span class="p">[</span><span class="n">stdout</span><span class="p">:</span><span class="mi">0</span><span class="p">]</span> <span class="p">[</span> <span class="mf">2.08796354</span><span class="p">]</span>
+<span class="p">[</span><span class="n">stdout</span><span class="p">:</span><span class="mi">1</span><span class="p">]</span> <span class="p">[</span> <span class="mf">2.08796354</span><span class="p">]</span>
+<span class="p">[</span><span class="n">stdout</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span> <span class="p">[</span> <span class="mf">2.08796354</span><span class="p">]</span>
+<span class="p">[</span><span class="n">stdout</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span> <span class="p">[</span> <span class="mf">2.08796354</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">px</span>
+<span class="n">sq</span><span class="o">.</span><span class="n">autobcast</span> <span class="o">=</span> <span class="kc">False</span> <span class="c1"># no broadcasting</span>
+<span class="nb">print</span> <span class="n">mpirank</span><span class="p">,</span><span class="n">sq</span><span class="o">.</span><span class="n">hxrms</span><span class="p">(</span><span class="s1">&#39;moni1&#39;</span><span class="p">,</span><span class="s1">&#39;mm&#39;</span><span class="p">)</span>
+<span class="o">--------------------------------------------------------------------</span>
+<span class="p">[</span><span class="n">stdout</span><span class="p">:</span><span class="mi">0</span><span class="p">]</span> <span class="mi">2</span> <span class="kc">None</span>
+<span class="p">[</span><span class="n">stdout</span><span class="p">:</span><span class="mi">1</span><span class="p">]</span> <span class="mi">1</span> <span class="kc">None</span>
+<span class="p">[</span><span class="n">stdout</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span> <span class="mi">0</span> <span class="p">[</span> <span class="mf">2.08796354</span><span class="p">]</span>
+<span class="p">[</span><span class="n">stdout</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span> <span class="mi">3</span> <span class="kc">None</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="tips">
+<h2>Tips<a class="headerlink" href="#tips" title="Permalink to this headline">¶</a></h2>
+<p>There are 2 methods to make cost-function for optimization.</p>
+<p>Easy method:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sq</span><span class="o">.</span><span class="n">autobcast</span> <span class="o">=</span> <span class="kc">True</span> <span class="c1"># default setting</span>
+<span class="k">def</span> <span class="nf">cost_func</span><span class="p">(</span><span class="n">input_value</span><span class="p">):</span>
+    <span class="o">...</span>
+    <span class="c1"># set parameter from input_value</span>
+    <span class="o">...</span>
+    <span class="n">sq</span><span class="o">.</span><span class="n">distribute</span><span class="p">();</span> <span class="n">sq</span><span class="o">.</span><span class="n">run</span><span class="p">()</span> <span class="c1"># run simulation</span>
+
+    <span class="c1"># calculate cost value</span>
+    <span class="n">xx</span> <span class="o">=</span> <span class="n">sq</span><span class="o">.</span><span class="n">hxrms</span><span class="p">()</span> <span class="c1"># broadcast full list of x rms</span>
+    <span class="n">yy</span> <span class="o">=</span> <span class="n">sq</span><span class="o">.</span><span class="n">hyrms</span><span class="p">()</span> <span class="c1"># broadcast full list of y rms</span>
+    <span class="n">cost</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">xx</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">xx</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">yy</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">yy</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">cost</span>
+</pre></div>
+</div>
+<p>Fast method:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sq</span><span class="o">.</span><span class="n">autobcast</span> <span class="o">=</span> <span class="kc">False</span> <span class="c1"># no auto broadcasting</span>
+<span class="k">def</span> <span class="nf">cost_func</span><span class="p">(</span><span class="n">input_value</span><span class="p">):</span>
+    <span class="o">...</span>
+    <span class="c1"># set parameter from input_value</span>
+    <span class="o">...</span>
+    <span class="n">sq</span><span class="o">.</span><span class="n">distribute</span><span class="p">();</span> <span class="n">sq</span><span class="o">.</span><span class="n">run</span><span class="p">()</span> <span class="c1"># run simulation</span>
+
+    <span class="c1"># calculate cost value</span>
+    <span class="k">if</span> <span class="n">mpirank</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">xx</span> <span class="o">=</span> <span class="n">sq</span><span class="o">.</span><span class="n">hxrms</span><span class="p">()</span>
+        <span class="n">yy</span> <span class="o">=</span> <span class="n">sq</span><span class="o">.</span><span class="n">hyrms</span><span class="p">()</span>
+        <span class="n">cost</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">xx</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">xx</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">yy</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">yy</span><span class="p">)</span>
+    <span class="k">else</span>
+        <span class="n">cost</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="n">cost</span> <span class="o">=</span> <span class="n">mpicomm</span><span class="o">.</span><span class="n">bcast</span><span class="p">(</span><span class="n">cost</span><span class="p">,</span> <span class="n">root</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="c1"># broadcast single float only</span>
+
+    <span class="k">return</span> <span class="n">cost</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="element.html" class="btn btn-neutral float-right" title="Lattice Elements" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="tutorial.html" class="btn btn-neutral" title="Tutorial" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Kei Fukushima.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.0.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

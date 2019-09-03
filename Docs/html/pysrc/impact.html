@@ -1,0 +1,690 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>impact package &mdash; Adv. IMPACT 1.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="Adv. IMPACT 1.0.0 documentation" href="../index.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Adv. IMPACT
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Table of Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../parallel.html">Parallel Computing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../element.html">Lattice Elements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../classlib.html">Class Library</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Adv. IMPACT</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>impact package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/pysrc/impact.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="impact-package">
+<h1>impact package<a class="headerlink" href="#impact-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="impact.const.html">impact.const module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="impact.control.html">Sequence class – run control API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="impact.input.html">Input class / base of Sequence class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="impact.result.html">Result class / base of Sequence class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="impact.util.html">impact.util module</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="module-impact">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-impact" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="impact.Sequence">
+<em class="property">class </em><code class="descclassname">impact.</code><code class="descname">Sequence</code><span class="sig-paren">(</span><em>input=None</em>, <em>subdir=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/impact/control.html#Sequence"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#impact.Sequence" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="impact.input.html#impact.input.Input" title="impact.input.Input"><code class="xref py py-class docutils literal"><span class="pre">impact.input.Input</span></code></a>, <a class="reference internal" href="impact.result.html#impact.result.Result" title="impact.result.Result"><code class="xref py py-class docutils literal"><span class="pre">impact.result.Result</span></code></a></p>
+<p>Main class of python API for Advanced IMPACT code.</p>
+<ul class="simple">
+<li><strong>Attribute</strong></li>
+</ul>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#impact.Sequence.subdir" title="impact.Sequence.subdir"><code class="xref py py-obj docutils literal"><span class="pre">subdir</span></code></a></td>
+<td>str: Directory path for data files.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#impact.Sequence.seed" title="impact.Sequence.seed"><code class="xref py py-obj docutils literal"><span class="pre">seed</span></code></a></td>
+<td>int: Seed value of pseudo random number generator.</td>
+</tr>
+</tbody>
+</table>
+<ul class="simple">
+<li><strong>Methods</strong></li>
+</ul>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#impact.Sequence.read" title="impact.Sequence.read"><code class="xref py py-obj docutils literal"><span class="pre">read</span></code></a>([fname,&nbsp;debug])</td>
+<td>Read input file and set simulation parameters.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#impact.Sequence.load" title="impact.Sequence.load"><code class="xref py py-obj docutils literal"><span class="pre">load</span></code></a>([dname,&nbsp;reload])</td>
+<td>Load 3D field data</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#impact.Sequence.distribute" title="impact.Sequence.distribute"><code class="xref py py-obj docutils literal"><span class="pre">distribute</span></code></a>([particles,&nbsp;unit,&nbsp;dname,&nbsp;fname])</td>
+<td>Load 3D field data</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#impact.Sequence.run" title="impact.Sequence.run"><code class="xref py py-obj docutils literal"><span class="pre">run</span></code></a>([start,&nbsp;end,&nbsp;zstart,&nbsp;Phaseini])</td>
+<td>Run particle tracking simulation.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#impact.Sequence.construct" title="impact.Sequence.construct"><code class="xref py py-obj docutils literal"><span class="pre">construct</span></code></a>(lattice)</td>
+<td>Construct beam transport line.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#impact.Sequence.insert" title="impact.Sequence.insert"><code class="xref py py-obj docutils literal"><span class="pre">insert</span></code></a>(index,&nbsp;element)</td>
+<td>Insert new lattice element.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#impact.Sequence.conf" title="impact.Sequence.conf"><code class="xref py py-obj docutils literal"><span class="pre">conf</span></code></a>([index,&nbsp;col,&nbsp;value,&nbsp;syntax])</td>
+<td>Configure lattice parameters.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#impact.Sequence.search" title="impact.Sequence.search"><code class="xref py py-obj docutils literal"><span class="pre">search</span></code></a>([type,&nbsp;tag])</td>
+<td>Search lattice element.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#impact.Sequence.output" title="impact.Sequence.output"><code class="xref py py-obj docutils literal"><span class="pre">output</span></code></a>([fname,&nbsp;qid])</td>
+<td>Output original IMPACT results to file.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#impact.Sequence.save" title="impact.Sequence.save"><code class="xref py py-obj docutils literal"><span class="pre">save</span></code></a>([fname])</td>
+<td>Save current setting to file.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#impact.Sequence.checker" title="impact.Sequence.checker"><code class="xref py py-obj docutils literal"><span class="pre">checker</span></code></a>()</td>
+<td>Check input parameter correctness.</td>
+</tr>
+</tbody>
+</table>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>input</strong> : str (optional)</p>
+<blockquote>
+<div><p>Input file path.</p>
+</div></blockquote>
+<p><strong>subdir</strong> : str (optional)</p>
+<blockquote class="last">
+<div><p>Directory path for data files.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="impact.Sequence.checker">
+<code class="descname">checker</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/impact/control.html#Sequence.checker"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#impact.Sequence.checker" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check input parameter correctness.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="impact.Sequence.conf">
+<code class="descname">conf</code><span class="sig-paren">(</span><em>index=None</em>, <em>col=None</em>, <em>value=None</em>, <em>syntax=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/impact/control.html#Sequence.conf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#impact.Sequence.conf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Configure lattice parameters.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>index</strong> : int or str</p>
+<blockquote>
+<div><p>Index number of the element or tag name of the element.</p>
+</div></blockquote>
+<p><strong>col</strong> : int or str</p>
+<blockquote>
+<div><p>Column number of the target parameter or name of the target parameter.</p>
+</div></blockquote>
+<p><strong>col</strong> : dict</p>
+<blockquote>
+<div><p>dict key for the target parameter and dict value for target value.</p>
+</div></blockquote>
+<p><strong>value</strong> : float</p>
+<blockquote>
+<div><p>New value for the target parameter.</p>
+</div></blockquote>
+<p><strong>syntax</strong> : bool</p>
+<blockquote>
+<div><p>Print flag for full parameter of the element.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">dict</p>
+<blockquote class="last">
+<div><p>Dictionary style parameter list of the element</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sq</span> <span class="o">=</span> <span class="n">Sequence</span><span class="p">(</span><span class="s1">&#39;test.in&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tmp</span> <span class="o">=</span> <span class="n">sq</span><span class="o">.</span><span class="n">conf</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="c1"># show parameter of 3rd element</span>
+<span class="go">index :  3</span>
+<span class="go">length :  0.24 [m]</span>
+<span class="go">segment :  60</span>
+<span class="go">step :  20</span>
+<span class="go">type :  110  (emfld)</span>
+<span class="go">scaling (&#39;scale&#39;, &#39;scl_fac&#39;) :  0.64</span>
+<span class="go">frequency (&#39;f&#39;, &#39;freq&#39;) :  80500000.0 [Hz]</span>
+<span class="go">driven phase (&#39;phi0&#39;,) :  349.74086645 [deg]</span>
+<span class="go">fileid (&#39;file&#39;, &#39;id&#39;) :  421.0</span>
+<span class="go">xaperture (&#39;xaper&#39;, &#39;xpipe&#39;, &#39;xradius&#39;) :  0.017 [m]</span>
+<span class="go">yaperture (&#39;yaper&#39;, &#39;ypipe&#39;, &#39;yradius&#39;) :  0.017 [m]</span>
+<span class="go">dx  :  0.0 [m]</span>
+<span class="go">dy  :  0.0 [m]</span>
+<span class="go">pitch  :  0.0 [rad]</span>
+<span class="go">yaw  :  0.0 [rad]</span>
+<span class="go">roll  :  0.0 [rad]</span>
+<span class="go">data type (&#39;data&#39;,) :  1.0</span>
+<span class="go">coordinate (&#39;coor&#39;,) :  2.0</span>
+<span class="go">tag :  [&#39;cav1&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sq</span><span class="o">.</span><span class="n">conf</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;phi0&#39;</span><span class="p">:</span><span class="mf">360.0</span><span class="p">})</span> <span class="c1"># set new value for the driven phase</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tmp</span> <span class="o">=</span> <span class="n">sq</span><span class="o">.</span><span class="n">conf</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;phi0&#39;</span><span class="p">)</span> <span class="c1"># confirm new parameter</span>
+<span class="go">driven phase (&#39;phi0&#39;,) :  360.0 [deg]</span>
+</pre></div>
+</div>
+<p>If you have set the tag, followings return same results.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sq</span><span class="o">.</span><span class="n">conf</span><span class="p">(</span><span class="s1">&#39;cav1&#39;</span><span class="p">)</span> <span class="c1"># show parameter of 3rd element</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sq</span><span class="o">.</span><span class="n">conf</span><span class="p">(</span><span class="s1">&#39;cav1&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;phi0&#39;</span><span class="p">:</span><span class="mf">360.0</span><span class="p">})</span> <span class="c1"># set new value for the driven phase</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="impact.Sequence.construct">
+<code class="descname">construct</code><span class="sig-paren">(</span><em>lattice</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/impact/control.html#Sequence.construct"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#impact.Sequence.construct" title="Permalink to this definition">¶</a></dt>
+<dd><p>Construct beam transport line.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>lattice</strong> : 2D array or list of dict</p>
+<blockquote class="last">
+<div><p>List of lattice elements.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">drift</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">]</span>
+<span class="go"># define element by using list of numbers (format is the same as the input file)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">quad1</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;length&#39;</span><span class="p">:</span><span class="mf">0.2</span><span class="p">,</span> <span class="s1">&#39;seg&#39;</span><span class="p">:</span><span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;step&#39;</span><span class="p">:</span><span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span><span class="s1">&#39;quadrupole&#39;</span><span class="p">,</span> <span class="s1">&#39;B2&#39;</span><span class="p">:</span> <span class="mf">10.0</span><span class="p">,</span> <span class="s1">&#39;aper&#39;</span><span class="p">:</span><span class="mf">0.2</span><span class="p">}</span>
+<span class="go"># define element by using python dictionary</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">quad2</span> <span class="o">=</span> <span class="n">quad1</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">quad2</span><span class="p">[</span><span class="s1">&#39;B2&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mf">10.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">FODO</span> <span class="o">=</span> <span class="p">[</span><span class="n">drift</span><span class="p">,</span> <span class="n">quad1</span><span class="p">,</span> <span class="n">drift</span><span class="p">,</span> <span class="n">quad2</span><span class="p">,</span> <span class="n">drift</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sq</span><span class="o">.</span><span class="n">construct</span><span class="p">(</span><span class="n">FODO</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="impact.Sequence.distribute">
+<code class="descname">distribute</code><span class="sig-paren">(</span><em>particles=None</em>, <em>unit=u'physical'</em>, <em>dname=None</em>, <em>fname=u'partcl.data'</em>, <em>**kws</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/impact/control.html#Sequence.distribute"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#impact.Sequence.distribute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load 3D field data</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>particles</strong> : (9, n) shape ndarray (optional)</p>
+<blockquote>
+<div><p>All particle information for the simulation. <em>n</em> is the number of particles.</p>
+<ul class="simple">
+<li>row 1 : x positions [m]</li>
+<li>row 2 : xp momentums [rad]</li>
+<li>row 3 : y positions [m]</li>
+<li>row 4 : yp momentums [rad]</li>
+<li>row 5 : z positions [deg]</li>
+<li>row 6 : zp momentums [MeV]</li>
+<li>row 7 : charge to mass ratios [c^2/eV]</li>
+<li>row 8 : charge per macro-particle weights [1]</li>
+<li>row 9 : ID numbers [1]</li>
+</ul>
+</div></blockquote>
+<p><strong>unit</strong> : str (optional)</p>
+<blockquote>
+<div><p>Unit information for <em>particles</em>.</p>
+<ul class="simple">
+<li>‘physical’ : Use physical units [m, rad, m, rad, deg, MeV]. (default)</li>
+<li>‘impact’ : Use impact internal units.</li>
+</ul>
+</div></blockquote>
+<p><strong>dname</strong> : str (optional)</p>
+<blockquote>
+<div><p>Directory path for particle data file. Default path is defined by <a class="reference internal" href="impact.control.html#impact.control.Sequence.subdir" title="impact.control.Sequence.subdir"><code class="xref py py-func docutils literal"><span class="pre">subdir</span></code></a>.</p>
+</div></blockquote>
+<p><strong>fname</strong> : str (optional)</p>
+<blockquote>
+<div><p>File name or path for particle data file. Default is ‘partcl.data’</p>
+</div></blockquote>
+<p><strong>Mass</strong> : float (optional)</p>
+<blockquote>
+<div><p>Mass of the reference particle (unit is [eV/c^2]).</p>
+</div></blockquote>
+<p><strong>Energy</strong> : float (optional)</p>
+<blockquote>
+<div><p>Initial kinetic energy (unit is [eV]).</p>
+</div></blockquote>
+<p><strong>Frequency</strong> : float (optional)</p>
+<blockquote>
+<div><p>Scaling frequency (unit is [Hz]).</p>
+</div></blockquote>
+<p><strong>zstart</strong> : float (optional)</p>
+<blockquote>
+<div><p>Starting z point of the simulation.</p>
+</div></blockquote>
+<p><strong>Phaseini</strong> : float (optional)</p>
+<blockquote class="last">
+<div><p>Initial phase of the reference particle (unit is [rad]).</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p><code class="docutils literal"><span class="pre">dname</span></code> and <code class="docutils literal"><span class="pre">fname</span></code> are used in case of <a class="reference internal" href="impact.input.html#impact.input.Input.Disttype" title="impact.input.Input.Disttype"><code class="xref py py-func docutils literal"><span class="pre">Disttype</span></code></a> equals to 19.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="impact.Sequence.insert">
+<code class="descname">insert</code><span class="sig-paren">(</span><em>index</em>, <em>element</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/impact/control.html#Sequence.insert"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#impact.Sequence.insert" title="Permalink to this definition">¶</a></dt>
+<dd><p>Insert new lattice element.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>index</strong> : int</p>
+<blockquote>
+<div><p>Insert new lattice element before index. If index equals to 0, <em>append</em> the new element.</p>
+</div></blockquote>
+<p><strong>element</strong> : list or dict</p>
+<blockquote class="last">
+<div><p>Lattice element information.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">quad1</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;length&#39;</span><span class="p">:</span><span class="mf">0.2</span><span class="p">,</span> <span class="s1">&#39;seg&#39;</span><span class="p">:</span><span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;step&#39;</span><span class="p">:</span><span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span><span class="s1">&#39;quadrupole&#39;</span><span class="p">,</span> <span class="s1">&#39;B2&#39;</span><span class="p">:</span> <span class="mf">10.0</span><span class="p">,</span> <span class="s1">&#39;aper&#39;</span><span class="p">:</span><span class="mf">0.2</span><span class="p">}</span>
+<span class="go"># define element by using python dictionary</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sq</span><span class="o">.</span><span class="n">construct</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">quad1</span><span class="p">)</span> <span class="c1"># insert new element</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="impact.Sequence.load">
+<code class="descname">load</code><span class="sig-paren">(</span><em>dname=None</em>, <em>reload=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/impact/control.html#Sequence.load"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#impact.Sequence.load" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load 3D field data</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>dname</strong> : str (optional)</p>
+<blockquote>
+<div><p>Directory path for data files. Default path is defined by <a class="reference internal" href="impact.control.html#impact.control.Sequence.subdir" title="impact.control.Sequence.subdir"><code class="xref py py-func docutils literal"><span class="pre">subdir</span></code></a>.</p>
+</div></blockquote>
+<p><strong>reload</strong> : bool</p>
+<blockquote class="last">
+<div><p>If true, force to reload all 3D field data.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="impact.Sequence.output">
+<code class="descname">output</code><span class="sig-paren">(</span><em>fname=u'fort'</em>, <em>qid=-1</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/impact/control.html#Sequence.output"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#impact.Sequence.output" title="Permalink to this definition">¶</a></dt>
+<dd><p>Output original IMPACT results to file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>fname</strong> : str</p>
+<blockquote>
+<div><p>Header name of output file. Default is ‘fort’.</p>
+</div></blockquote>
+<p><strong>qid</strong> : int</p>
+<blockquote class="last">
+<div><p>Charge state index for return value. Default is -1 (Total of the all charge states).
+Index is compatible with <a class="reference internal" href="impact.result.html#impact.result.Result.qmlabel" title="impact.result.Result.qmlabel"><code class="xref py py-func docutils literal"><span class="pre">qmlabel</span></code></a>.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="impact.Sequence.read">
+<code class="descname">read</code><span class="sig-paren">(</span><em>fname=None</em>, <em>debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/impact/control.html#Sequence.read"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#impact.Sequence.read" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read input file and set simulation parameters.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>fname</strong> : str</p>
+<blockquote>
+<div><p>Input file path.</p>
+</div></blockquote>
+<p><strong>debug</strong> : bool</p>
+<blockquote class="last">
+<div><p>Flag for debug mode. If True, skip over input parameter correctness checker.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>This function is automatically called in case of <code class="docutils literal"><span class="pre">input</span></code> is defined
+in <a class="reference internal" href="impact.control.html#impact.control.Sequence" title="impact.control.Sequence"><code class="xref py py-class docutils literal"><span class="pre">Sequence</span></code></a>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="impact.Sequence.run">
+<code class="descname">run</code><span class="sig-paren">(</span><em>start=0</em>, <em>end=-1</em>, <em>zstart=None</em>, <em>Phaseini=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/impact/control.html#Sequence.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#impact.Sequence.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run particle tracking simulation.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>start</strong> : int or str (optional)</p>
+<blockquote>
+<div><p>Starting element of the particle tracking simulation.</p>
+</div></blockquote>
+<p><strong>end</strong> : int or str (optional)</p>
+<blockquote>
+<div><p>Ending element of the particle tracking simulation.</p>
+</div></blockquote>
+<p><strong>zstart</strong> : float (optional)</p>
+<blockquote>
+<div><p>Initial z position of the reference particle. Default is 0.0 .</p>
+</div></blockquote>
+<p><strong>Phaseini</strong> : float (optional)</p>
+<blockquote class="last">
+<div><p>Initial phase of the reference particle (unit is [rad]).</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="impact.Sequence.save">
+<code class="descname">save</code><span class="sig-paren">(</span><em>fname=u'test.in.new'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/impact/control.html#Sequence.save"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#impact.Sequence.save" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save current setting to file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>fname</strong> : str</p>
+<blockquote class="last">
+<div><p>File name for saved settings. Default is ‘test.in.new’.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="impact.Sequence.search">
+<code class="descname">search</code><span class="sig-paren">(</span><em>type=None</em>, <em>tag=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/impact/control.html#Sequence.search"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#impact.Sequence.search" title="Permalink to this definition">¶</a></dt>
+<dd><p>Search lattice element.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>type</strong> : int or str</p>
+<blockquote>
+<div><p>Element type ID or type name for _search.</p>
+</div></blockquote>
+<p><strong>tag</strong> : str</p>
+<blockquote>
+<div><p>Tag name of the element.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">ndarray</p>
+<blockquote class="last">
+<div><p>List of element ID</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>In case of input both type and tag, it returns <cite>AND</cite> _search result.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="impact.Sequence.seed">
+<code class="descname">seed</code><a class="headerlink" href="#impact.Sequence.seed" title="Permalink to this definition">¶</a></dt>
+<dd><p>int: Seed value of pseudo random number generator.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="impact.Sequence.subdir">
+<code class="descname">subdir</code><a class="headerlink" href="#impact.Sequence.subdir" title="Permalink to this definition">¶</a></dt>
+<dd><p>str: Directory path for data files.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Kei Fukushima.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.0.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

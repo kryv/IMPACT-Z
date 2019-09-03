@@ -1,0 +1,7 @@
+Input class / base of Sequence class
+====================================
+
+.. automodule:: impact.input
+    :members:
+    :undoc-members:
+    :show-inheritance:

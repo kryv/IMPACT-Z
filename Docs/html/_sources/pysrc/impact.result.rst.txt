@@ -1,0 +1,7 @@
+Result class / base of Sequence class
+=====================================
+
+.. automodule:: impact.result
+    :members:
+    :undoc-members:
+    :show-inheritance:

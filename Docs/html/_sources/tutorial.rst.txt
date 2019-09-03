@@ -1,0 +1,393 @@
+Tutorial
+========
+
+.. role:: red
+
+1. Basic usage
+--------------
+
+In Python interface (includes IPython-notebook), user can import IMPACT :py:class:`Sequence <impact.control.Sequence>` class.
+
+>>> from impact import Sequence
+
+Create IMPACT :py:class:`Sequence <impact.control.Sequence>` object with input file.
+
+>>> sq = Sequence('lattice_1cavity-1solenoid')
+
+If user's working directory has following structure for the external data files,
+::
+
+    $ ls
+    data/  lattice_1cavity-1solenoid
+    $ ls data/
+    1T421.T7  1T861.T7  fort.885  partcl.data
+
+user can define :py:func:`subdir <impact.control.Sequence.subdir>` for the data directory.
+
+>>> sq.subdir = 'data'
+
+Load the 3D field data. -- :py:func:`load <impact.control.Sequence.load>`
+
+>>> sq.load()
+
+Run particle tracking simulation.
+-- :py:func:`distribute <impact.control.Sequence.distribute>`, :py:func:`run <impact.control.Sequence.run>`
+
+>>> sq.distribute() # generate initial distribution by using the input-file's parameter
+>>> sq.run() # run simulation
+
+:py:class:`Sequence <impact.control.Sequence>` class contains all simulation results
+:doc:`(see here) <pysrc/impact.result>`.
+User can plot results directly.
+
+>>> import matplotlib.pylab as plt
+>>> plt.plot(sq.hrefz(), sq.hrefeng('MeV'))
+>>> plt.ylabel('Energy [MeV]')
+>>> plt.xlabel('z [m]')
+>>> plt.show()
+
+.. image:: figs/plot_z-eng.png
+
+>>> plt.plot(sq.hrefz(),sq.hxrms('mm'))
+>>> plt.ylabel('x rms envelope [mm]')
+>>> plt.xlabel('z [m]')
+>>> plt.show()
+
+.. image:: figs/plot_z-xrms.png
+
+
+2. Lattice parameter control
+----------------------------
+
+User can define **tag** (:py:func:`dtag <impact.result.Result.dtag>`) for each element like,
+
+lattice_1cavity-1solenoid::
+
+    1 1
+    6 20642 2 0 1
+    65 65 129 4 0.14 0.14 0.1025446
+    19 0 0 2
+    10111 10531
+    0.0 0.0
+    1.4885271891392098E-10 1.5336340736585796E-10  
+    0.0022734189 8.8312578E-5 0.0 1.0 1.0 0.0 0.0 
+    0.0022734189 8.8312578E-5 0.0 1.0 1.0 0.0 0.0 
+    0.076704772 3.4741445E-6 0.0 1.0 1.0 0.0 0.0 
+    0.0 500000.0 9.3149432E8 0.13865546218487396 8.05E7 0.0 99.9
+    0.072 4 20 0 0.02 / # first lattice element
+    0.135064 4 20 0 0.02 / 
+    0.24 60 20 110 0.64 8.05E7 349.740866 421 0.017 0.017 0.0 0.0 0.0 0.0 0.0 1. 2. / tag={'cav1'}
+    0.064263 4 20 0 0.02 /
+    0.05588 4 20 0 0.02 /
+    0.076123 4 20 0 0.02 / 
+    0.1 1 1 3 5.34 0 0.02 / tag={'sol1','split1'} # user can set multiple tags
+    0 0 0 -21 0.02 0 0 0 0 0 0 /
+    0 0 0 -21 0.02 0 0 0 0 0 0 /
+    0.1 1 1 3 5.34 0 0.02 / tag=['sol1','split2'] # user can set the same tag name
+    0.076123 4 20 0 0.02 /
+    0.06727 4 20 0 0.02 / 
+    0.0 0 100 -2 0.0 1 / tag=('moni1','pm1') # (),{},[] brackets are available
+   
+Check the lattice parameter with the tag name. -- :py:func:`conf <impact.control.Sequence.conf>`
+
+>>> tmp = sq.conf('cav1') # user can also input index like, tmp = sq.conf(3)
+index :  3 (start :  0.207064 , end :  0.447064  [m])
+length :  0.24 [m]
+segment :  60
+step :  20
+type :  110  (emfield)
+scaling ('scale', 'scl_fac') :  0.64 [1]
+frequency ('f', 'freq') :  349.74086645 [Hz]
+input phase ('phi0',) :  -90.0 [deg]
+fileid ('file', 'id') :  421.0 
+xaperture ('xaper', 'xpipe', 'xradius') :  0.017 [m]
+yaperture ('yaper', 'ypipe', 'yradius') :  0.017 [m]
+dx ('dx0',) :  0.0 [m]
+dy ('dy0',) :  0.0 [m]
+pitch ('dx1',) :  0.0 [rad]
+yaw ('dy1',) :  0.0 [rad]
+roll  :  0.0 [rad]
+data type ('data',) :  1.0 
+coordinate ('coor',) :  2.0 
+synchronous phase flag ('sync_flag', 'syncflag',) :  0.0 
+scale error ('dscl', 'er_scl') :  0.0 [1]
+phase error ('dphi', 'er_phi') :  0.0 [deg]
+scaling2 ('scale2',) :  0.0 [1]
+frequency2 ('f2', 'freq2') :  0.0 [Hz]
+driven phase offset 2 ('phi0_2',) :  0.0 [deg]
+scl_fac2 ('scaling3', 'scale3') :  0.0 
+frequency3 ('f3', 'freq3') :  0.0 [Hz]
+driven phase offset 3 ('phi0_3',) :  0.0 [deg]
+scale error 2 ('dscl2', 'er_scl2') :  0.0 [1]
+phase error 2 ('dphi2', 'er_phi2') :  0.0 [deg]
+scale error 3 ('dscl3', 'er_scl3') :  0.0 [1]
+phase error 3 ('dphi3', 'er_phi3') :  0.0 [deg]
+synchronous phase offset ('sync_offset',) :  0.0 [deg]
+tag :  ['cav1']
+
+Change the parameter.
+
+>>> sq.conf('cav1', {'phi0':360.0}) # change driven phase to 360.0
+
+User can :py:func:`search <impact.control.Sequence.search>` element by element-type or type-id.
+:py:func:`search <impact.control.Sequence.search>` command returns element indexes.
+
+>>> sq.search(type='solenoid')
+array([7, 10], dtype=int32)
+
+>>> sq.search(type=3)
+array([7, 10], dtype=int32)
+
+
+
+3. Example: Phase scan
+----------------------
+
+User can scan parameters by using simple loop.
+
+>>> phase = [360,370,380,390,400,410] # scan parameter list
+>>> pos = []; eng = []; rms = []
+>>> for p0 in phase:
+>>>    sq.conf('cav1',{'phi0':p0}) # set new parameter
+>>>    sq.distribute(); sq.run()
+>>>    pos.append(sq.hrefz()) # store results
+>>>    eng.append(sq.hrefeng('MeV'))
+>>>    rms.append(sq.hxrms('mm'))
+
+Plot the scan result.
+
+>>> plt.rcParams['figure.figsize'] = [9,10]
+>>> for (z,e,x,p0) in zip(pos, eng, xcn, phase):
+>>>     plt.subplot(3,1,1)
+>>>     plt.plot(z,e,label='$\phi_0 =$'+str(p0))
+>>>     plt.subplot(3,1,2)
+>>>     plt.plot(z,x)
+>>>
+>>> plt.subplot(3,1,1)    
+>>> plt.ylabel('Energy [MeV]')
+>>> plt.xlabel('z [m]')
+>>> plt.legend(loc='best', ncol=2)
+>>> plt.subplot(3,1,2)    
+>>> plt.ylabel('x rms envelope [mm]')
+>>> plt.xlabel('z [m]')
+>>>
+>>> e1 = [ee[-1] for ee in eng]
+>>> plt.subplot(3,1,3)
+>>> plt.plot(phase, e1)
+>>> plt.xlabel('Driven phase [deg]')
+>>> plt.ylabel('Finite energy [MeV]')
+>>> plt.tight_layout()
+>>> plt.show()
+
+.. image:: figs/plot_scan.png
+
+4. Beam parameter control
+-------------------------
+:py:class:`Sequence <impact.control.Sequence>` class contains all input parameters :doc:`(see here) <pysrc/impact.input>`. 
+
+For example,
+
+>>> sq.Energy # initial kinetic energy [eV]
+array(500000.0)
+>>> sq.Energy = 0.6e6 # set new energy
+
+>>> sq.Distxquadratic # initial distribution parameter for x
+array([  2.27341890e-03,   8.83125780e-05,   0.00000000e+00])
+    # [           sigma,           lambda,               mu] - IMPACT internal unit
+>>> sq.Distxtwiss # automatically converted to the twiss (Courant-Snyder) parameter
+array([  0.00000000e+00,   4.99999992e-01,   1.18999999e-07])
+    # [        alpha(1),          beta(m),   normalized emittance(m-rad)]
+>>> sq.Distxtwiss = [0.1, 0.6, 1.3e-7] # set new twiss parameter
+
+5. History result usage
+-----------------------
+
+:ref:`Method for history results <hist-label>` returns all segment results by default.
+
+>>> sq.hxcen() # returns x centroid history
+array([  3.34446507e-06,   3.57517607e-06, ..., -3.91164303e-05,  -3.97671083e-05,  -4.04177862e-05])
+
+User can input a unit to the method.
+
+>>> sq.hxcen('mm')
+array([ 0.00334447,  0.00357518, ..., -0.03911643, -0.03976711, -0.04041779])
+
+In case of input float or list of float, the method returns the linear interpolated result.
+
+>>> sq.hxcen(0.5, 'mm')
+array([ 0.01071064])
+>>> sq.hxcen([0.5, 0.6, 0.7], 'mm')
+array([ 0.01071064,  0.01260737,  0.00144759])
+
+In case of input the tag name, the method returns the result at exit point of the element by default.
+
+>>> sq.hxcen('cav1', 'mm')
+array([ 0.00758989])
+
+In addition, user can specify the data point of the element.
+
+>>> sq.hxcen('cav1', 'mm', at='entry') # returns result at the element entry
+array([ 0.00599846])
+>>> sq.hxcen('cav1', 'mm', at='exit') # returns result at the element exit
+array([ 0.00970658])
+
+For the multi-charge-states simulation, user can specify the charge state for the result.
+
+>>> sq.qmlabel # returns charge-to-mass ratios which appeared in the simulation.
+array([  1.48852719e-10,   1.53363407e-10])
+
+>>> sq.hxcen('mm', qid=1) # returns x centroid history with charge-to-mass ratio = 1.53363407e-10
+array([ 0.00731273,  0.00757781, ..., -0.04237878, -0.04297157, -0.04356436])
+
+All common parameters can be found in :py:func:`hrefz <impact.result.Result.hrefz>`.
+
+6. Distribution result usage
+----------------------------
+
+:ref:`Method for history results <hist-label>` returns initial distribution by default.
+
+>>> sq.getx() # returns current x distribution
+array([ 0.00190219, -0.00270052, ..., -0.0002277 , -0.00259636,  0.00128789])
+
+User can input a unit to the method.
+
+>>> sq.getx('mm')
+array([ 1.90219117, -2.70052015, ..., -0.22769931, -2.59636435,  1.28789445])
+
+User can input ID number of "-2" flagged lattice element to get the distribution there.
+
+>>> sq.getx(100, 'mm') # returns x distribution at the flag element
+array([ 3.00496309, -2.23733725, ..., -4.09860108, -2.0038936 ,  1.30413004])
+
+Able to input the tag name also.
+
+>>> sq.getx('pm1', 'mm') # returns x distribution at the flag element
+array([ 3.00496309, -2.23733725, ..., -4.09860108, -2.0038936 ,  1.30413004])
+
+All common parameters can be found in :py:func:`getx <impact.result.Result.getx>`.
+
+.. note::
+    The initial distribution is generated in :py:func:`distribute() <impact.control.Sequence.distribute>` function.
+
+    For example, user can check initial distribution before running particle tracking.
+
+    >>> sq.Distxtwiss = [0.0, 0.4, 1.5e-7] # set new x twiss parameter
+    >>> bins = np.linspace(-5.0,5.0,100)
+    >>>
+    >>> sq.Disttype = 'mcWB' # set as multi-charge Waterbag distribution
+    >>> sq.distribute()
+    >>> a,b,c=plt.hist(sq.getx(0, 'mm'),bins, alpha=0.5, label='Waterbag')
+    >>>
+    >>> sq.Disttype = 'mcGS' # set as multi-charge Gaussian distribution
+    >>> sq.distribute()
+    >>> a,b,c=plt.hist(sq.getx(0, 'mm'),bins, alpha=0.5, label='Gaussian')
+    >>>
+    >>> plt.xlabel('x [mm]')
+    >>> plt.ylabel('Count')
+    >>> plt.show()
+
+    .. image:: figs/plot_dist.png
+
+7. A to B run (partial run)
+---------------------------
+
+:py:func:`run <impact.control.Sequence.run>` method supports to input *start* and *end* point of the simulation.
+
+>>> sq.distribute()             # distribute the initial beam
+>>> sq.run(start=1, end='cav1') # simulate from the 1st element to the 1st cavity (index=3)
+
+Before continuing the simulation, user can store the current beam distribution and the beam energy.
+
+>>> dst1 = sq.getall(unit='impact') # store the whole beam distribution with *impact* unit
+>>> eng1 = sq.hrefeng()[-1]         # store the finite beam energy
+>>> zend = sq.hrefz() [-1]          # store the finite beam position
+
+Run simulation to the end of the lattice.
+
+>>> sq.run(start=4, end=-1, zstart=zend)
+
+In addition, user can restore the beam distribution and re-run the simulation. - :py:func:`distribute() <impact.control.Sequence.distribute>`
+
+>>> sq.distribute(particles=dst1, unit='impact', Energy=eng1) # distribute by using stored data
+>>> sq.run(start=4, end=-1, zstart=zend)
+
+8. Example: Transverse matching
+-------------------------------
+
+If you want to match the beam at the monitoring point, you can use optimizer like in *SciPy*.
+
+>>> from scipy.optimize import minimize
+
+Define *cost function* by using the simulation results.
+
+>>> desired_xrms = 2.5 # desired x rms size [mm]
+>>>
+>>> def cost(new_param):
+>>>     sq.conf('sol1', {'bz':new_param}) # set new solenoid strength
+>>>     sq.distribute()
+>>>     sq.run()
+>>>     diffx = sq.hxrms('pm1') - desired_xrms
+>>>     return np.absolute(diffx)
+
+Optimize the solenoid parameter
+
+>>> minimize(cost, 5.0, method='Nelder-Mead') # where 5.0 is the initial parameter for the solenoid strength
+final_simplex: (array([[ 4.58441162],
+      [ 4.58447266]]), array([  5.81423675e-06,   2.54995700e-05]))
+          fun: 5.8142367538316364e-06
+      message: 'Optimization terminated successfully.'
+         nfev: 30
+          nit: 15
+       status: 0
+      success: True
+            x: array([ 4.58441162])
+
+In this example, the parameter is one-dimension, but most of the optimizers support
+multi-dimensional parameter for more complex systems.
+
+9. Lattice construction
+-----------------------
+
+User can :py:func:`construct <impact.control.Sequence.construct>` new beam transport line by using Python interface.
+
+>>> drift = [0.5, 10, 10, 0, 0.2]
+# define element by using list of numbers (format is the same as the input file)
+>>> quad1 = {'length':0.2, 'seg':4, 'step':4, 'type':'quadrupole', 'B2': 10.0, 'aper':0.2}
+# define element by using python dictionary
+>>> quad2 = quad1.copy()
+>>> quad2['B2'] = -10.0
+>>> FODO = [drift, quad1, drift, quad2, drift]
+>>> sq.construct(FODO)
+
+In addtion, user can :py:func:`insert <impact.control.Sequence.insert>` new lattice element.
+
+>>> quad1 = {'length':0.2, 'seg':4, 'step':4, 'type':'quadrupole', 'B2': 10.0, 'aper':0.2, 'tag':'new_quad'}
+# define element by using python dictionary
+>>> sq.construct(3, quad1) # insert new element
+>>> sq.conf(3)
+index :  4 (start :  1.2 , end :  1.4  [m])
+length :  0.2 [m]
+segment :  4
+step :  4
+type :  1  (quadrupole)
+gradient ('grad', 'b2', 'k', 'voltage') :  10.0 [T/m]
+switch ('flag',) :  0.0 
+aperture ('aper', 'pipe', 'radius') :  0.2 [m]
+dx ('dx0',) :  0.0 [m]
+dy ('dy0',) :  0.0 [m]
+pitch ('dx1',) :  0.0 [rad]
+yaw ('dy1',) :  0.0 [rad]
+roll  :  0.0 [rad]
+tag :  ['new_quad']
+
+
+10. Data export 
+---------------
+
+User can :py:func:`save <impact.control.Sequence.save>` current settings as IMPACT input format.
+
+>>> sq.save('test.in.new') # export settings to 'test.in.new'
+
+User can :py:func:`output <impact.control.Sequence.output>` results as original IMAPCT format.
+
+>>> sq.output() # export simulation results to 'fort.*'

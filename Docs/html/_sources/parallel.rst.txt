@@ -1,0 +1,177 @@
+Parallel Computing
+==================
+IMPACT supports MPI (Message Passing Interface) for Parallel computing.
+
+MPI usage in command line
+----------------------------------
+Python API supports MPI by `mpi4py <https://mpi4py.scipy.org/>`_,
+all :py:class:`Sequence <impact.control.Sequence>` class objects are parallelized automatically.
+
+For example,
+
+run_parallel.py::
+
+    from impact import Sequence, mpisize, mpirank
+    import scipy as np
+    
+    print 'Launch with process '+str(mpirank)+' of '+str(mpisize)+'.'
+    sq = Sequence('user-defined-input')
+    sq.subdir = 'data'
+    sq.load()
+    if mpirank == 0: print 'Run Simulation'
+    sq.distribute()
+    sq.run() # compute in parallel
+
+    if mpirank == 0:
+        print 'Output Simulation Result'
+        np.savetxt('result.dat', np.transpose([sq.hrefz(), sq.hxrms(), sq.hyrms()]))
+
+and user can execute this script by using ``mpirun``.
+::
+
+    $ mpirun -np 4 python run_parallel.py
+    Launch with process 3 of 4.
+    Launch with process 1 of 4.
+    Launch with process 0 of 4.
+    Launch with process 2 of 4.
+    Run Simulation
+    Output Simulation Result
+
+MPI usage in jupyter-notebook
+-----------------------------
+
+Install `ipyparallel <https://github.com/ipython/ipyparallel>`_ with proper permissions.
+::
+
+    $ pip install ipyparallel # may need to install with sudo
+
+
+Launch MPI cluster.
+::
+
+    $ ipcluster start -n 4 --engines=MPIEngineSetLauncher # launch with 4 processes
+
+.. note::
+   Cluster launched directory is defined as the working directory.
+   If you input **relative path** in the notebook, the path is pursued form this working directory.
+    
+After the clusters are running with MPI, user can start ``jupyter-notebook`` in parallel.
+::
+
+    $ jupyter-notebook
+    
+In the notebook, user need to create a ``Client`` to IPython parallel cluster.
+
+::
+
+    import ipyparallel as ipp
+    rc = ipp.Client()
+    
+Then, user can write **parallelized cell** in notebook by using ``%%px`` command.
+
+::
+
+    %%px # execute cell in parallel
+    from impact import Sequence, mpisize, mpirank
+    print 'Launch with process '+str(mpirank)+' of '+str(mpisize)+'.'
+    --------------------------------------------------------------------
+    [stdout:0] Launch with process 1 of 4.
+    [stdout:1] Launch with process 0 of 4.
+    [stdout:2] Launch with process 2 of 4.
+    [stdout:3] Launch with process 3 of 4.
+
+:: 
+
+    %%px # execute cell in parallel
+    sq = Sequence('user-defined-input')
+    sq.subdir = 'data'
+    sq.load()
+    sq.distribute()
+    sq.run() 
+
+Simulation results are broadcasted to all processes by default. -- 
+:py:func:`autobcast <impact.result.Result.autobcast>`
+::
+
+    %%px
+    print sq.hxcen('moni1','mm')
+    --------------------------------------------------------------------
+    [stdout:0] [ 2.08796354]
+    [stdout:1] [ 2.08796354]
+    [stdout:2] [ 2.08796354]
+    [stdout:3] [ 2.08796354]
+
+::
+
+    %%px 
+    sq.autobcast = False # no broadcasting
+    print mpirank,sq.hxrms('moni1','mm')
+    --------------------------------------------------------------------
+    [stdout:0] 2 None
+    [stdout:1] 1 None
+    [stdout:2] 0 [ 2.08796354]
+    [stdout:3] 3 None
+
+
+Tips
+----
+
+There are 2 methods to make cost-function for optimization.
+
+Easy method::
+
+    sq.autobcast = True # default setting
+    def cost_func(input_value):
+        ...
+        # set parameter from input_value
+        ...
+        sq.distribute(); sq.run() # run simulation
+        
+        # calculate cost value
+        xx = sq.hxrms() # broadcast full list of x rms
+        yy = sq.hyrms() # broadcast full list of y rms
+        cost = np.std(xx)*np.mean(xx)*np.std(yy)*np.mean(yy)
+        return cost
+    
+    
+Fast method::
+
+    sq.autobcast = False # no auto broadcasting
+    def cost_func(input_value):
+        ...
+        # set parameter from input_value
+        ...
+        sq.distribute(); sq.run() # run simulation
+        
+        # calculate cost value
+        if mpirank == 0:
+            xx = sq.hxrms()
+            yy = sq.hyrms()
+            cost = np.std(xx)*np.mean(xx)*np.std(yy)*np.mean(yy)
+        else
+            cost = None
+
+        cost = mpicomm.bcast(cost, root=0) # broadcast single float only
+        
+        return cost    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+
+
+
+
+
+
+

@@ -1,0 +1,58 @@
+Installation
+=============
+
+Build from source code
+----------------------
+
+Pre-requisites
+""""""""""""""
+(may need to apt-get with sudo)
+
+For python2.x,
+
+::
+
+    $ apt-get install libopenmpi-dev python-scipy python-nose python-mpi4py cmake
+
+
+For python3.x,
+
+::
+
+    $ apt-get install libopenmpi-dev python3-scipy python3-nose python3-mpi4py cmake
+
+mpi library for fortran source, also scipy and mpi4py for Python interface.
+The nosetests test runner is used for 'make test' if present.
+
+Building
+""""""""
+
+Git clone from impact repository
+
+::
+
+    $ git clone *repository-address*
+
+If you are in Master branch, change branch to dev-adv.
+::
+
+    $ cd impact
+    $ git checkout dev-adv
+  
+Make ``build`` directory and compile with CMake.
+::
+
+    $ mkdir build
+    $ cd build
+    $ cmake ..
+    $ make
+
+Beam dynamics test for IMPACT.
+::
+
+    $ make test
+
+Install with proper permissions.
+::
+
+    $ make install # may need to install with sudo

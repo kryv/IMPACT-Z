@@ -1,0 +1,7 @@
+impact\.const module
+====================
+
+.. automodule:: impact.const
+    :members:
+    :undoc-members:
+    :show-inheritance:

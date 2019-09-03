@@ -1,0 +1,1242 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>impact.input &mdash; Adv. IMPACT 1.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="Adv. IMPACT 1.0.0 documentation" href="../../index.html"/>
+        <link rel="up" title="Module code" href="../index.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Adv. IMPACT
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Table of Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../parallel.html">Parallel Computing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../element.html">Lattice Elements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../classlib.html">Class Library</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Adv. IMPACT</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>impact.input</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for impact.input</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">absolute_import</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">division</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">print_function</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">unicode_literals</span>
+
+<span class="kn">import</span> <span class="nn">impact._impactf</span> <span class="k">as</span> <span class="nn">im</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="kn">from</span> <span class="nn">impact</span> <span class="k">import</span> <span class="n">const</span>
+
+<span class="n">__authors__</span> <span class="o">=</span> <span class="s2">&quot;Kei Fukushima&quot;</span>
+<span class="n">__copyright__</span> <span class="o">=</span> <span class="s2">&quot;(c) 2017, Facility for Rare Isotope beams, Michigan State University&quot;</span>
+<span class="n">__contact__</span> <span class="o">=</span> <span class="s2">&quot;Kei Fukushima &lt;fukushim@frib.msu.edu&gt;&quot;</span>
+
+<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">()</span>
+<span class="n">_Logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">basestring</span>
+<span class="k">except</span> <span class="ne">NameError</span><span class="p">:</span>
+    <span class="n">basestring</span> <span class="o">=</span> <span class="nb">str</span>
+
+
+<div class="viewcode-block" id="Input"><a class="viewcode-back" href="../../pysrc/impact.input.html#impact.input.Input">[docs]</a><span class="k">class</span> <span class="nc">Input</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Base class for input parameters of Advanced IMPACT.</span>
+
+<span class="sd">    - **Attributes for simulation parameter**</span>
+
+<span class="sd">    .. autosummary::</span>
+<span class="sd">        Mpisize</span>
+<span class="sd">        Ndim</span>
+<span class="sd">        Nxgrid</span>
+<span class="sd">        Nygrid</span>
+<span class="sd">        Nzgrid</span>
+<span class="sd">        Xbound</span>
+<span class="sd">        Ybound</span>
+<span class="sd">        Zperiod</span>
+<span class="sd">        Flaginteg</span>
+<span class="sd">        Flagerror</span>
+<span class="sd">        Flagdiag</span>
+<span class="sd">        Flagbc</span>
+<span class="sd">        Flagsubstep</span>
+<span class="sd">        Flagrestart</span>
+<span class="sd">        Flagsc</span>
+<span class="sd">        Outputemit</span>
+
+<span class="sd">    - **Attributes for beam parameter**</span>
+
+<span class="sd">    .. autosummary::</span>
+<span class="sd">        Nptot</span>
+<span class="sd">        Ncharge</span>
+<span class="sd">        Nplist</span>
+<span class="sd">        Curlist</span>
+<span class="sd">        Ctmlist</span>
+<span class="sd">        Energy</span>
+<span class="sd">        Mass</span>
+<span class="sd">        Frequency</span>
+<span class="sd">        Chargestate</span>
+<span class="sd">        Phaseini</span>
+<span class="sd">        Disttype</span>
+<span class="sd">        Distxsigma</span>
+<span class="sd">        Distysigma</span>
+<span class="sd">        Distzsigma</span>
+<span class="sd">        Distxlambda</span>
+<span class="sd">        Distylambda</span>
+<span class="sd">        Distzlambda</span>
+<span class="sd">        Distxmu</span>
+<span class="sd">        Distymu</span>
+<span class="sd">        Distzmu</span>
+<span class="sd">        Distxtwiss</span>
+<span class="sd">        Distytwiss</span>
+<span class="sd">        Distztwiss</span>
+<span class="sd">        Distxquadratic</span>
+<span class="sd">        Distyquadratic</span>
+<span class="sd">        Distzquadratic</span>
+<span class="sd">        Distxoffset</span>
+<span class="sd">        Distyoffset</span>
+<span class="sd">        Distzoffset</span>
+<span class="sd">        Distxpoffset</span>
+<span class="sd">        Distypoffset</span>
+<span class="sd">        Distzpoffset</span>
+<span class="sd">        Distxoffset_m</span>
+<span class="sd">        Distyoffset_m</span>
+<span class="sd">        Distzoffset_deg</span>
+<span class="sd">        Distxpoffset_rad</span>
+<span class="sd">        Distypoffset_rad</span>
+<span class="sd">        Distzpoffset_eV</span>
+<span class="sd">        Distxmismatch</span>
+<span class="sd">        Distymismatch</span>
+<span class="sd">        Distzmismatch</span>
+<span class="sd">        Distxpmismatch</span>
+<span class="sd">        Distypmismatch</span>
+<span class="sd">        Distzpmismatch</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_flagmass</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">_flagfreq</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">_flagengy</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">_xtwiss</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">_ytwiss</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">_ztwiss</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">Mpisize</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;int: Number of processors in MPI communicator.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">npcol</span><span class="o">*</span><span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">nprow</span>
+
+    <span class="nd">@Mpisize</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">Mpisize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+        <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">npcol</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+        <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">nprow</span> <span class="o">=</span> <span class="mi">1</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">Ndim</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;int: Dimension of the simulation space (dummy parameter).&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">dm</span>
+
+    <span class="nd">@Ndim</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">Ndim</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+        <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">dm</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">Nptot</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;int: Total number of macro particles.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">npin</span>
+
+    <span class="nd">@Nptot</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">Nptot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+        <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">npin</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">Flaginteg</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;int: Flag for integration method. 1 for linear map, 2 for nonlinear Lorentz integrator.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">flagmap</span>
+
+    <span class="nd">@Flaginteg</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">Flaginteg</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">int</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Input value must be 1 or 2.&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">flagmap</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">Flagerror</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;int: Flag for error study.</span>
+
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
+<span class="sd">        - 0 : No error simulation</span>
+
+<span class="sd">        - 1 : Use ``dx``, ``dy``, ``pitch``, ``yaw`` and ``roll`` errors to the lattice element.</span>
+
+<span class="sd">        - 2 : Use entrance offsets (``dx0``, ``dy0``), exit offsets (``dx1``, ``dy1``), and ``roll`` errors to the lattice element.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">flagerr</span>
+
+    <span class="nd">@Flagerror</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">Flagerror</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+        <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">flagerr</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">Flagdiag</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;int: Flag for diagnostic routine. 1 or 3 for standard, 2 or 4 for `n` % emittance, radius output.</span>
+
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
+<span class="sd">        - 1 or 2 : Diagnostic routine is called for each segment.</span>
+
+<span class="sd">        - 3 or 4 : Diagnostic routine is called in case of element type = -23 (monitor).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">flagdiag</span>
+
+    <span class="nd">@Flagdiag</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">Flagdiag</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">int</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Input value must be 1, 2, 3, or 4.&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">flagdiag</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">Nxgrid</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;int: Number of x mesh grid for space charge (PIC) calculation.</span>
+
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
+<span class="sd">        The x mesh number must be :math:`2^n` (for :py:func:`Flagbc &lt;impact.input.Input.Flagbc&gt;` equals to 1, 2, 3, or 4)</span>
+<span class="sd">        or :math:`2^n+1` (for :py:func:`Flagbc &lt;impact.input.Input.Flagbc&gt;` equals to 5 or 6).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">nx</span>
+
+    <span class="nd">@Nxgrid</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">Nxgrid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+        <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">log2</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="o">.</span><span class="n">is_integer</span><span class="p">())</span> <span class="ow">and</span> <span class="p">(</span><span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">log2</span><span class="p">(</span><span class="n">v</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">is_integer</span><span class="p">()):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Input value must be 2^n or 2^n + 1.&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">nx</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">Nygrid</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;int: Number of y mesh grid for space charge (PIC) calculation.</span>
+
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
+<span class="sd">        The y mesh number must be :math:`2^n` (for :py:func:`Flagbc &lt;impact.input.Input.Flagbc&gt;` equals to 1 or 2)</span>
+<span class="sd">        or :math:`2^n+1` (for :py:func:`Flagbc &lt;impact.input.Input.Flagbc&gt;` equals to 3, 4, 5, or 6).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">ny</span>
+
+    <span class="nd">@Nygrid</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">Nygrid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+        <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">log2</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="o">.</span><span class="n">is_integer</span><span class="p">())</span> <span class="ow">and</span> <span class="p">(</span><span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">log2</span><span class="p">(</span><span class="n">v</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">is_integer</span><span class="p">()):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Input value must be 2^n or 2^n + 1.&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">ny</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">Nzgrid</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;int: Number of z mesh grid for space charge (PIC) calculation.</span>
+
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
+<span class="sd">        The z mesh number must be :math:`2^n` (for :py:func:`Flagbc &lt;impact.input.Input.Flagbc&gt;` equals to 1, 3, or 5)</span>
+<span class="sd">        or :math:`2^n+1` (for :py:func:`Flagbc &lt;impact.input.Input.Flagbc&gt;` equals to 2, 4, or 6).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">nz</span>
+
+    <span class="nd">@Nzgrid</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">Nzgrid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+        <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">log2</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="o">.</span><span class="n">is_integer</span><span class="p">())</span> <span class="ow">and</span> <span class="p">(</span><span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">log2</span><span class="p">(</span><span class="n">v</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">is_integer</span><span class="p">()):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Input value must be 2^n or 2^n + 1.&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">nz</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">Flagbc</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;int: Flag of boundary condition for space charge (PIC) calculation.</span>
+
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
+<span class="sd">        - 1 : 3D open. In this case, all mesh number (:py:func:`Nxgrid &lt;impact.input.Input.Nxgrid&gt;`,</span>
+<span class="sd">          :py:func:`Nygrid &lt;impact.input.Input.Nygrid&gt;`, :py:func:`Nzgrid &lt;impact.input.Input.Nzgrid&gt;`) must be :math:`2^n`.</span>
+
+<span class="sd">        - 2 : Transverse open, longitudinal periodic. In this case,</span>
+<span class="sd">          :py:func:`Nxgrid &lt;impact.input.Input.Nxgrid&gt;` and :py:func:`Nygrid &lt;impact.input.Input.Nygrid&gt;` must be :math:`2^n`,</span>
+<span class="sd">          :py:func:`Nzgrid &lt;impact.input.Input.Nzgrid&gt;` must be :math:`2^n+1`.</span>
+
+<span class="sd">        - 3 : Transverse finite, longitudinal open round pipe. In this case,</span>
+<span class="sd">          :py:func:`Nxgrid &lt;impact.input.Input.Nxgrid&gt;` and :py:func:`Nzgrid &lt;impact.input.Input.Nzgrid&gt;` must be :math:`2^n`,</span>
+<span class="sd">          :py:func:`Nygrid &lt;impact.input.Input.Nygrid&gt;` must be :math:`2^n+1`.</span>
+
+<span class="sd">        - 4 : Transverse finite, longitudinal periodic round pipe. In this case</span>
+<span class="sd">          :py:func:`Nxgrid &lt;impact.input.Input.Nxgrid&gt;` must be :math:`2^n`,</span>
+<span class="sd">          :py:func:`Nygrid &lt;impact.input.Input.Nygrid&gt;` and :py:func:`Nzgrid &lt;impact.input.Input.Nzgrid&gt;` must be :math:`2^n+1`.</span>
+
+<span class="sd">        - 5 : Transverse finite, longitudinal open rectangular pipe. In this case,</span>
+<span class="sd">          :py:func:`Nzgrid &lt;impact.input.Input.Nzgrid&gt;` must be :math:`2^n`,</span>
+<span class="sd">          :py:func:`Nxgrid &lt;impact.input.Input.Nxgrid&gt;` and :py:func:`Nygrid &lt;impact.input.Input.Nygrid&gt;` must be :math:`2^n+1`.</span>
+
+<span class="sd">        - 6 : Transverse finite, longitudinal periodic rectangular pipe. In this case,</span>
+<span class="sd">          all mesh number ( :py:func:`Nxgrid &lt;impact.input.Input.Nxgrid&gt;`, :py:func:`Nygrid &lt;impact.input.Input.Nygrid&gt;`,</span>
+<span class="sd">          :py:func:`Nzgrid &lt;impact.input.Input.Nzgrid&gt;`) must be :math:`2^n+1`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">flagbc</span>
+
+    <span class="nd">@Flagbc</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">Flagbc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">int</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Input value must be in 1 to 6.&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">flagbc</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">Xbound</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;float: x (horizontal) pipe width for space charge (PIC) calculation (unit is [m]).&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">xwallrad</span>
+
+    <span class="nd">@Xbound</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">Xbound</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+        <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">xwallrad</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">Ybound</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;float: y (vertical) pipe width for space charge (PIC) calculation (unit is [m]).&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">ywallrad</span>
+
+    <span class="nd">@Ybound</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">Ybound</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+        <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">ywallrad</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">Zperiod</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;float: z periodic length for space charge (PIC) calculation (unit is [m]).&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">perdlen</span>
+
+    <span class="nd">@Zperiod</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">Zperiod</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+        <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">perdlen</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">Flagrestart</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;bool: Flag for restarting the simulation (dummy parameter).&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">rstartflg</span>
+
+    <span class="nd">@Flagrestart</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">Flagrestart</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+        <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">rstartflg</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">Flagsubstep</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;bool: Flag of sub-cycle for space charge calculation.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">flagsubstep</span>
+
+    <span class="nd">@Flagsubstep</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">Flagsubstep</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+        <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">flagsubstep</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">Ncharge</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;int: Number of charge states&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">nchrgin</span>
+
+    <span class="nd">@Ncharge</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">Ncharge</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+        <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">nchrgin</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">Nplist</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;list of int: List of particle number for each charge state.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">nptlistin</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">Ncharge</span><span class="p">]</span>
+
+    <span class="nd">@Nplist</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">Nplist</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">Ncharge</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
+            <span class="n">_Logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;List length does not match Ncharge.&#39;</span><span class="p">)</span>
+        <span class="n">ls</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+        <span class="n">ls</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="nb">len</span><span class="p">(</span><span class="n">v</span><span class="p">)]</span> <span class="o">=</span> <span class="n">v</span>
+        <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">nptlistin</span> <span class="o">=</span> <span class="n">ls</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">Curlist</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;list of float: List of beam current for each charge state. (unit is [A])&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">currlistin</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">Ncharge</span><span class="p">]</span>
+
+    <span class="nd">@Curlist</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">Curlist</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">Ncharge</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
+            <span class="n">_Logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;List length does not match Ncharge.&#39;</span><span class="p">)</span>
+        <span class="n">ls</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+        <span class="n">ls</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="nb">len</span><span class="p">(</span><span class="n">v</span><span class="p">)]</span> <span class="o">=</span> <span class="n">v</span>
+        <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">currlistin</span> <span class="o">=</span> <span class="n">ls</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">Ctmlist</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;list of float: List of charge to mass ratio for each charge state. (unit is [c^2/eV])&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">qmcclistin</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">Ncharge</span><span class="p">]</span>
+
+    <span class="nd">@Ctmlist</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">Ctmlist</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">Ncharge</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
+            <span class="n">_Logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;List length does not match Ncharge.&#39;</span><span class="p">)</span>
+        <span class="n">ls</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+        <span class="n">ls</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="nb">len</span><span class="p">(</span><span class="n">v</span><span class="p">)]</span> <span class="o">=</span> <span class="n">v</span>
+        <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">qmcclistin</span> <span class="o">=</span> <span class="n">ls</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">Flagsc</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;bool: Flag of space-charge calculation.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span><span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">bcurr</span><span class="p">)</span>
+
+    <span class="nd">@Flagsc</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">Flagsc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+        <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">bcurr</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">Energy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;float: Initial kinetic energy (unit is [eV]).&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">bkenergy</span>
+
+    <span class="nd">@Energy</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">Energy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+        <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">bkenergy</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_flagengy</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">Mass</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;float: Mass of the reference particle (unit is [eV/c^2]).&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">bmass</span>
+
+    <span class="nd">@Mass</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">Mass</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+        <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">bmass</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_flagmass</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">Chargestate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;float: Charge state of the reference particle (unit is [1]).&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">bchargein</span>
+
+    <span class="nd">@Chargestate</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">Chargestate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+        <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">bchargein</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">Frequency</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;float: Scaling frequency (unit is [Hz]).&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">bfreq</span>
+
+    <span class="nd">@Frequency</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">Frequency</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+        <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">bfreq</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+        <span class="n">im</span><span class="o">.</span><span class="n">physconstclass</span><span class="o">.</span><span class="n">construct_physconst</span><span class="p">(</span><span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">bfreq</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_flagfreq</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">Phaseini</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;float: Initial phase of the reference particle (unit is [rad]).&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">phsini</span>
+
+    <span class="nd">@Phaseini</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">Phaseini</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+        <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">phsini</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">Outputemit</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;float: Percentage for emittance and radius output (unit is [%]).</span>
+
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
+<span class="sd">        This value is used in case of :py:func:`Flagdiag &lt;impact.input.Input.Flagdiag&gt;` equals to 2 or 4.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">outputflag</span>
+
+    <span class="nd">@Outputemit</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">Outputemit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+        <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">outputflag</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+
+    <span class="c1"># -------------------------------- #</span>
+    <span class="c1"># Initial Distribution Parameters  #</span>
+    <span class="c1"># -------------------------------- #</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">Disttype</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;int: Initial distribution type.</span>
+
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
+<span class="sd">        - 1 : 6D rectangle in phase space for single charge state.</span>
+
+<span class="sd">        - 2 : 6D Gaussian distribution for single charge state.</span>
+
+<span class="sd">        - 3 : 6D Waterbag distribution for single charge state.</span>
+
+<span class="sd">        - 4 : Semi-Gaussian distribution for single charge state.</span>
+
+<span class="sd">        - 5 : KV distribution for single charge state.</span>
+
+<span class="sd">        - 16 : 6D Waterbag distribution for multi charge states (recommended).</span>
+
+<span class="sd">        - 17 : 6D Gaussian distribution for multi charge states (recommended).</span>
+
+<span class="sd">        - 19 : User input distribution (recommended). File path is defined in :py:func:`distribute &lt;impact.control.Sequence.distribute&gt;`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">flagdist</span>
+
+    <span class="nd">@Disttype</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">Disttype</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">basestring</span><span class="p">):</span>
+            <span class="n">v</span> <span class="o">=</span> <span class="n">const</span><span class="o">.</span><span class="n">ddist</span><span class="p">[</span><span class="n">v</span><span class="o">.</span><span class="n">lower</span><span class="p">()]</span>
+
+        <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">flagdist</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">Distxsigma</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;float: x standard deviation of the initial distribution (IMPACT internal unit).&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">distparam</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="nd">@Distxsigma</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">Distxsigma</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+        <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">distparam</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">Distxlambda</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;float: x&#39; (xp, px) standard deviation of the initial distribution (IMPACT internal unit).&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">distparam</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="nd">@Distxlambda</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">Distxlambda</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+        <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">distparam</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">Distxmu</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;float: x-x&#39; coupling term of the initial distribution (IMPACT internal unit).&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">distparam</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+
+    <span class="nd">@Distxmu</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">Distxmu</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+        <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">distparam</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">Distysigma</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;float: y standard deviation of the initial distribution (IMPACT internal unit).&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">distparam</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span>
+
+    <span class="nd">@Distysigma</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">Distysigma</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+        <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">distparam</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">Distylambda</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;float: y&#39; (yp, py) standard deviation of the initial distribution (IMPACT internal unit).&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">distparam</span><span class="p">[</span><span class="mi">8</span><span class="p">]</span>
+
+    <span class="nd">@Distylambda</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">Distylambda</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+        <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">distparam</span><span class="p">[</span><span class="mi">8</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">Distymu</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;float: y-y&#39; coupling term of the initial distribution (IMPACT internal unit).&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">distparam</span><span class="p">[</span><span class="mi">9</span><span class="p">]</span>
+
+    <span class="nd">@Distymu</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">Distymu</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+        <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">distparam</span><span class="p">[</span><span class="mi">9</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">Distzsigma</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;float: z standard deviation of the initial distribution (IMPACT internal unit).&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">distparam</span><span class="p">[</span><span class="mi">14</span><span class="p">]</span>
+
+    <span class="nd">@Distzsigma</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">Distzsigma</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+        <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">distparam</span><span class="p">[</span><span class="mi">14</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">Distzlambda</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;float: z&#39; (zp, pz) standard deviation of the initial distribution (IMPACT internal unit).&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">distparam</span><span class="p">[</span><span class="mi">15</span><span class="p">]</span>
+
+    <span class="nd">@Distzlambda</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">Distzlambda</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+        <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">distparam</span><span class="p">[</span><span class="mi">15</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">Distzmu</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;float: z-z&#39; coupling term of the initial distribution (IMPACT internal unit).&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">distparam</span><span class="p">[</span><span class="mi">16</span><span class="p">]</span>
+
+    <span class="nd">@Distzmu</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">Distzmu</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+        <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">distparam</span><span class="p">[</span><span class="mi">16</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">Distxmismatch</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;float: x mismatch factor of the initial distribution (unit is [1]).&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">distparam</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+
+    <span class="nd">@Distxmismatch</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">Distxmismatch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+        <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">distparam</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">Distxpmismatch</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;float: x&#39; (xp, px) mismatch factor of the initial distribution (unit is [1]).&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">distparam</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
+
+    <span class="nd">@Distxpmismatch</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">Distxpmismatch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+        <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">distparam</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">Distxoffset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;float: x position offset of the initial distribution (IMPACT internal unit).&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">distparam</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span>
+
+    <span class="nd">@Distxoffset</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">Distxoffset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+        <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">distparam</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">Distxpoffset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;float: x&#39; (xp, px) momentum offset of the initial distribution (IMPACT internal unit).&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">distparam</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span>
+
+    <span class="nd">@Distxpoffset</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">Distxpoffset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+        <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">distparam</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">Distymismatch</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;float: y mismatch factor of the initial distribution (unit is [1]).&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">distparam</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span>
+
+    <span class="nd">@Distymismatch</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">Distymismatch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+        <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">distparam</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">Distypmismatch</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;float: x&#39; (xp, px) mismatch factor of the initial distribution (unit is [1]).&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">distparam</span><span class="p">[</span><span class="mi">11</span><span class="p">]</span>
+
+    <span class="nd">@Distypmismatch</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">Distypmismatch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+        <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">distparam</span><span class="p">[</span><span class="mi">11</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">Distyoffset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;float: y position offset of the initial distribution (IMPACT internal unit).&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">distparam</span><span class="p">[</span><span class="mi">12</span><span class="p">]</span>
+
+    <span class="nd">@Distyoffset</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">Distyoffset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+        <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">distparam</span><span class="p">[</span><span class="mi">12</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">Distypoffset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;float: y&#39; (yp, py) momentum offset of the initial distribution (IMPACT internal unit).&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">distparam</span><span class="p">[</span><span class="mi">13</span><span class="p">]</span>
+
+    <span class="nd">@Distypoffset</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">Distypoffset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+        <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">distparam</span><span class="p">[</span><span class="mi">13</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">Distzmismatch</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;float: z mismatch factor of the initial distribution (unit is [1]).&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">distparam</span><span class="p">[</span><span class="mi">17</span><span class="p">]</span>
+
+    <span class="nd">@Distzmismatch</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">Distzmismatch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+        <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">distparam</span><span class="p">[</span><span class="mi">17</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">Distzpmismatch</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;float: z&#39; (zp, pz) mismatch factor of the initial distribution (unit is [1]).&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">distparam</span><span class="p">[</span><span class="mi">18</span><span class="p">]</span>
+
+    <span class="nd">@Distzpmismatch</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">Distzpmismatch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+        <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">distparam</span><span class="p">[</span><span class="mi">18</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">Distzoffset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;float: z position offset of the initial distribution (IMPACT internal unit).&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">distparam</span><span class="p">[</span><span class="mi">19</span><span class="p">]</span>
+
+    <span class="nd">@Distzoffset</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">Distzoffset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+        <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">distparam</span><span class="p">[</span><span class="mi">19</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">Distzpoffset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;float: z&#39; (zp, pz) offset of the initial distribution (IMPACT internal unit).&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">distparam</span><span class="p">[</span><span class="mi">20</span><span class="p">]</span>
+
+    <span class="nd">@Distzpoffset</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">Distzpoffset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+        <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">distparam</span><span class="p">[</span><span class="mi">20</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+
+    <span class="c1"># --------------------------------------------- #</span>
+    <span class="c1"># Special Input Format for Initial Distribution #</span>
+    <span class="c1"># --------------------------------------------- #</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">Distxtwiss</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;list of float: x twiss parameter for the initial distribution.</span>
+
+<span class="sd">        List of input parameters and units is [alpha(1), beta(m), normalized emittance(m-rad)].</span>
+
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
+<span class="sd">        Input list length must be 3.</span>
+
+<span class="sd">        keywords: Courant Snyder parameters, horizontal</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_xtwiss</span>
+
+    <span class="nd">@Distxtwiss</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">Distxtwiss</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;List length must be 3 (Twiss parameter [alpha(1), beta(m), normalized emittance(m-rad)]).&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">runseq</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_flagfreq</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Scaling frequency is not defined. Please input &#39;Frequency&#39; at first.&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_flagmass</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Particle mass is not defined. Please input &#39;Mass&#39; at first.&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_flagengy</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Kinetic energy is not defined. Please input &#39;Energy&#39; at first.&quot;</span><span class="p">)</span>
+
+        <span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">emit</span> <span class="o">=</span> <span class="n">v</span>
+        <span class="n">g0</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Energy</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">Mass</span> <span class="o">+</span> <span class="mf">1.0</span>
+        <span class="n">b0g0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">g0</span><span class="o">*</span><span class="n">g0</span> <span class="o">-</span> <span class="mf">1.0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Distxsigma</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">emit</span><span class="o">/</span><span class="n">b0g0</span><span class="o">*</span><span class="n">beta</span><span class="o">/</span><span class="p">(</span><span class="mf">1.0</span> <span class="o">+</span> <span class="n">alpha</span><span class="o">*</span><span class="n">alpha</span><span class="p">))</span><span class="o">/</span><span class="n">im</span><span class="o">.</span><span class="n">physconstclass</span><span class="o">.</span><span class="n">scxl</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Distxlambda</span> <span class="o">=</span> <span class="n">b0g0</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">emit</span><span class="o">/</span><span class="n">b0g0</span><span class="o">/</span><span class="n">beta</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Distxmu</span> <span class="o">=</span> <span class="n">alpha</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">1.0</span> <span class="o">+</span> <span class="n">alpha</span><span class="o">*</span><span class="n">alpha</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_xtwiss</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">emit</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">Distxquadratic</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;list of float: x quadratic parameter (IMPACT default) for the initial distribution.</span>
+
+<span class="sd">        List of input parameters is [sigma, lambda, mu], IMPACT internal units.</span>
+
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
+<span class="sd">        Input list length must be 3.</span>
+
+<span class="sd">        keywords: horizontal</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">distparam</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">])</span>
+
+    <span class="nd">@Distxquadratic</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">Distxquadratic</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;List length must be 3 (Quadratic parameter [sigma, lambda, mu]).&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">runseq</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_flagfreq</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Scaling frequency is not defined. Please input &#39;Frequency&#39; at first.&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_flagmass</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Particle mass is not defined. Please input &#39;Mass&#39; at first.&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_flagengy</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Kinetic energy is not defined. Please input &#39;Energy&#39; at first.&quot;</span><span class="p">)</span>
+
+        <span class="n">sigma</span><span class="p">,</span> <span class="n">lambda_</span><span class="p">,</span> <span class="n">mu</span> <span class="o">=</span> <span class="n">v</span>
+        <span class="n">g0</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Energy</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">Mass</span> <span class="o">+</span> <span class="mf">1.0</span>
+        <span class="n">b0g0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">g0</span><span class="o">*</span><span class="n">g0</span> <span class="o">-</span> <span class="mf">1.0</span><span class="p">)</span>
+        <span class="n">alpha</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">mu</span><span class="o">*</span><span class="n">mu</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">mu</span><span class="o">*</span><span class="n">mu</span><span class="p">))</span>
+        <span class="n">fac</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">physconstclass</span><span class="o">.</span><span class="n">scxl</span><span class="o">*</span><span class="n">sigma</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">mu</span><span class="o">*</span><span class="n">mu</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">fac</span> <span class="o">==</span> <span class="mf">0.0</span><span class="p">:</span>
+            <span class="n">beta</span> <span class="o">=</span> <span class="mf">0.0</span>
+            <span class="n">emit</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">beta</span> <span class="o">=</span> <span class="n">fac</span><span class="o">*</span><span class="n">b0g0</span><span class="o">/</span><span class="n">lambda_</span>
+            <span class="n">emit</span> <span class="o">=</span> <span class="n">fac</span><span class="o">*</span><span class="n">lambda_</span>
+        <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">distparam</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">lambda_</span><span class="p">,</span> <span class="n">mu</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_xtwiss</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">emit</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">Distytwiss</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;list of float: y twiss parameter for the initial distribution.</span>
+
+<span class="sd">        List of input parameters and units is [alpha(1), beta(m), normalized emittance(m-rad)].</span>
+
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
+<span class="sd">        Input list length must be 3.</span>
+
+<span class="sd">        keywords: Courant Snyder parameters, vertical</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ytwiss</span>
+
+    <span class="nd">@Distytwiss</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">Distytwiss</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;List length must be 3 (Twiss parameter [alpha(1), beta(m), normalized emittance(m-rad)]).&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">runseq</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_flagfreq</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Scaling frequency is not defined. Please input &#39;Frequency&#39; at first.&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_flagmass</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Particle mass is not defined. Please input &#39;Mass&#39; at first.&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_flagengy</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Kinetic energy is not defined. Please input &#39;Energy&#39; at first.&quot;</span><span class="p">)</span>
+
+        <span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">emit</span> <span class="o">=</span> <span class="n">v</span>
+        <span class="n">g0</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Energy</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">Mass</span> <span class="o">+</span> <span class="mf">1.0</span>
+        <span class="n">b0g0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">g0</span><span class="o">*</span><span class="n">g0</span> <span class="o">-</span> <span class="mf">1.0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Distysigma</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">emit</span><span class="o">/</span><span class="n">b0g0</span><span class="o">*</span><span class="n">beta</span><span class="o">/</span><span class="p">(</span><span class="mf">1.0</span> <span class="o">+</span> <span class="n">alpha</span><span class="o">*</span><span class="n">alpha</span><span class="p">))</span><span class="o">/</span><span class="n">im</span><span class="o">.</span><span class="n">physconstclass</span><span class="o">.</span><span class="n">scxl</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Distylambda</span> <span class="o">=</span> <span class="n">b0g0</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">emit</span><span class="o">/</span><span class="n">b0g0</span><span class="o">/</span><span class="n">beta</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Distymu</span> <span class="o">=</span> <span class="n">alpha</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">1.0</span> <span class="o">+</span> <span class="n">alpha</span><span class="o">*</span><span class="n">alpha</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ytwiss</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">emit</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">Distyquadratic</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;list of float: y quadratic parameter (IMPACT default) for the initial distribution.</span>
+
+<span class="sd">        List of input parameters is [sigma, lambda, mu], IMPACT internal units.</span>
+
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
+<span class="sd">        Input list length must be 3.</span>
+
+<span class="sd">        keywords: vertical</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">distparam</span><span class="p">[</span><span class="mi">7</span><span class="p">:</span><span class="mi">10</span><span class="p">])</span>
+
+    <span class="nd">@Distyquadratic</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">Distyquadratic</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;List length must be 3 (Quadratic parameter [sigma, lambda, mu]).&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">runseq</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_flagfreq</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Scaling frequency is not defined. Please input &#39;Frequency&#39; at first.&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_flagmass</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Particle mass is not defined. Please input &#39;Mass&#39; at first.&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_flagengy</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Kinetic energy is not defined. Please input &#39;Energy&#39; at first.&quot;</span><span class="p">)</span>
+
+        <span class="n">sigma</span><span class="p">,</span> <span class="n">lambda_</span><span class="p">,</span> <span class="n">mu</span> <span class="o">=</span> <span class="n">v</span>
+        <span class="n">g0</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Energy</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">Mass</span> <span class="o">+</span> <span class="mf">1.0</span>
+        <span class="n">b0g0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">g0</span><span class="o">*</span><span class="n">g0</span> <span class="o">-</span> <span class="mf">1.0</span><span class="p">)</span>
+        <span class="n">alpha</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">mu</span><span class="o">*</span><span class="n">mu</span><span class="o">/</span><span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">mu</span><span class="o">*</span><span class="n">mu</span><span class="p">))</span>
+        <span class="n">fac</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">physconstclass</span><span class="o">.</span><span class="n">scxl</span><span class="o">*</span><span class="n">sigma</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">mu</span><span class="o">*</span><span class="n">mu</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">fac</span> <span class="o">==</span> <span class="mf">0.0</span><span class="p">:</span>
+            <span class="n">beta</span> <span class="o">=</span> <span class="mf">0.0</span>
+            <span class="n">emit</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">beta</span> <span class="o">=</span> <span class="n">fac</span><span class="o">*</span><span class="n">b0g0</span><span class="o">/</span><span class="n">lambda_</span>
+            <span class="n">emit</span> <span class="o">=</span> <span class="n">fac</span><span class="o">*</span><span class="n">lambda_</span>
+        <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">distparam</span><span class="p">[</span><span class="mi">7</span><span class="p">:</span><span class="mi">10</span><span class="p">]</span> <span class="o">=</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">lambda_</span><span class="p">,</span> <span class="n">mu</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ytwiss</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">emit</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">Distztwiss</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;list of float: z twiss parameter for the initial distribution.</span>
+
+<span class="sd">        List of input parameters and units is [alpha(1), beta(m), normalized emittance(m-rad)].</span>
+
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
+<span class="sd">        Input list length must be 3.</span>
+
+<span class="sd">        keywords: Courant Snyder parameters, longitudinal</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ztwiss</span>
+
+    <span class="nd">@Distztwiss</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">Distztwiss</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;List length must be 3 (Twiss parameter [alpha(1), beta(m), normalized emittance(m-rad)]).&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">runseq</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_flagfreq</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Scaling frequency is not defined. Please input &#39;Frequency&#39; at first.&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_flagmass</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Particle mass is not defined. Please input &#39;Mass&#39; at first.&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_flagengy</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Kinetic energy is not defined. Please input &#39;Energy&#39; at first.&quot;</span><span class="p">)</span>
+
+        <span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">emit</span> <span class="o">=</span> <span class="n">v</span>
+        <span class="n">g0</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Energy</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">Mass</span> <span class="o">+</span> <span class="mf">1.0</span>
+        <span class="n">b0g0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">g0</span><span class="o">*</span><span class="n">g0</span> <span class="o">-</span> <span class="mf">1.0</span><span class="p">)</span>
+
+        <span class="n">m2</span> <span class="o">=</span> <span class="mf">1.0</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">Energy</span><span class="o">*</span><span class="n">g0</span><span class="o">/</span><span class="p">(</span><span class="mf">1.0</span><span class="o">+</span><span class="n">g0</span><span class="p">)</span>
+        <span class="n">d2</span> <span class="o">=</span> <span class="mf">1.0</span><span class="o">/</span><span class="mf">360.0</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">Frequency</span><span class="o">*</span><span class="n">const</span><span class="o">.</span><span class="n">clight</span><span class="o">*</span><span class="n">b0g0</span><span class="o">/</span><span class="n">g0</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">Distzsigma</span> <span class="o">=</span> <span class="n">const</span><span class="o">.</span><span class="n">udegree</span><span class="p">[</span><span class="s1">&#39;rad&#39;</span><span class="p">]</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">emit</span><span class="o">*</span><span class="n">beta</span><span class="o">/</span><span class="n">b0g0</span><span class="o">/</span><span class="n">d2</span><span class="o">/</span><span class="n">d2</span><span class="o">/</span><span class="p">(</span><span class="mf">1.0</span> <span class="o">+</span> <span class="n">alpha</span><span class="o">*</span><span class="n">alpha</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Distzlambda</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">emit</span><span class="o">/</span><span class="n">beta</span><span class="o">/</span><span class="n">b0g0</span><span class="o">/</span><span class="n">m2</span><span class="o">/</span><span class="n">m2</span><span class="p">)</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">Mass</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Distzmu</span> <span class="o">=</span> <span class="n">alpha</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">1.0</span> <span class="o">+</span> <span class="n">alpha</span><span class="o">*</span><span class="n">alpha</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ztwiss</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">emit</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">Distzquadratic</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;list of float: z quadratic parameter (IMPACT default) for the initial distribution.</span>
+
+<span class="sd">        List of input parameters is [sigma, lambda, mu], IMPACT internal units.</span>
+
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
+<span class="sd">        Input list length must be 3.</span>
+
+<span class="sd">        keywords: vertical</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">distparam</span><span class="p">[</span><span class="mi">14</span><span class="p">:</span><span class="mi">17</span><span class="p">])</span>
+
+    <span class="nd">@Distzquadratic</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">Distzquadratic</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;List length must be 3 (Quadratic parameter [sigma, lambda, mu]).&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">runseq</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_flagfreq</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Scaling frequency is not defined. Please input &#39;Frequency&#39; at first.&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_flagmass</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Particle mass is not defined. Please input &#39;Mass&#39; at first.&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_flagengy</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Kinetic energy is not defined. Please input &#39;Energy&#39; at first.&quot;</span><span class="p">)</span>
+
+        <span class="n">sigma</span><span class="p">,</span> <span class="n">lambda_</span><span class="p">,</span> <span class="n">mu</span> <span class="o">=</span> <span class="n">v</span>
+        <span class="n">g0</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Energy</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">Mass</span> <span class="o">+</span> <span class="mf">1.0</span>
+        <span class="n">b0g0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">g0</span><span class="o">*</span><span class="n">g0</span> <span class="o">-</span> <span class="mf">1.0</span><span class="p">)</span>
+
+        <span class="n">m2</span> <span class="o">=</span> <span class="mf">1.0</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">Energy</span><span class="o">*</span><span class="n">g0</span><span class="o">/</span><span class="p">(</span><span class="mf">1.0</span><span class="o">+</span><span class="n">g0</span><span class="p">)</span>
+        <span class="n">d2</span> <span class="o">=</span> <span class="mf">1.0</span><span class="o">/</span><span class="mf">360.0</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">Frequency</span><span class="o">*</span><span class="n">const</span><span class="o">.</span><span class="n">clight</span><span class="o">*</span><span class="n">b0g0</span><span class="o">/</span><span class="n">g0</span>
+
+        <span class="n">alpha</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">mu</span><span class="o">*</span><span class="n">mu</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">mu</span><span class="o">*</span><span class="n">mu</span><span class="p">))</span>
+        <span class="n">fac</span> <span class="o">=</span> <span class="n">const</span><span class="o">.</span><span class="n">uradian</span><span class="p">[</span><span class="s1">&#39;deg&#39;</span><span class="p">]</span><span class="o">*</span><span class="n">sigma</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">mu</span><span class="o">*</span><span class="n">mu</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">fac</span> <span class="o">==</span> <span class="mf">0.0</span><span class="p">:</span>
+            <span class="n">beta</span> <span class="o">=</span> <span class="mf">0.0</span>
+            <span class="n">emit</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">beta</span> <span class="o">=</span> <span class="n">fac</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">Mass</span><span class="o">/</span><span class="n">lambda_</span><span class="o">*</span><span class="n">d2</span><span class="o">/</span><span class="n">m2</span>
+            <span class="n">emit</span> <span class="o">=</span> <span class="n">fac</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">Mass</span><span class="o">*</span><span class="n">lambda_</span><span class="o">*</span><span class="n">b0g0</span><span class="o">*</span><span class="n">d2</span><span class="o">*</span><span class="n">m2</span>
+        <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">distparam</span><span class="p">[</span><span class="mi">14</span><span class="p">:</span><span class="mi">17</span><span class="p">]</span> <span class="o">=</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">lambda_</span><span class="p">,</span> <span class="n">mu</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ztwiss</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">emit</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">Distxoffset_m</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;float: x position offset of the initial distribution (unit is [m]).&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">runseq</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_flagfreq</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Scaling frequency is not defined. Please input &#39;Frequency&#39; at first.&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">distparam</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="o">*</span><span class="n">im</span><span class="o">.</span><span class="n">physconstclass</span><span class="o">.</span><span class="n">scxl</span>
+
+    <span class="nd">@Distxoffset_m</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">Distxoffset_m</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">runseq</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_flagfreq</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Scaling frequency is not defined. Please input &#39;Frequency&#39; at first.&quot;</span><span class="p">)</span>
+
+        <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">distparam</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="o">/</span><span class="n">im</span><span class="o">.</span><span class="n">physconstclass</span><span class="o">.</span><span class="n">scxl</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">Distxpoffset_rad</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;float: x&#39; (xp, px) momentum offset of the initial distribution (unit is [rad]).&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">runseq</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_flagmass</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Particle mass is not defined. Please input &#39;Mass&#39; at first.&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_flagengy</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Kinetic energy is not defined. Please input &#39;Energy&#39; at first.&quot;</span><span class="p">)</span>
+
+        <span class="n">g0</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Energy</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">Mass</span> <span class="o">+</span> <span class="mf">1.0</span>
+        <span class="n">b0g0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">g0</span><span class="o">*</span><span class="n">g0</span> <span class="o">-</span> <span class="mf">1.0</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">distparam</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span><span class="o">/</span><span class="n">b0g0</span>
+
+    <span class="nd">@Distxpoffset_rad</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">Distxpoffset_rad</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">runseq</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_flagmass</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Particle mass is not defined. Please input &#39;Mass&#39; at first.&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_flagengy</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Kinetic energy is not defined. Please input &#39;Energy&#39; at first.&quot;</span><span class="p">)</span>
+
+        <span class="n">g0</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Energy</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">Mass</span> <span class="o">+</span> <span class="mf">1.0</span>
+        <span class="n">b0g0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">g0</span><span class="o">*</span><span class="n">g0</span> <span class="o">-</span> <span class="mf">1.0</span><span class="p">)</span>
+
+        <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">distparam</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="o">*</span><span class="n">b0g0</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">Distyoffset_m</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;float: y position offset of the initial distribution (unit is [m]).&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">runseq</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_flagfreq</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Scaling frequency is not defined. Please input &#39;Frequency&#39; at first.&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">distparam</span><span class="p">[</span><span class="mi">12</span><span class="p">]</span><span class="o">*</span><span class="n">im</span><span class="o">.</span><span class="n">physconstclass</span><span class="o">.</span><span class="n">scxl</span>
+
+    <span class="nd">@Distyoffset_m</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">Distyoffset_m</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">runseq</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_flagfreq</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Scaling frequency is not defined. Please input &#39;Frequency&#39; at first.&quot;</span><span class="p">)</span>
+
+        <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">distparam</span><span class="p">[</span><span class="mi">12</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="o">/</span><span class="n">im</span><span class="o">.</span><span class="n">physconstclass</span><span class="o">.</span><span class="n">scxl</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">Distypoffset_rad</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;float: y&#39; (yp, py) momentum offset of the initial distribution (unit is [rad]).&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">runseq</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_flagmass</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Particle mass is not defined. Please input &#39;Mass&#39; at first.&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_flagengy</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Kinetic energy is not defined. Please input &#39;Energy&#39; at first.&quot;</span><span class="p">)</span>
+
+        <span class="n">g0</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Energy</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">Mass</span> <span class="o">+</span> <span class="mf">1.0</span>
+        <span class="n">b0g0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">g0</span><span class="o">*</span><span class="n">g0</span> <span class="o">-</span> <span class="mf">1.0</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">distparam</span><span class="p">[</span><span class="mi">13</span><span class="p">]</span><span class="o">/</span><span class="n">b0g0</span>
+
+    <span class="nd">@Distypoffset_rad</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">Distypoffset_rad</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">runseq</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_flagmass</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Particle mass is not defined. Please input &#39;Mass&#39; at first.&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_flagengy</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Kinetic energy is not defined. Please input &#39;Energy&#39; at first.&quot;</span><span class="p">)</span>
+
+        <span class="n">g0</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Energy</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">Mass</span> <span class="o">+</span> <span class="mf">1.0</span>
+        <span class="n">b0g0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">g0</span><span class="o">*</span><span class="n">g0</span> <span class="o">-</span> <span class="mf">1.0</span><span class="p">)</span>
+
+        <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">distparam</span><span class="p">[</span><span class="mi">13</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="o">*</span><span class="n">b0g0</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">Distzoffset_deg</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;float: z position offset of the initial distribution (unit is [deg]).&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">distparam</span><span class="p">[</span><span class="mi">12</span><span class="p">]</span><span class="o">*</span><span class="n">const</span><span class="o">.</span><span class="n">uradian</span><span class="p">[</span><span class="s1">&#39;deg&#39;</span><span class="p">]</span>
+
+    <span class="nd">@Distzoffset_deg</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">Distzoffset_deg</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+        <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">distparam</span><span class="p">[</span><span class="mi">12</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="o">/</span><span class="n">const</span><span class="o">.</span><span class="n">uradian</span><span class="p">[</span><span class="s1">&#39;deg&#39;</span><span class="p">]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">Distzpoffset_eV</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;float: z&#39; (zp, pz) offset of the initial distribution (unit is [eV]).&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">runseq</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_flagmass</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Particle mass is not defined. Please input &#39;Mass&#39; at first.&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">distparam</span><span class="p">[</span><span class="mi">13</span><span class="p">]</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">Mass</span>
+
+    <span class="nd">@Distzpoffset_eV</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">Distzpoffset_eV</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">runseq</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_flagmass</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Particle mass is not defined. Please input &#39;Mass&#39; at first.&quot;</span><span class="p">)</span>
+
+        <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">distparam</span><span class="p">[</span><span class="mi">13</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">Mass</span></div>
+</pre></div>
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Kei Fukushima.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'1.0.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

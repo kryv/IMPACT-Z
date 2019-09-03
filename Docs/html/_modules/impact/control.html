@@ -1,0 +1,1143 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>impact.control &mdash; Adv. IMPACT 1.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="Adv. IMPACT 1.0.0 documentation" href="../../index.html"/>
+        <link rel="up" title="Module code" href="../index.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Adv. IMPACT
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Table of Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../parallel.html">Parallel Computing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../element.html">Lattice Elements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../classlib.html">Class Library</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Adv. IMPACT</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>impact.control</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for impact.control</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">absolute_import</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">division</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">print_function</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">unicode_literals</span>
+
+
+<span class="kn">import</span> <span class="nn">copy</span> <span class="k">as</span> <span class="nn">cp</span>
+<span class="kn">import</span> <span class="nn">impact._impactf</span> <span class="k">as</span> <span class="nn">im</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="kn">from</span> <span class="nn">impact</span> <span class="k">import</span> <span class="n">const</span>
+<span class="kn">from</span> <span class="nn">impact</span> <span class="k">import</span> <span class="n">util</span>
+<span class="kn">from</span> <span class="nn">mpi4py</span> <span class="k">import</span> <span class="n">MPI</span>
+
+<span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">OrderedDict</span>
+<span class="kn">from</span> <span class="nn">impact.input</span> <span class="k">import</span> <span class="n">Input</span>
+<span class="kn">from</span> <span class="nn">impact.result</span> <span class="k">import</span> <span class="n">Result</span>
+
+<span class="n">__authors__</span> <span class="o">=</span> <span class="s2">&quot;Kei Fukushima&quot;</span>
+<span class="n">__copyright__</span> <span class="o">=</span> <span class="s2">&quot;(c) 2017, Facility for Rare Isotope beams, Michigan State University&quot;</span>
+<span class="n">__contact__</span> <span class="o">=</span> <span class="s2">&quot;Kei Fukushima &lt;fukushim@frib.msu.edu&gt;&quot;</span>
+
+<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">()</span>
+<span class="n">_Logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="n">mpicomm</span> <span class="o">=</span> <span class="n">MPI</span><span class="o">.</span><span class="n">COMM_WORLD</span>
+<span class="n">mpisize</span> <span class="o">=</span> <span class="n">mpicomm</span><span class="o">.</span><span class="n">Get_size</span><span class="p">()</span>
+<span class="n">mpirank</span> <span class="o">=</span> <span class="n">mpicomm</span><span class="o">.</span><span class="n">Get_rank</span><span class="p">()</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">basestring</span>
+<span class="k">except</span> <span class="ne">NameError</span><span class="p">:</span>
+    <span class="n">basestring</span> <span class="o">=</span> <span class="nb">str</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">im</span><span class="o">.</span><span class="n">pyfunction</span><span class="o">.</span><span class="n">setup</span><span class="p">()</span>
+    <span class="n">version_fsrc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">([</span><span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">version_fsrc</span><span class="p">])</span><span class="o">.</span><span class="n">tostring</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="n">_Logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;cannot setup from _impact.so&#39;</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="Sequence"><a class="viewcode-back" href="../../pysrc/impact.control.html#impact.Sequence">[docs]</a><span class="k">class</span> <span class="nc">Sequence</span><span class="p">(</span><span class="n">Input</span><span class="p">,</span> <span class="n">Result</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Main class of python API for Advanced IMPACT code.</span>
+
+<span class="sd">    - **Attribute**</span>
+
+<span class="sd">    .. autosummary::</span>
+<span class="sd">        subdir</span>
+<span class="sd">        seed</span>
+
+<span class="sd">    - **Methods**</span>
+
+<span class="sd">    .. autosummary::</span>
+<span class="sd">        read</span>
+<span class="sd">        load</span>
+<span class="sd">        distribute</span>
+<span class="sd">        run</span>
+<span class="sd">        construct</span>
+<span class="sd">        insert</span>
+<span class="sd">        conf</span>
+<span class="sd">        search</span>
+<span class="sd">        output</span>
+<span class="sd">        save</span>
+<span class="sd">        checker</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    input : str (optional)</span>
+<span class="sd">        Input file path.</span>
+
+<span class="sd">    subdir : str (optional)</span>
+<span class="sd">        Directory path for data files.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">input</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">subdir</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">basestring</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_filein</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">subdir</span><span class="p">,</span> <span class="n">basestring</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">subdir</span> <span class="o">=</span> <span class="n">subdir</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_subdir</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_zstart</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">def</span> <span class="nf">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">nblem</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">subdir</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;str: Directory path for data files.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_subdir</span>
+
+    <span class="nd">@subdir</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">subdir</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+        <span class="n">_set_subdir</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_subdir</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">_dpath</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">seed</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;int: Seed value of pseudo random number generator.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">isrd</span>
+
+    <span class="nd">@seed</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">seed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+        <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">isrd</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Sequence.read"><a class="viewcode-back" href="../../pysrc/impact.control.html#impact.Sequence.read">[docs]</a>    <span class="k">def</span> <span class="nf">read</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fname</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Read input file and set simulation parameters.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        fname : str</span>
+<span class="sd">            Input file path.</span>
+
+<span class="sd">        debug : bool</span>
+<span class="sd">            Flag for debug mode. If True, skip over input parameter correctness checker.</span>
+
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
+<span class="sd">        This function is automatically called in case of ``input`` is defined</span>
+<span class="sd">        in :py:class:`Sequence &lt;impact.control.Sequence&gt;`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="n">basestring</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_filein</span> <span class="o">=</span> <span class="n">fname</span>
+
+        <span class="n">_read_input</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_filein</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">debug</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">checker</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dtag</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">get_tag</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Sequence.load"><a class="viewcode-back" href="../../pysrc/impact.control.html#impact.Sequence.load">[docs]</a>    <span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dname</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">reload</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Load 3D field data</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        dname : str (optional)</span>
+<span class="sd">            Directory path for data files. Default path is defined by :py:func:`subdir &lt;impact.control.Sequence.subdir&gt;`.</span>
+
+<span class="sd">        reload : bool</span>
+<span class="sd">            If true, force to reload all 3D field data.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">reload</span><span class="p">:</span>
+            <span class="n">_reset_data</span><span class="p">()</span>
+        <span class="n">_load_data</span><span class="p">(</span><span class="n">dname</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Sequence.distribute"><a class="viewcode-back" href="../../pysrc/impact.control.html#impact.Sequence.distribute">[docs]</a>    <span class="k">def</span> <span class="nf">distribute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">particles</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;physical&#39;</span><span class="p">,</span> <span class="n">dname</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">fname</span><span class="o">=</span><span class="s1">&#39;partcl.data&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kws</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Load 3D field data</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        particles : (9, n) shape ndarray (optional)</span>
+<span class="sd">            All particle information for the simulation. *n* is the number of particles.</span>
+
+<span class="sd">            * row 1 : x positions [m]</span>
+
+<span class="sd">            * row 2 : xp momentums [rad]</span>
+
+<span class="sd">            * row 3 : y positions [m]</span>
+
+<span class="sd">            * row 4 : yp momentums [rad]</span>
+
+<span class="sd">            * row 5 : z positions [deg]</span>
+
+<span class="sd">            * row 6 : zp momentums [MeV]</span>
+
+<span class="sd">            * row 7 : charge to mass ratios [c^2/eV]</span>
+
+<span class="sd">            * row 8 : charge per macro-particle weights [1]</span>
+
+<span class="sd">            * row 9 : ID numbers [1]</span>
+
+<span class="sd">        unit : str (optional)</span>
+<span class="sd">            Unit information for *particles*.</span>
+
+<span class="sd">            * &#39;physical&#39; : Use physical units [m, rad, m, rad, deg, MeV]. (default)</span>
+
+<span class="sd">            * &#39;impact&#39; : Use impact internal units.</span>
+
+<span class="sd">        dname : str (optional)</span>
+<span class="sd">            Directory path for particle data file. Default path is defined by :py:func:`subdir &lt;impact.control.Sequence.subdir&gt;`.</span>
+
+<span class="sd">        fname : str (optional)</span>
+<span class="sd">            File name or path for particle data file. Default is &#39;partcl.data&#39;</span>
+
+<span class="sd">        Mass : float (optional)</span>
+<span class="sd">            Mass of the reference particle (unit is [eV/c^2]).</span>
+
+<span class="sd">        Energy : float (optional)</span>
+<span class="sd">            Initial kinetic energy (unit is [eV]).</span>
+
+<span class="sd">        Frequency : float (optional)</span>
+<span class="sd">            Scaling frequency (unit is [Hz]).</span>
+
+<span class="sd">        zstart : float (optional)</span>
+<span class="sd">            Starting z point of the simulation.</span>
+
+<span class="sd">        Phaseini : float (optional)</span>
+<span class="sd">            Initial phase of the reference particle (unit is [rad]).</span>
+
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
+<span class="sd">        ``dname`` and ``fname`` are used in case of :py:func:`Disttype &lt;impact.input.Input.Disttype&gt;` equals to 19.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="s1">&#39;Mass&#39;</span> <span class="ow">in</span> <span class="n">kws</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">Mass</span> <span class="o">=</span> <span class="n">kws</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;Mass&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="s1">&#39;Energy&#39;</span> <span class="ow">in</span> <span class="n">kws</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">Energy</span> <span class="o">=</span> <span class="n">kws</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;Energy&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="s1">&#39;Frequency&#39;</span> <span class="ow">in</span> <span class="n">kws</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">Frequency</span> <span class="o">=</span> <span class="n">kws</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;Frequency&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="s1">&#39;Phaseini&#39;</span> <span class="ow">in</span> <span class="n">kws</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">Phaseini</span> <span class="o">=</span> <span class="n">kws</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;Phaseini&#39;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_zstart</span> <span class="o">=</span> <span class="n">kws</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;zstart&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">particles</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">unit</span> <span class="o">==</span> <span class="s1">&#39;physical&#39;</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">runseq</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_flagfreq</span><span class="p">:</span>
+                        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Scaling frequency is not defined. Please input &#39;Frequency&#39; at first.&quot;</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_flagmass</span><span class="p">:</span>
+                        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Particle mass is not defined. Please input &#39;Mass&#39; at first.&quot;</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_flagengy</span><span class="p">:</span>
+                        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Kinetic energy is not defined. Please input &#39;Energy&#39; at first.&quot;</span><span class="p">)</span>
+
+                <span class="n">g0</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Energy</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">Mass</span> <span class="o">+</span> <span class="mf">1.0</span>
+                <span class="n">b0g0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">g0</span><span class="o">*</span><span class="n">g0</span> <span class="o">-</span> <span class="mf">1.0</span><span class="p">)</span>
+                <span class="n">scxl</span> <span class="o">=</span> <span class="n">const</span><span class="o">.</span><span class="n">clight</span><span class="o">/</span><span class="p">(</span><span class="mf">2.0</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">Frequency</span><span class="p">)</span>
+                <span class="n">cnv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+                <span class="n">cnv</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span><span class="o">/</span><span class="n">scxl</span>
+                <span class="n">cnv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">b0g0</span>
+                <span class="n">cnv</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span><span class="o">/</span><span class="n">scxl</span>
+                <span class="n">cnv</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">b0g0</span>
+                <span class="n">cnv</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mf">180.0</span>
+                <span class="n">cnv</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0e6</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">Mass</span>
+                <span class="n">part</span> <span class="o">=</span> <span class="n">particles</span><span class="o">*</span><span class="n">cnv</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">unit</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;impact&#39;</span><span class="p">:</span>
+                <span class="n">part</span> <span class="o">=</span> <span class="n">particles</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="ne">KeyError</span><span class="p">(</span><span class="s1">&#39;Unknown unit type: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">unit</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">part</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="n">_init_dist</span><span class="p">(</span><span class="n">part</span><span class="p">,</span> <span class="n">dname</span><span class="o">=</span><span class="n">dname</span><span class="p">,</span> <span class="n">fname</span><span class="o">=</span><span class="n">fname</span><span class="p">,</span> <span class="o">**</span><span class="n">kws</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Sequence.run"><a class="viewcode-back" href="../../pysrc/impact.control.html#impact.Sequence.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">end</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">zstart</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">Phaseini</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Run particle tracking simulation.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        start : int or str (optional)</span>
+<span class="sd">            Starting element of the particle tracking simulation.</span>
+
+<span class="sd">        end : int or str (optional)</span>
+<span class="sd">            Ending element of the particle tracking simulation.</span>
+
+<span class="sd">        zstart : float (optional)</span>
+<span class="sd">            Initial z position of the reference particle. Default is 0.0 .</span>
+
+<span class="sd">        Phaseini : float (optional)</span>
+<span class="sd">            Initial phase of the reference particle (unit is [rad]).</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">basestring</span><span class="p">):</span>
+            <span class="n">ini</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dtag</span><span class="p">[</span><span class="n">start</span><span class="p">]</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ini</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">int_</span><span class="p">)):</span>
+                <span class="n">ini</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">ini</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">ini</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">start</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">end</span><span class="p">,</span> <span class="n">basestring</span><span class="p">):</span>
+            <span class="n">fin</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dtag</span><span class="p">[</span><span class="n">end</span><span class="p">]</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fin</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">int_</span><span class="p">)):</span>
+                <span class="n">fin</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">fin</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">fin</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">end</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">zstart</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">zposini</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_zstart</span><span class="p">)</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_zstart</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="nb">float</span><span class="p">(</span><span class="mf">0.0</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">zposini</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">zstart</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">Phaseini</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">Phaseini</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">Phaseini</span><span class="p">)</span>
+
+        <span class="n">_run_accel</span><span class="p">(</span><span class="n">ini</span><span class="p">,</span> <span class="n">fin</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">_cnv_element</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">el</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">el</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+            <span class="k">if</span> <span class="s1">&#39;length&#39;</span> <span class="ow">in</span> <span class="n">el</span><span class="p">:</span>
+                <span class="n">lng</span> <span class="o">=</span> <span class="n">el</span><span class="p">[</span><span class="s1">&#39;length&#39;</span><span class="p">]</span>
+            <span class="k">elif</span> <span class="s1">&#39;l&#39;</span> <span class="ow">in</span> <span class="n">el</span><span class="p">:</span>
+                <span class="n">lng</span> <span class="o">=</span> <span class="n">el</span><span class="p">[</span><span class="s1">&#39;l&#39;</span><span class="p">]</span>
+            <span class="k">elif</span> <span class="s1">&#39;L&#39;</span> <span class="ow">in</span> <span class="n">el</span><span class="p">:</span>
+                <span class="n">lng</span> <span class="o">=</span> <span class="n">el</span><span class="p">[</span><span class="s1">&#39;L&#39;</span><span class="p">]</span>
+            <span class="k">elif</span> <span class="s1">&#39;start&#39;</span> <span class="ow">in</span> <span class="n">el</span> <span class="ow">and</span> <span class="s1">&#39;end&#39;</span> <span class="ow">in</span> <span class="n">el</span><span class="p">:</span>
+                <span class="n">lng</span> <span class="o">=</span> <span class="n">el</span><span class="p">[</span><span class="s1">&#39;end&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">el</span><span class="p">[</span><span class="s1">&#39;start&#39;</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Lattice element must have &#39;length&#39; (or &#39;l&#39;, &#39;L&#39;) parameter.&quot;</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="s1">&#39;segment&#39;</span> <span class="ow">in</span> <span class="n">el</span><span class="p">:</span>
+                <span class="n">seg</span> <span class="o">=</span> <span class="n">el</span><span class="p">[</span><span class="s1">&#39;segment&#39;</span><span class="p">]</span>
+            <span class="k">elif</span> <span class="s1">&#39;seg&#39;</span> <span class="ow">in</span> <span class="n">el</span><span class="p">:</span>
+                <span class="n">seg</span> <span class="o">=</span> <span class="n">el</span><span class="p">[</span><span class="s1">&#39;seg&#39;</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Lattice element must have &#39;segment&#39; (or &#39;seg&#39;) parameter.&quot;</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="s1">&#39;step&#39;</span> <span class="ow">in</span> <span class="n">el</span><span class="p">:</span>
+                <span class="n">stp</span> <span class="o">=</span> <span class="n">el</span><span class="p">[</span><span class="s1">&#39;step&#39;</span><span class="p">]</span>
+            <span class="k">elif</span> <span class="s1">&#39;pid&#39;</span> <span class="ow">in</span> <span class="n">el</span><span class="p">:</span>
+                <span class="n">stp</span> <span class="o">=</span> <span class="n">el</span><span class="p">[</span><span class="s1">&#39;pid&#39;</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Lattice element must have &#39;step&#39; (or &#39;pid&#39;) parameter.&quot;</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="s1">&#39;type&#39;</span> <span class="ow">in</span> <span class="n">el</span><span class="p">:</span>
+                <span class="n">ttyp</span> <span class="o">=</span> <span class="n">el</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Lattice element must have &#39;type&#39; parameter.&quot;</span><span class="p">)</span>
+            <span class="n">typ</span> <span class="o">=</span> <span class="n">const</span><span class="o">.</span><span class="n">elemtype</span><span class="p">[</span><span class="n">ttyp</span><span class="p">]</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ttyp</span><span class="p">,</span> <span class="n">basestring</span><span class="p">)</span> <span class="k">else</span> <span class="n">ttyp</span>
+
+            <span class="n">idd</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="n">param</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">28</span><span class="p">)</span>
+            <span class="n">tdct</span> <span class="o">=</span> <span class="n">const</span><span class="o">.</span><span class="n">vrdct</span><span class="p">(</span><span class="n">typ</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">kw</span> <span class="ow">in</span> <span class="n">el</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">kw</span><span class="o">.</span><span class="n">isdigit</span><span class="p">():</span>
+                    <span class="n">ikw</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">kw</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">ikw</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                        <span class="n">lng</span> <span class="o">=</span> <span class="n">el</span><span class="p">[</span><span class="n">kw</span><span class="p">]</span>
+                    <span class="k">elif</span> <span class="n">ikw</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+                        <span class="n">seg</span> <span class="o">=</span> <span class="n">el</span><span class="p">[</span><span class="n">kw</span><span class="p">]</span>
+                    <span class="k">elif</span> <span class="n">ikw</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+                        <span class="n">stp</span> <span class="o">=</span> <span class="n">el</span><span class="p">[</span><span class="n">kw</span><span class="p">]</span>
+                    <span class="k">elif</span> <span class="n">ikw</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>
+                        <span class="n">typ</span> <span class="o">=</span> <span class="n">el</span><span class="p">[</span><span class="n">kw</span><span class="p">]</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">idd</span><span class="p">[</span><span class="n">kw</span><span class="p">]</span> <span class="o">=</span> <span class="n">el</span><span class="p">[</span><span class="n">kw</span><span class="p">]</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">kw</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;tag&#39;</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">el</span><span class="p">[</span><span class="n">kw</span><span class="p">],</span> <span class="n">basestring</span><span class="p">):</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">dtag</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">add_tag</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dtag</span><span class="p">,</span> <span class="p">{</span><span class="n">el</span><span class="p">[</span><span class="n">kw</span><span class="p">]:</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">})</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="k">for</span> <span class="n">tag</span> <span class="ow">in</span> <span class="n">el</span><span class="p">[</span><span class="n">kw</span><span class="p">]:</span>
+                                <span class="bp">self</span><span class="o">.</span><span class="n">dtag</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">add_tag</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dtag</span><span class="p">,</span> <span class="p">{</span><span class="n">tag</span><span class="p">:</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">})</span>
+                    <span class="k">elif</span> <span class="n">kw</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="n">tdct</span><span class="p">:</span>
+                        <span class="n">kid</span> <span class="o">=</span> <span class="n">tdct</span><span class="p">[</span><span class="n">kw</span><span class="o">.</span><span class="n">lower</span><span class="p">()]</span>
+                        <span class="n">pkw</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">invdict</span><span class="p">(</span><span class="n">tdct</span><span class="p">,</span> <span class="n">kid</span><span class="p">)</span>
+                        <span class="n">param</span><span class="p">[</span><span class="n">kid</span><span class="o">-</span><span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="n">el</span><span class="p">[</span><span class="n">pkw</span><span class="p">]</span> <span class="k">if</span> <span class="n">pkw</span> <span class="ow">in</span> <span class="n">el</span> <span class="k">else</span> <span class="n">el</span><span class="p">[</span><span class="n">kw</span><span class="p">]</span>
+
+            <span class="c1"># overwrite by index input</span>
+            <span class="k">for</span> <span class="nb">id</span> <span class="ow">in</span> <span class="n">idd</span><span class="p">:</span>
+                <span class="n">param</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="nb">id</span><span class="p">)]</span> <span class="o">=</span> <span class="n">idd</span><span class="p">[</span><span class="nb">id</span><span class="p">]</span>
+
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">el</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)):</span>
+            <span class="n">lng</span> <span class="o">=</span> <span class="n">el</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">seg</span> <span class="o">=</span> <span class="n">el</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">stp</span> <span class="o">=</span> <span class="n">el</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+            <span class="n">typ</span> <span class="o">=</span> <span class="n">el</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+            <span class="n">esize</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">el</span><span class="p">[</span><span class="mi">4</span><span class="p">:])</span>
+            <span class="n">param</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">28</span><span class="p">)</span>
+            <span class="n">param</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.0</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">el</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">basestring</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">dtag</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">add_tag</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dtag</span><span class="p">,</span> <span class="p">{</span><span class="n">el</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">})</span>
+                <span class="n">param</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="n">esize</span><span class="p">]</span> <span class="o">=</span> <span class="n">el</span><span class="p">[</span><span class="mi">4</span><span class="p">:</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">el</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)):</span>
+                <span class="k">for</span> <span class="n">tag</span> <span class="ow">in</span> <span class="n">el</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">dtag</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">add_tag</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dtag</span><span class="p">,</span> <span class="p">{</span><span class="n">tag</span><span class="p">:</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">})</span>
+                <span class="n">param</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="n">esize</span><span class="p">]</span> <span class="o">=</span> <span class="n">el</span><span class="p">[</span><span class="mi">4</span><span class="p">:</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">param</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="n">esize</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">el</span><span class="p">[</span><span class="mi">4</span><span class="p">:]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;Element information must be a dict or list.&#39;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">lng</span><span class="p">,</span> <span class="n">seg</span><span class="p">,</span> <span class="n">stp</span><span class="p">,</span> <span class="n">typ</span><span class="p">,</span> <span class="n">param</span>
+
+<div class="viewcode-block" id="Sequence.construct"><a class="viewcode-back" href="../../pysrc/impact.control.html#impact.Sequence.construct">[docs]</a>    <span class="k">def</span> <span class="nf">construct</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lattice</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Construct beam transport line.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        lattice : 2D array or list of dict</span>
+<span class="sd">            List of lattice elements.</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        &gt;&gt;&gt; drift = [0.5, 10, 10, 0, 0.2]</span>
+<span class="sd">        # define element by using list of numbers (format is the same as the input file)</span>
+<span class="sd">        &gt;&gt;&gt; quad1 = {&#39;length&#39;:0.2, &#39;seg&#39;:4, &#39;step&#39;:4, &#39;type&#39;:&#39;quadrupole&#39;, &#39;B2&#39;: 10.0, &#39;aper&#39;:0.2}</span>
+<span class="sd">        # define element by using python dictionary</span>
+<span class="sd">        &gt;&gt;&gt; quad2 = quad1.copy()</span>
+<span class="sd">        &gt;&gt;&gt; quad2[&#39;B2&#39;] = -10.0</span>
+<span class="sd">        &gt;&gt;&gt; FODO = [drift, quad1, drift, quad2, drift]</span>
+<span class="sd">        &gt;&gt;&gt; sq.construct(FODO)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">nl</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">lattice</span><span class="p">)</span>
+        <span class="n">lngs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">nl</span><span class="p">)</span>
+        <span class="n">segs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">nl</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+        <span class="n">stps</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">nl</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+        <span class="n">typs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">nl</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+        <span class="n">params</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">28</span><span class="p">,</span> <span class="n">nl</span><span class="p">))</span>
+        <span class="n">params</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dtag</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
+
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">el</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">lattice</span><span class="p">):</span>
+            <span class="n">lng</span><span class="p">,</span> <span class="n">seg</span><span class="p">,</span> <span class="n">stp</span><span class="p">,</span> <span class="n">typ</span><span class="p">,</span> <span class="n">param</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cnv_element</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">el</span><span class="p">)</span>
+
+            <span class="n">lngs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">lng</span>
+            <span class="n">segs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">seg</span>
+            <span class="n">stps</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">stp</span>
+            <span class="n">typs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">typ</span>
+            <span class="n">params</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">param</span>
+
+        <span class="n">_construct</span><span class="p">(</span><span class="n">lngs</span><span class="p">,</span> <span class="n">segs</span><span class="p">,</span> <span class="n">stps</span><span class="p">,</span> <span class="n">typs</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Sequence.insert"><a class="viewcode-back" href="../../pysrc/impact.control.html#impact.Sequence.insert">[docs]</a>    <span class="k">def</span> <span class="nf">insert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">element</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Insert new lattice element.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        index : int</span>
+<span class="sd">            Insert new lattice element before index. If index equals to 0, *append* the new element.</span>
+
+<span class="sd">        element : list or dict</span>
+<span class="sd">            Lattice element information.</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        &gt;&gt;&gt; quad1 = {&#39;length&#39;:0.2, &#39;seg&#39;:4, &#39;step&#39;:4, &#39;type&#39;:&#39;quadrupole&#39;, &#39;B2&#39;: 10.0, &#39;aper&#39;:0.2}</span>
+<span class="sd">        # define element by using python dictionary</span>
+<span class="sd">        &gt;&gt;&gt; sq.construct(3, quad1) # insert new element</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">index</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">idx</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">nblem</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">idx</span> <span class="o">=</span> <span class="n">index</span> <span class="o">-</span> <span class="mi">1</span>
+
+        <span class="k">def</span> <span class="nf">addnum</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="n">tmp</span><span class="p">):</span>
+            <span class="n">new</span> <span class="o">=</span> <span class="n">tmp</span> <span class="o">+</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">tmp</span> <span class="o">&gt;</span> <span class="n">idx</span> <span class="k">else</span> <span class="n">tmp</span>
+            <span class="k">return</span> <span class="n">new</span>
+
+        <span class="k">for</span> <span class="n">ky</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">dtag</span><span class="p">:</span>
+            <span class="n">tmpids</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dtag</span><span class="p">[</span><span class="n">ky</span><span class="p">]</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">tmpids</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">int_</span><span class="p">)):</span>
+                <span class="n">newids</span> <span class="o">=</span> <span class="n">addnum</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="n">tmpids</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">newids</span> <span class="o">=</span> <span class="p">[</span><span class="n">addnum</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="n">tmpid</span><span class="p">)</span> <span class="k">for</span> <span class="n">tmpid</span> <span class="ow">in</span> <span class="n">tmpids</span><span class="p">]</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">dtag</span><span class="p">[</span><span class="n">ky</span><span class="p">]</span> <span class="o">=</span> <span class="n">newids</span>
+
+        <span class="n">lng</span><span class="p">,</span> <span class="n">seg</span><span class="p">,</span> <span class="n">stp</span><span class="p">,</span> <span class="n">typ</span><span class="p">,</span> <span class="n">param</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cnv_element</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="n">element</span><span class="p">)</span>
+
+        <span class="n">tlngs</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">blnlen</span><span class="p">)</span>
+        <span class="n">tlngs</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="n">lng</span><span class="p">)</span>
+        <span class="n">lngs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">tlngs</span><span class="p">)</span>
+
+        <span class="n">tsegs</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">blnseg</span><span class="p">)</span>
+        <span class="n">tsegs</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="n">seg</span><span class="p">)</span>
+        <span class="n">segs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">tsegs</span><span class="p">)</span>
+
+        <span class="n">tstps</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">blnstp</span><span class="p">)</span>
+        <span class="n">tstps</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="n">stp</span><span class="p">)</span>
+        <span class="n">stps</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">tstps</span><span class="p">)</span>
+
+        <span class="n">ttyps</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">blntyp</span><span class="p">)</span>
+        <span class="n">ttyps</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="n">typ</span><span class="p">)</span>
+        <span class="n">typs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">ttyps</span><span class="p">)</span>
+
+        <span class="n">tparams</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">blnparams</span><span class="p">)))</span>
+        <span class="k">for</span> <span class="n">tp</span><span class="p">,</span> <span class="n">pp</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">tparams</span><span class="p">,</span> <span class="n">param</span><span class="p">):</span>
+            <span class="n">tp</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="n">pp</span><span class="p">)</span>
+        <span class="n">params</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">tparams</span><span class="p">)</span>
+
+        <span class="n">_construct</span><span class="p">(</span><span class="n">lngs</span><span class="p">,</span> <span class="n">segs</span><span class="p">,</span> <span class="n">stps</span><span class="p">,</span> <span class="n">typs</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Sequence.conf"><a class="viewcode-back" href="../../pysrc/impact.control.html#impact.Sequence.conf">[docs]</a>    <span class="k">def</span> <span class="nf">conf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">syntax</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Configure lattice parameters.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        index : int or str</span>
+<span class="sd">            Index number of the element or tag name of the element.</span>
+
+<span class="sd">        col : int or str</span>
+<span class="sd">            Column number of the target parameter or name of the target parameter.</span>
+
+<span class="sd">        col : dict</span>
+<span class="sd">            dict key for the target parameter and dict value for target value.</span>
+
+<span class="sd">        value : float</span>
+<span class="sd">            New value for the target parameter.</span>
+
+<span class="sd">        syntax : bool</span>
+<span class="sd">            Print flag for full parameter of the element.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        dict</span>
+<span class="sd">            Dictionary style parameter list of the element</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        &gt;&gt;&gt; sq = Sequence(&#39;test.in&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; tmp = sq.conf(3) # show parameter of 3rd element</span>
+<span class="sd">        index :  3</span>
+<span class="sd">        length :  0.24 [m]</span>
+<span class="sd">        segment :  60</span>
+<span class="sd">        step :  20</span>
+<span class="sd">        type :  110  (emfld)</span>
+<span class="sd">        scaling (&#39;scale&#39;, &#39;scl_fac&#39;) :  0.64</span>
+<span class="sd">        frequency (&#39;f&#39;, &#39;freq&#39;) :  80500000.0 [Hz]</span>
+<span class="sd">        driven phase (&#39;phi0&#39;,) :  349.74086645 [deg]</span>
+<span class="sd">        fileid (&#39;file&#39;, &#39;id&#39;) :  421.0</span>
+<span class="sd">        xaperture (&#39;xaper&#39;, &#39;xpipe&#39;, &#39;xradius&#39;) :  0.017 [m]</span>
+<span class="sd">        yaperture (&#39;yaper&#39;, &#39;ypipe&#39;, &#39;yradius&#39;) :  0.017 [m]</span>
+<span class="sd">        dx  :  0.0 [m]</span>
+<span class="sd">        dy  :  0.0 [m]</span>
+<span class="sd">        pitch  :  0.0 [rad]</span>
+<span class="sd">        yaw  :  0.0 [rad]</span>
+<span class="sd">        roll  :  0.0 [rad]</span>
+<span class="sd">        data type (&#39;data&#39;,) :  1.0</span>
+<span class="sd">        coordinate (&#39;coor&#39;,) :  2.0</span>
+<span class="sd">        tag :  [&#39;cav1&#39;]</span>
+<span class="sd">        &gt;&gt;&gt; sq.conf(3, {&#39;phi0&#39;:360.0}) # set new value for the driven phase</span>
+<span class="sd">        &gt;&gt;&gt; tmp = sq.conf(3, &#39;phi0&#39;) # confirm new parameter</span>
+<span class="sd">        driven phase (&#39;phi0&#39;,) :  360.0 [deg]</span>
+
+<span class="sd">        If you have set the tag, followings return same results.</span>
+
+<span class="sd">        &gt;&gt;&gt; sq.conf(&#39;cav1&#39;) # show parameter of 3rd element</span>
+<span class="sd">        &gt;&gt;&gt; sq.conf(&#39;cav1&#39;, {&#39;phi0&#39;:360.0}) # set new value for the driven phase</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">index</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">_conf_para</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">nblem</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dtag</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">col</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+                <span class="k">if</span> <span class="p">(</span><span class="s1">&#39;tag&#39;</span> <span class="ow">in</span> <span class="n">col</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">col</span><span class="p">[</span><span class="s1">&#39;tag&#39;</span><span class="p">],</span> <span class="n">basestring</span><span class="p">):</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">dtag</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">add_tag</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dtag</span><span class="p">,</span> <span class="p">{</span><span class="n">col</span><span class="p">[</span><span class="s1">&#39;tag&#39;</span><span class="p">]:</span> <span class="n">index</span><span class="p">})</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="k">for</span> <span class="n">tag</span> <span class="ow">in</span> <span class="n">col</span><span class="p">[</span><span class="s1">&#39;tag&#39;</span><span class="p">]:</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">dtag</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">add_tag</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dtag</span><span class="p">,</span> <span class="p">{</span><span class="n">tag</span><span class="p">:</span> <span class="n">index</span><span class="p">})</span>
+                    <span class="k">return</span> <span class="kc">None</span>
+
+            <span class="k">return</span> <span class="n">_conf_para</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">col</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dtag</span><span class="p">,</span> <span class="n">syntax</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Sequence.search"><a class="viewcode-back" href="../../pysrc/impact.control.html#impact.Sequence.search">[docs]</a>    <span class="k">def</span> <span class="nf">search</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tag</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Search lattice element.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        type : int or str</span>
+<span class="sd">            Element type ID or type name for _search.</span>
+
+<span class="sd">        tag : str</span>
+<span class="sd">            Tag name of the element.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        ndarray</span>
+<span class="sd">            List of element ID</span>
+
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
+<span class="sd">        In case of input both type and tag, it returns `AND` _search result.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">type</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">tag</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">_search</span><span class="p">(</span><span class="nb">type</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">type</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">tag</span><span class="p">,</span> <span class="n">basestring</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">dtag</span><span class="p">[</span><span class="n">tag</span><span class="p">]])</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="nb">type</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">tag</span><span class="p">,</span> <span class="n">basestring</span><span class="p">):</span>
+            <span class="n">lstyp</span> <span class="o">=</span> <span class="n">_search</span><span class="p">(</span><span class="nb">type</span><span class="p">)</span>
+            <span class="n">lstag</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">dtag</span><span class="p">[</span><span class="n">tag</span><span class="p">]])</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+            <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">intersect1d</span><span class="p">(</span><span class="n">lstyp</span><span class="p">,</span> <span class="n">lstag</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Sequence.output"><a class="viewcode-back" href="../../pysrc/impact.control.html#impact.Sequence.output">[docs]</a>    <span class="k">def</span> <span class="nf">output</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fname</span><span class="o">=</span><span class="s1">&#39;fort&#39;</span><span class="p">,</span> <span class="n">qid</span><span class="o">=-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Output original IMPACT results to file.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        fname : str</span>
+<span class="sd">            Header name of output file. Default is &#39;fort&#39;.</span>
+
+<span class="sd">        qid : int</span>
+<span class="sd">            Charge state index for return value. Default is -1 (Total of the all charge states).</span>
+<span class="sd">            Index is compatible with :py:func:`qmlabel &lt;impact.result.Result.qmlabel&gt;`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">qid</span> <span class="o">&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">qmlabel</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Input qid is out of range&#39;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">qid</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">iid</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">iid</span> <span class="o">=</span> <span class="n">qid</span> <span class="o">+</span> <span class="mi">2</span>
+
+        <span class="n">_output_hist</span><span class="p">(</span><span class="n">fname</span><span class="o">=</span><span class="n">fname</span><span class="p">,</span> <span class="n">iqid</span><span class="o">=</span><span class="n">iid</span><span class="p">)</span>
+        <span class="n">_output_dist</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Sequence.save"><a class="viewcode-back" href="../../pysrc/impact.control.html#impact.Sequence.save">[docs]</a>    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fname</span><span class="o">=</span><span class="s1">&#39;test.in.new&#39;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Save current setting to file.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        fname : str</span>
+<span class="sd">            File name for saved settings. Default is &#39;test.in.new&#39;.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">_save_testin</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
+        <span class="n">util</span><span class="o">.</span><span class="n">put_tag</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dtag</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Sequence.checker"><a class="viewcode-back" href="../../pysrc/impact.control.html#impact.Sequence.checker">[docs]</a>    <span class="k">def</span> <span class="nf">checker</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Check input parameter correctness.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">mpisize</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Mpisize</span><span class="p">:</span>
+            <span class="n">_Logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;Number of proccessors does not match to the input value. Adjust to actual size.&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">Mpisize</span> <span class="o">=</span> <span class="n">mpisize</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">Flaginteg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Flaginteg</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Flagdiag</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Flagdiag</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Flagbc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Flagbc</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Nxgrid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Nxgrid</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Nygrid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Nygrid</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Nzgrid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Nzgrid</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">Nptot</span> <span class="o">&lt;=</span> <span class="mf">0.0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Nptot must be larger than zero.&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">Nptot</span> <span class="o">!=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Nplist</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Nptot does not match to the sum of Nplist.&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">Frequency</span> <span class="o">&lt;=</span> <span class="mf">0.0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Frequency must be larger than zero.&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">Mass</span> <span class="o">&lt;=</span> <span class="mf">0.0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Mass must be larger than zero.&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">Disttype</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">19</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Wrong input value for Disttype.&#39;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">Distxquadratic</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Distxquadratic</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Distyquadratic</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Distyquadratic</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Distzquadratic</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Distzquadratic</span></div></div>
+
+
+<span class="k">def</span> <span class="nf">_read_input</span><span class="p">(</span><span class="n">fname</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Read input file&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">runseq</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;setup() must be called before _read_input()&#39;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="n">basestring</span><span class="p">):</span>
+        <span class="n">im</span><span class="o">.</span><span class="n">pyfunction</span><span class="o">.</span><span class="n">input</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
+        <span class="n">_iostat</span><span class="p">([</span><span class="s1">&#39;inp&#39;</span><span class="p">])</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;build() takes a str or unicode argument for input file&#39;</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_set_subdir</span><span class="p">(</span><span class="n">dname</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Set all sub directory for IMPACT&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dname</span><span class="p">,</span> <span class="n">basestring</span><span class="p">):</span>
+        <span class="n">im</span><span class="o">.</span><span class="n">pyfunction</span><span class="o">.</span><span class="n">set_datadir</span><span class="p">(</span><span class="n">util</span><span class="o">.</span><span class="n">_dpath</span><span class="p">(</span><span class="n">dname</span><span class="p">))</span>
+        <span class="n">im</span><span class="o">.</span><span class="n">pyfunction</span><span class="o">.</span><span class="n">set_partdir</span><span class="p">(</span><span class="n">util</span><span class="o">.</span><span class="n">_dpath</span><span class="p">(</span><span class="n">dname</span><span class="p">))</span>
+        <span class="n">im</span><span class="o">.</span><span class="n">pyfunction</span><span class="o">.</span><span class="n">set_strpdir</span><span class="p">(</span><span class="n">util</span><span class="o">.</span><span class="n">_dpath</span><span class="p">(</span><span class="n">dname</span><span class="p">))</span>
+    <span class="k">elif</span> <span class="p">(</span><span class="n">dname</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="n">_Logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;Input argument must be a str or unicode. Input argument is ignored.&#39;</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_load_data</span><span class="p">(</span><span class="n">dname</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Load 3D field data&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dname</span><span class="p">,</span> <span class="n">basestring</span><span class="p">):</span>
+        <span class="n">im</span><span class="o">.</span><span class="n">pyfunction</span><span class="o">.</span><span class="n">set_datadir</span><span class="p">(</span><span class="n">util</span><span class="o">.</span><span class="n">_dpath</span><span class="p">(</span><span class="n">dname</span><span class="p">))</span>
+    <span class="k">elif</span> <span class="p">(</span><span class="n">dname</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="n">_Logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;Input argument must be a str or unicode. Input argument is ignored.&#39;</span><span class="p">)</span>
+
+    <span class="n">im</span><span class="o">.</span><span class="n">pyfunction</span><span class="o">.</span><span class="n">load_data</span><span class="p">()</span>
+    <span class="n">_iostat</span><span class="p">([</span><span class="s1">&#39;data&#39;</span><span class="p">])</span>
+
+
+<span class="k">def</span> <span class="nf">_reset_data</span><span class="p">():</span>
+    <span class="n">im</span><span class="o">.</span><span class="n">pyfunction</span><span class="o">.</span><span class="n">reset_data</span><span class="p">()</span>
+
+
+<span class="k">def</span> <span class="nf">_init_dist</span><span class="p">(</span><span class="n">particles</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">dname</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">fname</span><span class="o">=</span><span class="s1">&#39;partcl.data&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kws</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Initialize particle distribution&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">runseq</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;input parameters must be set before _init_dist()&#39;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">particles</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+        <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">particles</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">!=</span> <span class="mi">9</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;shape mismatch: input particles must have (9, n) shape&#39;</span><span class="p">)</span>
+        <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">idistnp</span> <span class="o">=</span> <span class="n">j</span>
+        <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">idistd</span> <span class="o">=</span> <span class="n">particles</span>
+        <span class="n">unq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">particles</span><span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="p">:])</span>
+        <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">nchrg</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">unq</span><span class="p">)</span>
+        <span class="n">tmp1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+        <span class="n">tmp1</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="nb">len</span><span class="p">(</span><span class="n">unq</span><span class="p">)]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">particles</span><span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="p">:]</span> <span class="o">==</span> <span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">unq</span><span class="p">])</span>
+        <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">nptlist</span> <span class="o">=</span> <span class="n">tmp1</span>
+        <span class="n">tmp2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+        <span class="n">tmp2</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="nb">len</span><span class="p">(</span><span class="n">unq</span><span class="p">)]</span> <span class="o">=</span> <span class="n">unq</span>
+        <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">qmcclist</span> <span class="o">=</span> <span class="n">tmp2</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">idistnp</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dname</span><span class="p">,</span> <span class="n">basestring</span><span class="p">):</span>
+        <span class="n">im</span><span class="o">.</span><span class="n">pyfunction</span><span class="o">.</span><span class="n">set_partdir</span><span class="p">(</span><span class="n">util</span><span class="o">.</span><span class="n">_dpath</span><span class="p">(</span><span class="n">dname</span><span class="p">))</span>
+    <span class="k">elif</span> <span class="p">(</span><span class="n">dname</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="n">_Logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;Input argument must be a str or unicode. Input argument is ignored.&#39;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="n">basestring</span><span class="p">):</span>
+        <span class="n">im</span><span class="o">.</span><span class="n">pyfunction</span><span class="o">.</span><span class="n">set_partfile</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="p">(</span><span class="n">fname</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="n">_Logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;Input argument must be a str or unicode. Input argument is ignored.&#39;</span><span class="p">)</span>
+
+    <span class="n">flagsc</span> <span class="o">=</span> <span class="n">kws</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;Flagsc&#39;</span><span class="p">,</span> <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">bcurr</span><span class="p">)</span>
+    <span class="n">mass</span> <span class="o">=</span> <span class="n">kws</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;Mass&#39;</span><span class="p">,</span> <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">bmass</span><span class="p">)</span>
+    <span class="n">eng</span> <span class="o">=</span> <span class="n">kws</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;Energy&#39;</span><span class="p">,</span> <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">bkenergy</span><span class="p">)</span>
+    <span class="n">phsini</span> <span class="o">=</span> <span class="n">kws</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;Phaseini&#39;</span><span class="p">,</span> <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">phsini</span><span class="p">)</span>
+    <span class="n">im</span><span class="o">.</span><span class="n">pyfunction</span><span class="o">.</span><span class="n">init_dist</span><span class="p">(</span><span class="n">flagsc</span><span class="p">,</span> <span class="n">mass</span><span class="p">,</span> <span class="n">eng</span><span class="p">,</span> <span class="n">phsini</span><span class="p">)</span>
+    <span class="n">_iostat</span><span class="p">([</span><span class="s1">&#39;dist&#39;</span><span class="p">])</span>
+
+
+<span class="k">def</span> <span class="nf">_run_accel</span><span class="p">(</span><span class="n">ini</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">fin</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Run particle tracking simulation&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">runseq</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;Input parameters must be set before _init_dist()&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">dstseq</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;Initial distribution must be set before _run_accel()&#39;</span><span class="p">)</span>
+
+    <span class="n">im</span><span class="o">.</span><span class="n">pyfunction</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">ini</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">fin</span><span class="p">))</span>
+    <span class="n">_iostat</span><span class="p">([</span><span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="s1">&#39;strp&#39;</span><span class="p">])</span>
+
+
+<span class="k">def</span> <span class="nf">_construct</span><span class="p">(</span><span class="n">lngs</span><span class="p">,</span> <span class="n">segs</span><span class="p">,</span> <span class="n">stps</span><span class="p">,</span> <span class="n">typs</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Construct Beam line&quot;&quot;&quot;</span>
+
+    <span class="n">n</span><span class="p">,</span> <span class="n">m</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">shape</span>
+    <span class="k">if</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">len</span><span class="p">,</span> <span class="p">[</span><span class="n">lngs</span><span class="p">,</span> <span class="n">segs</span><span class="p">,</span> <span class="n">stps</span><span class="p">,</span> <span class="n">typs</span><span class="p">]))</span> <span class="o">!=</span> <span class="p">[</span><span class="n">m</span><span class="p">]</span><span class="o">*</span><span class="mi">4</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;Input data size does not match.&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">m</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Number of Lattice elements must be greater than 0.&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">!=</span> <span class="mi">28</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;Parameter array size does not match.&#39;</span><span class="p">)</span>
+
+    <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">nblem</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+    <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">blnlen</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">lngs</span><span class="p">)</span>
+    <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">blnseg</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">segs</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+    <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">blnstp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">stps</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+    <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">blntyp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">typs</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+    <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">blnparams</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+    <span class="n">im</span><span class="o">.</span><span class="n">pyfunction</span><span class="o">.</span><span class="n">construct</span><span class="p">()</span>
+
+
+<span class="k">def</span> <span class="nf">_conf_para</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">idic</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">syntax</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Configure lattice parameters&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">basestring</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">idic</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+            <span class="n">index</span> <span class="o">=</span> <span class="n">idic</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;wrong input arguments for _conf_para():&#39;</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">idic</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">int_</span><span class="p">)):</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="p">[</span><span class="n">index</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">column</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+        <span class="n">col</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">column</span><span class="o">.</span><span class="n">keys</span><span class="p">())[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">val</span> <span class="o">=</span> <span class="n">column</span><span class="p">[</span><span class="n">col</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">col</span> <span class="o">=</span> <span class="n">column</span>
+        <span class="n">val</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="n">maxid</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">nblem</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">val</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="n">index</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">idx</span> <span class="o">&gt;</span> <span class="n">maxid</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">IndexError</span><span class="p">(</span><span class="s1">&#39;Input index is out of lattice range (max &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">nblem</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;).&#39;</span><span class="p">)</span>
+
+            <span class="n">lng</span><span class="p">,</span> <span class="n">seg</span><span class="p">,</span> <span class="n">stp</span><span class="p">,</span> <span class="n">typ</span><span class="p">,</span> <span class="n">vrr</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">pyfunction</span><span class="o">.</span><span class="n">configure0</span><span class="p">(</span><span class="n">idx</span><span class="p">)</span>
+
+            <span class="n">zs</span><span class="p">,</span> <span class="n">ze</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">blnpos</span><span class="p">[</span><span class="n">idx</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="n">idx</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+
+            <span class="n">dline</span> <span class="o">=</span> <span class="nb">list</span><span class="p">([</span><span class="n">vrr</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">const</span><span class="o">.</span><span class="n">vrlen</span><span class="p">(</span><span class="n">typ</span><span class="p">))])</span>
+
+            <span class="k">if</span> <span class="n">typ</span> <span class="ow">is</span> <span class="o">-</span><span class="mi">2</span><span class="p">:</span>
+                <span class="n">keystp</span> <span class="o">=</span> <span class="s1">&#39;pid&#39;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">keystp</span> <span class="o">=</span> <span class="s1">&#39;step&#39;</span>
+
+            <span class="n">ddct</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">(((</span><span class="s1">&#39;index&#39;</span><span class="p">,</span> <span class="n">idx</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;length&#39;</span><span class="p">,</span> <span class="n">lng</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;segment&#39;</span><span class="p">,</span> <span class="n">seg</span><span class="p">),</span>
+                                <span class="p">(</span><span class="n">keystp</span><span class="p">,</span> <span class="n">stp</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;type&#39;</span><span class="p">,</span> <span class="n">typ</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;start&#39;</span><span class="p">,</span> <span class="n">zs</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;end&#39;</span><span class="p">,</span> <span class="n">ze</span><span class="p">)))</span>
+
+            <span class="k">if</span> <span class="n">syntax</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">col</span> <span class="ow">in</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;index&#39;</span><span class="p">]:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;index : &#39;</span><span class="p">,</span> <span class="n">idx</span><span class="p">,</span> <span class="s1">&#39;(start : &#39;</span><span class="p">,</span> <span class="n">zs</span><span class="p">,</span> <span class="s1">&#39;, end : &#39;</span><span class="p">,</span> <span class="n">ze</span><span class="p">,</span> <span class="s1">&#39; [m])&#39;</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">col</span> <span class="ow">in</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;length&#39;</span><span class="p">]:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;length : &#39;</span><span class="p">,</span> <span class="n">lng</span><span class="p">,</span> <span class="s1">&#39;[m]&#39;</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">col</span> <span class="ow">in</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;segment&#39;</span><span class="p">]:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;segment : &#39;</span><span class="p">,</span> <span class="n">seg</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">col</span> <span class="ow">in</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">keystp</span><span class="p">]:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="n">keystp</span><span class="o">+</span><span class="s1">&#39; : &#39;</span><span class="p">,</span> <span class="n">stp</span><span class="p">)</span>
+
+                <span class="k">if</span> <span class="n">typ</span> <span class="ow">in</span> <span class="n">const</span><span class="o">.</span><span class="n">elemtype</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+                    <span class="k">if</span> <span class="n">col</span> <span class="ow">in</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">]:</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;type : &#39;</span><span class="p">,</span> <span class="n">typ</span><span class="p">,</span> <span class="s1">&#39; (&#39;</span><span class="o">+</span><span class="n">util</span><span class="o">.</span><span class="n">invdict</span><span class="p">(</span><span class="n">const</span><span class="o">.</span><span class="n">elemtype</span><span class="p">,</span> <span class="n">typ</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;)&#39;</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">col</span> <span class="ow">in</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">]:</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;type : &#39;</span><span class="p">,</span> <span class="n">typ</span><span class="p">)</span>
+
+            <span class="n">delem</span> <span class="o">=</span> <span class="n">const</span><span class="o">.</span><span class="n">vrdct</span><span class="p">(</span><span class="n">typ</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">delem</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">vr</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">dline</span><span class="p">):</span>
+                    <span class="n">vname</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">invdict</span><span class="p">(</span><span class="n">const</span><span class="o">.</span><span class="n">vrdct</span><span class="p">(</span><span class="n">typ</span><span class="p">),</span> <span class="n">i</span><span class="o">+</span><span class="mi">5</span><span class="p">)</span>
+                    <span class="n">alias</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">util</span><span class="o">.</span><span class="n">invdictall</span><span class="p">(</span><span class="n">const</span><span class="o">.</span><span class="n">vrdct</span><span class="p">(</span><span class="n">typ</span><span class="p">),</span> <span class="n">i</span><span class="o">+</span><span class="mi">5</span><span class="p">)[</span><span class="mi">1</span><span class="p">:])</span>
+                    <span class="n">info</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">alias</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">alias</span>
+                    <span class="n">unit</span> <span class="o">=</span> <span class="n">const</span><span class="o">.</span><span class="n">uelem</span><span class="p">[</span><span class="n">vname</span><span class="p">]</span> <span class="k">if</span> <span class="n">vname</span> <span class="ow">in</span> <span class="n">const</span><span class="o">.</span><span class="n">uelem</span> <span class="k">else</span> <span class="s1">&#39;&#39;</span>
+                    <span class="n">ddct</span><span class="o">.</span><span class="n">update</span><span class="p">(((</span><span class="n">vname</span><span class="p">,</span> <span class="n">vr</span><span class="p">),))</span>
+                    <span class="k">for</span> <span class="n">vn</span> <span class="ow">in</span> <span class="n">alias</span><span class="p">:</span>
+                        <span class="n">ddct</span><span class="o">.</span><span class="n">update</span><span class="p">(((</span><span class="nb">str</span><span class="p">(</span><span class="n">vn</span><span class="p">),</span> <span class="n">vr</span><span class="p">),))</span>
+                    <span class="k">if</span> <span class="n">syntax</span> <span class="ow">and</span> <span class="p">(</span><span class="n">col</span> <span class="ow">in</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="n">i</span><span class="o">+</span><span class="mi">5</span><span class="p">,</span> <span class="n">vname</span><span class="p">]</span> <span class="ow">or</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">alias</span><span class="p">):</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="n">vname</span><span class="p">,</span> <span class="n">info</span><span class="p">,</span> <span class="s1">&#39;: &#39;</span><span class="p">,</span> <span class="n">vr</span><span class="p">,</span> <span class="n">unit</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">idic</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">tagname</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">invdictls</span><span class="p">(</span><span class="n">idic</span><span class="p">,</span> <span class="n">idx</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span>
+                <span class="n">ddct</span><span class="o">.</span><span class="n">update</span><span class="p">(((</span><span class="s1">&#39;tag&#39;</span><span class="p">,</span> <span class="n">tagname</span><span class="p">),))</span>
+                <span class="k">if</span> <span class="n">syntax</span> <span class="ow">and</span> <span class="n">col</span> <span class="ow">in</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;tag&#39;</span><span class="p">]:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;tag : &#39;</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">tagname</span><span class="p">)))</span>
+
+            <span class="k">if</span> <span class="n">syntax</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+            <span class="n">ret</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ddct</span><span class="p">)</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="n">ret</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">ret</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">else</span> <span class="n">ret</span>
+
+    <span class="k">elif</span> <span class="p">(</span><span class="n">col</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">val</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="n">index</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">idx</span> <span class="o">&gt;</span> <span class="n">maxid</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">IndexError</span><span class="p">(</span><span class="s1">&#39;Input index is out of lattice range (max &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">nblem</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;).&#39;</span><span class="p">)</span>
+
+            <span class="n">lng</span><span class="p">,</span> <span class="n">seg</span><span class="p">,</span> <span class="n">stp</span><span class="p">,</span> <span class="n">typ</span><span class="p">,</span> <span class="n">vrr</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">pyfunction</span><span class="o">.</span><span class="n">configure0</span><span class="p">(</span><span class="n">idx</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">col</span><span class="p">,</span> <span class="n">basestring</span><span class="p">):</span>
+                <span class="n">ccol</span> <span class="o">=</span> <span class="n">const</span><span class="o">.</span><span class="n">vrdct</span><span class="p">(</span><span class="n">typ</span><span class="p">)[</span><span class="n">col</span><span class="o">.</span><span class="n">lower</span><span class="p">()]</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">col</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">int_</span><span class="p">)):</span>
+                <span class="n">ccol</span> <span class="o">=</span> <span class="n">col</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;wrong input arguments for _conf_para() :&#39;</span><span class="p">,</span> <span class="n">col</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">ccol</span> <span class="o">&lt;</span> <span class="mi">5</span> <span class="ow">or</span> <span class="n">ccol</span> <span class="o">&gt;</span> <span class="mi">23</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">IndexError</span><span class="p">(</span><span class="s1">&#39;Input col must be 5 to 23.&#39;</span><span class="p">)</span>
+
+            <span class="n">im</span><span class="o">.</span><span class="n">pyfunction</span><span class="o">.</span><span class="n">configure1</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="n">ccol</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;wrong input arguments for _conf_para()&#39;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">ret</span>
+
+
+<span class="k">def</span> <span class="nf">_search</span><span class="p">(</span><span class="n">typ</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Search lattice elements&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">typ</span><span class="p">,</span> <span class="n">basestring</span><span class="p">):</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="n">const</span><span class="o">.</span><span class="n">elemtype</span><span class="p">[</span><span class="n">typ</span><span class="p">]</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">typ</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">int_</span><span class="p">)):</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="n">typ</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;wrong input arguments for _search() :&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">typ</span><span class="p">))</span>
+
+    <span class="n">im</span><span class="o">.</span><span class="n">pyfunction</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+    <span class="n">mpicomm</span><span class="o">.</span><span class="n">barrier</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">cp</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">searchres</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_save_testin</span><span class="p">(</span><span class="n">fname</span><span class="o">=</span><span class="s1">&#39;test.in.new&#39;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Save current setting to file&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">runseq</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;Input parameters must be set before exporting.&#39;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="n">basestring</span><span class="p">):</span>
+        <span class="n">im</span><span class="o">.</span><span class="n">pyfunction</span><span class="o">.</span><span class="n">export</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;wrong input arguments for _save_testin()&#39;</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_output_hist</span><span class="p">(</span><span class="n">fname</span><span class="o">=</span><span class="s1">&#39;fort&#39;</span><span class="p">,</span> <span class="n">iqid</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Output history data to file&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">hrefz</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;no exportable data&#39;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="n">basestring</span><span class="p">):</span>
+        <span class="n">im</span><span class="o">.</span><span class="n">pyfunction</span><span class="o">.</span><span class="n">outhist</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="n">iqid</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;wrong input arguments for _output_hist()&#39;</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_output_dist</span><span class="p">(</span><span class="n">fname</span><span class="o">=</span><span class="s1">&#39;fort&#39;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Output distribution data to file&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">hbunchid</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">im</span><span class="o">.</span><span class="n">messaging</span><span class="o">.</span><span class="n">hbunchid</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;no exportable data&#39;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="n">basestring</span><span class="p">):</span>
+        <span class="n">im</span><span class="o">.</span><span class="n">pyfunction</span><span class="o">.</span><span class="n">outdist</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;wrong input arguments for _output_dist()&#39;</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_iostat</span><span class="p">(</span><span class="n">key</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Return io status in IMPACT&quot;&quot;&quot;</span>
+    <span class="n">iolst</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">pyfunction</span><span class="o">.</span><span class="n">get_iostat</span><span class="p">()</span>
+    <span class="n">iolst</span> <span class="o">=</span> <span class="n">mpicomm</span><span class="o">.</span><span class="n">bcast</span><span class="p">(</span><span class="n">iolst</span><span class="p">,</span> <span class="n">root</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">iolst</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="s1">&#39;inp&#39;</span> <span class="ow">in</span> <span class="n">key</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;Input file does not found.&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">iolst</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="s1">&#39;dist&#39;</span> <span class="ow">in</span> <span class="n">key</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;Initial distribution file does not found.&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">iolst</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="s1">&#39;data&#39;</span> <span class="ow">in</span> <span class="n">key</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;Field data file does not found.&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">iolst</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="s1">&#39;strp&#39;</span> <span class="ow">in</span> <span class="n">key</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;Stripper data file does not found.&#39;</span><span class="p">)</span>
+</pre></div>
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Kei Fukushima.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'1.0.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

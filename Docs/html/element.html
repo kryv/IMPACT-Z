@@ -1,0 +1,1971 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Lattice Elements &mdash; Adv. IMPACT 1.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="Adv. IMPACT 1.0.0 documentation" href="index.html"/>
+        <link rel="next" title="Class Library" href="classlib.html"/>
+        <link rel="prev" title="Parallel Computing" href="parallel.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Adv. IMPACT
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Table of Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parallel.html">Parallel Computing</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Lattice Elements</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#optical-element">Optical element</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#drift-type-0">drift (<code class="docutils literal"><span class="pre">type</span></code> : <strong>0</strong>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#quadrupole-type-1">quadrupole (<code class="docutils literal"><span class="pre">type</span></code> : <strong>1</strong>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#constant-focusing-type-2">constant focusing (<code class="docutils literal"><span class="pre">type</span></code> : <strong>2</strong>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#linear-map-solenoid-type-3">linear-map solenoid (<code class="docutils literal"><span class="pre">type</span></code> : <strong>3</strong>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#hard-edge-solenoid-type-13">hard-edge solenoid (<code class="docutils literal"><span class="pre">type</span></code> : <strong>13</strong>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dipole-type-4">dipole (<code class="docutils literal"><span class="pre">type</span></code> : <strong>4</strong>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#multipole-type-5">multipole (<code class="docutils literal"><span class="pre">type</span></code> : <strong>5</strong>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#drift-tube-linac-type-101">drift tube linac (<code class="docutils literal"><span class="pre">type</span></code> : <strong>101</strong>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#coupled-cavity-dtl-type-102">coupled cavity dtl (<code class="docutils literal"><span class="pre">type</span></code> : <strong>102</strong>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#coupled-cavity-linac-type-103">coupled cavity linac (<code class="docutils literal"><span class="pre">type</span></code> : <strong>103</strong>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#superconducting-cavity-type-104">superconducting cavity (<code class="docutils literal"><span class="pre">type</span></code> : <strong>104</strong>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#solenoid-rf-type-105">solenoid-rf (<code class="docutils literal"><span class="pre">type</span></code> : <strong>105</strong>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rf-quadrupole-type-106">rf quadrupole (<code class="docutils literal"><span class="pre">type</span></code> : <strong>106</strong>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#em-field-type-110">em field (<code class="docutils literal"><span class="pre">type</span></code> : <strong>110</strong>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#em-field-dipole-type-114">em field dipole (<code class="docutils literal"><span class="pre">type</span></code> : <strong>114</strong>)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#special-element">Special element</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#d-centroid-adjust-type-1">2d centroid adjust (<code class="docutils literal"><span class="pre">type</span></code> : <strong>-1</strong>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#d-centroid-adjust-type-26">4d centroid adjust (<code class="docutils literal"><span class="pre">type</span></code> : <strong>-26</strong>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#store-beam-distribution-type-2">store beam distribution (<code class="docutils literal"><span class="pre">type</span></code> : <strong>-2</strong>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#make-beam-mismatch-type-10">make beam mismatch (<code class="docutils literal"><span class="pre">type</span></code> : <strong>-10</strong>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#charge-stripper-type-11">charge stripper (<code class="docutils literal"><span class="pre">type</span></code> : <strong>-11</strong>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#collimator-slit-type-13">collimator slit (<code class="docutils literal"><span class="pre">type</span></code> : <strong>-13</strong>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#beam-parameter-selector-type-14">beam parameter selector (<code class="docutils literal"><span class="pre">type</span></code> : <strong>-14</strong>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#multi-charge-beam-shift-type-21">multi-charge beam shift (<code class="docutils literal"><span class="pre">type</span></code> : <strong>-21</strong>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pure-beam-shift-type-25">pure beam shift (<code class="docutils literal"><span class="pre">type</span></code> : <strong>-25</strong>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#transverse-rotation-type-22">transverse rotation (<code class="docutils literal"><span class="pre">type</span></code> : <strong>-22</strong>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#diagnostic-flag-type-23">diagnostic flag (<code class="docutils literal"><span class="pre">type</span></code> : <strong>-23</strong>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#jump-reference-frequency-type-27">jump reference frequency (<code class="docutils literal"><span class="pre">type</span></code> : <strong>-27</strong>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#hard-edge-solenoid-wrapper-type-40">hard-edge solenoid wrapper (<code class="docutils literal"><span class="pre">type</span></code> : <strong>-40</strong>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#lattice-end-flag-type-99">lattice end flag (<code class="docutils literal"><span class="pre">type</span></code> : <strong>-99</strong>)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#synchronous-phase-input-for-rf-cavities">Synchronous phase input for RF cavities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#external-data-format">External data format</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rf-cavity-data">rf cavity data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#d-field-data">3d field data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rfq-data">rfq data</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="classlib.html">Class Library</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Adv. IMPACT</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Lattice Elements</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/element.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="lattice-elements">
+<h1>Lattice Elements<a class="headerlink" href="#lattice-elements" title="Permalink to this headline">¶</a></h1>
+<p>Basic format of the one lattice element is,</p>
+<div class="highlight-none"><div class="highlight"><pre><span></span>col1  col2  col3  col4 ... /
+</pre></div>
+</div>
+<p>Length of the lattice parameter-array (col{n}) must be greater than or equals to <strong>4</strong>.</p>
+<div class="section" id="optical-element">
+<h2>Optical element<a class="headerlink" href="#optical-element" title="Permalink to this headline">¶</a></h2>
+<p>For the optical elements, first 4 columns of the parameter-array have same significance.</p>
+<div class="highlight-none"><div class="highlight"><pre><span></span>element-length    seg    step    type    parameter-array[5:] /
+</pre></div>
+</div>
+<dl class="class">
+<dt>
+<code class="descname">parameter-array</code></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Col 1:</th><td class="field-body"><p class="first">(float) - <em>element length (‘length’, ‘L’)</em> [m].</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Col 2:</th><td class="field-body"><p class="first">(int) - <em>number of element segmentations (‘segment’, ‘seg’)</em> [1].</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Col 3:</th><td class="field-body"><p class="first">(int) - <em>number of map steps for PIC calculation (‘step’, ‘pid’)</em> [1].</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Col 4:</th><td class="field-body"><p class="first">(int) - <em>lattice element type (‘type’)</em> [1].</p>
+<table border="1" class="last docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">element-type</th>
+<th class="head">value</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference internal" href="#drift"><span class="std std-ref">drift</span></a></td>
+<td><strong>0</strong></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#quad"><span class="std std-ref">quadrupole</span></a></td>
+<td><strong>1</strong></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#cfocus"><span class="std std-ref">constant focusing</span></a></td>
+<td><strong>2</strong></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#solenoid"><span class="std std-ref">linear-map solenoid</span></a></td>
+<td><strong>3</strong></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#solenoid2"><span class="std std-ref">hard-edge solenoid</span></a></td>
+<td><strong>13</strong></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#dipole"><span class="std std-ref">dipole</span></a></td>
+<td><strong>4</strong></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#mltpole"><span class="std std-ref">multipole</span></a></td>
+<td><strong>5</strong></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#dtl"><span class="std std-ref">drift tube linac</span></a></td>
+<td><strong>101</strong></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#ccdtl"><span class="std std-ref">coupled cavity dtl</span></a></td>
+<td><strong>102</strong></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#ccl"><span class="std std-ref">coupled cavity linac</span></a></td>
+<td><strong>103</strong></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#scc"><span class="std std-ref">superconducting cavity</span></a></td>
+<td><strong>104</strong></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#solrf"><span class="std std-ref">solenoid with rf field</span></a></td>
+<td><strong>105</strong></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#rfq"><span class="std std-ref">rf quadrupole</span></a></td>
+<td><strong>106</strong></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#emfld"><span class="std std-ref">em field</span></a></td>
+<td><strong>110</strong></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#dipole3d"><span class="std std-ref">em field dipole</span></a></td>
+<td><strong>114</strong></td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<div class="section" id="drift-type-0">
+<span id="drift"></span><h3>drift (<code class="docutils literal"><span class="pre">type</span></code> : <strong>0</strong>)<a class="headerlink" href="#drift-type-0" title="Permalink to this headline">¶</a></h3>
+<p>Drift space element.</p>
+<blockquote>
+<div>(<strong>keywords</strong>: ‘drift’)</div></blockquote>
+<dl class="class">
+<dt>
+<code class="descname">parameter-array</code></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Col 5:</th><td class="field-body"><p class="first">(float) - <em>pipe radius</em> [m].</p>
+<p class="last">(<strong>keywords</strong>: ‘aperture’, ‘aper’, ‘pipe’, ‘radius’)</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="quadrupole-type-1">
+<span id="quad"></span><h3>quadrupole (<code class="docutils literal"><span class="pre">type</span></code> : <strong>1</strong>)<a class="headerlink" href="#quadrupole-type-1" title="Permalink to this headline">¶</a></h3>
+<p>Magnetic or electrostatic quadrupole element.</p>
+<blockquote>
+<div>(<strong>keywords</strong>: ‘quadrupole’, ‘quad’)</div></blockquote>
+<dl class="class">
+<dt>
+<code class="descname">parameter-array</code></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Col 5:</th><td class="field-body"><p class="first">(float) - <em>gradient</em> [T/m] for magnetic or <em>voltage</em> [V] for electrostatic quadrupole.</p>
+<p>(<strong>keywords</strong>: ‘gradient’, ‘grad’, ‘b2’, ‘k’, ‘voltage’)</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Col 6:</th><td class="field-body"><p class="first">(float) - <em>pipe radius</em> [m].</p>
+<p>(<strong>keywords</strong>: ‘aperture’, ‘aper’, ‘pipe’, ‘radius’)</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Col 7:</th><td class="field-body"><p class="first">(float) - <em>quadrupole type switch</em> [1].</p>
+<p>(<strong>keywords</strong>: ‘switch’, ‘flag’)</p>
+<table border="1" class="last docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">quadrupole type</th>
+<th class="head">value</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>magnetic</td>
+<td><strong>0</strong></td>
+</tr>
+<tr class="row-odd"><td>electrostatic</td>
+<td><strong>1</strong></td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+<table class="docutils field-list" frame="void" id="quaderr" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Col 8:</th><td class="field-body"><p class="first">(float) - <em>horizontal (x) alignment error</em> [m], or <em>entrance x offset</em> [m]. (see <a class="reference internal" href="pysrc/impact.input.html#impact.input.Input.Flagerror" title="impact.input.Input.Flagerror"><code class="xref py py-func docutils literal"><span class="pre">Flagerror</span></code></a>)</p>
+<p>(<strong>keywords</strong>: ‘dx’, ‘dx0’)</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Col 9:</th><td class="field-body"><p class="first">(float) - <em>vertical (y) alignment error</em> [m], or <em>entrance y offset</em> [m]. (see <a class="reference internal" href="pysrc/impact.input.html#impact.input.Input.Flagerror" title="impact.input.Input.Flagerror"><code class="xref py py-func docutils literal"><span class="pre">Flagerror</span></code></a>)</p>
+<p>(<strong>keywords</strong>: ‘dy’, ‘dy0’)</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Col 10:</th><td class="field-body"><p class="first">(float) - <em>pitch angle alignment error</em> [rad], or <em>exit x offset</em> [m]. (see <a class="reference internal" href="pysrc/impact.input.html#impact.input.Input.Flagerror" title="impact.input.Input.Flagerror"><code class="xref py py-func docutils literal"><span class="pre">Flagerror</span></code></a>)</p>
+<p>(<strong>keywords</strong>: ‘pitch’, ‘dx1’)</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Col 11:</th><td class="field-body"><p class="first">(float) - <em>yaw angle alignment error</em> [rad], or <em>exit y offset</em> [m]. (see <a class="reference internal" href="pysrc/impact.input.html#impact.input.Input.Flagerror" title="impact.input.Input.Flagerror"><code class="xref py py-func docutils literal"><span class="pre">Flagerror</span></code></a>)</p>
+<p>(<strong>keywords</strong>: ‘yaw’, ‘dy1’)</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Col 12:</th><td class="field-body"><p class="first">(float) - <em>roll angle alignment error</em> [rad].</p>
+<p class="last">(<strong>keywords</strong>: ‘roll’)</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="constant-focusing-type-2">
+<span id="cfocus"></span><h3>constant focusing (<code class="docutils literal"><span class="pre">type</span></code> : <strong>2</strong>)<a class="headerlink" href="#constant-focusing-type-2" title="Permalink to this headline">¶</a></h3>
+<p>3D constant focusing element.</p>
+<blockquote>
+<div>(<strong>keywords</strong>: ‘constant focusing’, ‘constfocus’)</div></blockquote>
+<dl class="class">
+<dt>
+<code class="descname">parameter-array</code></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Col 5:</th><td class="field-body"><p class="first">(float) - <em>horizontal (x) focusing strength</em>.</p>
+<p>(<strong>keywords</strong>: ‘kx0^2’, ‘kx2’)</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Col 6:</th><td class="field-body"><p class="first">(float) - <em>vertical (y) focusing strength</em>.</p>
+<p>(<strong>keywords</strong>: ‘ky0^2’, ‘ky2’)</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Col 7:</th><td class="field-body"><p class="first">(float) - <em>longitudinal (z) focusing strength</em>.</p>
+<p>(<strong>keywords</strong>: ‘kz0^2’, ‘kz2’)</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Col 8:</th><td class="field-body"><p class="first">(float) - <em>pipe radius</em> [m].</p>
+<p class="last">(<strong>keywords</strong>: ‘aperture’, ‘aper’, ‘pipe’, ‘radius’)</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="linear-map-solenoid-type-3">
+<span id="solenoid"></span><h3>linear-map solenoid (<code class="docutils literal"><span class="pre">type</span></code> : <strong>3</strong>)<a class="headerlink" href="#linear-map-solenoid-type-3" title="Permalink to this headline">¶</a></h3>
+<p>Linear map solenoid element.</p>
+<blockquote>
+<div>(<strong>keywords</strong>: ‘solenoid’, ‘sol’)</div></blockquote>
+<dl class="class">
+<dt>
+<code class="descname">parameter-array</code></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Col 5:</th><td class="field-body"><p class="first">(float) - <em>longitudinal magnetic field strength (Bz)</em> [T].</p>
+<p>(<strong>keywords</strong>: ‘bz0’, ‘bz’, ‘b’)</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Col 6:</th><td class="field-body"><p class="first">(float) - <em>file id</em> [1].</p>
+<p>(<strong>keywords</strong>: ‘fileid’, ‘file’, ‘id’)</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Col 7:</th><td class="field-body"><p class="first">(float) - <em>pipe radius</em> [m].</p>
+<p>(<strong>keywords</strong>: ‘aperture’, ‘aper’, ‘pipe’, ‘radius’)</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Col 8 ~ 12:</th><td class="field-body"><p class="first last">(float) - <em>alignment errors</em>. <a class="reference internal" href="#quaderr"><span class="std std-ref">Same as quadrupole col 8 ~ 12</span></a>.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="hard-edge-solenoid-type-13">
+<span id="solenoid2"></span><h3>hard-edge solenoid (<code class="docutils literal"><span class="pre">type</span></code> : <strong>13</strong>)<a class="headerlink" href="#hard-edge-solenoid-type-13" title="Permalink to this headline">¶</a></h3>
+<p>Hard-edge solenoid element. This can be used with <a class="reference internal" href="#solwrap"><span class="std std-ref">hard-edge solenoid wrapper</span></a> (<code class="docutils literal"><span class="pre">type</span></code> = <strong>-40</strong>).</p>
+<blockquote>
+<div>(<strong>keywords</strong>: ‘solenoid2’, ‘sol2’)</div></blockquote>
+<dl class="class">
+<dt>
+<code class="descname">parameter-array</code></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Col 5:</th><td class="field-body"><p class="first">(float) - <em>longitudinal (z) magnetic field strength</em> [T].</p>
+<p>(<strong>keywords</strong>: ‘bz0’, ‘bz’, ‘b’)</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Col 6:</th><td class="field-body"><p class="first">(float) - <em>hard-edge wrapper flag</em> [1].</p>
+<ul class="simple">
+<li><strong>0</strong> for no-auto wrapping (<strong>-40</strong> wrapper is mandatory).</li>
+<li><strong>1</strong> for auto wrapping with the same field strength.</li>
+</ul>
+<p>(<strong>keywords</strong>: ‘fileid’, ‘file’, ‘id’)</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Col 7:</th><td class="field-body"><p class="first">(float) - <em>pipe radius</em> [m].</p>
+<p>(<strong>keywords</strong>: ‘aperture’, ‘aper’, ‘pipe’, ‘radius’)</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Col 8:</th><td class="field-body"><p class="first">(float) - <em>horizontal (x) magnetic field strength</em> [T].</p>
+<p>(<strong>keywords</strong>: ‘bx’)</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Col 9:</th><td class="field-body"><p class="first">(float) - <em>vertical (y) magnetic field strength</em> [T].</p>
+<p>(<strong>keywords</strong>: ‘by’)</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Col 10 ~ 14:</th><td class="field-body"><p class="first last">(float) - <em>alignment errors</em>. <a class="reference internal" href="#quaderr"><span class="std std-ref">Same as quadrupole col 8 ~ 12</span></a>.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="dipole-type-4">
+<span id="dipole"></span><h3>dipole (<code class="docutils literal"><span class="pre">type</span></code> : <strong>4</strong>)<a class="headerlink" href="#dipole-type-4" title="Permalink to this headline">¶</a></h3>
+<p>Magnetic or electrostatic dipole (bending) element.</p>
+<blockquote>
+<div>(<strong>keywords</strong>: ‘dipole’, ‘bend’)</div></blockquote>
+<dl class="class">
+<dt>
+<code class="descname">parameter-array</code></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Col 5:</th><td class="field-body"><p class="first">(float) - <em>bending angle</em> [deg].</p>
+<p>(<strong>keywords</strong>: ‘angle’, ‘phi’)</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Col 6:</th><td class="field-body"><p class="first">(float) - <em>reference Lorentz beta*gamma</em> [1].</p>
+<p>(<strong>keywords</strong>: ‘beta*gamma’, ‘bg’)</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Col 7:</th><td class="field-body"><p class="first">(float) - <em>dipole type switch</em> [1]. Greater than <strong>100</strong> for 2nd order matrix.</p>
+<p>(<strong>keywords</strong>: ‘switch’, ‘flag’)</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">dipole type</th>
+<th class="head">value</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>magnetic front-side</td>
+<td><strong>400</strong></td>
+</tr>
+<tr class="row-odd"><td>magnetic sector</td>
+<td><strong>500</strong></td>
+</tr>
+<tr class="row-even"><td>magnetic back-side</td>
+<td><strong>600</strong></td>
+</tr>
+<tr class="row-odd"><td>electrostatic-cylindrical</td>
+<td><strong>1500</strong></td>
+</tr>
+<tr class="row-even"><td>electrostatic-spherical</td>
+<td><strong>1501</strong></td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Col 8:</th><td class="field-body"><p class="first">(float) - <em>pipe radius</em> [m].</p>
+<p>(<strong>keywords</strong>: ‘aperture’, ‘aper’, ‘pipe’, ‘radius’)</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Col 9:</th><td class="field-body"><p class="first">(float) - <em>front pole-face angle</em> [deg].</p>
+<p>(<strong>keywords</strong>: ‘front angle’, ‘angle1’, ‘phi1’)</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Col 10:</th><td class="field-body"><p class="first">(float) - <em>back pole-face angle</em> [deg].</p>
+<p>(<strong>keywords</strong>: ‘back angle’, ‘angle2’, ‘phi2’)</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Col 11:</th><td class="field-body"><p class="first">(float) - <em>front curvature</em> [1/m].</p>
+<p>(<strong>keywords</strong>: ‘front curvature’, ‘curv1’)</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Col 12:</th><td class="field-body"><p class="first">(float) - <em>back curvature</em> [1/m].</p>
+<p>(<strong>keywords</strong>: ‘back curvature’, ‘curv2’)</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Col 13:</th><td class="field-body"><p class="first">(float) - <em>fringe quadrupole term</em>.</p>
+<p>(<strong>keywords</strong>: ‘fringe q-term’, ‘kf’)</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Col 14:</th><td class="field-body"><p class="first">(float) - <em>main quadrupole term</em>.</p>
+<p class="last">(<strong>keywords</strong>: ‘main q-term’, ‘k’)</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="multipole-type-5">
+<span id="mltpole"></span><h3>multipole (<code class="docutils literal"><span class="pre">type</span></code> : <strong>5</strong>)<a class="headerlink" href="#multipole-type-5" title="Permalink to this headline">¶</a></h3>
+<p>Magnetic multipole element.</p>
+<blockquote>
+<div>(<strong>keywords</strong>: ‘multipole’, ‘mpole’)</div></blockquote>
+<dl class="class">
+<dt>
+<code class="descname">parameter-array</code></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Col 5:</th><td class="field-body"><p class="first">(float) - <em>quadrupole strength</em> [T/m].</p>
+<p>(<strong>keywords</strong>: ‘gradient’, ‘grad’, ‘b2’)</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Col 6:</th><td class="field-body"><p class="first">(float) - <em>sextupole strength</em> [T/m^2].</p>
+<p>(<strong>keywords</strong>: ‘b3’)</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Col 7:</th><td class="field-body"><p class="first">(float) - <em>octupole strength</em> [T/m^3].</p>
+<p>(<strong>keywords</strong>: ‘b4’)</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Col 8:</th><td class="field-body"><p class="first">(float) - <em>decapole strength</em> [T/m^4].</p>
+<p>(<strong>keywords</strong>: ‘b5’)</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Col 9:</th><td class="field-body"><p class="first">(float) - <em>12 pole strength</em> [T/m^5].</p>
+<p>(<strong>keywords</strong>: ‘b6’)</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Col 10:</th><td class="field-body"><p class="first">(float) - <em>14 pole strength</em> [T/m^6].</p>
+<p>(<strong>keywords</strong>: ‘b7’)</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Col 11:</th><td class="field-body"><p class="first">(float) - <em>16 pole strength</em> [T/m^7].</p>
+<p>(<strong>keywords</strong>: ‘b8’)</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Col 12:</th><td class="field-body"><p class="first">(float) - <em>pipe radius</em> [m].</p>
+<p>(<strong>keywords</strong>: ‘aperture’, ‘aper’, ‘pipe’, ‘radius’)</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Col 13 ~ 17:</th><td class="field-body"><p class="first last">(float) - <em>alignment errors</em>. <a class="reference internal" href="#quaderr"><span class="std std-ref">Same as quadrupole col 8 ~ 12</span></a>.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="drift-tube-linac-type-101">
+<span id="dtl"></span><h3>drift tube linac (<code class="docutils literal"><span class="pre">type</span></code> : <strong>101</strong>)<a class="headerlink" href="#drift-tube-linac-type-101" title="Permalink to this headline">¶</a></h3>
+<p>Drift tube linac element</p>
+<blockquote>
+<div>(<strong>keywords</strong>: ‘drift tube linac’, ‘dtl’)</div></blockquote>
+<dl class="class">
+<dt>
+<code class="descname">parameter-array</code></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Col 5:</th><td class="field-body"><p class="first">(float) - <em>scaling factor</em> [1].</p>
+<p>(<strong>keywords</strong>: ‘scaling’, ‘scale’, ‘scl_fac’)</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Col 6:</th><td class="field-body"><p class="first">(float) - <em>frequency</em> [Hz].</p>
+<p>(<strong>keywords</strong>: ‘frequency’, ‘f’, ‘freq’)</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Col 7:</th><td class="field-body"><p class="first">(float) - <em>driven phase</em> [deg].</p>
+<p>(<strong>keywords</strong>: ‘driven phase’, ‘phi0’)</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Col 8:</th><td class="field-body"><p class="first">(float) - <em>file id</em> [1]. This element uses ‘rfdata${file_id}’ file. <a class="reference internal" href="#rfdata"><span class="std std-ref">(see here)</span></a></p>
+<p>(<strong>keywords</strong>: ‘fileid’, ‘file’, ‘id’)</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Col 9:</th><td class="field-body"><p class="first">(float) - <em>pipe radius</em> [m].</p>
+<p>(<strong>keywords</strong>: ‘aperture’, ‘aper’, ‘pipe’, ‘radius’)</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Col 10:</th><td class="field-body"><p class="first">(float) - <em>first quadrupole length</em> [m].</p>
+<p>(<strong>keywords</strong>: ‘quad 1 length’, ‘q1len’)</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Col 11:</th><td class="field-body"><p class="first">(float) - <em>first quadrupole strength</em> [1/T].</p>
+<p>(<strong>keywords</strong>: ‘quad 1 gradient’, ‘q1grad’)</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Col 12:</th><td class="field-body"><p class="first">(float) - <em>second quadrupole length</em> [m].</p>
+<p>(<strong>keywords</strong>: ‘quad 2 length’, ‘q2len’)</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Col 13:</th><td class="field-body"><p class="first">(float) - <em>second quadrupole strength</em> [1/T].</p>
+<p>(<strong>keywords</strong>: ‘quad 2 gradient’, ‘q2grad’)</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Col 14 ~ 18:</th><td class="field-body"><p class="first last">(float) - <em>alignment errors</em>. <a class="reference internal" href="#quaderr"><span class="std std-ref">Same as quadrupole col 8 ~ 12</span></a>.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="coupled-cavity-dtl-type-102">
+<span id="ccdtl"></span><h3>coupled cavity dtl (<code class="docutils literal"><span class="pre">type</span></code> : <strong>102</strong>)<a class="headerlink" href="#coupled-cavity-dtl-type-102" title="Permalink to this headline">¶</a></h3>
+<p>Coupled cavity drift tube linac element</p>
+<blockquote>
+<div>(<strong>keywords</strong>: ‘coupled cavity drift tube linac’, ‘ccdtl’)</div></blockquote>
+<dl class="class">
+<dt>
+<code class="descname">parameter-array</code></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Col 5:</th><td class="field-body"><p class="first">(float) - <em>scaling factor</em> [1].</p>
+<p>(<strong>keywords</strong>: ‘scaling’, ‘scale’, ‘scl_fac’)</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Col 6:</th><td class="field-body"><p class="first">(float) - <em>frequency</em> [Hz].</p>
+<p>(<strong>keywords</strong>: ‘frequency’, ‘f’, ‘freq’)</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Col 7:</th><td class="field-body"><p class="first">(float) - <em>driven phase</em> [deg].</p>
+<p>(<strong>keywords</strong>: ‘driven phase’, ‘phi0’)</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Col 8:</th><td class="field-body"><p class="first">(float) - <em>file id</em> [1]. This element uses ‘rfdata${file_id}’ file. <a class="reference internal" href="#rfdata"><span class="std std-ref">(see here)</span></a></p>
+<p>(<strong>keywords</strong>: ‘fileid’, ‘file’, ‘id’)</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Col 9:</th><td class="field-body"><p class="first">(float) - <em>pipe radius</em> [m].</p>
+<p>(<strong>keywords</strong>: ‘aperture’, ‘aper’, ‘pipe’, ‘radius’)</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Col 10 ~ 14:</th><td class="field-body"><p class="first last">(float) - <em>alignment errors</em>. <a class="reference internal" href="#quaderr"><span class="std std-ref">Same as quadrupole col 8 ~ 12</span></a>.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="coupled-cavity-linac-type-103">
+<span id="ccl"></span><h3>coupled cavity linac (<code class="docutils literal"><span class="pre">type</span></code> : <strong>103</strong>)<a class="headerlink" href="#coupled-cavity-linac-type-103" title="Permalink to this headline">¶</a></h3>
+<p>Coupled cavity linac element</p>
+<blockquote>
+<div>(<strong>keywords</strong>: ‘coupled cavity linac’, ‘ccl’)</div></blockquote>
+<dl class="class">
+<dt>
+<code class="descname">parameter-array</code></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Col 5:</th><td class="field-body"><p class="first">(float) - <em>scaling factor</em> [1].</p>
+<p>(<strong>keywords</strong>: ‘scaling’, ‘scale’, ‘scl_fac’)</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Col 6:</th><td class="field-body"><p class="first">(float) - <em>base frequency</em> [Hz].</p>
+<p>(<strong>keywords</strong>: ‘frequency’, ‘f’, ‘freq’)</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Col 7:</th><td class="field-body"><p class="first">(float) - <em>input phase</em> [deg].</p>
+<p>(<strong>keywords</strong>: ‘input phase’, ‘phi0’)</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Col 8:</th><td class="field-body"><p class="first">(float) - <em>file id</em> [1]. This element uses ‘rfdata${file_id}’ file. <a class="reference internal" href="#rfdata"><span class="std std-ref">(see here)</span></a></p>
+<p>(<strong>keywords</strong>: ‘fileid’, ‘file’, ‘id’)</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Col 9:</th><td class="field-body"><p class="first">(float) - <em>pipe radius</em> [m].</p>
+<p>(<strong>keywords</strong>: ‘aperture’, ‘aper’, ‘pipe’, ‘radius’)</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Col 10 ~ 14:</th><td class="field-body"><p class="first">(float) - <em>alignment errors</em>. <a class="reference internal" href="#quaderr"><span class="std std-ref">Same as quadrupole col 8 ~ 12</span></a>.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Col 15:</th><td class="field-body"><p class="first">(float) - <em>flag for synchronous phase input</em> [1]. <a class="reference internal" href="#syncphase"><span class="std std-ref">(see here)</span></a></p>
+<ul class="simple">
+<li><strong>0</strong> for input phase (col 6) is driven phase.</li>
+<li><strong>1</strong> for input phase (col 6) is synchronous phase.</li>
+</ul>
+<p>(<strong>keywords</strong>: ‘synchronous phase flag’, ‘sync_flag’, ‘syncflag’)</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Col 16:</th><td class="field-body"><p class="first">(float) - <em>scaling error for primary harmonic</em> [1]. (added to the scaling factor)</p>
+<p>(<strong>keywords</strong>: ‘scale error’, ‘dscl’, ‘er_scl’)</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Col 17:</th><td class="field-body"><p class="first">(float) - <em>phase error for primary harmonic</em> [deg].</p>
+<p>(<strong>keywords</strong>: ‘phase error’, ‘dphi’, ‘er_phi’)</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Col 18:</th><td class="field-body"><p class="first">(float) - <em>scaling factor for second harmonic</em> [1].</p>
+<p>(<strong>keywords</strong>: ‘scaling2’, ‘scale2’, ‘scl_fac2’)</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Col 19:</th><td class="field-body"><p class="first">(float) - <em>frequency ratio to the base frequency for second harmonic</em> [1].</p>
+<p>(<strong>keywords</strong>: ‘frequency ratio 2’, ‘f2’, ‘freq2’)</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Col 20:</th><td class="field-body"><p class="first">(float) - <em>driven phase offset for second harmonic</em> [deg].</p>
+<p>(<strong>keywords</strong>: ‘driven phase offset 2’, ‘phi0_2’)</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Col 21:</th><td class="field-body"><p class="first">(float) - <em>scaling factor for third harmonic</em> [1].</p>
+<p>(<strong>keywords</strong>: ‘scaling3’, ‘scale3’, ‘scl_fac3’)</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Col 22:</th><td class="field-body"><p class="first">(float) - <em>frequency ratio to the base frequency for third harmonic</em> [1].</p>
+<p>(<strong>keywords</strong>: ‘frequency ratio 3’, ‘f3’, ‘freq3’)</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Col 23:</th><td class="field-body"><p class="first">(float) - <em>driven phase offset for third harmonic</em> [deg].</p>
+<p>(<strong>keywords</strong>: ‘driven phase offset 3’, ‘phi0_3’)</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Col 24:</th><td class="field-body"><p class="first">(float) - <em>scaling error for second harmonic</em> [1]. (added to the scaling factor)</p>
+<p>(<strong>keywords</strong>: ‘scale error 2’, ‘dscl2’, ‘er_scl2’)</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Col 25:</th><td class="field-body"><p class="first">(float) - <em>phase error for second harmonic</em> [deg].</p>
+<p>(<strong>keywords</strong>: ‘phase error 2’, ‘dphi2’, ‘er_phi2’)</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Col 26:</th><td class="field-body"><p class="first">(float) - <em>scaling error for third harmonic</em> [1]. (added to the scaling factor)</p>
+<p>(<strong>keywords</strong>: ‘scale error 3’, ‘dscl3’, ‘er_scl3’)</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Col 27:</th><td class="field-body"><p class="first">(float) - <em>phase error for third harmonic</em> [deg].</p>
+<p>(<strong>keywords</strong>: ‘phase error 3’, ‘dphi3’, ‘er_phi3’)</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Col 28:</th><td class="field-body"><p class="first">(float) - <em>synchronous phase offset</em> [deg]. Read only, set after the simulation.</p>
+<p class="last">(<strong>keywords</strong>: ‘synchronous phase offset’, ‘sync_offset’)</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="superconducting-cavity-type-104">
+<span id="scc"></span><h3>superconducting cavity (<code class="docutils literal"><span class="pre">type</span></code> : <strong>104</strong>)<a class="headerlink" href="#superconducting-cavity-type-104" title="Permalink to this headline">¶</a></h3>
+<p>Superconducting cavity element</p>
+<blockquote>
+<div>(<strong>keywords</strong>: ‘superconducting cavity’, ‘scc’)</div></blockquote>
+<dl class="class">
+<dt>
+<code class="descname">parameter-array</code></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Col 5:</th><td class="field-body"><p class="first">(float) - <em>scaling factor</em> [1].</p>
+<p>(<strong>keywords</strong>: ‘scaling’, ‘scale’, ‘scl_fac’)</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Col 6:</th><td class="field-body"><p class="first">(float) - <em>frequency</em> [Hz].</p>
+<p>(<strong>keywords</strong>: ‘frequency’, ‘f’, ‘freq’)</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Col 7:</th><td class="field-body"><p class="first">(float) - <em>driven phase</em> [deg].</p>
+<p>(<strong>keywords</strong>: ‘driven phase’, ‘phi0’)</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Col 8:</th><td class="field-body"><p class="first">(float) - <em>file id</em> [1]. This element uses ‘rfdata${file_id}’ file. <a class="reference internal" href="#rfdata"><span class="std std-ref">(see here)</span></a></p>
+<p>(<strong>keywords</strong>: ‘fileid’, ‘file’, ‘id’)</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Col 9:</th><td class="field-body"><p class="first">(float) - <em>pipe radius</em> [m].</p>
+<p>(<strong>keywords</strong>: ‘aperture’, ‘aper’, ‘pipe’, ‘radius’)</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Col 10 ~ 14:</th><td class="field-body"><p class="first last">(float) - <em>alignment errors</em>. <a class="reference internal" href="#quaderr"><span class="std std-ref">Same as quadrupole col 8 ~ 12</span></a>.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="solenoid-rf-type-105">
+<span id="solrf"></span><h3>solenoid-rf (<code class="docutils literal"><span class="pre">type</span></code> : <strong>105</strong>)<a class="headerlink" href="#solenoid-rf-type-105" title="Permalink to this headline">¶</a></h3>
+<p>Solenoid with imbeded RF field element.</p>
+<blockquote>
+<div>(<strong>keywords</strong>: ‘solenoid-rf’, ‘solrf’)</div></blockquote>
+<dl class="class">
+<dt>
+<code class="descname">parameter-array</code></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Col 5:</th><td class="field-body"><p class="first">(float) - <em>scaling factor</em> [1].</p>
+<p>(<strong>keywords</strong>: ‘scaling’, ‘scale’, ‘scl_fac’)</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Col 6:</th><td class="field-body"><p class="first">(float) - <em>frequency</em> [Hz].</p>
+<p>(<strong>keywords</strong>: ‘frequency’, ‘f’, ‘freq’)</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Col 7:</th><td class="field-body"><p class="first">(float) - <em>driven phase</em> [deg].</p>
+<p>(<strong>keywords</strong>: ‘driven phase’, ‘phi0’)</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Col 8:</th><td class="field-body"><p class="first">(float) - <em>file id</em> [1]. This element uses ‘rfdata${file_id}’ file. <a class="reference internal" href="#rfdata"><span class="std std-ref">(see here)</span></a></p>
+<p>(<strong>keywords</strong>: ‘fileid’, ‘file’, ‘id’)</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Col 9:</th><td class="field-body"><p class="first">(float) - <em>pipe radius</em> [m].</p>
+<p>(<strong>keywords</strong>: ‘aperture’, ‘aper’, ‘pipe’, ‘radius’)</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Col 10 ~ 14:</th><td class="field-body"><p class="first">(float) - <em>alignment errors</em>. <a class="reference internal" href="#quaderr"><span class="std std-ref">Same as quadrupole col 8 ~ 12</span></a>.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Col 15:</th><td class="field-body"><p class="first">(float) - <em>longitudinal magnetic field strength (Bz)</em> [T].</p>
+<p class="last">(<strong>keywords</strong>: ‘bz0’, ‘bz’, ‘b’)</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="rf-quadrupole-type-106">
+<span id="rfq"></span><h3>rf quadrupole (<code class="docutils literal"><span class="pre">type</span></code> : <strong>106</strong>)<a class="headerlink" href="#rf-quadrupole-type-106" title="Permalink to this headline">¶</a></h3>
+<p>RF quadrupole element. In case of <a class="reference internal" href="pysrc/impact.input.html#impact.input.Input.Flaginteg" title="impact.input.Input.Flaginteg"><code class="xref py py-func docutils literal"><span class="pre">Flaginteg</span></code></a> equals to <strong>2</strong>,
+<code class="docutils literal"><span class="pre">element-length</span></code> rescales the length defined in the external file (input <strong>0</strong> for no rescaling),
+in addition, <code class="docutils literal"><span class="pre">segment</span></code> and <code class="docutils literal"><span class="pre">step</span></code> are treated as dummy parameter.</p>
+<blockquote>
+<div>(<strong>keywords</strong>: ‘rfquadrupole’, ‘rfquad’, ‘rfq’)</div></blockquote>
+<dl class="class">
+<dt>
+<code class="descname">parameter-array</code></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Col 5:</th><td class="field-body"><p class="first">(float) - <em>scaling factor</em> [1].</p>
+<p>(<strong>keywords</strong>: ‘scaling’, ‘scale’, ‘scl_fac’)</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Col 6:</th><td class="field-body"><p class="first">(float) - <em>frequency</em> [Hz].</p>
+<p>(<strong>keywords</strong>: ‘frequency’, ‘f’, ‘freq’)</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Col 7:</th><td class="field-body"><p class="first">(float) - <em>driven phase</em> [deg].</p>
+<p>(<strong>keywords</strong>: ‘driven phase’, ‘phi0’)</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Col 8:</th><td class="field-body"><p class="first">(float) - <em>file id</em> [1]. This element uses ‘rfqline${file_id}’ file
+in case of <a class="reference internal" href="pysrc/impact.input.html#impact.input.Input.Flaginteg" title="impact.input.Input.Flaginteg"><code class="xref py py-func docutils literal"><span class="pre">Flaginteg</span></code></a> equals to <strong>2</strong>. <a class="reference internal" href="#rfqdata"><span class="std std-ref">(see here)</span></a></p>
+<p>(<strong>keywords</strong>: ‘fileid’, ‘file’, ‘id’)</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Col 9:</th><td class="field-body"><p class="first">(float) - <em>pipe radius</em> [m].</p>
+<p>(<strong>keywords</strong>: ‘aperture’, ‘aper’, ‘pipe’, ‘radius’)</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Col 10:</th><td class="field-body"><p class="first">(float) - <em>modulation</em> [1].</p>
+<p>(<strong>keywords</strong>: ‘modulation’, ‘mod’)</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Col 11 ~ 15:</th><td class="field-body"><p class="first last">(float) - <em>alignment errors</em>. <a class="reference internal" href="#quaderr"><span class="std std-ref">Same as quadrupole col 8 ~ 12</span></a>.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="em-field-type-110">
+<span id="emfld"></span><h3>em field (<code class="docutils literal"><span class="pre">type</span></code> : <strong>110</strong>)<a class="headerlink" href="#em-field-type-110" title="Permalink to this headline">¶</a></h3>
+<p>3D electro-magnetic field element with data file.</p>
+<p>This element only works in case of <a class="reference internal" href="pysrc/impact.input.html#impact.input.Input.Flaginteg" title="impact.input.Input.Flaginteg"><code class="xref py py-func docutils literal"><span class="pre">Flaginteg</span></code></a> equals to <strong>2</strong>.</p>
+<blockquote>
+<div>(<strong>keywords</strong>: ‘emfield’, ‘emfld’)</div></blockquote>
+<dl class="class">
+<dt>
+<code class="descname">parameter-array</code></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Col 5:</th><td class="field-body"><p class="first">(float) - <em>scaling factor</em> [1].</p>
+<p>(<strong>keywords</strong>: ‘scaling’, ‘scale’, ‘scl_fac’)</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Col 6:</th><td class="field-body"><p class="first">(float) - <em>frequency</em> [Hz].</p>
+<p>(<strong>keywords</strong>: ‘frequency’, ‘f’, ‘freq’)</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Col 7:</th><td class="field-body"><p class="first">(float) - <em>driven phase</em> [deg].</p>
+<p>(<strong>keywords</strong>: ‘driven phase’, ‘phi0’)</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Col 8:</th><td class="field-body"><p class="first">(float) - <em>file id</em> [1]. This element uses ‘1T${file_id}.T7’ file. <a class="reference internal" href="#dfdata"><span class="std std-ref">(see here)</span></a></p>
+<p>(<strong>keywords</strong>: ‘fileid’, ‘file’, ‘id’)</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Col 9:</th><td class="field-body"><p class="first">(float) - <em>horizontal (x) pipe radius</em> [m].</p>
+<p>(<strong>keywords</strong>: ‘xaperture’, ‘xaper’, ‘xpipe’, ‘xradius’)</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Col 10:</th><td class="field-body"><p class="first">(float) - <em>vertical (y) pipe radius</em> [m].</p>
+<p>(<strong>keywords</strong>: ‘yaperture’, ‘yaper’, ‘ypipe’, ‘yradius’)</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Col 11 ~ 15:</th><td class="field-body"><p class="first">(float) - <em>alignment errors</em>. <a class="reference internal" href="#quaderr"><span class="std std-ref">Same as quadrupole col 8 ~ 12</span></a>.</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Col 16:</th><td class="field-body"><p class="first">(float) - <em>data type</em> [1].</p>
+<ul class="simple">
+<li><strong>1</strong> for discrete data only. (recommended)</li>
+<li><strong>2</strong> for both discrete and analytical data.</li>
+</ul>
+<p>(<strong>keywords</strong>: ‘data type’, ‘data’)</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Col 17:</th><td class="field-body"><p class="first">(float) - <em>coordinate type</em> [1].</p>
+<ul class="simple">
+<li><strong>1</strong> for cylindrical coordinate.</li>
+<li><strong>2</strong> for Cartesian coordinate.</li>
+</ul>
+<p>(<strong>keywords</strong>: ‘coordinate’, ‘coor’)</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Col 18:</th><td class="field-body"><p class="first">(float) - <em>flag for synchronous phase input</em> [1]. <a class="reference internal" href="#syncphase"><span class="std std-ref">(see here)</span></a></p>
+<ul class="simple">
+<li><strong>0</strong> for input phase (col 6) is driven phase.</li>
+<li><strong>1</strong> for input phase (col 6) is synchronous phase.</li>
+</ul>
+<p>(<strong>keywords</strong>: ‘synchronous phase flag’, ‘sync_flag’, ‘syncflag’)</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Col 19:</th><td class="field-body"><p class="first">(float) - <em>scaling error for primary field</em> [1]. (added to the scaling factor)</p>
+<p>(<strong>keywords</strong>: ‘scale error’, ‘dscl’, ‘er_scl’)</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Col 20:</th><td class="field-body"><p class="first">(float) - <em>phase error for primary field</em> [deg].</p>
+<p>(<strong>keywords</strong>: ‘phase error’, ‘dphi’, ‘er_phi’)</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Col 21:</th><td class="field-body"><p class="first">(float) - <em>scaling factor for second field</em> [1].</p>
+<p>(<strong>keywords</strong>: ‘scaling2’, ‘scale2’, ‘scl_fac2’)</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Col 22:</th><td class="field-body"><p class="first">(float) - <em>frequency for second field</em> [Hz].</p>
+<p>(<strong>keywords</strong>: ‘frequency2’, ‘f2’, ‘freq2’)</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Col 23:</th><td class="field-body"><p class="first">(float) - <em>driven phase offset for second field</em> [deg].</p>
+<p>(<strong>keywords</strong>: ‘driven phase offset 2’, ‘phi0_2’)</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Col 24:</th><td class="field-body"><p class="first">(float) - <em>scaling factor for third field</em> [1].</p>
+<p>(<strong>keywords</strong>: ‘scaling3’, ‘scale3’, ‘scl_fac3’)</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Col 25:</th><td class="field-body"><p class="first">(float) - <em>frequency for second field</em> [Hz].</p>
+<p>(<strong>keywords</strong>: ‘frequency3’, ‘f3’, ‘freq3’)</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Col 26:</th><td class="field-body"><p class="first">(float) - <em>driven phase offset for third field</em> [deg].</p>
+<p>(<strong>keywords</strong>: ‘driven phase offset 3’, ‘phi0_3’)</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Col 27:</th><td class="field-body"><p class="first">(float) - <em>scaling error for second field</em> [1]. (added to the scaling factor)</p>
+<p>(<strong>keywords</strong>: ‘scale error 2’, ‘dscl2’, ‘er_scl2’)</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Col 28:</th><td class="field-body"><p class="first">(float) - <em>phase error for second field</em> [deg].</p>
+<p>(<strong>keywords</strong>: ‘phase error 2’, ‘dphi2’, ‘er_phi2’)</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Col 29:</th><td class="field-body"><p class="first">(float) - <em>scaling error for third field</em> [1]. (added to the scaling factor)</p>
+<p>(<strong>keywords</strong>: ‘scale error 3’, ‘dscl3’, ‘er_scl3’)</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Col 30:</th><td class="field-body"><p class="first">(float) - <em>phase error for third field</em> [deg].</p>
+<p>(<strong>keywords</strong>: ‘phase error 3’, ‘dphi3’, ‘er_phi3’)</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Col 31:</th><td class="field-body"><p class="first">(float) - <em>synchronous phase offset</em> [deg]. Read only, set after the simulation.</p>
+<p class="last">(<strong>keywords</strong>: ‘synchronous phase offset’, ‘sync_offset’)</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="em-field-dipole-type-114">
+<span id="dipole3d"></span><h3>em field dipole (<code class="docutils literal"><span class="pre">type</span></code> : <strong>114</strong>)<a class="headerlink" href="#em-field-dipole-type-114" title="Permalink to this headline">¶</a></h3>
+<p>3D electro-magnetic field dipole element with data file.
+<code class="docutils literal"><span class="pre">element-length</span></code> is treated as the path length of the pipe center.</p>
+<p>This element only works in case of <a class="reference internal" href="pysrc/impact.input.html#impact.input.Input.Flaginteg" title="impact.input.Input.Flaginteg"><code class="xref py py-func docutils literal"><span class="pre">Flaginteg</span></code></a> equals to <strong>2</strong>.</p>
+<blockquote>
+<div>(<strong>keywords</strong>: ‘em field dipole’, ‘emfdipole’, ‘emfbend’)</div></blockquote>
+<dl class="class">
+<dt>
+<code class="descname">parameter-array</code></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Col 5:</th><td class="field-body"><p class="first">(float) - <em>scaling factor</em> [1].</p>
+<p>(<strong>keywords</strong>: ‘scaling’, ‘scale’, ‘scl_fac’)</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Col 6:</th><td class="field-body"><p class="first">(float) - <em>bending angle</em> [deg].</p>
+<p>(<strong>keywords</strong>: ‘angle’, ‘phi’)</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Col 7:</th><td class="field-body"><p class="first">(float) - <em>fringe length</em> [m]. This length is treated as straight section in the <code class="docutils literal"><span class="pre">element-length</span></code>.</p>
+<p>(<strong>keywords</strong>: ‘fringe length’, ‘flen’)</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Col 8:</th><td class="field-body"><p class="first">(float) - <em>file id</em> [1]. This element uses ‘1T${file_id}.T7’ file. <a class="reference internal" href="#dfdata"><span class="std std-ref">(see here)</span></a></p>
+<p>(<strong>keywords</strong>: ‘fileid’, ‘file’, ‘id’)</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Col 9:</th><td class="field-body"><p class="first">(float) - <em>horizontal (x) pipe width</em> [m].</p>
+<p>(<strong>keywords</strong>: ‘xaperture’, ‘xaper’, ‘xpipe’, ‘xwidth’)</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Col 10:</th><td class="field-body"><p class="first">(float) - <em>vertical (y) pipe width</em> [m].</p>
+<p>(<strong>keywords</strong>: ‘yaperture’, ‘yaper’, ‘ypipe’, ‘ywidth’)</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Col 11 ~ 15:</th><td class="field-body"><p class="first">(float) - <em>alignment errors</em>. <a class="reference internal" href="#quaderr"><span class="std std-ref">Same as quadrupole col 8 ~ 12</span></a>.</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Col 16:</th><td class="field-body"><p class="first">(float) - <em>horizontal (x) offset for field data</em> [m].</p>
+<p>(<strong>keywords</strong>: ‘xoffset’, ‘xoff’)</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Col 17:</th><td class="field-body"><p class="first">(float) - <em>vertical (y) offset for field data</em> [m].</p>
+<p class="last">(<strong>keywords</strong>: ‘yoffset’, ‘yoff’)</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>z-x plane data image for input parameters. The reference line assumes x-axial symmetry.</p>
+<a class="last reference internal image-reference" href="_images/ref3ddipole.png"><img alt="_images/ref3ddipole.png" src="_images/ref3ddipole.png" style="width: 650px;" /></a>
+</div>
+</div>
+</div>
+<div class="section" id="special-element">
+<h2>Special element<a class="headerlink" href="#special-element" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt>
+<code class="descname">parameter-array</code></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Col 4:</th><td class="field-body"><p class="first">(int) - <em>special element type</em> [1].</p>
+<table border="1" class="last docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">element-type</th>
+<th class="head">value</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference internal" href="#dadjust"><span class="std std-ref">2d centroid adjust</span></a></td>
+<td><strong>-1</strong></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#id1"><span class="std std-ref">4d centroid adjust</span></a></td>
+<td><strong>-26</strong></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#pstore"><span class="std std-ref">store beam distribution</span></a></td>
+<td><strong>-2</strong></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#mismatch"><span class="std std-ref">make beam mismatch</span></a></td>
+<td><strong>-10</strong></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#msustr"><span class="std std-ref">charge stripper</span></a></td>
+<td><strong>-11</strong></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#slit"><span class="std std-ref">collimator slit</span></a></td>
+<td><strong>-13</strong></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#bps"><span class="std std-ref">beam parameter selector</span></a></td>
+<td><strong>-14</strong></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#mcshift"><span class="std std-ref">multi-charge beam shift</span></a></td>
+<td><strong>-21</strong></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#pshift"><span class="std std-ref">pure beam shift</span></a></td>
+<td><strong>-25</strong></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#rotbeam"><span class="std std-ref">transverse rotation</span></a></td>
+<td><strong>-22</strong></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#diagbeam"><span class="std std-ref">diagnostic flag</span></a></td>
+<td><strong>-23</strong></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#jumpfreq"><span class="std std-ref">jump reference frequency</span></a></td>
+<td><strong>-27</strong></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#solwrap"><span class="std std-ref">hard-edge solenoid wrapper</span></a></td>
+<td><strong>-40</strong></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#endlat"><span class="std std-ref">lattice end flag</span></a></td>
+<td><strong>-99</strong></td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<div class="section" id="d-centroid-adjust-type-1">
+<span id="dadjust"></span><h3>2d centroid adjust (<code class="docutils literal"><span class="pre">type</span></code> : <strong>-1</strong>)<a class="headerlink" href="#d-centroid-adjust-type-1" title="Permalink to this headline">¶</a></h3>
+<p>Adjust the horizontal and vertical centroid to zero.</p>
+<dl class="class">
+<dt>
+<code class="descname">parameter-array</code></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Col 1:</th><td class="field-body">(float) - <em>dummy parameter</em>.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Col 2:</th><td class="field-body">(int) - <em>dummy parameter</em>.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Col 3:</th><td class="field-body">(int) - <em>dummy parameter</em>.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Col 4:</th><td class="field-body">(int) - <em>element-type</em> = -1</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="d-centroid-adjust-type-26">
+<span id="id1"></span><h3>4d centroid adjust (<code class="docutils literal"><span class="pre">type</span></code> : <strong>-26</strong>)<a class="headerlink" href="#d-centroid-adjust-type-26" title="Permalink to this headline">¶</a></h3>
+<p>Adjust the horizontal and vertical, centroid and momentum centroid to zero.</p>
+<dl class="class">
+<dt>
+<code class="descname">parameter-array</code></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Col 1:</th><td class="field-body">(float) - <em>dummy parameter</em>.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Col 2:</th><td class="field-body">(int) - <em>dummy parameter</em>.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Col 3:</th><td class="field-body">(int) - <em>dummy parameter</em>.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Col 4:</th><td class="field-body">(int) - <em>element-type</em> = -26</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="store-beam-distribution-type-2">
+<span id="pstore"></span><h3>store beam distribution (<code class="docutils literal"><span class="pre">type</span></code> : <strong>-2</strong>)<a class="headerlink" href="#store-beam-distribution-type-2" title="Permalink to this headline">¶</a></h3>
+<p>Store the 6D beam distribution.</p>
+<dl class="class">
+<dt>
+<code class="descname">parameter-array</code></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Col 1:</th><td class="field-body">(float) - <em>dummy parameter</em>.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Col 2:</th><td class="field-body">(int) - <em>dummy parameter</em>.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Col 3:</th><td class="field-body">(int) - <em>storage id</em> [1].</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Col 4:</th><td class="field-body">(int) - <em>element-type</em> = -2</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Col 5:</th><td class="field-body">(int) - <em>Sampling interval</em> [1].</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="make-beam-mismatch-type-10">
+<span id="mismatch"></span><h3>make beam mismatch (<code class="docutils literal"><span class="pre">type</span></code> : <strong>-10</strong>)<a class="headerlink" href="#make-beam-mismatch-type-10" title="Permalink to this headline">¶</a></h3>
+<p>Make mismatch for the 6D beam distribution.</p>
+<dl class="class">
+<dt>
+<code class="descname">parameter-array</code></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Col 1:</th><td class="field-body">(float) - <em>dummy parameter</em>.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Col 2:</th><td class="field-body">(int) - <em>dummy parameter</em>.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Col 3:</th><td class="field-body">(int) - <em>dummy parameter</em>.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Col 4:</th><td class="field-body">(int) - <em>element-type</em> = -10</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Col 5:</th><td class="field-body">(float) - <em>dummy parameter</em>.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Col 6:</th><td class="field-body">(float) - <em>x mismatch factor</em> [1].</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Col 7:</th><td class="field-body">(float) - <em>x’ mismatch factor</em> [1].</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Col 8:</th><td class="field-body">(float) - <em>y mismatch factor</em> [1].</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Col 9:</th><td class="field-body">(float) - <em>y’ mismatch factor</em> [1].</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Col 10:</th><td class="field-body">(float) - <em>z mismatch factor</em> [1].</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Col 11:</th><td class="field-body">(float) - <em>z’ mismatch factor</em> [1].</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="charge-stripper-type-11">
+<span id="msustr"></span><h3>charge stripper (<code class="docutils literal"><span class="pre">type</span></code> : <strong>-11</strong>)<a class="headerlink" href="#charge-stripper-type-11" title="Permalink to this headline">¶</a></h3>
+<p>MSU model charge stripper.</p>
+<dl class="class">
+<dt>
+<code class="descname">parameter-array</code></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Col 1:</th><td class="field-body">(float) - <em>dummy parameter</em>.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Col 2:</th><td class="field-body">(int) - <em>dummy parameter</em>.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Col 3:</th><td class="field-body">(int) - <em>file id</em> [1]. This element uses ‘fort.${file_id}’ file.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Col 4:</th><td class="field-body">(int) - <em>element-type</em> = -11</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="collimator-slit-type-13">
+<span id="slit"></span><h3>collimator slit (<code class="docutils literal"><span class="pre">type</span></code> : <strong>-13</strong>)<a class="headerlink" href="#collimator-slit-type-13" title="Permalink to this headline">¶</a></h3>
+<p>Collimator slit in x-y plane.</p>
+<dl class="class">
+<dt>
+<code class="descname">parameter-array</code></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Col 1:</th><td class="field-body">(float) - <em>dummy parameter</em>.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Col 2:</th><td class="field-body">(int) - <em>dummy parameter</em>.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Col 3:</th><td class="field-body">(int) - <em>dummy parameter</em>.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Col 4:</th><td class="field-body">(int) - <em>element-type</em> = -13</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Col 5:</th><td class="field-body">(float) - <em>dummy parameter</em>.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Col 6:</th><td class="field-body">(float) - <em>x lower limit</em> [m].</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Col 7:</th><td class="field-body">(float) - <em>x higher limit</em> [m].</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Col 8:</th><td class="field-body">(float) - <em>y lower limit</em> [m].</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Col 9:</th><td class="field-body">(float) - <em>y higher limit</em> [m].</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="beam-parameter-selector-type-14">
+<span id="bps"></span><h3>beam parameter selector (<code class="docutils literal"><span class="pre">type</span></code> : <strong>-14</strong>)<a class="headerlink" href="#beam-parameter-selector-type-14" title="Permalink to this headline">¶</a></h3>
+<p>Beam parameter selector by usings high and low limitation</p>
+<dl class="class">
+<dt>
+<code class="descname">parameter-array</code></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Col 1:</th><td class="field-body"><p class="first">(float) - <em>dummy parameter</em>.</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Col 2:</th><td class="field-body"><p class="first">(int) - <em>dummy parameter</em>.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Col 3:</th><td class="field-body"><p class="first">(int) - <em>dummy parameter</em>.</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Col 4:</th><td class="field-body"><p class="first">(int) - <em>element-type</em> = -14</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Col 5:</th><td class="field-body"><p class="first">(int) - <em>index for the beam parameter</em>.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">index</th>
+<th class="head">description</th>
+<th class="head">unit</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><strong>0</strong></td>
+<td>skip selector</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td><strong>1</strong></td>
+<td>x position</td>
+<td>[m]</td>
+</tr>
+<tr class="row-even"><td><strong>2</strong></td>
+<td>x momentum</td>
+<td>[rad]</td>
+</tr>
+<tr class="row-odd"><td><strong>3</strong></td>
+<td>y position</td>
+<td>[m]</td>
+</tr>
+<tr class="row-even"><td><strong>4</strong></td>
+<td>y momentum</td>
+<td>[rad]</td>
+</tr>
+<tr class="row-odd"><td><strong>5</strong></td>
+<td>relative phase</td>
+<td>[deg]</td>
+</tr>
+<tr class="row-even"><td><strong>6</strong></td>
+<td>relative or absolute energy</td>
+<td>[MeV]</td>
+</tr>
+<tr class="row-odd"><td><strong>7</strong></td>
+<td>charge to mass ratio</td>
+<td>[c^2/eV]</td>
+</tr>
+<tr class="row-even"><td><strong>8</strong></td>
+<td>charge per macro particle</td>
+<td>[1]</td>
+</tr>
+<tr class="row-odd"><td><strong>9</strong></td>
+<td>id number</td>
+<td>[1]</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Col 6:</th><td class="field-body"><p class="first">(float) - <em>lower limit for the parameter</em>.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Col 7:</th><td class="field-body"><p class="first">(float) - <em>higher limit for the parameters</em>.</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Col 8:</th><td class="field-body"><p class="first">(int) - <em>flag for reference energy offset</em>.</p>
+<ul class="last simple">
+<li><strong>0</strong> for use relative energy (default)</li>
+<li><strong>1</strong> for use absolute energy</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="multi-charge-beam-shift-type-21">
+<span id="mcshift"></span><h3>multi-charge beam shift (<code class="docutils literal"><span class="pre">type</span></code> : <strong>-21</strong>)<a class="headerlink" href="#multi-charge-beam-shift-type-21" title="Permalink to this headline">¶</a></h3>
+<p>Shift the beam in 6D phase space. The shift amount is depends on each charge state.</p>
+<dl class="class">
+<dt>
+<code class="descname">parameter-array</code></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Col 1:</th><td class="field-body">(float) - <em>dummy parameter</em>.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Col 2:</th><td class="field-body">(int) - <em>dummy parameter</em>.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Col 3:</th><td class="field-body">(int) - <em>dummy parameter</em>.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Col 4:</th><td class="field-body">(int) - <em>element-type</em> = -21</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Col 5:</th><td class="field-body">(float) - <em>dummy parameter</em>.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Col 6:</th><td class="field-body">(float) - <em>x shift amount</em> [m].</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Col 7:</th><td class="field-body">(float) - <em>x’ shift amount</em> [rad].</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Col 8:</th><td class="field-body">(float) - <em>y shift amount</em> [m].</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Col 9:</th><td class="field-body">(float) - <em>y’ shift amount</em> [rad].</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Col 10:</th><td class="field-body">(float) - <em>z shift amount</em> [deg].</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Col 11:</th><td class="field-body">(float) - <em>z’ shift amount</em> [MeV].</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="pure-beam-shift-type-25">
+<span id="pshift"></span><h3>pure beam shift (<code class="docutils literal"><span class="pre">type</span></code> : <strong>-25</strong>)<a class="headerlink" href="#pure-beam-shift-type-25" title="Permalink to this headline">¶</a></h3>
+<p>Shift the beam in 6D phase space. The shift amount is <strong>NOT</strong> depends on each charge state.</p>
+<dl class="class">
+<dt>
+<code class="descname">parameter-array</code></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Col 1:</th><td class="field-body">(float) - <em>dummy parameter</em>.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Col 2:</th><td class="field-body">(int) - <em>dummy parameter</em>.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Col 3:</th><td class="field-body">(int) - <em>dummy parameter</em>.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Col 4:</th><td class="field-body">(int) - <em>element-type</em> = -25</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Col 5:</th><td class="field-body">(float) - <em>dummy parameter</em>.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Col 6:</th><td class="field-body">(float) - <em>x shift amount</em> [m].</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Col 7:</th><td class="field-body">(float) - <em>x’ shift amount</em> [rad].</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Col 8:</th><td class="field-body">(float) - <em>y shift amount</em> [m].</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Col 9:</th><td class="field-body">(float) - <em>y’ shift amount</em> [rad].</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Col 10:</th><td class="field-body">(float) - <em>z shift amount</em> [deg].</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Col 11:</th><td class="field-body">(float) - <em>z’ shift amount</em> [MeV].</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="transverse-rotation-type-22">
+<span id="rotbeam"></span><h3>transverse rotation (<code class="docutils literal"><span class="pre">type</span></code> : <strong>-22</strong>)<a class="headerlink" href="#transverse-rotation-type-22" title="Permalink to this headline">¶</a></h3>
+<p>Transverse rotation of the beam.</p>
+<dl class="class">
+<dt>
+<code class="descname">parameter-array</code></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Col 1:</th><td class="field-body">(float) - <em>dummy parameter</em>.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Col 2:</th><td class="field-body">(int) - <em>dummy parameter</em>.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Col 3:</th><td class="field-body">(int) - <em>dummy parameter</em>.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Col 4:</th><td class="field-body">(int) - <em>element-type</em> = -22</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Col 5:</th><td class="field-body">(float) - <em>dummy parameter</em>.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Col 6:</th><td class="field-body">(float) - <em>x-y plane rotation angle</em> [deg].</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Col 7:</th><td class="field-body">(float) - <em>x’-y’ plane rotation angle</em> [deg].</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="diagnostic-flag-type-23">
+<span id="diagbeam"></span><h3>diagnostic flag (<code class="docutils literal"><span class="pre">type</span></code> : <strong>-23</strong>)<a class="headerlink" href="#diagnostic-flag-type-23" title="Permalink to this headline">¶</a></h3>
+<p>Store the diagnostic data of the beam distribution.</p>
+<dl class="class">
+<dt>
+<code class="descname">parameter-array</code></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Col 1:</th><td class="field-body">(float) - <em>dummy parameter</em>.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Col 2:</th><td class="field-body">(int) - <em>dummy parameter</em>.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Col 3:</th><td class="field-body">(int) - <em>dummy parameter</em>.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Col 4:</th><td class="field-body">(int) - <em>element-type</em> = -23</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="jump-reference-frequency-type-27">
+<span id="jumpfreq"></span><h3>jump reference frequency (<code class="docutils literal"><span class="pre">type</span></code> : <strong>-27</strong>)<a class="headerlink" href="#jump-reference-frequency-type-27" title="Permalink to this headline">¶</a></h3>
+<p>Jump the reference frequency.</p>
+<dl class="class">
+<dt>
+<code class="descname">parameter-array</code></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Col 1:</th><td class="field-body">(float) - <em>dummy parameter</em>.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Col 2:</th><td class="field-body">(int) - <em>dummy parameter</em>.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Col 3:</th><td class="field-body">(int) - <em>dummy parameter</em>.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Col 4:</th><td class="field-body">(int) - <em>element-type</em> = -27</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Col 5:</th><td class="field-body">(float) - <em>dummy parameter</em>.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Col 6:</th><td class="field-body">(float) - <em>new reference frequency</em> [Hz].</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Col 7:</th><td class="field-body">(float) - <em>phase shift</em> [deg].</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="hard-edge-solenoid-wrapper-type-40">
+<span id="solwrap"></span><h3>hard-edge solenoid wrapper (<code class="docutils literal"><span class="pre">type</span></code> : <strong>-40</strong>)<a class="headerlink" href="#hard-edge-solenoid-wrapper-type-40" title="Permalink to this headline">¶</a></h3>
+<p>Wrapping the hard-edge solenoid at the front and back side.</p>
+<dl class="class">
+<dt>
+<code class="descname">parameter-array</code></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Col 1:</th><td class="field-body">(float) - <em>dummy parameter</em>.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Col 2:</th><td class="field-body">(int) - <em>dummy parameter</em>.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Col 3:</th><td class="field-body">(int) - <em>dummy parameter</em>.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Col 4:</th><td class="field-body">(int) - <em>element-type</em> = -40</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Col 5:</th><td class="field-body">(float) - <em>dummy parameter</em>.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Col 6:</th><td class="field-body">(float) - <em>longitudinal magnetic field strength</em> [T].</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Col 7:</th><td class="field-body">(float) - <em>front/back side flag</em> [1]. <strong>0</strong> for front, <strong>1</strong> for back side.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="lattice-end-flag-type-99">
+<span id="endlat"></span><h3>lattice end flag (<code class="docutils literal"><span class="pre">type</span></code> : <strong>-99</strong>)<a class="headerlink" href="#lattice-end-flag-type-99" title="Permalink to this headline">¶</a></h3>
+<p>End flag of the input lattice.</p>
+<dl class="class">
+<dt>
+<code class="descname">parameter-array</code></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Col 1:</th><td class="field-body">(float) - <em>dummy parameter</em>.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Col 2:</th><td class="field-body">(int) - <em>dummy parameter</em>.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Col 3:</th><td class="field-body">(int) - <em>dummy parameter</em>.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Col 4:</th><td class="field-body">(int) - <em>element-type</em> = -99</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="synchronous-phase-input-for-rf-cavities">
+<span id="syncphase"></span><h2>Synchronous phase input for RF cavities<a class="headerlink" href="#synchronous-phase-input-for-rf-cavities" title="Permalink to this headline">¶</a></h2>
+<p>For the <a class="reference internal" href="#ccl"><span class="std std-ref">coupled cavity linac (type:103)</span></a> and
+<a class="reference internal" href="#emfld"><span class="std std-ref">em field (type:110)</span></a>, input phase is switchable
+between <em>drive phase</em> <span class="math">\(\phi_d\)</span> and <em>synchronous phase</em> <span class="math">\(\phi_s\)</span> .</p>
+<p>In the case of input phase is <em>synchronous phase</em>, -90 [deg] is stable and no energy gain point.
+Inside the code, the rf field is calculated by using driven phase,
+and the synchronous phase offset <span class="math">\(\phi_\text{off}\)</span> is calculated automatically which defined as</p>
+<div class="math">
+\[\phi_d = \phi_s + \phi_\text{off} .\]</div>
+<p>This offset value is defined by using the reference particle, and
+the reference particle does not depend on any rf errors and alignment errors.
+In addition, it is cached in memory and reuse if the reference energy and charge to mass ratio at the element entrance are the same as the previous simulation.</p>
+<p>The rf phase error <span class="math">\(\phi_{error}\)</span> is directly added to the driven phase.
+Basically, the energy gain of the whole beam is not zero even in the synchronous phase is -90
+due to the energy deviation.</p>
+</div>
+<div class="section" id="external-data-format">
+<h2>External data format<a class="headerlink" href="#external-data-format" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="rf-cavity-data">
+<span id="rfdata"></span><h3>rf cavity data<a class="headerlink" href="#rf-cavity-data" title="Permalink to this headline">¶</a></h3>
+<p>(Use for <a class="reference internal" href="#dtl"><span class="std std-ref">drift tube linac</span></a>, <a class="reference internal" href="#ccdtl"><span class="std std-ref">coupled cavity dtl</span></a>,
+<a class="reference internal" href="#ccl"><span class="std std-ref">coupled cavity linac</span></a>, <a class="reference internal" href="#scc"><span class="std std-ref">superconducting cavity</span></a>,
+<a class="reference internal" href="#solrf"><span class="std std-ref">solenoid with rf field</span></a>)</p>
+<p>In case of <a class="reference internal" href="pysrc/impact.input.html#impact.input.Input.Flaginteg" title="impact.input.Input.Flaginteg"><code class="xref py py-func docutils literal"><span class="pre">Flaginteg</span></code></a> equals to <strong>1</strong>,
+the data file (rfdata${file_id}) should have on-axis longitudinal electric field data.</p>
+<div class="highlight-none"><div class="highlight"><pre><span></span>z(1)    Ez(1)    Ez&#39;(1)    Ez&#39;&#39;(1)
+z(2)    Ez(2)    Ez&#39;(2)    Ez&#39;&#39;(2)
+z(3)    Ez(3)    Ez&#39;(3)    Ez&#39;&#39;(3)
+.
+.
+! max data length is 5000
+</pre></div>
+</div>
+<p>In case of <a class="reference internal" href="pysrc/impact.input.html#impact.input.Input.Flaginteg" title="impact.input.Input.Flaginteg"><code class="xref py py-func docutils literal"><span class="pre">Flaginteg</span></code></a> equals to <strong>2</strong>,
+the data file (rfdata${file_id}) should have Fourier coefficients of on-axis longitudinal electric field.</p>
+<div class="highlight-none"><div class="highlight"><pre><span></span>F(1)
+F(2)
+F(3)
+.
+.
+! max data length is 101
+</pre></div>
+</div>
+</div>
+<div class="section" id="d-field-data">
+<span id="dfdata"></span><h3>3d field data<a class="headerlink" href="#d-field-data" title="Permalink to this headline">¶</a></h3>
+<p>(Use for <a class="reference internal" href="#emfld"><span class="std std-ref">em field</span></a>, <a class="reference internal" href="#dipole3d"><span class="std std-ref">em field dipole</span></a>)</p>
+<p>This data can be used in case of <a class="reference internal" href="pysrc/impact.input.html#impact.input.Input.Flaginteg" title="impact.input.Input.Flaginteg"><code class="xref py py-func docutils literal"><span class="pre">Flaginteg</span></code></a> equals to <strong>2</strong>.
+The data file (1T${file_id}.T7) should have 6D electro-magnetic field data and its size information.</p>
+<div class="highlight-none"><div class="highlight"><pre><span></span>x_min  x_max  x_ngrid
+y_min  y_max  y_ngrid
+z_min  z_max  z_ngrid
+Ex   Ey   Ez   Bx   By   Bz   ! at (x(1), y(1), z(1))
+Ex   Ey   Ez   Bx   By   Bz   ! at (x(2), y(1), z(1))
+Ex   Ey   Ez   Bx   By   Bz   ! at (x(3), y(1), z(1))
+.
+.
+Ex   Ey   Ez   Bx   By   Bz   ! at (x(1), y(2), z(1))
+Ex   Ey   Ez   Bx   By   Bz   ! at (x(2), y(2), z(1))
+Ex   Ey   Ez   Bx   By   Bz   ! at (x(3), y(2), z(1))
+.
+.
+Ex   Ey   Ez   Bx   By   Bz   ! at (x(1), y(3), z(1))
+Ex   Ey   Ez   Bx   By   Bz   ! at (x(2), y(3), z(1))
+Ex   Ey   Ez   Bx   By   Bz   ! at (x(3), y(3), z(1))
+.
+.
+Ex   Ey   Ez   Bx   By   Bz   ! at (x(1), y(1), z(2))
+Ex   Ey   Ez   Bx   By   Bz   ! at (x(2), y(1), z(2))
+Ex   Ey   Ez   Bx   By   Bz   ! at (x(3), y(1), z(2))
+.
+.
+! data length is (x_ngrid+1)*(y_ngrid+1)*(z_ngrid+1)
+</pre></div>
+</div>
+<p>For multi-field (in <a class="reference internal" href="#emfld"><span class="std std-ref">em field</span></a>) data,</p>
+<div class="highlight-none"><div class="highlight"><pre><span></span>x_min  x_max  x_ngrid
+y_min  y_max  y_ngrid
+z_min  z_max  z_ngrid
+E1x  E1y  E1z  B1x  B1y  B1z  E2x  E2y  E2z  B2x  B2y  B2z
+.
+.
+! data length is (x_ngrid+1)*(y_ngrid+1)*(z_ngrid+1)
+</pre></div>
+</div>
+<p>or,</p>
+<div class="highlight-none"><div class="highlight"><pre><span></span>x_min  x_max  x_ngrid
+y_min  y_max  y_ngrid
+z_min  z_max  z_ngrid
+E1x  E1y  E1z  B1x  B1y  B1z  E2x  E2y  E2z  B2x  B2y  B2z  E3x  E3y  E3z  B3x  B3y  B3z
+.
+.
+! data length is (x_ngrid+1)*(y_ngrid+1)*(z_ngrid+1)
+</pre></div>
+</div>
+<p>formats are available.</p>
+</div>
+<div class="section" id="rfq-data">
+<span id="rfqdata"></span><h3>rfq data<a class="headerlink" href="#rfq-data" title="Permalink to this headline">¶</a></h3>
+<p>(Use for <a class="reference internal" href="#rfq"><span class="std std-ref">rf quadrupole</span></a>)</p>
+<p>This data can be used in case of <a class="reference internal" href="pysrc/impact.input.html#impact.input.Input.Flaginteg" title="impact.input.Input.Flaginteg"><code class="xref py py-func docutils literal"><span class="pre">Flaginteg</span></code></a> equals to <strong>2</strong>.</p>
+<p>The data file (rfqline${file_id}) should have the list of the RFQ structure constants.</p>
+<div class="highlight-none"><div class="highlight"><pre><span></span>Len Nseg Nstp Ctype Scale Phi1 Radius Mod R0 A10 A0 A12I4 A1 A30I0 A21I2 A32I4 A23I6 /
+</pre></div>
+</div>
+<dl class="class">
+<dt>
+<code class="descname">structure constants</code></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Len:</th><td class="field-body"><p class="first">(float) - <em>cell length</em> [m].</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Nseg:</th><td class="field-body"><p class="first">(int) - <em>number of element segmentations</em> [1].</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Nstp:</th><td class="field-body"><p class="first">(int) - <em>number of map steps for PIC calculation</em> [1].</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Ctype:</th><td class="field-body"><p class="first">(int) - <em>cell type</em> [1].</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">cell-type</th>
+<th class="head">value</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>2 term XY potential for standard acceleration</td>
+<td><strong>0</strong></td>
+</tr>
+<tr class="row-odd"><td>8 term XY potential for standard acceleration</td>
+<td><strong>1</strong></td>
+</tr>
+<tr class="row-even"><td>radial matching</td>
+<td><strong>2</strong></td>
+</tr>
+<tr class="row-odd"><td>exit transition (inverse)</td>
+<td><strong>3</strong></td>
+</tr>
+<tr class="row-even"><td>exit transition (normal)</td>
+<td><strong>4</strong></td>
+</tr>
+<tr class="row-odd"><td>exit matching</td>
+<td><strong>5</strong></td>
+</tr>
+<tr class="row-even"><td>exit fringe</td>
+<td><strong>6</strong></td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Scale:</th><td class="field-body"><p class="first">(float) - <em>scaling factor</em> [1].</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Phi1:</th><td class="field-body"><p class="first">(float) - <em>synchronous phase</em> [deg].</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Radius:</th><td class="field-body"><p class="first">(float) - <em>pipe radius</em> [m].</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Mod:</th><td class="field-body"><p class="first">(float) - <em>modulation</em> [1].</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">R0:</th><td class="field-body"><p class="first">(float) - <em>middle point radius</em> [m].</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">A10:</th><td class="field-body"><p class="first">(float) - <em>acceleration term</em> [1].</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">A0:</th><td class="field-body"><p class="first">(float) - <em>quadrupole term</em> [1].</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">A1:</th><td class="field-body"><p class="first">(float) - <em>duodecapole term</em> [1].</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name" colspan="2">A12I4, A30I0, A21I2, A32I4, A23I6:</th></tr>
+<tr class="field-odd field"><td>&#160;</td><td class="field-body"><p class="first last">(float) - <em>product of multipole coefficient and Bessel function</em> [1].</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>In this RFQ model is based on Thomas P. Wangler’s “RF Linear Accelerator” book.</p>
+<p>The eight-term potential function is,</p>
+<div class="math">
+\[\begin{split}U(r, \theta, z) &amp;= \frac{V}{2}\Bigl\{ A_0 \left(\frac{r}{r_0}\right)^2 \cos 2\theta + A_1 \left(\frac{r}{r_0}\right)^6 \cos 6\theta \Bigr. \\
+                &amp;+ A_{10}I_0(kr)\cos kz + A_{30}I_0(3kr) \cos 3kz \\
+                &amp;+ [A_{12}I_4(kr) \cos kz + A_{32}I_4(3kr) \cos 3kz] \cos 4\theta\\
+                &amp;+ [A_{21}I_2(2kr) \cos 2\theta + A_{23}I_6(2kr) \cos 6\theta] \cos 2kz \Bigl. \Bigr\}\end{split}\]</div>
+<p class="last">here, <span class="math">\(V\)</span> is applied voltage, <span class="math">\(k = \pi / L\)</span> (where <span class="math">\(L\)</span> is the length of the cell),
+and <span class="math">\(I_n\)</span> is <span class="math">\(n\)</span>-th kind Bessel function.</p>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="classlib.html" class="btn btn-neutral float-right" title="Class Library" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="parallel.html" class="btn btn-neutral" title="Parallel Computing" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Kei Fukushima.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.0.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

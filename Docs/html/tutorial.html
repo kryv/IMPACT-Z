@@ -1,0 +1,633 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Tutorial &mdash; Adv. IMPACT 1.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="Adv. IMPACT 1.0.0 documentation" href="index.html"/>
+        <link rel="next" title="Parallel Computing" href="parallel.html"/>
+        <link rel="prev" title="Installation" href="installation.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Adv. IMPACT
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Table of Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Tutorial</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#basic-usage">1. Basic usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#lattice-parameter-control">2. Lattice parameter control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#example-phase-scan">3. Example: Phase scan</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#beam-parameter-control">4. Beam parameter control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#history-result-usage">5. History result usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#distribution-result-usage">6. Distribution result usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#a-to-b-run-partial-run">7. A to B run (partial run)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#example-transverse-matching">8. Example: Transverse matching</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#lattice-construction">9. Lattice construction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#data-export">10. Data export</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="parallel.html">Parallel Computing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="element.html">Lattice Elements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classlib.html">Class Library</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Adv. IMPACT</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Tutorial</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/tutorial.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="tutorial">
+<h1>Tutorial<a class="headerlink" href="#tutorial" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="basic-usage">
+<h2>1. Basic usage<a class="headerlink" href="#basic-usage" title="Permalink to this headline">¶</a></h2>
+<p>In Python interface (includes IPython-notebook), user can import IMPACT <a class="reference internal" href="pysrc/impact.control.html#impact.control.Sequence" title="impact.control.Sequence"><code class="xref py py-class docutils literal"><span class="pre">Sequence</span></code></a> class.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">impact</span> <span class="k">import</span> <span class="n">Sequence</span>
+</pre></div>
+</div>
+<p>Create IMPACT <a class="reference internal" href="pysrc/impact.control.html#impact.control.Sequence" title="impact.control.Sequence"><code class="xref py py-class docutils literal"><span class="pre">Sequence</span></code></a> object with input file.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sq</span> <span class="o">=</span> <span class="n">Sequence</span><span class="p">(</span><span class="s1">&#39;lattice_1cavity-1solenoid&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If user’s working directory has following structure for the external data files,</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ ls
+data/  lattice_1cavity-1solenoid
+$ ls data/
+1T421.T7  1T861.T7  fort.885  partcl.data
+</pre></div>
+</div>
+<p>user can define <a class="reference internal" href="pysrc/impact.control.html#impact.control.Sequence.subdir" title="impact.control.Sequence.subdir"><code class="xref py py-func docutils literal"><span class="pre">subdir</span></code></a> for the data directory.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sq</span><span class="o">.</span><span class="n">subdir</span> <span class="o">=</span> <span class="s1">&#39;data&#39;</span>
+</pre></div>
+</div>
+<p>Load the 3D field data. – <a class="reference internal" href="pysrc/impact.control.html#impact.control.Sequence.load" title="impact.control.Sequence.load"><code class="xref py py-func docutils literal"><span class="pre">load</span></code></a></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sq</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Run particle tracking simulation.
+– <a class="reference internal" href="pysrc/impact.control.html#impact.control.Sequence.distribute" title="impact.control.Sequence.distribute"><code class="xref py py-func docutils literal"><span class="pre">distribute</span></code></a>, <a class="reference internal" href="pysrc/impact.control.html#impact.control.Sequence.run" title="impact.control.Sequence.run"><code class="xref py py-func docutils literal"><span class="pre">run</span></code></a></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sq</span><span class="o">.</span><span class="n">distribute</span><span class="p">()</span> <span class="c1"># generate initial distribution by using the input-file&#39;s parameter</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sq</span><span class="o">.</span><span class="n">run</span><span class="p">()</span> <span class="c1"># run simulation</span>
+</pre></div>
+</div>
+<p><a class="reference internal" href="pysrc/impact.control.html#impact.control.Sequence" title="impact.control.Sequence"><code class="xref py py-class docutils literal"><span class="pre">Sequence</span></code></a> class contains all simulation results
+<a class="reference internal" href="pysrc/impact.result.html"><span class="doc">(see here)</span></a>.
+User can plot results directly.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pylab</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sq</span><span class="o">.</span><span class="n">hrefz</span><span class="p">(),</span> <span class="n">sq</span><span class="o">.</span><span class="n">hrefeng</span><span class="p">(</span><span class="s1">&#39;MeV&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Energy [MeV]&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;z [m]&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="_images/plot_z-eng.png" src="_images/plot_z-eng.png" />
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sq</span><span class="o">.</span><span class="n">hrefz</span><span class="p">(),</span><span class="n">sq</span><span class="o">.</span><span class="n">hxrms</span><span class="p">(</span><span class="s1">&#39;mm&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;x rms envelope [mm]&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;z [m]&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="_images/plot_z-xrms.png" src="_images/plot_z-xrms.png" />
+</div>
+<div class="section" id="lattice-parameter-control">
+<h2>2. Lattice parameter control<a class="headerlink" href="#lattice-parameter-control" title="Permalink to this headline">¶</a></h2>
+<p>User can define <strong>tag</strong> (<a class="reference internal" href="pysrc/impact.result.html#impact.result.Result.dtag" title="impact.result.Result.dtag"><code class="xref py py-func docutils literal"><span class="pre">dtag</span></code></a>) for each element like,</p>
+<p>lattice_1cavity-1solenoid:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="mi">1</span> <span class="mi">1</span>
+<span class="mi">6</span> <span class="mi">20642</span> <span class="mi">2</span> <span class="mi">0</span> <span class="mi">1</span>
+<span class="mi">65</span> <span class="mi">65</span> <span class="mi">129</span> <span class="mi">4</span> <span class="mf">0.14</span> <span class="mf">0.14</span> <span class="mf">0.1025446</span>
+<span class="mi">19</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">2</span>
+<span class="mi">10111</span> <span class="mi">10531</span>
+<span class="mf">0.0</span> <span class="mf">0.0</span>
+<span class="mf">1.4885271891392098E-10</span> <span class="mf">1.5336340736585796E-10</span>
+<span class="mf">0.0022734189</span> <span class="mf">8.8312578E-5</span> <span class="mf">0.0</span> <span class="mf">1.0</span> <span class="mf">1.0</span> <span class="mf">0.0</span> <span class="mf">0.0</span>
+<span class="mf">0.0022734189</span> <span class="mf">8.8312578E-5</span> <span class="mf">0.0</span> <span class="mf">1.0</span> <span class="mf">1.0</span> <span class="mf">0.0</span> <span class="mf">0.0</span>
+<span class="mf">0.076704772</span> <span class="mf">3.4741445E-6</span> <span class="mf">0.0</span> <span class="mf">1.0</span> <span class="mf">1.0</span> <span class="mf">0.0</span> <span class="mf">0.0</span>
+<span class="mf">0.0</span> <span class="mf">500000.0</span> <span class="mf">9.3149432E8</span> <span class="mf">0.13865546218487396</span> <span class="mf">8.05E7</span> <span class="mf">0.0</span> <span class="mf">99.9</span>
+<span class="mf">0.072</span> <span class="mi">4</span> <span class="mi">20</span> <span class="mi">0</span> <span class="mf">0.02</span> <span class="o">/</span> <span class="c1"># first lattice element</span>
+<span class="mf">0.135064</span> <span class="mi">4</span> <span class="mi">20</span> <span class="mi">0</span> <span class="mf">0.02</span> <span class="o">/</span>
+<span class="mf">0.24</span> <span class="mi">60</span> <span class="mi">20</span> <span class="mi">110</span> <span class="mf">0.64</span> <span class="mf">8.05E7</span> <span class="mf">349.740866</span> <span class="mi">421</span> <span class="mf">0.017</span> <span class="mf">0.017</span> <span class="mf">0.0</span> <span class="mf">0.0</span> <span class="mf">0.0</span> <span class="mf">0.0</span> <span class="mf">0.0</span> <span class="mf">1.</span> <span class="mf">2.</span> <span class="o">/</span> <span class="n">tag</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;cav1&#39;</span><span class="p">}</span>
+<span class="mf">0.064263</span> <span class="mi">4</span> <span class="mi">20</span> <span class="mi">0</span> <span class="mf">0.02</span> <span class="o">/</span>
+<span class="mf">0.05588</span> <span class="mi">4</span> <span class="mi">20</span> <span class="mi">0</span> <span class="mf">0.02</span> <span class="o">/</span>
+<span class="mf">0.076123</span> <span class="mi">4</span> <span class="mi">20</span> <span class="mi">0</span> <span class="mf">0.02</span> <span class="o">/</span>
+<span class="mf">0.1</span> <span class="mi">1</span> <span class="mi">1</span> <span class="mi">3</span> <span class="mf">5.34</span> <span class="mi">0</span> <span class="mf">0.02</span> <span class="o">/</span> <span class="n">tag</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;sol1&#39;</span><span class="p">,</span><span class="s1">&#39;split1&#39;</span><span class="p">}</span> <span class="c1"># user can set multiple tags</span>
+<span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span> <span class="o">-</span><span class="mi">21</span> <span class="mf">0.02</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span> <span class="o">/</span>
+<span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span> <span class="o">-</span><span class="mi">21</span> <span class="mf">0.02</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span> <span class="o">/</span>
+<span class="mf">0.1</span> <span class="mi">1</span> <span class="mi">1</span> <span class="mi">3</span> <span class="mf">5.34</span> <span class="mi">0</span> <span class="mf">0.02</span> <span class="o">/</span> <span class="n">tag</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;sol1&#39;</span><span class="p">,</span><span class="s1">&#39;split2&#39;</span><span class="p">]</span> <span class="c1"># user can set the same tag name</span>
+<span class="mf">0.076123</span> <span class="mi">4</span> <span class="mi">20</span> <span class="mi">0</span> <span class="mf">0.02</span> <span class="o">/</span>
+<span class="mf">0.06727</span> <span class="mi">4</span> <span class="mi">20</span> <span class="mi">0</span> <span class="mf">0.02</span> <span class="o">/</span>
+<span class="mf">0.0</span> <span class="mi">0</span> <span class="mi">100</span> <span class="o">-</span><span class="mi">2</span> <span class="mf">0.0</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">tag</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;moni1&#39;</span><span class="p">,</span><span class="s1">&#39;pm1&#39;</span><span class="p">)</span> <span class="c1"># (),{},[] brackets are available</span>
+</pre></div>
+</div>
+<p>Check the lattice parameter with the tag name. – <a class="reference internal" href="pysrc/impact.control.html#impact.control.Sequence.conf" title="impact.control.Sequence.conf"><code class="xref py py-func docutils literal"><span class="pre">conf</span></code></a></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tmp</span> <span class="o">=</span> <span class="n">sq</span><span class="o">.</span><span class="n">conf</span><span class="p">(</span><span class="s1">&#39;cav1&#39;</span><span class="p">)</span> <span class="c1"># user can also input index like, tmp = sq.conf(3)</span>
+<span class="go">index :  3 (start :  0.207064 , end :  0.447064  [m])</span>
+<span class="go">length :  0.24 [m]</span>
+<span class="go">segment :  60</span>
+<span class="go">step :  20</span>
+<span class="go">type :  110  (emfield)</span>
+<span class="go">scaling (&#39;scale&#39;, &#39;scl_fac&#39;) :  0.64 [1]</span>
+<span class="go">frequency (&#39;f&#39;, &#39;freq&#39;) :  349.74086645 [Hz]</span>
+<span class="go">input phase (&#39;phi0&#39;,) :  -90.0 [deg]</span>
+<span class="go">fileid (&#39;file&#39;, &#39;id&#39;) :  421.0</span>
+<span class="go">xaperture (&#39;xaper&#39;, &#39;xpipe&#39;, &#39;xradius&#39;) :  0.017 [m]</span>
+<span class="go">yaperture (&#39;yaper&#39;, &#39;ypipe&#39;, &#39;yradius&#39;) :  0.017 [m]</span>
+<span class="go">dx (&#39;dx0&#39;,) :  0.0 [m]</span>
+<span class="go">dy (&#39;dy0&#39;,) :  0.0 [m]</span>
+<span class="go">pitch (&#39;dx1&#39;,) :  0.0 [rad]</span>
+<span class="go">yaw (&#39;dy1&#39;,) :  0.0 [rad]</span>
+<span class="go">roll  :  0.0 [rad]</span>
+<span class="go">data type (&#39;data&#39;,) :  1.0</span>
+<span class="go">coordinate (&#39;coor&#39;,) :  2.0</span>
+<span class="go">synchronous phase flag (&#39;sync_flag&#39;, &#39;syncflag&#39;,) :  0.0</span>
+<span class="go">scale error (&#39;dscl&#39;, &#39;er_scl&#39;) :  0.0 [1]</span>
+<span class="go">phase error (&#39;dphi&#39;, &#39;er_phi&#39;) :  0.0 [deg]</span>
+<span class="go">scaling2 (&#39;scale2&#39;,) :  0.0 [1]</span>
+<span class="go">frequency2 (&#39;f2&#39;, &#39;freq2&#39;) :  0.0 [Hz]</span>
+<span class="go">driven phase offset 2 (&#39;phi0_2&#39;,) :  0.0 [deg]</span>
+<span class="go">scl_fac2 (&#39;scaling3&#39;, &#39;scale3&#39;) :  0.0</span>
+<span class="go">frequency3 (&#39;f3&#39;, &#39;freq3&#39;) :  0.0 [Hz]</span>
+<span class="go">driven phase offset 3 (&#39;phi0_3&#39;,) :  0.0 [deg]</span>
+<span class="go">scale error 2 (&#39;dscl2&#39;, &#39;er_scl2&#39;) :  0.0 [1]</span>
+<span class="go">phase error 2 (&#39;dphi2&#39;, &#39;er_phi2&#39;) :  0.0 [deg]</span>
+<span class="go">scale error 3 (&#39;dscl3&#39;, &#39;er_scl3&#39;) :  0.0 [1]</span>
+<span class="go">phase error 3 (&#39;dphi3&#39;, &#39;er_phi3&#39;) :  0.0 [deg]</span>
+<span class="go">synchronous phase offset (&#39;sync_offset&#39;,) :  0.0 [deg]</span>
+<span class="go">tag :  [&#39;cav1&#39;]</span>
+</pre></div>
+</div>
+<p>Change the parameter.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sq</span><span class="o">.</span><span class="n">conf</span><span class="p">(</span><span class="s1">&#39;cav1&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;phi0&#39;</span><span class="p">:</span><span class="mf">360.0</span><span class="p">})</span> <span class="c1"># change driven phase to 360.0</span>
+</pre></div>
+</div>
+<p>User can <a class="reference internal" href="pysrc/impact.control.html#impact.control.Sequence.search" title="impact.control.Sequence.search"><code class="xref py py-func docutils literal"><span class="pre">search</span></code></a> element by element-type or type-id.
+<a class="reference internal" href="pysrc/impact.control.html#impact.control.Sequence.search" title="impact.control.Sequence.search"><code class="xref py py-func docutils literal"><span class="pre">search</span></code></a> command returns element indexes.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sq</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;solenoid&#39;</span><span class="p">)</span>
+<span class="go">array([7, 10], dtype=int32)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sq</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="go">array([7, 10], dtype=int32)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="example-phase-scan">
+<h2>3. Example: Phase scan<a class="headerlink" href="#example-phase-scan" title="Permalink to this headline">¶</a></h2>
+<p>User can scan parameters by using simple loop.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">phase</span> <span class="o">=</span> <span class="p">[</span><span class="mi">360</span><span class="p">,</span><span class="mi">370</span><span class="p">,</span><span class="mi">380</span><span class="p">,</span><span class="mi">390</span><span class="p">,</span><span class="mi">400</span><span class="p">,</span><span class="mi">410</span><span class="p">]</span> <span class="c1"># scan parameter list</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pos</span> <span class="o">=</span> <span class="p">[];</span> <span class="n">eng</span> <span class="o">=</span> <span class="p">[];</span> <span class="n">rms</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">p0</span> <span class="ow">in</span> <span class="n">phase</span><span class="p">:</span>
+<span class="gp">&gt;&gt;&gt; </span>   <span class="n">sq</span><span class="o">.</span><span class="n">conf</span><span class="p">(</span><span class="s1">&#39;cav1&#39;</span><span class="p">,{</span><span class="s1">&#39;phi0&#39;</span><span class="p">:</span><span class="n">p0</span><span class="p">})</span> <span class="c1"># set new parameter</span>
+<span class="gp">&gt;&gt;&gt; </span>   <span class="n">sq</span><span class="o">.</span><span class="n">distribute</span><span class="p">();</span> <span class="n">sq</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span>   <span class="n">pos</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sq</span><span class="o">.</span><span class="n">hrefz</span><span class="p">())</span> <span class="c1"># store results</span>
+<span class="gp">&gt;&gt;&gt; </span>   <span class="n">eng</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sq</span><span class="o">.</span><span class="n">hrefeng</span><span class="p">(</span><span class="s1">&#39;MeV&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span>   <span class="n">rms</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sq</span><span class="o">.</span><span class="n">hxrms</span><span class="p">(</span><span class="s1">&#39;mm&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Plot the scan result.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.figsize&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">9</span><span class="p">,</span><span class="mi">10</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="p">(</span><span class="n">z</span><span class="p">,</span><span class="n">e</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">p0</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">eng</span><span class="p">,</span> <span class="n">xcn</span><span class="p">,</span> <span class="n">phase</span><span class="p">):</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">z</span><span class="p">,</span><span class="n">e</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;$\phi_0 =$&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">p0</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">z</span><span class="p">,</span><span class="n">x</span><span class="p">)</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Energy [MeV]&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;z [m]&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">,</span> <span class="n">ncol</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;x rms envelope [mm]&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;z [m]&#39;</span><span class="p">)</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">e1</span> <span class="o">=</span> <span class="p">[</span><span class="n">ee</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">ee</span> <span class="ow">in</span> <span class="n">eng</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">phase</span><span class="p">,</span> <span class="n">e1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Driven phase [deg]&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Finite energy [MeV]&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="_images/plot_scan.png" src="_images/plot_scan.png" />
+</div>
+<div class="section" id="beam-parameter-control">
+<h2>4. Beam parameter control<a class="headerlink" href="#beam-parameter-control" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="pysrc/impact.control.html#impact.control.Sequence" title="impact.control.Sequence"><code class="xref py py-class docutils literal"><span class="pre">Sequence</span></code></a> class contains all input parameters <a class="reference internal" href="pysrc/impact.input.html"><span class="doc">(see here)</span></a>.</p>
+<p>For example,</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sq</span><span class="o">.</span><span class="n">Energy</span> <span class="c1"># initial kinetic energy [eV]</span>
+<span class="go">array(500000.0)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sq</span><span class="o">.</span><span class="n">Energy</span> <span class="o">=</span> <span class="mf">0.6e6</span> <span class="c1"># set new energy</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sq</span><span class="o">.</span><span class="n">Distxquadratic</span> <span class="c1"># initial distribution parameter for x</span>
+<span class="go">array([  2.27341890e-03,   8.83125780e-05,   0.00000000e+00])</span>
+<span class="go">    # [           sigma,           lambda,               mu] - IMPACT internal unit</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sq</span><span class="o">.</span><span class="n">Distxtwiss</span> <span class="c1"># automatically converted to the twiss (Courant-Snyder) parameter</span>
+<span class="go">array([  0.00000000e+00,   4.99999992e-01,   1.18999999e-07])</span>
+<span class="go">    # [        alpha(1),          beta(m),   normalized emittance(m-rad)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sq</span><span class="o">.</span><span class="n">Distxtwiss</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">,</span> <span class="mf">1.3e-7</span><span class="p">]</span> <span class="c1"># set new twiss parameter</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="history-result-usage">
+<h2>5. History result usage<a class="headerlink" href="#history-result-usage" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="pysrc/impact.result.html#hist-label"><span class="std std-ref">Method for history results</span></a> returns all segment results by default.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sq</span><span class="o">.</span><span class="n">hxcen</span><span class="p">()</span> <span class="c1"># returns x centroid history</span>
+<span class="go">array([  3.34446507e-06,   3.57517607e-06, ..., -3.91164303e-05,  -3.97671083e-05,  -4.04177862e-05])</span>
+</pre></div>
+</div>
+<p>User can input a unit to the method.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sq</span><span class="o">.</span><span class="n">hxcen</span><span class="p">(</span><span class="s1">&#39;mm&#39;</span><span class="p">)</span>
+<span class="go">array([ 0.00334447,  0.00357518, ..., -0.03911643, -0.03976711, -0.04041779])</span>
+</pre></div>
+</div>
+<p>In case of input float or list of float, the method returns the linear interpolated result.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sq</span><span class="o">.</span><span class="n">hxcen</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="s1">&#39;mm&#39;</span><span class="p">)</span>
+<span class="go">array([ 0.01071064])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sq</span><span class="o">.</span><span class="n">hxcen</span><span class="p">([</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">],</span> <span class="s1">&#39;mm&#39;</span><span class="p">)</span>
+<span class="go">array([ 0.01071064,  0.01260737,  0.00144759])</span>
+</pre></div>
+</div>
+<p>In case of input the tag name, the method returns the result at exit point of the element by default.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sq</span><span class="o">.</span><span class="n">hxcen</span><span class="p">(</span><span class="s1">&#39;cav1&#39;</span><span class="p">,</span> <span class="s1">&#39;mm&#39;</span><span class="p">)</span>
+<span class="go">array([ 0.00758989])</span>
+</pre></div>
+</div>
+<p>In addition, user can specify the data point of the element.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sq</span><span class="o">.</span><span class="n">hxcen</span><span class="p">(</span><span class="s1">&#39;cav1&#39;</span><span class="p">,</span> <span class="s1">&#39;mm&#39;</span><span class="p">,</span> <span class="n">at</span><span class="o">=</span><span class="s1">&#39;entry&#39;</span><span class="p">)</span> <span class="c1"># returns result at the element entry</span>
+<span class="go">array([ 0.00599846])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sq</span><span class="o">.</span><span class="n">hxcen</span><span class="p">(</span><span class="s1">&#39;cav1&#39;</span><span class="p">,</span> <span class="s1">&#39;mm&#39;</span><span class="p">,</span> <span class="n">at</span><span class="o">=</span><span class="s1">&#39;exit&#39;</span><span class="p">)</span> <span class="c1"># returns result at the element exit</span>
+<span class="go">array([ 0.00970658])</span>
+</pre></div>
+</div>
+<p>For the multi-charge-states simulation, user can specify the charge state for the result.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sq</span><span class="o">.</span><span class="n">qmlabel</span> <span class="c1"># returns charge-to-mass ratios which appeared in the simulation.</span>
+<span class="go">array([  1.48852719e-10,   1.53363407e-10])</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sq</span><span class="o">.</span><span class="n">hxcen</span><span class="p">(</span><span class="s1">&#39;mm&#39;</span><span class="p">,</span> <span class="n">qid</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># returns x centroid history with charge-to-mass ratio = 1.53363407e-10</span>
+<span class="go">array([ 0.00731273,  0.00757781, ..., -0.04237878, -0.04297157, -0.04356436])</span>
+</pre></div>
+</div>
+<p>All common parameters can be found in <a class="reference internal" href="pysrc/impact.result.html#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div>
+<div class="section" id="distribution-result-usage">
+<h2>6. Distribution result usage<a class="headerlink" href="#distribution-result-usage" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="pysrc/impact.result.html#hist-label"><span class="std std-ref">Method for history results</span></a> returns initial distribution by default.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sq</span><span class="o">.</span><span class="n">getx</span><span class="p">()</span> <span class="c1"># returns current x distribution</span>
+<span class="go">array([ 0.00190219, -0.00270052, ..., -0.0002277 , -0.00259636,  0.00128789])</span>
+</pre></div>
+</div>
+<p>User can input a unit to the method.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sq</span><span class="o">.</span><span class="n">getx</span><span class="p">(</span><span class="s1">&#39;mm&#39;</span><span class="p">)</span>
+<span class="go">array([ 1.90219117, -2.70052015, ..., -0.22769931, -2.59636435,  1.28789445])</span>
+</pre></div>
+</div>
+<p>User can input ID number of “-2” flagged lattice element to get the distribution there.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sq</span><span class="o">.</span><span class="n">getx</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="s1">&#39;mm&#39;</span><span class="p">)</span> <span class="c1"># returns x distribution at the flag element</span>
+<span class="go">array([ 3.00496309, -2.23733725, ..., -4.09860108, -2.0038936 ,  1.30413004])</span>
+</pre></div>
+</div>
+<p>Able to input the tag name also.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sq</span><span class="o">.</span><span class="n">getx</span><span class="p">(</span><span class="s1">&#39;pm1&#39;</span><span class="p">,</span> <span class="s1">&#39;mm&#39;</span><span class="p">)</span> <span class="c1"># returns x distribution at the flag element</span>
+<span class="go">array([ 3.00496309, -2.23733725, ..., -4.09860108, -2.0038936 ,  1.30413004])</span>
+</pre></div>
+</div>
+<p>All common parameters can be found in <a class="reference internal" href="pysrc/impact.result.html#impact.result.Result.getx" title="impact.result.Result.getx"><code class="xref py py-func docutils literal"><span class="pre">getx</span></code></a>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>The initial distribution is generated in <a class="reference internal" href="pysrc/impact.control.html#impact.control.Sequence.distribute" title="impact.control.Sequence.distribute"><code class="xref py py-func docutils literal"><span class="pre">distribute()</span></code></a> function.</p>
+<p>For example, user can check initial distribution before running particle tracking.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sq</span><span class="o">.</span><span class="n">Distxtwiss</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mf">1.5e-7</span><span class="p">]</span> <span class="c1"># set new x twiss parameter</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bins</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">5.0</span><span class="p">,</span><span class="mf">5.0</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sq</span><span class="o">.</span><span class="n">Disttype</span> <span class="o">=</span> <span class="s1">&#39;mcWB&#39;</span> <span class="c1"># set as multi-charge Waterbag distribution</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sq</span><span class="o">.</span><span class="n">distribute</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">sq</span><span class="o">.</span><span class="n">getx</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;mm&#39;</span><span class="p">),</span><span class="n">bins</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Waterbag&#39;</span><span class="p">)</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sq</span><span class="o">.</span><span class="n">Disttype</span> <span class="o">=</span> <span class="s1">&#39;mcGS&#39;</span> <span class="c1"># set as multi-charge Gaussian distribution</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sq</span><span class="o">.</span><span class="n">distribute</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">sq</span><span class="o">.</span><span class="n">getx</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;mm&#39;</span><span class="p">),</span><span class="n">bins</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Gaussian&#39;</span><span class="p">)</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x [mm]&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Count&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="_images/plot_dist.png" class="last" src="_images/plot_dist.png" />
+</div>
+</div>
+<div class="section" id="a-to-b-run-partial-run">
+<h2>7. A to B run (partial run)<a class="headerlink" href="#a-to-b-run-partial-run" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="pysrc/impact.control.html#impact.control.Sequence.run" title="impact.control.Sequence.run"><code class="xref py py-func docutils literal"><span class="pre">run</span></code></a> method supports to input <em>start</em> and <em>end</em> point of the simulation.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sq</span><span class="o">.</span><span class="n">distribute</span><span class="p">()</span>             <span class="c1"># distribute the initial beam</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sq</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;cav1&#39;</span><span class="p">)</span> <span class="c1"># simulate from the 1st element to the 1st cavity (index=3)</span>
+</pre></div>
+</div>
+<p>Before continuing the simulation, user can store the current beam distribution and the beam energy.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dst1</span> <span class="o">=</span> <span class="n">sq</span><span class="o">.</span><span class="n">getall</span><span class="p">(</span><span class="n">unit</span><span class="o">=</span><span class="s1">&#39;impact&#39;</span><span class="p">)</span> <span class="c1"># store the whole beam distribution with *impact* unit</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">eng1</span> <span class="o">=</span> <span class="n">sq</span><span class="o">.</span><span class="n">hrefeng</span><span class="p">()[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>         <span class="c1"># store the finite beam energy</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">zend</span> <span class="o">=</span> <span class="n">sq</span><span class="o">.</span><span class="n">hrefz</span><span class="p">()</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>          <span class="c1"># store the finite beam position</span>
+</pre></div>
+</div>
+<p>Run simulation to the end of the lattice.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sq</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">end</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">zstart</span><span class="o">=</span><span class="n">zend</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>In addition, user can restore the beam distribution and re-run the simulation. - <a class="reference internal" href="pysrc/impact.control.html#impact.control.Sequence.distribute" title="impact.control.Sequence.distribute"><code class="xref py py-func docutils literal"><span class="pre">distribute()</span></code></a></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sq</span><span class="o">.</span><span class="n">distribute</span><span class="p">(</span><span class="n">particles</span><span class="o">=</span><span class="n">dst1</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;impact&#39;</span><span class="p">,</span> <span class="n">Energy</span><span class="o">=</span><span class="n">eng1</span><span class="p">)</span> <span class="c1"># distribute by using stored data</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sq</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">end</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">zstart</span><span class="o">=</span><span class="n">zend</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="example-transverse-matching">
+<h2>8. Example: Transverse matching<a class="headerlink" href="#example-transverse-matching" title="Permalink to this headline">¶</a></h2>
+<p>If you want to match the beam at the monitoring point, you can use optimizer like in <em>SciPy</em>.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="k">import</span> <span class="n">minimize</span>
+</pre></div>
+</div>
+<p>Define <em>cost function</em> by using the simulation results.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">desired_xrms</span> <span class="o">=</span> <span class="mf">2.5</span> <span class="c1"># desired x rms size [mm]</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">cost</span><span class="p">(</span><span class="n">new_param</span><span class="p">):</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">sq</span><span class="o">.</span><span class="n">conf</span><span class="p">(</span><span class="s1">&#39;sol1&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;bz&#39;</span><span class="p">:</span><span class="n">new_param</span><span class="p">})</span> <span class="c1"># set new solenoid strength</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">sq</span><span class="o">.</span><span class="n">distribute</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">sq</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">diffx</span> <span class="o">=</span> <span class="n">sq</span><span class="o">.</span><span class="n">hxrms</span><span class="p">(</span><span class="s1">&#39;pm1&#39;</span><span class="p">)</span> <span class="o">-</span> <span class="n">desired_xrms</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">absolute</span><span class="p">(</span><span class="n">diffx</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Optimize the solenoid parameter</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">minimize</span><span class="p">(</span><span class="n">cost</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;Nelder-Mead&#39;</span><span class="p">)</span> <span class="c1"># where 5.0 is the initial parameter for the solenoid strength</span>
+<span class="go">final_simplex: (array([[ 4.58441162],</span>
+<span class="go">      [ 4.58447266]]), array([  5.81423675e-06,   2.54995700e-05]))</span>
+<span class="go">          fun: 5.8142367538316364e-06</span>
+<span class="go">      message: &#39;Optimization terminated successfully.&#39;</span>
+<span class="go">         nfev: 30</span>
+<span class="go">          nit: 15</span>
+<span class="go">       status: 0</span>
+<span class="go">      success: True</span>
+<span class="go">            x: array([ 4.58441162])</span>
+</pre></div>
+</div>
+<p>In this example, the parameter is one-dimension, but most of the optimizers support
+multi-dimensional parameter for more complex systems.</p>
+</div>
+<div class="section" id="lattice-construction">
+<h2>9. Lattice construction<a class="headerlink" href="#lattice-construction" title="Permalink to this headline">¶</a></h2>
+<p>User can <a class="reference internal" href="pysrc/impact.control.html#impact.control.Sequence.construct" title="impact.control.Sequence.construct"><code class="xref py py-func docutils literal"><span class="pre">construct</span></code></a> new beam transport line by using Python interface.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">drift</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">]</span>
+<span class="go"># define element by using list of numbers (format is the same as the input file)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">quad1</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;length&#39;</span><span class="p">:</span><span class="mf">0.2</span><span class="p">,</span> <span class="s1">&#39;seg&#39;</span><span class="p">:</span><span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;step&#39;</span><span class="p">:</span><span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span><span class="s1">&#39;quadrupole&#39;</span><span class="p">,</span> <span class="s1">&#39;B2&#39;</span><span class="p">:</span> <span class="mf">10.0</span><span class="p">,</span> <span class="s1">&#39;aper&#39;</span><span class="p">:</span><span class="mf">0.2</span><span class="p">}</span>
+<span class="go"># define element by using python dictionary</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">quad2</span> <span class="o">=</span> <span class="n">quad1</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">quad2</span><span class="p">[</span><span class="s1">&#39;B2&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mf">10.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">FODO</span> <span class="o">=</span> <span class="p">[</span><span class="n">drift</span><span class="p">,</span> <span class="n">quad1</span><span class="p">,</span> <span class="n">drift</span><span class="p">,</span> <span class="n">quad2</span><span class="p">,</span> <span class="n">drift</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sq</span><span class="o">.</span><span class="n">construct</span><span class="p">(</span><span class="n">FODO</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>In addtion, user can <a class="reference internal" href="pysrc/impact.control.html#impact.control.Sequence.insert" title="impact.control.Sequence.insert"><code class="xref py py-func docutils literal"><span class="pre">insert</span></code></a> new lattice element.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">quad1</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;length&#39;</span><span class="p">:</span><span class="mf">0.2</span><span class="p">,</span> <span class="s1">&#39;seg&#39;</span><span class="p">:</span><span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;step&#39;</span><span class="p">:</span><span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span><span class="s1">&#39;quadrupole&#39;</span><span class="p">,</span> <span class="s1">&#39;B2&#39;</span><span class="p">:</span> <span class="mf">10.0</span><span class="p">,</span> <span class="s1">&#39;aper&#39;</span><span class="p">:</span><span class="mf">0.2</span><span class="p">,</span> <span class="s1">&#39;tag&#39;</span><span class="p">:</span><span class="s1">&#39;new_quad&#39;</span><span class="p">}</span>
+<span class="go"># define element by using python dictionary</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sq</span><span class="o">.</span><span class="n">construct</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">quad1</span><span class="p">)</span> <span class="c1"># insert new element</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sq</span><span class="o">.</span><span class="n">conf</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="go">index :  4 (start :  1.2 , end :  1.4  [m])</span>
+<span class="go">length :  0.2 [m]</span>
+<span class="go">segment :  4</span>
+<span class="go">step :  4</span>
+<span class="go">type :  1  (quadrupole)</span>
+<span class="go">gradient (&#39;grad&#39;, &#39;b2&#39;, &#39;k&#39;, &#39;voltage&#39;) :  10.0 [T/m]</span>
+<span class="go">switch (&#39;flag&#39;,) :  0.0</span>
+<span class="go">aperture (&#39;aper&#39;, &#39;pipe&#39;, &#39;radius&#39;) :  0.2 [m]</span>
+<span class="go">dx (&#39;dx0&#39;,) :  0.0 [m]</span>
+<span class="go">dy (&#39;dy0&#39;,) :  0.0 [m]</span>
+<span class="go">pitch (&#39;dx1&#39;,) :  0.0 [rad]</span>
+<span class="go">yaw (&#39;dy1&#39;,) :  0.0 [rad]</span>
+<span class="go">roll  :  0.0 [rad]</span>
+<span class="go">tag :  [&#39;new_quad&#39;]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="data-export">
+<h2>10. Data export<a class="headerlink" href="#data-export" title="Permalink to this headline">¶</a></h2>
+<p>User can <a class="reference internal" href="pysrc/impact.control.html#impact.control.Sequence.save" title="impact.control.Sequence.save"><code class="xref py py-func docutils literal"><span class="pre">save</span></code></a> current settings as IMPACT input format.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sq</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;test.in.new&#39;</span><span class="p">)</span> <span class="c1"># export settings to &#39;test.in.new&#39;</span>
+</pre></div>
+</div>
+<p>User can <a class="reference internal" href="pysrc/impact.control.html#impact.control.Sequence.output" title="impact.control.Sequence.output"><code class="xref py py-func docutils literal"><span class="pre">output</span></code></a> results as original IMAPCT format.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sq</span><span class="o">.</span><span class="n">output</span><span class="p">()</span> <span class="c1"># export simulation results to &#39;fort.*&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="parallel.html" class="btn btn-neutral float-right" title="Parallel Computing" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="installation.html" class="btn btn-neutral" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Kei Fukushima.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.0.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

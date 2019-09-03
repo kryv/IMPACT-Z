@@ -1,0 +1,1391 @@
+Lattice Elements
+================
+Basic format of the one lattice element is,
+
+.. code-block:: none
+
+    col1  col2  col3  col4 ... /
+
+Length of the lattice parameter-array (col{n}) must be greater than or equals to **4**.
+
+
+Optical element
+---------------
+
+For the optical elements, first 4 columns of the parameter-array have same significance.
+
+.. code-block:: none
+
+    element-length    seg    step    type    parameter-array[5:] /
+
+.. class:: parameter-array
+
+    :col 1: (float) - *element length ('length', 'L')* [m].
+
+    :col 2: (int) - *number of element segmentations ('segment', 'seg')* [1].
+
+    :col 3: (int) - *number of map steps for PIC calculation ('step', 'pid')* [1].
+
+    :col 4: (int) - *lattice element type ('type')* [1].
+
+        .. list-table::
+            :header-rows: 1
+
+            * - element-type
+              - value
+            * - :ref:`drift <drift>`
+              - **0**
+            * - :ref:`quadrupole <quad>`
+              - **1**
+            * - :ref:`constant focusing <cfocus>`
+              - **2**
+            * - :ref:`linear-map solenoid <solenoid>`
+              - **3**
+            * - :ref:`hard-edge solenoid <solenoid2>`
+              - **13**
+            * - :ref:`dipole <dipole>`
+              - **4**
+            * - :ref:`multipole <mltpole>`
+              - **5**
+            * - :ref:`drift tube linac <dtl>`
+              - **101**
+            * - :ref:`coupled cavity dtl <ccdtl>`
+              - **102**
+            * - :ref:`coupled cavity linac <ccl>`
+              - **103**
+            * - :ref:`superconducting cavity <scc>`
+              - **104**
+            * - :ref:`solenoid with rf field <solrf>`
+              - **105**
+            * - :ref:`rf quadrupole <rfq>`
+              - **106**
+            * - :ref:`em field <emfld>`
+              - **110**
+            * - :ref:`em field dipole <dipole3d>`
+              - **114**
+
+.. _drift:
+
+drift (``type`` : **0**)
+^^^^^^^^^^^^^^^^^^^^^^^^^
+Drift space element.
+
+    (**keywords**: 'drift')
+
+.. class:: parameter-array
+
+    :col 5: (float) - *pipe radius* [m].
+
+        (**keywords**: 'aperture', 'aper', 'pipe', 'radius')
+
+
+
+.. _quad:
+
+quadrupole (``type`` : **1**)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Magnetic or electrostatic quadrupole element.
+
+    (**keywords**: 'quadrupole', 'quad')
+
+.. class:: parameter-array
+
+    :col 5: (float) - *gradient* [T/m] for magnetic or *voltage* [V] for electrostatic quadrupole.
+
+        (**keywords**: 'gradient', 'grad', 'b2', 'k', 'voltage')
+
+    :col 6: (float) - *pipe radius* [m].
+
+        (**keywords**: 'aperture', 'aper', 'pipe', 'radius')
+
+    :col 7: (float) - *quadrupole type switch* [1].
+
+        (**keywords**: 'switch', 'flag')
+
+        .. list-table::
+            :header-rows: 1
+
+            * - quadrupole type
+              - value
+            * - magnetic
+              - **0**
+            * - electrostatic
+              - **1**
+
+    .. _quaderr:
+
+    :col 8: (float) - *horizontal (x) alignment error* [m], or *entrance x offset* [m]. (see :py:func:`Flagerror <impact.input.Input.Flagerror>`)
+
+        (**keywords**: 'dx', 'dx0')
+
+    :col 9: (float) - *vertical (y) alignment error* [m], or *entrance y offset* [m]. (see :py:func:`Flagerror <impact.input.Input.Flagerror>`)
+
+        (**keywords**: 'dy', 'dy0')
+
+    :col 10: (float) - *pitch angle alignment error* [rad], or *exit x offset* [m]. (see :py:func:`Flagerror <impact.input.Input.Flagerror>`)
+
+        (**keywords**: 'pitch', 'dx1')
+
+    :col 11: (float) - *yaw angle alignment error* [rad], or *exit y offset* [m]. (see :py:func:`Flagerror <impact.input.Input.Flagerror>`)
+
+        (**keywords**: 'yaw', 'dy1')
+
+    :col 12: (float) - *roll angle alignment error* [rad].
+
+        (**keywords**: 'roll')
+
+
+.. _cfocus:
+
+constant focusing (``type`` : **2**)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+3D constant focusing element.
+
+    (**keywords**: 'constant focusing', 'constfocus')
+
+.. class:: parameter-array
+
+    :col 5: (float) - *horizontal (x) focusing strength*.
+
+        (**keywords**: 'kx0^2', 'kx2')
+
+    :col 6: (float) - *vertical (y) focusing strength*.
+
+        (**keywords**: 'ky0^2', 'ky2')
+
+    :col 7: (float) - *longitudinal (z) focusing strength*.
+
+        (**keywords**: 'kz0^2', 'kz2')
+
+    :col 8: (float) - *pipe radius* [m].
+
+        (**keywords**: 'aperture', 'aper', 'pipe', 'radius')
+
+
+.. _solenoid:
+
+linear-map solenoid (``type`` : **3**)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Linear map solenoid element.
+
+    (**keywords**: 'solenoid', 'sol')
+
+.. class:: parameter-array
+
+    :col 5: (float) - *longitudinal magnetic field strength (Bz)* [T].
+
+        (**keywords**: 'bz0', 'bz', 'b')
+
+    :col 6: (float) - *file id* [1].
+
+        (**keywords**: 'fileid', 'file', 'id')
+
+    :col 7: (float) - *pipe radius* [m].
+
+        (**keywords**: 'aperture', 'aper', 'pipe', 'radius')
+
+    :col 8 ~ 12: (float) - *alignment errors*. :ref:`Same as quadrupole col 8 ~ 12 <quaderr>`.
+
+.. _solenoid2:
+
+hard-edge solenoid (``type`` : **13**)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Hard-edge solenoid element. This can be used with :ref:`hard-edge solenoid wrapper <solwrap>` (``type`` = **-40**).
+
+    (**keywords**: 'solenoid2', 'sol2')
+
+.. class:: parameter-array
+
+    :col 5: (float) - *longitudinal (z) magnetic field strength* [T].
+
+        (**keywords**: 'bz0', 'bz', 'b')
+
+    :col 6: (float) - *hard-edge wrapper flag* [1].
+
+        - **0** for no-auto wrapping (**-40** wrapper is mandatory).
+
+        - **1** for auto wrapping with the same field strength.
+
+        (**keywords**: 'fileid', 'file', 'id')
+
+    :col 7: (float) - *pipe radius* [m].
+
+        (**keywords**: 'aperture', 'aper', 'pipe', 'radius')
+
+    :col 8: (float) - *horizontal (x) magnetic field strength* [T].
+
+        (**keywords**: 'bx')
+
+    :col 9: (float) - *vertical (y) magnetic field strength* [T].
+
+        (**keywords**: 'by')
+
+    :col 10 ~ 14: (float) - *alignment errors*. :ref:`Same as quadrupole col 8 ~ 12 <quaderr>`.
+
+.. _dipole:
+
+dipole (``type`` : **4**)
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+Magnetic or electrostatic dipole (bending) element.
+
+    (**keywords**: 'dipole', 'bend')
+
+.. class:: parameter-array
+
+    :col 5: (float) - *bending angle* [deg].
+
+        (**keywords**: 'angle', 'phi')
+
+    :col 6: (float) - *reference Lorentz beta\*gamma* [1].
+
+        (**keywords**: 'beta\*gamma', 'bg')
+
+    :col 7: (float) - *dipole type switch* [1]. Greater than **100** for 2nd order matrix.
+
+        (**keywords**: 'switch', 'flag')
+
+        .. list-table::
+            :header-rows: 1
+
+            * - dipole type
+              - value
+            * - magnetic front-side
+              - **400**
+            * - magnetic sector
+              - **500**
+            * - magnetic back-side
+              - **600**
+            * - electrostatic-cylindrical
+              - **1500**
+            * - electrostatic-spherical
+              - **1501**
+
+    :col 8: (float) - *pipe radius* [m].
+
+        (**keywords**: 'aperture', 'aper', 'pipe', 'radius')
+
+    :col 9: (float) - *front pole-face angle* [deg].
+
+        (**keywords**: 'front angle', 'angle1', 'phi1')
+
+    :col 10: (float) - *back pole-face angle* [deg].
+
+        (**keywords**: 'back angle', 'angle2', 'phi2')
+
+    :col 11: (float) - *front curvature* [1/m].
+
+        (**keywords**: 'front curvature', 'curv1')
+
+    :col 12: (float) - *back curvature* [1/m].
+
+        (**keywords**: 'back curvature', 'curv2')
+
+    :col 13: (float) - *fringe quadrupole term*.
+
+        (**keywords**: 'fringe q-term', 'kf')
+
+    :col 14: (float) - *main quadrupole term*.
+
+        (**keywords**: 'main q-term', 'k')
+
+
+.. _mltpole:
+
+multipole (``type`` : **5**)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Magnetic multipole element.
+
+    (**keywords**: 'multipole', 'mpole')
+
+.. class:: parameter-array
+
+    :col 5: (float) - *quadrupole strength* [T/m].
+
+        (**keywords**: 'gradient', 'grad', 'b2')
+
+    :col 6: (float) - *sextupole strength* [T/m^2].
+
+        (**keywords**: 'b3')
+
+    :col 7: (float) - *octupole strength* [T/m^3].
+
+        (**keywords**: 'b4')
+
+    :col 8: (float) - *decapole strength* [T/m^4].
+
+        (**keywords**: 'b5')
+
+    :col 9: (float) - *12 pole strength* [T/m^5].
+
+        (**keywords**: 'b6')
+
+    :col 10: (float) - *14 pole strength* [T/m^6].
+
+        (**keywords**: 'b7')
+
+    :col 11: (float) - *16 pole strength* [T/m^7].
+
+        (**keywords**: 'b8')
+
+    :col 12: (float) - *pipe radius* [m].
+
+        (**keywords**: 'aperture', 'aper', 'pipe', 'radius')
+
+    :col 13 ~ 17: (float) - *alignment errors*. :ref:`Same as quadrupole col 8 ~ 12 <quaderr>`.
+
+.. _dtl:
+
+drift tube linac (``type`` : **101**)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Drift tube linac element
+
+    (**keywords**: 'drift tube linac', 'dtl')
+
+.. class:: parameter-array
+
+    :col 5: (float) - *scaling factor* [1].
+
+        (**keywords**: 'scaling', 'scale', 'scl_fac')
+
+    :col 6: (float) - *frequency* [Hz].
+
+        (**keywords**: 'frequency', 'f', 'freq')
+
+    :col 7: (float) - *driven phase* [deg].
+
+        (**keywords**: 'driven phase', 'phi0')
+
+    :col 8: (float) - *file id* [1]. This element uses 'rfdata${file_id}' file. :ref:`(see here) <rfdata>`
+
+        (**keywords**: 'fileid', 'file', 'id')
+
+    :col 9: (float) - *pipe radius* [m].
+
+        (**keywords**: 'aperture', 'aper', 'pipe', 'radius')
+
+    :col 10: (float) - *first quadrupole length* [m].
+
+        (**keywords**: 'quad 1 length', 'q1len')
+
+    :col 11: (float) - *first quadrupole strength* [1/T].
+
+        (**keywords**: 'quad 1 gradient', 'q1grad')
+
+    :col 12: (float) - *second quadrupole length* [m].
+
+        (**keywords**: 'quad 2 length', 'q2len')
+
+    :col 13: (float) - *second quadrupole strength* [1/T].
+
+        (**keywords**: 'quad 2 gradient', 'q2grad')
+
+    :col 14 ~ 18: (float) - *alignment errors*. :ref:`Same as quadrupole col 8 ~ 12 <quaderr>`.
+
+.. _ccdtl:
+
+coupled cavity dtl (``type`` : **102**)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Coupled cavity drift tube linac element
+
+    (**keywords**: 'coupled cavity drift tube linac', 'ccdtl')
+
+.. class:: parameter-array
+
+    :col 5: (float) - *scaling factor* [1].
+
+        (**keywords**: 'scaling', 'scale', 'scl_fac')
+
+    :col 6: (float) - *frequency* [Hz].
+
+        (**keywords**: 'frequency', 'f', 'freq')
+
+    :col 7: (float) - *driven phase* [deg].
+
+        (**keywords**: 'driven phase', 'phi0')
+
+    :col 8: (float) - *file id* [1]. This element uses 'rfdata${file_id}' file. :ref:`(see here) <rfdata>`
+
+        (**keywords**: 'fileid', 'file', 'id')
+
+    :col 9: (float) - *pipe radius* [m].
+
+        (**keywords**: 'aperture', 'aper', 'pipe', 'radius')
+
+    :col 10 ~ 14: (float) - *alignment errors*. :ref:`Same as quadrupole col 8 ~ 12 <quaderr>`.
+
+
+.. _ccl:
+
+coupled cavity linac (``type`` : **103**)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Coupled cavity linac element
+
+    (**keywords**: 'coupled cavity linac', 'ccl')
+
+.. class:: parameter-array
+
+    :col 5: (float) - *scaling factor* [1].
+
+        (**keywords**: 'scaling', 'scale', 'scl_fac')
+
+    :col 6: (float) - *base frequency* [Hz].
+
+        (**keywords**: 'frequency', 'f', 'freq')
+
+    :col 7: (float) - *input phase* [deg]. 
+
+        (**keywords**: 'input phase', 'phi0')
+
+    :col 8: (float) - *file id* [1]. This element uses 'rfdata${file_id}' file. :ref:`(see here) <rfdata>`
+
+        (**keywords**: 'fileid', 'file', 'id')
+
+    :col 9: (float) - *pipe radius* [m].
+
+        (**keywords**: 'aperture', 'aper', 'pipe', 'radius')
+
+    :col 10 ~ 14: (float) - *alignment errors*. :ref:`Same as quadrupole col 8 ~ 12 <quaderr>`.
+
+    :col 15: (float) - *flag for synchronous phase input* [1]. :ref:`(see here) <syncphase>`
+
+        - **0** for input phase (col 6) is driven phase.
+
+        - **1** for input phase (col 6) is synchronous phase.
+
+        (**keywords**: 'synchronous phase flag', 'sync_flag', 'syncflag')
+
+    :col 16: (float) - *scaling error for primary harmonic* [1]. (added to the scaling factor)
+
+        (**keywords**: 'scale error', 'dscl', 'er_scl')
+
+    :col 17: (float) - *phase error for primary harmonic* [deg].
+
+        (**keywords**: 'phase error', 'dphi', 'er_phi')
+
+    :col 18: (float) - *scaling factor for second harmonic* [1].
+
+        (**keywords**: 'scaling2', 'scale2', 'scl_fac2')
+
+    :col 19: (float) - *frequency ratio to the base frequency for second harmonic* [1].
+
+        (**keywords**: 'frequency ratio 2', 'f2', 'freq2')
+
+    :col 20: (float) - *driven phase offset for second harmonic* [deg].
+
+        (**keywords**: 'driven phase offset 2', 'phi0_2')
+
+    :col 21: (float) - *scaling factor for third harmonic* [1].
+
+        (**keywords**: 'scaling3', 'scale3', 'scl_fac3')
+
+    :col 22: (float) - *frequency ratio to the base frequency for third harmonic* [1].
+
+        (**keywords**: 'frequency ratio 3', 'f3', 'freq3')
+
+    :col 23: (float) - *driven phase offset for third harmonic* [deg].
+
+        (**keywords**: 'driven phase offset 3', 'phi0_3')
+
+    :col 24: (float) - *scaling error for second harmonic* [1]. (added to the scaling factor)
+
+        (**keywords**: 'scale error 2', 'dscl2', 'er_scl2')
+
+    :col 25: (float) - *phase error for second harmonic* [deg].
+
+        (**keywords**: 'phase error 2', 'dphi2', 'er_phi2')
+
+    :col 26: (float) - *scaling error for third harmonic* [1]. (added to the scaling factor)
+
+        (**keywords**: 'scale error 3', 'dscl3', 'er_scl3')
+
+    :col 27: (float) - *phase error for third harmonic* [deg].
+
+        (**keywords**: 'phase error 3', 'dphi3', 'er_phi3')
+
+    :col 28: (float) - *synchronous phase offset* [deg]. Read only, set after the simulation.
+
+        (**keywords**: 'synchronous phase offset', 'sync_offset')
+
+
+.. _scc:
+
+superconducting cavity (``type`` : **104**)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Superconducting cavity element
+
+    (**keywords**: 'superconducting cavity', 'scc')
+
+.. class:: parameter-array
+
+    :col 5: (float) - *scaling factor* [1].
+
+        (**keywords**: 'scaling', 'scale', 'scl_fac')
+
+    :col 6: (float) - *frequency* [Hz].
+
+        (**keywords**: 'frequency', 'f', 'freq')
+
+    :col 7: (float) - *driven phase* [deg].
+
+        (**keywords**: 'driven phase', 'phi0')
+
+    :col 8: (float) - *file id* [1]. This element uses 'rfdata${file_id}' file. :ref:`(see here) <rfdata>`
+
+        (**keywords**: 'fileid', 'file', 'id')
+
+    :col 9: (float) - *pipe radius* [m].
+
+        (**keywords**: 'aperture', 'aper', 'pipe', 'radius')
+
+    :col 10 ~ 14: (float) - *alignment errors*. :ref:`Same as quadrupole col 8 ~ 12 <quaderr>`.
+
+
+.. _solrf:
+
+solenoid-rf (``type`` : **105**)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Solenoid with imbeded RF field element.
+
+    (**keywords**: 'solenoid-rf', 'solrf')
+
+.. class:: parameter-array
+
+    :col 5: (float) - *scaling factor* [1].
+
+        (**keywords**: 'scaling', 'scale', 'scl_fac')
+
+    :col 6: (float) - *frequency* [Hz].
+
+        (**keywords**: 'frequency', 'f', 'freq')
+
+    :col 7: (float) - *driven phase* [deg].
+
+        (**keywords**: 'driven phase', 'phi0')
+
+    :col 8: (float) - *file id* [1]. This element uses 'rfdata${file_id}' file. :ref:`(see here) <rfdata>`
+
+        (**keywords**: 'fileid', 'file', 'id')
+
+    :col 9: (float) - *pipe radius* [m].
+
+        (**keywords**: 'aperture', 'aper', 'pipe', 'radius')
+
+    :col 10 ~ 14: (float) - *alignment errors*. :ref:`Same as quadrupole col 8 ~ 12 <quaderr>`.
+
+    :col 15: (float) - *longitudinal magnetic field strength (Bz)* [T].
+
+        (**keywords**: 'bz0', 'bz', 'b')
+
+
+.. _rfq:
+
+rf quadrupole (``type`` : **106**)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RF quadrupole element. In case of :py:func:`Flaginteg <impact.input.Input.Flaginteg>` equals to **2**,
+``element-length`` rescales the length defined in the external file (input **0** for no rescaling),
+in addition, ``segment`` and ``step`` are treated as dummy parameter.
+
+    (**keywords**: 'rfquadrupole', 'rfquad', 'rfq')
+
+.. class:: parameter-array
+
+    :col 5: (float) - *scaling factor* [1].
+
+        (**keywords**: 'scaling', 'scale', 'scl_fac')
+
+    :col 6: (float) - *frequency* [Hz].
+
+        (**keywords**: 'frequency', 'f', 'freq')
+
+    :col 7: (float) - *driven phase* [deg].
+
+        (**keywords**: 'driven phase', 'phi0')
+
+    :col 8: (float) - *file id* [1]. This element uses 'rfqline${file_id}' file
+        in case of :py:func:`Flaginteg <impact.input.Input.Flaginteg>` equals to **2**. :ref:`(see here) <rfqdata>`
+
+        (**keywords**: 'fileid', 'file', 'id')
+
+    :col 9: (float) - *pipe radius* [m].
+
+        (**keywords**: 'aperture', 'aper', 'pipe', 'radius')
+
+    :col 10: (float) - *modulation* [1].
+
+        (**keywords**: 'modulation', 'mod')
+
+    :col 11 ~ 15: (float) - *alignment errors*. :ref:`Same as quadrupole col 8 ~ 12 <quaderr>`.
+
+
+.. _emfld:
+
+em field (``type`` : **110**)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+3D electro-magnetic field element with data file.
+
+This element only works in case of :py:func:`Flaginteg <impact.input.Input.Flaginteg>` equals to **2**.
+
+    (**keywords**: 'emfield', 'emfld')
+
+.. class:: parameter-array
+
+    :col 5: (float) - *scaling factor* [1].
+
+        (**keywords**: 'scaling', 'scale', 'scl_fac')
+
+    :col 6: (float) - *frequency* [Hz].
+
+        (**keywords**: 'frequency', 'f', 'freq')
+
+    :col 7: (float) - *driven phase* [deg].
+
+        (**keywords**: 'driven phase', 'phi0')
+
+    :col 8: (float) - *file id* [1]. This element uses '1T${file_id}.T7' file. :ref:`(see here) <3dfdata>`
+
+        (**keywords**: 'fileid', 'file', 'id')
+
+    :col 9: (float) - *horizontal (x) pipe radius* [m].
+
+        (**keywords**: 'xaperture', 'xaper', 'xpipe', 'xradius')
+
+    :col 10: (float) - *vertical (y) pipe radius* [m].
+
+        (**keywords**: 'yaperture', 'yaper', 'ypipe', 'yradius')
+
+    :col 11 ~ 15: (float) - *alignment errors*. :ref:`Same as quadrupole col 8 ~ 12 <quaderr>`.
+
+    :col 16: (float) - *data type* [1].
+
+        - **1** for discrete data only. (recommended)
+
+        - **2** for both discrete and analytical data.
+
+        (**keywords**: 'data type', 'data')
+
+    :col 17: (float) - *coordinate type* [1].
+
+        - **1** for cylindrical coordinate.
+
+        - **2** for Cartesian coordinate.
+
+        (**keywords**: 'coordinate', 'coor')
+
+    :col 18: (float) - *flag for synchronous phase input* [1]. :ref:`(see here) <syncphase>`
+
+        - **0** for input phase (col 6) is driven phase.
+
+        - **1** for input phase (col 6) is synchronous phase.
+
+        (**keywords**: 'synchronous phase flag', 'sync_flag', 'syncflag')
+
+    :col 19: (float) - *scaling error for primary field* [1]. (added to the scaling factor)
+
+        (**keywords**: 'scale error', 'dscl', 'er_scl')
+
+    :col 20: (float) - *phase error for primary field* [deg].
+
+        (**keywords**: 'phase error', 'dphi', 'er_phi')
+
+    :col 21: (float) - *scaling factor for second field* [1]. 
+
+        (**keywords**: 'scaling2', 'scale2', 'scl_fac2')
+
+    :col 22: (float) - *frequency for second field* [Hz].
+
+        (**keywords**: 'frequency2', 'f2', 'freq2')
+
+    :col 23: (float) - *driven phase offset for second field* [deg].
+
+        (**keywords**: 'driven phase offset 2', 'phi0_2')
+
+    :col 24: (float) - *scaling factor for third field* [1].
+
+        (**keywords**: 'scaling3', 'scale3', 'scl_fac3')
+
+    :col 25: (float) - *frequency for second field* [Hz].
+
+        (**keywords**: 'frequency3', 'f3', 'freq3')
+
+    :col 26: (float) - *driven phase offset for third field* [deg].
+
+        (**keywords**: 'driven phase offset 3', 'phi0_3')
+
+    :col 27: (float) - *scaling error for second field* [1]. (added to the scaling factor)
+
+        (**keywords**: 'scale error 2', 'dscl2', 'er_scl2')
+
+    :col 28: (float) - *phase error for second field* [deg].
+
+        (**keywords**: 'phase error 2', 'dphi2', 'er_phi2')
+
+    :col 29: (float) - *scaling error for third field* [1]. (added to the scaling factor)
+
+        (**keywords**: 'scale error 3', 'dscl3', 'er_scl3')
+
+    :col 30: (float) - *phase error for third field* [deg].
+
+        (**keywords**: 'phase error 3', 'dphi3', 'er_phi3')
+
+    :col 31: (float) - *synchronous phase offset* [deg]. Read only, set after the simulation.
+
+        (**keywords**: 'synchronous phase offset', 'sync_offset')
+
+
+.. _dipole3d:
+
+em field dipole (``type`` : **114**)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+3D electro-magnetic field dipole element with data file.
+``element-length`` is treated as the path length of the pipe center.
+
+This element only works in case of :py:func:`Flaginteg <impact.input.Input.Flaginteg>` equals to **2**.
+
+    (**keywords**: 'em field dipole', 'emfdipole', 'emfbend')
+
+.. class:: parameter-array
+
+    :col 5: (float) - *scaling factor* [1].
+
+        (**keywords**: 'scaling', 'scale', 'scl_fac')
+
+    :col 6: (float) - *bending angle* [deg].
+
+        (**keywords**: 'angle', 'phi')
+
+    :col 7: (float) - *fringe length* [m]. This length is treated as straight section in the ``element-length``.
+
+        (**keywords**: 'fringe length', 'flen')
+
+    :col 8: (float) - *file id* [1]. This element uses '1T${file_id}.T7' file. :ref:`(see here) <3dfdata>`
+
+        (**keywords**: 'fileid', 'file', 'id')
+
+    :col 9: (float) - *horizontal (x) pipe width* [m].
+
+        (**keywords**: 'xaperture', 'xaper', 'xpipe', 'xwidth')
+
+    :col 10: (float) - *vertical (y) pipe width* [m].
+
+        (**keywords**: 'yaperture', 'yaper', 'ypipe', 'ywidth')
+
+    :col 11 ~ 15: (float) - *alignment errors*. :ref:`Same as quadrupole col 8 ~ 12 <quaderr>`.
+
+    :col 16: (float) - *horizontal (x) offset for field data* [m].
+
+        (**keywords**: 'xoffset', 'xoff')
+
+    :col 17: (float) - *vertical (y) offset for field data* [m].
+
+        (**keywords**: 'yoffset', 'yoff')
+
+.. note::
+
+    z-x plane data image for input parameters. The reference line assumes x-axial symmetry.
+
+    .. image:: figs/ref3ddipole.png
+        :width: 650 px
+
+Special element
+---------------
+
+.. class:: parameter-array
+
+    :col 4: (int) - *special element type* [1].
+
+        .. list-table::
+            :header-rows: 1
+
+            * - element-type
+              - value
+            * - :ref:`2d centroid adjust <2dadjust>`
+              - **-1**
+            * - :ref:`4d centroid adjust <4dadjust>`
+              - **-26**
+            * - :ref:`store beam distribution <pstore>`
+              - **-2**
+            * - :ref:`make beam mismatch <mismatch>`
+              - **-10**
+            * - :ref:`charge stripper <msustr>`
+              - **-11**
+            * - :ref:`collimator slit <slit>`
+              - **-13**
+            * - :ref:`beam parameter selector <bps>`
+              - **-14**
+            * - :ref:`multi-charge beam shift <mcshift>`
+              - **-21**
+            * - :ref:`pure beam shift <pshift>`
+              - **-25**
+            * - :ref:`transverse rotation <rotbeam>`
+              - **-22**
+            * - :ref:`diagnostic flag <diagbeam>`
+              - **-23**
+            * - :ref:`jump reference frequency <jumpfreq>`
+              - **-27**
+            * - :ref:`hard-edge solenoid wrapper <solwrap>`
+              - **-40**
+            * - :ref:`lattice end flag <endlat>`
+              - **-99**
+
+
+.. _2dadjust:
+
+2d centroid adjust (``type`` : **-1**)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Adjust the horizontal and vertical centroid to zero.
+
+.. class:: parameter-array
+
+    :col 1: (float) - *dummy parameter*.
+
+    :col 2: (int) - *dummy parameter*.
+
+    :col 3: (int) - *dummy parameter*.
+
+    :col 4: (int) - *element-type* = -1
+
+
+.. _4dadjust:
+
+4d centroid adjust (``type`` : **-26**)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Adjust the horizontal and vertical, centroid and momentum centroid to zero.
+
+.. class:: parameter-array
+
+    :col 1: (float) - *dummy parameter*.
+
+    :col 2: (int) - *dummy parameter*.
+
+    :col 3: (int) - *dummy parameter*.
+
+    :col 4: (int) - *element-type* = -26
+
+
+.. _pstore:
+
+store beam distribution (``type`` : **-2**)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Store the 6D beam distribution.
+
+.. class:: parameter-array
+
+    :col 1: (float) - *dummy parameter*.
+
+    :col 2: (int) - *dummy parameter*.
+
+    :col 3: (int) - *storage id* [1].
+
+    :col 4: (int) - *element-type* = -2
+
+    :col 5: (int) - *Sampling interval* [1].
+
+
+.. _mismatch:
+
+make beam mismatch (``type`` : **-10**)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Make mismatch for the 6D beam distribution.
+
+.. class:: parameter-array
+
+    :col 1: (float) - *dummy parameter*.
+
+    :col 2: (int) - *dummy parameter*.
+
+    :col 3: (int) - *dummy parameter*.
+
+    :col 4: (int) - *element-type* = -10
+
+    :col 5: (float) - *dummy parameter*.
+
+    :col 6: (float) - *x mismatch factor* [1].
+
+    :col 7: (float) - *x' mismatch factor* [1].
+
+    :col 8: (float) - *y mismatch factor* [1].
+
+    :col 9: (float) - *y' mismatch factor* [1].
+
+    :col 10: (float) - *z mismatch factor* [1].
+
+    :col 11: (float) - *z' mismatch factor* [1].
+
+
+.. _msustr:
+
+
+charge stripper (``type`` : **-11**)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+MSU model charge stripper.
+
+.. class:: parameter-array
+
+    :col 1: (float) - *dummy parameter*.
+
+    :col 2: (int) - *dummy parameter*.
+
+    :col 3: (int) - *file id* [1]. This element uses 'fort.${file_id}' file.
+
+    :col 4: (int) - *element-type* = -11
+
+
+.. _slit:
+
+collimator slit (``type`` : **-13**)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Collimator slit in x-y plane.
+
+.. class:: parameter-array
+
+    :col 1: (float) - *dummy parameter*.
+
+    :col 2: (int) - *dummy parameter*.
+
+    :col 3: (int) - *dummy parameter*.
+
+    :col 4: (int) - *element-type* = -13
+
+    :col 5: (float) - *dummy parameter*.
+
+    :col 6: (float) - *x lower limit* [m].
+
+    :col 7: (float) - *x higher limit* [m].
+
+    :col 8: (float) - *y lower limit* [m].
+
+    :col 9: (float) - *y higher limit* [m].
+
+
+.. _bps:
+
+beam parameter selector (``type`` : **-14**)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Beam parameter selector by usings high and low limitation
+
+.. class:: parameter-array
+
+    :col 1: (float) - *dummy parameter*.
+
+    :col 2: (int) - *dummy parameter*.
+
+    :col 3: (int) - *dummy parameter*.
+
+    :col 4: (int) - *element-type* = -14
+
+    :col 5: (int) - *index for the beam parameter*.
+
+        .. list-table::
+            :header-rows: 1
+
+            * - index
+              - description
+              - unit
+            * - **0**
+              - skip selector
+              - 
+            * - **1**
+              - x position
+              - [m]
+            * - **2**
+              - x momentum
+              - [rad]
+            * - **3**
+              - y position
+              - [m]
+            * - **4**
+              - y momentum
+              - [rad]
+            * - **5**
+              - relative phase
+              - [deg]
+            * - **6**
+              - relative or absolute energy
+              - [MeV]
+            * - **7**
+              - charge to mass ratio
+              - [c^2/eV]
+            * - **8**
+              - charge per macro particle
+              - [1]
+            * - **9**
+              - id number
+              - [1]
+
+    :col 6: (float) - *lower limit for the parameter*.
+
+    :col 7: (float) - *higher limit for the parameters*.
+
+    :col 8: (int) - *flag for reference energy offset*.
+    
+                        - **0** for use relative energy (default)
+                        - **1** for use absolute energy
+
+.. _mcshift:
+
+multi-charge beam shift (``type`` : **-21**)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Shift the beam in 6D phase space. The shift amount is depends on each charge state.
+
+.. class:: parameter-array
+
+    :col 1: (float) - *dummy parameter*.
+
+    :col 2: (int) - *dummy parameter*.
+
+    :col 3: (int) - *dummy parameter*.
+
+    :col 4: (int) - *element-type* = -21
+
+    :col 5: (float) - *dummy parameter*.
+
+    :col 6: (float) - *x shift amount* [m].
+
+    :col 7: (float) - *x' shift amount* [rad].
+
+    :col 8: (float) - *y shift amount* [m].
+
+    :col 9: (float) - *y' shift amount* [rad].
+
+    :col 10: (float) - *z shift amount* [deg].
+
+    :col 11: (float) - *z' shift amount* [MeV].
+
+
+.. _pshift:
+
+pure beam shift (``type`` : **-25**)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Shift the beam in 6D phase space. The shift amount is **NOT** depends on each charge state.
+
+.. class:: parameter-array
+
+    :col 1: (float) - *dummy parameter*.
+
+    :col 2: (int) - *dummy parameter*.
+
+    :col 3: (int) - *dummy parameter*.
+
+    :col 4: (int) - *element-type* = -25
+
+    :col 5: (float) - *dummy parameter*.
+
+    :col 6: (float) - *x shift amount* [m].
+
+    :col 7: (float) - *x' shift amount* [rad].
+
+    :col 8: (float) - *y shift amount* [m].
+
+    :col 9: (float) - *y' shift amount* [rad].
+
+    :col 10: (float) - *z shift amount* [deg].
+
+    :col 11: (float) - *z' shift amount* [MeV].
+
+
+.. _rotbeam:
+
+transverse rotation (``type`` : **-22**)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Transverse rotation of the beam.
+
+.. class:: parameter-array
+
+    :col 1: (float) - *dummy parameter*.
+
+    :col 2: (int) - *dummy parameter*.
+
+    :col 3: (int) - *dummy parameter*.
+
+    :col 4: (int) - *element-type* = -22
+
+    :col 5: (float) - *dummy parameter*.
+
+    :col 6: (float) - *x-y plane rotation angle* [deg].
+
+    :col 7: (float) - *x'-y' plane rotation angle* [deg].
+
+
+.. _diagbeam:
+
+diagnostic flag (``type`` : **-23**)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Store the diagnostic data of the beam distribution.
+
+.. class:: parameter-array
+
+    :col 1: (float) - *dummy parameter*.
+
+    :col 2: (int) - *dummy parameter*.
+
+    :col 3: (int) - *dummy parameter*.
+
+    :col 4: (int) - *element-type* = -23
+
+
+.. _jumpfreq:
+
+jump reference frequency (``type`` : **-27**)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Jump the reference frequency.
+
+.. class:: parameter-array
+
+    :col 1: (float) - *dummy parameter*.
+
+    :col 2: (int) - *dummy parameter*.
+
+    :col 3: (int) - *dummy parameter*.
+
+    :col 4: (int) - *element-type* = -27
+
+    :col 5: (float) - *dummy parameter*.
+
+    :col 6: (float) - *new reference frequency* [Hz].
+
+    :col 7: (float) - *phase shift* [deg].
+
+
+.. _solwrap:
+
+hard-edge solenoid wrapper (``type`` : **-40**)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Wrapping the hard-edge solenoid at the front and back side.
+
+.. class:: parameter-array
+
+    :col 1: (float) - *dummy parameter*.
+
+    :col 2: (int) - *dummy parameter*.
+
+    :col 3: (int) - *dummy parameter*.
+
+    :col 4: (int) - *element-type* = -40
+
+    :col 5: (float) - *dummy parameter*.
+
+    :col 6: (float) - *longitudinal magnetic field strength* [T].
+
+    :col 7: (float) - *front/back side flag* [1]. **0** for front, **1** for back side.
+
+
+.. _endlat:
+
+lattice end flag (``type`` : **-99**)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+End flag of the input lattice.
+
+.. class:: parameter-array
+
+    :col 1: (float) - *dummy parameter*.
+
+    :col 2: (int) - *dummy parameter*.
+
+    :col 3: (int) - *dummy parameter*.
+
+    :col 4: (int) - *element-type* = -99
+
+
+
+.. _syncphase:
+
+Synchronous phase input for RF cavities
+---------------------------------------
+
+For the :ref:`coupled cavity linac (type:103) <ccl>` and
+:ref:`em field (type:110) <emfld>`, input phase is switchable
+between *drive phase* :math:`\phi_d` and *synchronous phase* :math:`\phi_s` .
+
+In the case of input phase is *synchronous phase*, -90 [deg] is stable and no energy gain point.
+Inside the code, the rf field is calculated by using driven phase,
+and the synchronous phase offset :math:`\phi_\text{off}` is calculated automatically which defined as 
+
+.. math::
+    \phi_d = \phi_s + \phi_\text{off} .
+
+This offset value is defined by using the reference particle, and
+the reference particle does not depend on any rf errors and alignment errors.
+In addition, it is cached in memory and reuse if the reference energy and charge to mass ratio at the element entrance are the same as the previous simulation.
+
+The rf phase error :math:`\phi_{error}` is directly added to the driven phase.
+Basically, the energy gain of the whole beam is not zero even in the synchronous phase is -90
+due to the energy deviation.
+
+External data format
+--------------------
+
+.. _rfdata:
+
+rf cavity data
+^^^^^^^^^^^^^^
+(Use for :ref:`drift tube linac <dtl>`, :ref:`coupled cavity dtl <ccdtl>`,
+:ref:`coupled cavity linac <ccl>`, :ref:`superconducting cavity <scc>`,
+:ref:`solenoid with rf field <solrf>`)
+
+
+In case of :py:func:`Flaginteg <impact.input.Input.Flaginteg>` equals to **1**,
+the data file (rfdata${file_id}) should have on-axis longitudinal electric field data.
+
+.. code-block:: none
+
+    z(1)    Ez(1)    Ez'(1)    Ez''(1)
+    z(2)    Ez(2)    Ez'(2)    Ez''(2)
+    z(3)    Ez(3)    Ez'(3)    Ez''(3)
+    .
+    .
+    ! max data length is 5000
+
+In case of :py:func:`Flaginteg <impact.input.Input.Flaginteg>` equals to **2**,
+the data file (rfdata${file_id}) should have Fourier coefficients of on-axis longitudinal electric field.
+
+.. code-block:: none
+
+    F(1)
+    F(2)
+    F(3)
+    .
+    .
+    ! max data length is 101
+
+
+.. _3dfdata:
+
+3d field data
+^^^^^^^^^^^^^
+(Use for :ref:`em field <emfld>`, :ref:`em field dipole <dipole3d>`)
+
+This data can be used in case of :py:func:`Flaginteg <impact.input.Input.Flaginteg>` equals to **2**.
+The data file (1T${file_id}.T7) should have 6D electro-magnetic field data and its size information.
+
+.. code-block:: none
+
+    x_min  x_max  x_ngrid
+    y_min  y_max  y_ngrid
+    z_min  z_max  z_ngrid
+    Ex   Ey   Ez   Bx   By   Bz   ! at (x(1), y(1), z(1))
+    Ex   Ey   Ez   Bx   By   Bz   ! at (x(2), y(1), z(1))
+    Ex   Ey   Ez   Bx   By   Bz   ! at (x(3), y(1), z(1))
+    .
+    .
+    Ex   Ey   Ez   Bx   By   Bz   ! at (x(1), y(2), z(1))
+    Ex   Ey   Ez   Bx   By   Bz   ! at (x(2), y(2), z(1))
+    Ex   Ey   Ez   Bx   By   Bz   ! at (x(3), y(2), z(1))
+    .
+    .
+    Ex   Ey   Ez   Bx   By   Bz   ! at (x(1), y(3), z(1))
+    Ex   Ey   Ez   Bx   By   Bz   ! at (x(2), y(3), z(1))
+    Ex   Ey   Ez   Bx   By   Bz   ! at (x(3), y(3), z(1))
+    .
+    .
+    Ex   Ey   Ez   Bx   By   Bz   ! at (x(1), y(1), z(2))
+    Ex   Ey   Ez   Bx   By   Bz   ! at (x(2), y(1), z(2))
+    Ex   Ey   Ez   Bx   By   Bz   ! at (x(3), y(1), z(2))
+    .
+    .
+    ! data length is (x_ngrid+1)*(y_ngrid+1)*(z_ngrid+1)
+
+For multi-field (in :ref:`em field <emfld>`) data,
+
+.. code-block:: none
+
+    x_min  x_max  x_ngrid
+    y_min  y_max  y_ngrid
+    z_min  z_max  z_ngrid
+    E1x  E1y  E1z  B1x  B1y  B1z  E2x  E2y  E2z  B2x  B2y  B2z
+    .
+    .
+    ! data length is (x_ngrid+1)*(y_ngrid+1)*(z_ngrid+1)
+
+or,
+
+.. code-block:: none
+
+    x_min  x_max  x_ngrid
+    y_min  y_max  y_ngrid
+    z_min  z_max  z_ngrid
+    E1x  E1y  E1z  B1x  B1y  B1z  E2x  E2y  E2z  B2x  B2y  B2z  E3x  E3y  E3z  B3x  B3y  B3z
+    .
+    .
+    ! data length is (x_ngrid+1)*(y_ngrid+1)*(z_ngrid+1)
+
+formats are available.
+
+.. _rfqdata:
+
+rfq data
+^^^^^^^^
+(Use for :ref:`rf quadrupole <rfq>`)
+
+This data can be used in case of :py:func:`Flaginteg <impact.input.Input.Flaginteg>` equals to **2**.
+
+The data file (rfqline${file_id}) should have the list of the RFQ structure constants.
+
+.. code-block:: none
+
+    Len Nseg Nstp Ctype Scale Phi1 Radius Mod R0 A10 A0 A12I4 A1 A30I0 A21I2 A32I4 A23I6 /
+
+.. class:: structure constants
+
+    :Len: (float) - *cell length* [m].
+
+    :Nseg: (int) - *number of element segmentations* [1].
+
+    :Nstp: (int) - *number of map steps for PIC calculation* [1].
+
+    :Ctype: (int) - *cell type* [1].
+
+        .. list-table::
+            :header-rows: 1
+
+            * - cell-type
+              - value
+            * - 2 term XY potential for standard acceleration
+              - **0**
+            * - 8 term XY potential for standard acceleration
+              - **1**
+            * - radial matching
+              - **2**
+            * - exit transition (inverse)
+              - **3**
+            * - exit transition (normal)
+              - **4**
+            * - exit matching
+              - **5**
+            * - exit fringe
+              - **6**
+
+    :Scale: (float) - *scaling factor* [1].
+
+    :Phi1: (float) - *synchronous phase* [deg].
+
+    :Radius: (float) - *pipe radius* [m].
+
+    :Mod: (float) - *modulation* [1].
+
+    :R0: (float) - *middle point radius* [m].
+
+    :A10: (float) - *acceleration term* [1].
+
+    :A0: (float) - *quadrupole term* [1].
+
+    :A1: (float) - *duodecapole term* [1].
+
+    :A12I4, A30I0, A21I2, A32I4, A23I6: (float) - *product of multipole coefficient and Bessel function* [1].
+
+.. note::
+
+    In this RFQ model is based on Thomas P. Wangler's "RF Linear Accelerator" book.
+
+    The eight-term potential function is,
+
+    .. math::
+
+        U(r, \theta, z) &= \frac{V}{2}\Bigl\{ A_0 \left(\frac{r}{r_0}\right)^2 \cos 2\theta + A_1 \left(\frac{r}{r_0}\right)^6 \cos 6\theta \Bigr. \\
+                        &+ A_{10}I_0(kr)\cos kz + A_{30}I_0(3kr) \cos 3kz \\
+                        &+ [A_{12}I_4(kr) \cos kz + A_{32}I_4(3kr) \cos 3kz] \cos 4\theta\\
+                        &+ [A_{21}I_2(2kr) \cos 2\theta + A_{23}I_6(2kr) \cos 6\theta] \cos 2kz \Bigl. \Bigr\}
+
+    here, :math:`V` is applied voltage, :math:`k = \pi / L` (where :math:`L` is the length of the cell),
+    and :math:`I_n` is :math:`n`-th kind Bessel function.
+
+

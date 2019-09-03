@@ -1,0 +1,2648 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Result class / base of Sequence class &mdash; Adv. IMPACT 1.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="Adv. IMPACT 1.0.0 documentation" href="../index.html"/>
+        <link rel="up" title="Class Library" href="../classlib.html"/>
+        <link rel="prev" title="Input class / base of Sequence class" href="impact.input.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Adv. IMPACT
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Table of Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../parallel.html">Parallel Computing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../element.html">Lattice Elements</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../classlib.html">Class Library</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="impact.control.html">Sequence class – run control API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="impact.input.html">Input class / base of Sequence class</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Result class / base of Sequence class</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Adv. IMPACT</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../classlib.html">Class Library</a> &raquo;</li>
+        
+      <li>Result class / base of Sequence class</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/pysrc/impact.result.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-impact.result">
+<span id="result-class-base-of-sequence-class"></span><h1>Result class / base of Sequence class<a class="headerlink" href="#module-impact.result" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="impact.result.Result">
+<em class="property">class </em><code class="descclassname">impact.result.</code><code class="descname">Result</code><a class="reference internal" href="../_modules/impact/result.html#Result"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#impact.result.Result" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>Base class for simulation results of Advanced IMPACT.</p>
+<ul class="simple">
+<li><strong>Attributes</strong></li>
+</ul>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#impact.result.Result.dtag" title="impact.result.Result.dtag"><code class="xref py py-obj docutils literal"><span class="pre">dtag</span></code></a></td>
+<td>dict: Tag dictionary of lattice elements.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#impact.result.Result.autobcast" title="impact.result.Result.autobcast"><code class="xref py py-obj docutils literal"><span class="pre">autobcast</span></code></a></td>
+<td>bool: Flag of auto MPI bcast for simulation results.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#impact.result.Result.qmlabel" title="impact.result.Result.qmlabel"><code class="xref py py-obj docutils literal"><span class="pre">qmlabel</span></code></a></td>
+<td>list: List of charge to mass ratios for history results</td>
+</tr>
+</tbody>
+</table>
+<ul class="simple" id="hist-label">
+<li><strong>Methods for history results</strong></li>
+</ul>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-obj docutils literal"><span class="pre">hrefz</span></code></a>(*args,&nbsp;**kws)</td>
+<td>Returns z distance history of the reference particle (default unit is [m]).</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#impact.result.Result.hrefphi" title="impact.result.Result.hrefphi"><code class="xref py py-obj docutils literal"><span class="pre">hrefphi</span></code></a>(*args,&nbsp;**kws)</td>
+<td>Returns absolute phase history of the reference particle (default unit is [rad]).</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#impact.result.Result.hrefgma" title="impact.result.Result.hrefgma"><code class="xref py py-obj docutils literal"><span class="pre">hrefgma</span></code></a>(*args,&nbsp;**kws)</td>
+<td>Returns Lorentz gamma history of the reference particle (default unit is [1]).</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#impact.result.Result.hrefeng" title="impact.result.Result.hrefeng"><code class="xref py py-obj docutils literal"><span class="pre">hrefeng</span></code></a>(*args,&nbsp;**kws)</td>
+<td>Returns kinetic energy history of the reference particle (default unit is [MeV]).</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#impact.result.Result.hrefbeta" title="impact.result.Result.hrefbeta"><code class="xref py py-obj docutils literal"><span class="pre">hrefbeta</span></code></a>(*args,&nbsp;**kws)</td>
+<td>Returns Lorentz beta history of the reference particle (default unit is [1]).</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#impact.result.Result.hrefr" title="impact.result.Result.hrefr"><code class="xref py py-obj docutils literal"><span class="pre">hrefr</span></code></a>(*args,&nbsp;**kws)</td>
+<td>Returns maximum r distance history of particles from pipe center (default unit is [m]).</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#impact.result.Result.hxcen" title="impact.result.Result.hxcen"><code class="xref py py-obj docutils literal"><span class="pre">hxcen</span></code></a>(*args,&nbsp;**kws)</td>
+<td>Returns x centroid position history (default unit is [m]).</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#impact.result.Result.hycen" title="impact.result.Result.hycen"><code class="xref py py-obj docutils literal"><span class="pre">hycen</span></code></a>(*args,&nbsp;**kws)</td>
+<td>Returns y centroid position history (default unit is [m]).</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#impact.result.Result.hzcen" title="impact.result.Result.hzcen"><code class="xref py py-obj docutils literal"><span class="pre">hzcen</span></code></a>(*args,&nbsp;**kws)</td>
+<td>Returns z (phase) centroid position history (default unit is [deg]).</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#impact.result.Result.hxrms" title="impact.result.Result.hxrms"><code class="xref py py-obj docutils literal"><span class="pre">hxrms</span></code></a>(*args,&nbsp;**kws)</td>
+<td>Returns x rms size history (default unit is [m]).</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#impact.result.Result.hyrms" title="impact.result.Result.hyrms"><code class="xref py py-obj docutils literal"><span class="pre">hyrms</span></code></a>(*args,&nbsp;**kws)</td>
+<td>Returns y rms size history (default unit is [m]).</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#impact.result.Result.hzrms" title="impact.result.Result.hzrms"><code class="xref py py-obj docutils literal"><span class="pre">hzrms</span></code></a>(*args,&nbsp;**kws)</td>
+<td>Returns z (phase) rms size history (default unit is [deg]).</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#impact.result.Result.hxpcen" title="impact.result.Result.hxpcen"><code class="xref py py-obj docutils literal"><span class="pre">hxpcen</span></code></a>(*args,&nbsp;**kws)</td>
+<td>Returns x’(xp, px) centroid momentum history (default unit is [rad]).</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#impact.result.Result.hypcen" title="impact.result.Result.hypcen"><code class="xref py py-obj docutils literal"><span class="pre">hypcen</span></code></a>(*args,&nbsp;**kws)</td>
+<td>Returns y’(yp, py) centroid momentum history (default unit is [rad]).</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#impact.result.Result.hzpcen" title="impact.result.Result.hzpcen"><code class="xref py py-obj docutils literal"><span class="pre">hzpcen</span></code></a>(*args,&nbsp;**kws)</td>
+<td>Returns z’(zp, pz) centroid history (default unit is [MeV]).</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#impact.result.Result.hxprms" title="impact.result.Result.hxprms"><code class="xref py py-obj docutils literal"><span class="pre">hxprms</span></code></a>(*args,&nbsp;**kws)</td>
+<td>Returns x’(xp, px) rms momentum history (default unit is [rad]).</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#impact.result.Result.hyprms" title="impact.result.Result.hyprms"><code class="xref py py-obj docutils literal"><span class="pre">hyprms</span></code></a>(*args,&nbsp;**kws)</td>
+<td>Returns y’(yp, py) rms momentum history (default unit is [rad]).</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#impact.result.Result.hzprms" title="impact.result.Result.hzprms"><code class="xref py py-obj docutils literal"><span class="pre">hzprms</span></code></a>(*args,&nbsp;**kws)</td>
+<td>Returns z’(zp, pz) rms spread history (default unit is [MeV]).</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#impact.result.Result.hxtwsa" title="impact.result.Result.hxtwsa"><code class="xref py py-obj docutils literal"><span class="pre">hxtwsa</span></code></a>(*args,&nbsp;**kws)</td>
+<td>Returns x twiss parameter alpha history (default unit is [1]).</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#impact.result.Result.hytwsa" title="impact.result.Result.hytwsa"><code class="xref py py-obj docutils literal"><span class="pre">hytwsa</span></code></a>(*args,&nbsp;**kws)</td>
+<td>Returns y twiss parameter alpha history (default unit is [1]).</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#impact.result.Result.hztwsa" title="impact.result.Result.hztwsa"><code class="xref py py-obj docutils literal"><span class="pre">hztwsa</span></code></a>(*args,&nbsp;**kws)</td>
+<td>Returns z twiss parameter alpha history (default unit is [1]).</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#impact.result.Result.hxtwsb" title="impact.result.Result.hxtwsb"><code class="xref py py-obj docutils literal"><span class="pre">hxtwsb</span></code></a>(*args,&nbsp;**kws)</td>
+<td>Returns x twiss parameter beta history (default unit is [m]).</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#impact.result.Result.hytwsb" title="impact.result.Result.hytwsb"><code class="xref py py-obj docutils literal"><span class="pre">hytwsb</span></code></a>(*args,&nbsp;**kws)</td>
+<td>Returns y twiss parameter beta history (default unit is [m]).</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#impact.result.Result.hztwsb" title="impact.result.Result.hztwsb"><code class="xref py py-obj docutils literal"><span class="pre">hztwsb</span></code></a>(*args,&nbsp;**kws)</td>
+<td>Returns z twiss parameter beta history (default unit is [m]).</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#impact.result.Result.hxepsn" title="impact.result.Result.hxepsn"><code class="xref py py-obj docutils literal"><span class="pre">hxepsn</span></code></a>(*args,&nbsp;**kws)</td>
+<td>Returns x normalized emittance history (default unit is [m-rad]).</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#impact.result.Result.hyepsn" title="impact.result.Result.hyepsn"><code class="xref py py-obj docutils literal"><span class="pre">hyepsn</span></code></a>(*args,&nbsp;**kws)</td>
+<td>Returns y normalized emittance history (default unit is [m-rad]).</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#impact.result.Result.hzepsn" title="impact.result.Result.hzepsn"><code class="xref py py-obj docutils literal"><span class="pre">hzepsn</span></code></a>(*args,&nbsp;**kws)</td>
+<td>Returns z normalized emittance history (default unit is [m-rad]).</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#impact.result.Result.hxepsnp" title="impact.result.Result.hxepsnp"><code class="xref py py-obj docutils literal"><span class="pre">hxepsnp</span></code></a>(*args,&nbsp;**kws)</td>
+<td>Returns <cite>n</cite> % x normalized emittance history (default: <cite>n</cite> = 99.9, unit is [m-rad]).</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#impact.result.Result.hyepsnp" title="impact.result.Result.hyepsnp"><code class="xref py py-obj docutils literal"><span class="pre">hyepsnp</span></code></a>(*args,&nbsp;**kws)</td>
+<td>Returns <cite>n</cite> % y normalized emittance history (default: <cite>n</cite> = 99.9, unit is [m-rad]).</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#impact.result.Result.hzepsnp" title="impact.result.Result.hzepsnp"><code class="xref py py-obj docutils literal"><span class="pre">hzepsnp</span></code></a>(*args,&nbsp;**kws)</td>
+<td>Returns <cite>n</cite> % z normalized emittance history (default: <cite>n</cite> = 99.9, unit is [m-rad]).</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#impact.result.Result.hxepsnf" title="impact.result.Result.hxepsnf"><code class="xref py py-obj docutils literal"><span class="pre">hxepsnf</span></code></a>(*args,&nbsp;**kws)</td>
+<td>Returns full x normalized emittance history (default unit is [m-rad]).</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#impact.result.Result.hyepsnf" title="impact.result.Result.hyepsnf"><code class="xref py py-obj docutils literal"><span class="pre">hyepsnf</span></code></a>(*args,&nbsp;**kws)</td>
+<td>Returns full y normalized emittance history (default unit is [m-rad]).</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#impact.result.Result.hzepsnf" title="impact.result.Result.hzepsnf"><code class="xref py py-obj docutils literal"><span class="pre">hzepsnf</span></code></a>(*args,&nbsp;**kws)</td>
+<td>Returns full z normalized emittance history (default unit is [m-rad]).</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#impact.result.Result.hxmax" title="impact.result.Result.hxmax"><code class="xref py py-obj docutils literal"><span class="pre">hxmax</span></code></a>(*args,&nbsp;**kws)</td>
+<td>Returns maximum x position history (default unit is [m]).</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#impact.result.Result.hymax" title="impact.result.Result.hymax"><code class="xref py py-obj docutils literal"><span class="pre">hymax</span></code></a>(*args,&nbsp;**kws)</td>
+<td>Returns maximum y position history (default unit is [m]).</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#impact.result.Result.hzmax" title="impact.result.Result.hzmax"><code class="xref py py-obj docutils literal"><span class="pre">hzmax</span></code></a>(*args,&nbsp;**kws)</td>
+<td>Returns maximum z position (phase) history (default unit is [deg]).</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#impact.result.Result.hxpmax" title="impact.result.Result.hxpmax"><code class="xref py py-obj docutils literal"><span class="pre">hxpmax</span></code></a>(*args,&nbsp;**kws)</td>
+<td>Returns maximum x’ (xp, px) momentum history (default unit is [rad]).</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#impact.result.Result.hypmax" title="impact.result.Result.hypmax"><code class="xref py py-obj docutils literal"><span class="pre">hypmax</span></code></a>(*args,&nbsp;**kws)</td>
+<td>Returns maximum y’ (yp, py) momentum history (default unit is [rad]).</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#impact.result.Result.hzpmax" title="impact.result.Result.hzpmax"><code class="xref py py-obj docutils literal"><span class="pre">hzpmax</span></code></a>(*args,&nbsp;**kws)</td>
+<td>Returns maximum z’ (zp, pz) history (default unit is [MeV]).</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#impact.result.Result.hrrms" title="impact.result.Result.hrrms"><code class="xref py py-obj docutils literal"><span class="pre">hrrms</span></code></a>(*args,&nbsp;**kws)</td>
+<td>Returns r rms history (default unit is [m]).</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#impact.result.Result.hrnpr" title="impact.result.Result.hrnpr"><code class="xref py py-obj docutils literal"><span class="pre">hrnpr</span></code></a>(*args,&nbsp;**kws)</td>
+<td>Returns <cite>n</cite> % r size history (default: <cite>n</cite> = 99.9) (default unit is [m]).</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#impact.result.Result.hrmax" title="impact.result.Result.hrmax"><code class="xref py py-obj docutils literal"><span class="pre">hrmax</span></code></a>(*args,&nbsp;**kws)</td>
+<td>Returns maximum r distance history (default unit is [m]).</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#impact.result.Result.hx3rd" title="impact.result.Result.hx3rd"><code class="xref py py-obj docutils literal"><span class="pre">hx3rd</span></code></a>(*args,&nbsp;**kws)</td>
+<td>Returns x 3rd root of 3rd moment history (default unit is [m]).</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#impact.result.Result.hy3rd" title="impact.result.Result.hy3rd"><code class="xref py py-obj docutils literal"><span class="pre">hy3rd</span></code></a>(*args,&nbsp;**kws)</td>
+<td>Returns y 3rd root of 3rd moment history (default unit is [m]).</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#impact.result.Result.hz3rd" title="impact.result.Result.hz3rd"><code class="xref py py-obj docutils literal"><span class="pre">hz3rd</span></code></a>(*args,&nbsp;**kws)</td>
+<td>Returns z (phase) 3rd root of 3rd moment history (default unit is [deg]).</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#impact.result.Result.hxp3rd" title="impact.result.Result.hxp3rd"><code class="xref py py-obj docutils literal"><span class="pre">hxp3rd</span></code></a>(*args,&nbsp;**kws)</td>
+<td>Returns x’ (xp, px) 3rd root of 3rd moment history (default unit is [rad]).</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#impact.result.Result.hyp3rd" title="impact.result.Result.hyp3rd"><code class="xref py py-obj docutils literal"><span class="pre">hyp3rd</span></code></a>(*args,&nbsp;**kws)</td>
+<td>Returns y’ (yp, py) 3rd root of 3rd moment history (default unit is [rad]).</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#impact.result.Result.hzp3rd" title="impact.result.Result.hzp3rd"><code class="xref py py-obj docutils literal"><span class="pre">hzp3rd</span></code></a>(*args,&nbsp;**kws)</td>
+<td>Returns z’ (zp, pz) 3rd root of 3rd moment history (default unit is [MeV]).</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#impact.result.Result.hx4th" title="impact.result.Result.hx4th"><code class="xref py py-obj docutils literal"><span class="pre">hx4th</span></code></a>(*args,&nbsp;**kws)</td>
+<td>Returns x 4th root of 4th moment history (default unit is [m]).</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#impact.result.Result.hy4th" title="impact.result.Result.hy4th"><code class="xref py py-obj docutils literal"><span class="pre">hy4th</span></code></a>(*args,&nbsp;**kws)</td>
+<td>Returns y 4th root of 4th moment history (default unit is [m]).</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#impact.result.Result.hzp4th" title="impact.result.Result.hzp4th"><code class="xref py py-obj docutils literal"><span class="pre">hzp4th</span></code></a>(*args,&nbsp;**kws)</td>
+<td>Returns z’ (zp, pz) 4th root of 4th moment history (default unit is [MeV]).</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#impact.result.Result.hxp4th" title="impact.result.Result.hxp4th"><code class="xref py py-obj docutils literal"><span class="pre">hxp4th</span></code></a>(*args,&nbsp;**kws)</td>
+<td>Returns x’ (xp, px) 4th root of 4th moment history (default unit is [rad]).</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#impact.result.Result.hyp4th" title="impact.result.Result.hyp4th"><code class="xref py py-obj docutils literal"><span class="pre">hyp4th</span></code></a>(*args,&nbsp;**kws)</td>
+<td>Returns y’ (yp, py) 4th root of 4th moment history (default unit is [rad]).</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#impact.result.Result.hz4th" title="impact.result.Result.hz4th"><code class="xref py py-obj docutils literal"><span class="pre">hz4th</span></code></a>(*args,&nbsp;**kws)</td>
+<td>Returns z (phase) 4th root of 4th moment history (default unit is [deg]).</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#impact.result.Result.hlpmin" title="impact.result.Result.hlpmin"><code class="xref py py-obj docutils literal"><span class="pre">hlpmin</span></code></a>(*args,&nbsp;**kws)</td>
+<td>Returns minimum local particle number history (default unit is [1]).</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#impact.result.Result.hlpmax" title="impact.result.Result.hlpmax"><code class="xref py py-obj docutils literal"><span class="pre">hlpmax</span></code></a>(*args,&nbsp;**kws)</td>
+<td>Returns maximum local particle number history (default unit is [1]).</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#impact.result.Result.hptot" title="impact.result.Result.hptot"><code class="xref py py-obj docutils literal"><span class="pre">hptot</span></code></a>(*args,&nbsp;**kws)</td>
+<td>Returns total particle number history (default unit is [1]).</td>
+</tr>
+</tbody>
+</table>
+<ul class="simple">
+<li><strong>Methods for distribution results</strong></li>
+</ul>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#impact.result.Result.getx" title="impact.result.Result.getx"><code class="xref py py-obj docutils literal"><span class="pre">getx</span></code></a>(*args,&nbsp;**kws)</td>
+<td>Returns x positions of the particles (default unit is [m]).</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#impact.result.Result.getxp" title="impact.result.Result.getxp"><code class="xref py py-obj docutils literal"><span class="pre">getxp</span></code></a>(*args,&nbsp;**kws)</td>
+<td>Returns x’ (xp, px) momentums of the particles (default unit is [rad]).</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#impact.result.Result.gety" title="impact.result.Result.gety"><code class="xref py py-obj docutils literal"><span class="pre">gety</span></code></a>(*args,&nbsp;**kws)</td>
+<td>Returns y positions of the particles (default unit is [m]).</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#impact.result.Result.getyp" title="impact.result.Result.getyp"><code class="xref py py-obj docutils literal"><span class="pre">getyp</span></code></a>(*args,&nbsp;**kws)</td>
+<td>Returns y’ (yp, py) momentums of the particles (default unit is [rad]).</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#impact.result.Result.getz" title="impact.result.Result.getz"><code class="xref py py-obj docutils literal"><span class="pre">getz</span></code></a>(*args,&nbsp;**kws)</td>
+<td>Returns z positions (phase) of the particles (default unit is [deg]).</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#impact.result.Result.getzp" title="impact.result.Result.getzp"><code class="xref py py-obj docutils literal"><span class="pre">getzp</span></code></a>(*args,&nbsp;**kws)</td>
+<td>Returns z’ (zp, pz) of the particles (default unit is [MeV]).</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#impact.result.Result.getctm" title="impact.result.Result.getctm"><code class="xref py py-obj docutils literal"><span class="pre">getctm</span></code></a>(*args,&nbsp;**kws)</td>
+<td>Returns charge to mass ratio of the particles (default unit is [c^2/eV]).</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#impact.result.Result.getcpmp" title="impact.result.Result.getcpmp"><code class="xref py py-obj docutils literal"><span class="pre">getcpmp</span></code></a>(*args,&nbsp;**kws)</td>
+<td>Returns charge per macro particle of the particles (default unit is [1]).</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#impact.result.Result.getid" title="impact.result.Result.getid"><code class="xref py py-obj docutils literal"><span class="pre">getid</span></code></a>(*args,&nbsp;**kws)</td>
+<td>Returns ID number of the particles (default unit is [1]).</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#impact.result.Result.getall" title="impact.result.Result.getall"><code class="xref py py-obj docutils literal"><span class="pre">getall</span></code></a>(*args,&nbsp;**kws)</td>
+<td>Returns full information of the particles).</td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="impact.result.Result.dtag">
+<code class="descname">dtag</code><a class="headerlink" href="#impact.result.Result.dtag" title="Permalink to this definition">¶</a></dt>
+<dd><p>dict: Tag dictionary of lattice elements.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="impact.result.Result.autobcast">
+<code class="descname">autobcast</code><a class="headerlink" href="#impact.result.Result.autobcast" title="Permalink to this definition">¶</a></dt>
+<dd><p>bool: Flag of auto MPI bcast for simulation results.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="impact.result.Result.qmlabel">
+<code class="descname">qmlabel</code><a class="headerlink" href="#impact.result.Result.qmlabel" title="Permalink to this definition">¶</a></dt>
+<dd><p>list: List of charge to mass ratios for history results</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="impact.result.Result.hrefz">
+<code class="descname">hrefz</code><span class="sig-paren">(</span><em>*args</em>, <em>**kws</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/impact/result.html#Result.hrefz"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#impact.result.Result.hrefz" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns z distance history of the reference particle (default unit is [m]).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>*args :</strong></p>
+<blockquote>
+<div><p>str – Tag name or physical unit.</p>
+<p>float or list of float – Substitution value of interpolation function.</p>
+</div></blockquote>
+<p><strong>**kws :</strong></p>
+<blockquote>
+<div><p><strong>tag</strong> : str</p>
+<blockquote>
+<div><p>Tag name of the target position.</p>
+</div></blockquote>
+<p><strong>unit</strong> : str</p>
+<blockquote>
+<div><p>Physical unit name of the return value.</p>
+</div></blockquote>
+<p><strong>value</strong> : float or list of float</p>
+<blockquote>
+<div><p>Substitution value for the interpolation function.</p>
+</div></blockquote>
+<p><strong>qid</strong> : int</p>
+<blockquote>
+<div><p>Charge state index for return value. Default is -1 (Total of the all charge states).
+Index is compatible with <a class="reference internal" href="#impact.result.Result.qmlabel" title="impact.result.Result.qmlabel"><code class="xref py py-func docutils literal"><span class="pre">qmlabel</span></code></a>.</p>
+</div></blockquote>
+<p><strong>at</strong> : <code class="docutils literal"><span class="pre">entry</span></code>, <code class="docutils literal"><span class="pre">mid</span></code>, or <code class="docutils literal"><span class="pre">exit</span></code> (default)</p>
+<blockquote>
+<div><p>Data taking location in the target element. Used when the tag name is given.</p>
+</div></blockquote>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">ndarray</p>
+<blockquote class="last">
+<div><p>z distance history</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>keywords: longitudinal, fort.18</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="impact.result.Result.hrefphi">
+<code class="descname">hrefphi</code><span class="sig-paren">(</span><em>*args</em>, <em>**kws</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/impact/result.html#Result.hrefphi"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#impact.result.Result.hrefphi" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns absolute phase history of the reference particle (default unit is [rad]).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>*args :</strong></p>
+<blockquote>
+<div><p>The same arguments are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+<p><strong>**kws :</strong></p>
+<blockquote>
+<div><p>The same keywords are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">ndarray</p>
+<blockquote class="last">
+<div><p>absolute phase history</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>keywords: fort.18</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="impact.result.Result.hrefbeta">
+<code class="descname">hrefbeta</code><span class="sig-paren">(</span><em>*args</em>, <em>**kws</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/impact/result.html#Result.hrefbeta"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#impact.result.Result.hrefbeta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns Lorentz beta history of the reference particle (default unit is [1]).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>*args :</strong></p>
+<blockquote>
+<div><p>The same arguments are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+<p><strong>**kws :</strong></p>
+<blockquote>
+<div><p>The same keywords are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">ndarray</p>
+<blockquote class="last">
+<div><p>Lorentz beta history</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>keywords: fort.18</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="impact.result.Result.hrefgma">
+<code class="descname">hrefgma</code><span class="sig-paren">(</span><em>*args</em>, <em>**kws</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/impact/result.html#Result.hrefgma"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#impact.result.Result.hrefgma" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns Lorentz gamma history of the reference particle (default unit is [1]).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>*args :</strong></p>
+<blockquote>
+<div><p>The same arguments are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+<p><strong>**kws :</strong></p>
+<blockquote>
+<div><p>The same keywords are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">ndarray</p>
+<blockquote class="last">
+<div><p>Lorentz gamma history</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>keywords: fort.18</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="impact.result.Result.hrefeng">
+<code class="descname">hrefeng</code><span class="sig-paren">(</span><em>*args</em>, <em>**kws</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/impact/result.html#Result.hrefeng"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#impact.result.Result.hrefeng" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns kinetic energy history of the reference particle (default unit is [MeV]).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>*args :</strong></p>
+<blockquote>
+<div><p>The same arguments are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+<p><strong>**kws :</strong></p>
+<blockquote>
+<div><p>The same keywords are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">ndarray</p>
+<blockquote class="last">
+<div><p>kinetic energy history</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>keywords: fort.18</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="impact.result.Result.hrefr">
+<code class="descname">hrefr</code><span class="sig-paren">(</span><em>*args</em>, <em>**kws</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/impact/result.html#Result.hrefr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#impact.result.Result.hrefr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns maximum r distance history of particles from pipe center (default unit is [m]).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>*args :</strong></p>
+<blockquote>
+<div><p>The same arguments are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+<p><strong>**kws :</strong></p>
+<blockquote>
+<div><p>The same keywords are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">ndarray</p>
+<blockquote class="last">
+<div><p>maximum r distance history</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>keywords: fort.18</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="impact.result.Result.hxcen">
+<code class="descname">hxcen</code><span class="sig-paren">(</span><em>*args</em>, <em>**kws</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/impact/result.html#Result.hxcen"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#impact.result.Result.hxcen" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns x centroid position history (default unit is [m]).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>*args :</strong></p>
+<blockquote>
+<div><p>The same arguments are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+<p><strong>**kws :</strong></p>
+<blockquote>
+<div><p>The same keywords are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">ndarray</p>
+<blockquote class="last">
+<div><p>x centroid position history</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>keywords: horizontal, fort.24</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="impact.result.Result.hxrms">
+<code class="descname">hxrms</code><span class="sig-paren">(</span><em>*args</em>, <em>**kws</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/impact/result.html#Result.hxrms"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#impact.result.Result.hxrms" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns x rms size history (default unit is [m]).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>*args :</strong></p>
+<blockquote>
+<div><p>The same arguments are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+<p><strong>**kws :</strong></p>
+<blockquote>
+<div><p>The same keywords are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">ndarray</p>
+<blockquote class="last">
+<div><p>x rms size history</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>keywords: root mean square, envelope, horizontal, fort.24</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="impact.result.Result.hxpcen">
+<code class="descname">hxpcen</code><span class="sig-paren">(</span><em>*args</em>, <em>**kws</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/impact/result.html#Result.hxpcen"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#impact.result.Result.hxpcen" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns x’(xp, px) centroid momentum history (default unit is [rad]).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>*args :</strong></p>
+<blockquote>
+<div><p>The same arguments are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+<p><strong>**kws :</strong></p>
+<blockquote>
+<div><p>The same keywords are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">ndarray</p>
+<blockquote class="last">
+<div><p>x’ centroid momentum history</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>keywords: horizontal, fort.24</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="impact.result.Result.hxprms">
+<code class="descname">hxprms</code><span class="sig-paren">(</span><em>*args</em>, <em>**kws</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/impact/result.html#Result.hxprms"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#impact.result.Result.hxprms" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns x’(xp, px) rms momentum history (default unit is [rad]).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>*args :</strong></p>
+<blockquote>
+<div><p>The same arguments are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+<p><strong>**kws :</strong></p>
+<blockquote>
+<div><p>The same keywords are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">ndarray</p>
+<blockquote class="last">
+<div><p>x’ rms momentum history</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>keywords: root mean square, envelope, horizontal, fort.24</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="impact.result.Result.hxtwsa">
+<code class="descname">hxtwsa</code><span class="sig-paren">(</span><em>*args</em>, <em>**kws</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/impact/result.html#Result.hxtwsa"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#impact.result.Result.hxtwsa" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns x twiss parameter alpha history (default unit is [1]).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>*args :</strong></p>
+<blockquote>
+<div><p>The same arguments are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+<p><strong>**kws :</strong></p>
+<blockquote>
+<div><p>The same keywords are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">ndarray</p>
+<blockquote class="last">
+<div><p>x twiss parameter alpha history</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>keywords: Courant Snyder parameters, horizontal, fort.24</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="impact.result.Result.hxtwsb">
+<code class="descname">hxtwsb</code><span class="sig-paren">(</span><em>*args</em>, <em>**kws</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/impact/result.html#Result.hxtwsb"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#impact.result.Result.hxtwsb" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns x twiss parameter beta history (default unit is [m]).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>*args :</strong></p>
+<blockquote>
+<div><p>The same arguments are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+<p><strong>**kws :</strong></p>
+<blockquote>
+<div><p>The same keywords are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">ndarray</p>
+<blockquote class="last">
+<div><p>x twiss parameter beta history</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>keywords: Courant Snyder parameters, horizontal, fort.24</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="impact.result.Result.hxepsn">
+<code class="descname">hxepsn</code><span class="sig-paren">(</span><em>*args</em>, <em>**kws</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/impact/result.html#Result.hxepsn"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#impact.result.Result.hxepsn" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns x normalized emittance history (default unit is [m-rad]).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>*args :</strong></p>
+<blockquote>
+<div><p>The same arguments are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+<p><strong>**kws :</strong></p>
+<blockquote>
+<div><p>The same keywords are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">ndarray</p>
+<blockquote class="last">
+<div><p>x normalized emittance history</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>keywords: horizontal, fort.24</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="impact.result.Result.hxepsnp">
+<code class="descname">hxepsnp</code><span class="sig-paren">(</span><em>*args</em>, <em>**kws</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/impact/result.html#Result.hxepsnp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#impact.result.Result.hxepsnp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns <cite>n</cite> % x normalized emittance history (default: <cite>n</cite> = 99.9, unit is [m-rad]).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>*args :</strong></p>
+<blockquote>
+<div><p>The same arguments are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+<p><strong>**kws :</strong></p>
+<blockquote>
+<div><p>The same keywords are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">ndarray</p>
+<blockquote class="last">
+<div><p><cite>n</cite> % x normalized emittance history</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>This value is calculated in case of <a class="reference internal" href="impact.input.html#impact.input.Input.Flagdiag" title="impact.input.Input.Flagdiag"><code class="xref py py-func docutils literal"><span class="pre">Flagdiag</span></code></a> equals to 2 or 4.</p>
+<p>The percentage <cite>n</cite> [%] is defined by <a class="reference internal" href="impact.input.html#impact.input.Input.Outputemit" title="impact.input.Input.Outputemit"><code class="xref py py-func docutils literal"><span class="pre">Outputemit</span></code></a>.</p>
+<p>keywords: horizontal, fort.24</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="impact.result.Result.hxepsnf">
+<code class="descname">hxepsnf</code><span class="sig-paren">(</span><em>*args</em>, <em>**kws</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/impact/result.html#Result.hxepsnf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#impact.result.Result.hxepsnf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns full x normalized emittance history (default unit is [m-rad]).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>*args :</strong></p>
+<blockquote>
+<div><p>The same arguments are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+<p><strong>**kws :</strong></p>
+<blockquote>
+<div><p>The same keywords are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">ndarray</p>
+<blockquote class="last">
+<div><p>full x normalized emittance history</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>This value is calculated in case of <a class="reference internal" href="impact.input.html#impact.input.Input.Flagdiag" title="impact.input.Input.Flagdiag"><code class="xref py py-func docutils literal"><span class="pre">Flagdiag</span></code></a> equals to 2 or 4.</p>
+<p>keywords: horizontal, fort.24</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="impact.result.Result.hycen">
+<code class="descname">hycen</code><span class="sig-paren">(</span><em>*args</em>, <em>**kws</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/impact/result.html#Result.hycen"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#impact.result.Result.hycen" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns y centroid position history (default unit is [m]).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>*args :</strong></p>
+<blockquote>
+<div><p>The same arguments are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+<p><strong>**kws :</strong></p>
+<blockquote>
+<div><p>The same keywords are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">ndarray</p>
+<blockquote class="last">
+<div><p>y centroid position history</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>keywords: vertical, fort.25</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="impact.result.Result.hyrms">
+<code class="descname">hyrms</code><span class="sig-paren">(</span><em>*args</em>, <em>**kws</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/impact/result.html#Result.hyrms"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#impact.result.Result.hyrms" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns y rms size history (default unit is [m]).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>*args :</strong></p>
+<blockquote>
+<div><p>The same arguments are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+<p><strong>**kws :</strong></p>
+<blockquote>
+<div><p>The same keywords are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">ndarray</p>
+<blockquote class="last">
+<div><p>y rms size history</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>keywords: root mean square, envelope, vertical, fort.25</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="impact.result.Result.hypcen">
+<code class="descname">hypcen</code><span class="sig-paren">(</span><em>*args</em>, <em>**kws</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/impact/result.html#Result.hypcen"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#impact.result.Result.hypcen" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns y’(yp, py) centroid momentum history (default unit is [rad]).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>*args :</strong></p>
+<blockquote>
+<div><p>The same arguments are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+<p><strong>**kws :</strong></p>
+<blockquote>
+<div><p>The same keywords are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">ndarray</p>
+<blockquote class="last">
+<div><p>y’ centroid momentum history</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>keywords: vertical, fort.25</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="impact.result.Result.hyprms">
+<code class="descname">hyprms</code><span class="sig-paren">(</span><em>*args</em>, <em>**kws</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/impact/result.html#Result.hyprms"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#impact.result.Result.hyprms" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns y’(yp, py) rms momentum history (default unit is [rad]).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>*args :</strong></p>
+<blockquote>
+<div><p>The same arguments are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+<p><strong>**kws :</strong></p>
+<blockquote>
+<div><p>The same keywords are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">ndarray</p>
+<blockquote class="last">
+<div><p>y’ rms momentum history</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>keywords: root mean square, envelope, vertical, fort.25</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="impact.result.Result.hytwsa">
+<code class="descname">hytwsa</code><span class="sig-paren">(</span><em>*args</em>, <em>**kws</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/impact/result.html#Result.hytwsa"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#impact.result.Result.hytwsa" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns y twiss parameter alpha history (default unit is [1]).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>*args :</strong></p>
+<blockquote>
+<div><p>The same arguments are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+<p><strong>**kws :</strong></p>
+<blockquote>
+<div><p>The same keywords are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">ndarray</p>
+<blockquote class="last">
+<div><p>y twiss parameter alpha history</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>keywords: Courant Snyder parameters, vertical, fort.25</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="impact.result.Result.hytwsb">
+<code class="descname">hytwsb</code><span class="sig-paren">(</span><em>*args</em>, <em>**kws</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/impact/result.html#Result.hytwsb"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#impact.result.Result.hytwsb" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns y twiss parameter beta history (default unit is [m]).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>*args :</strong></p>
+<blockquote>
+<div><p>The same arguments are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+<p><strong>**kws :</strong></p>
+<blockquote>
+<div><p>The same keywords are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">ndarray</p>
+<blockquote class="last">
+<div><p>y twiss parameter beta history</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>keywords: Courant Snyder parameters, vertical, fort.25</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="impact.result.Result.hyepsn">
+<code class="descname">hyepsn</code><span class="sig-paren">(</span><em>*args</em>, <em>**kws</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/impact/result.html#Result.hyepsn"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#impact.result.Result.hyepsn" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns y normalized emittance history (default unit is [m-rad]).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>*args :</strong></p>
+<blockquote>
+<div><p>The same arguments are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+<p><strong>**kws :</strong></p>
+<blockquote>
+<div><p>The same keywords are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">ndarray</p>
+<blockquote class="last">
+<div><p>y normalized emittance history</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>keywords: vertical, fort.25</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="impact.result.Result.hyepsnp">
+<code class="descname">hyepsnp</code><span class="sig-paren">(</span><em>*args</em>, <em>**kws</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/impact/result.html#Result.hyepsnp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#impact.result.Result.hyepsnp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns <cite>n</cite> % y normalized emittance history (default: <cite>n</cite> = 99.9, unit is [m-rad]).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>*args :</strong></p>
+<blockquote>
+<div><p>The same arguments are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+<p><strong>**kws :</strong></p>
+<blockquote>
+<div><p>The same keywords are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">ndarray</p>
+<blockquote class="last">
+<div><p><cite>n</cite> % y normalized emittance history</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>This value is calculated in case of <a class="reference internal" href="impact.input.html#impact.input.Input.Flagdiag" title="impact.input.Input.Flagdiag"><code class="xref py py-func docutils literal"><span class="pre">Flagdiag</span></code></a> equals to 2 or 4.</p>
+<p>The percentage <cite>n</cite> [%] is defined by <a class="reference internal" href="impact.input.html#impact.input.Input.Outputemit" title="impact.input.Input.Outputemit"><code class="xref py py-func docutils literal"><span class="pre">Outputemit</span></code></a>.</p>
+<p>keywords: vertical, fort.25</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="impact.result.Result.hyepsnf">
+<code class="descname">hyepsnf</code><span class="sig-paren">(</span><em>*args</em>, <em>**kws</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/impact/result.html#Result.hyepsnf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#impact.result.Result.hyepsnf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns full y normalized emittance history (default unit is [m-rad]).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>*args :</strong></p>
+<blockquote>
+<div><p>The same arguments are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+<p><strong>**kws :</strong></p>
+<blockquote>
+<div><p>The same keywords are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">ndarray</p>
+<blockquote class="last">
+<div><p>full y normalized emittance history</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>This value is calculated in case of <a class="reference internal" href="impact.input.html#impact.input.Input.Flagdiag" title="impact.input.Input.Flagdiag"><code class="xref py py-func docutils literal"><span class="pre">Flagdiag</span></code></a> equals to 2 or 4.</p>
+<p>keywords: vertical, fort.25</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="impact.result.Result.hzcen">
+<code class="descname">hzcen</code><span class="sig-paren">(</span><em>*args</em>, <em>**kws</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/impact/result.html#Result.hzcen"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#impact.result.Result.hzcen" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns z (phase) centroid position history (default unit is [deg]).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>*args :</strong></p>
+<blockquote>
+<div><p>The same arguments are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+<p><strong>**kws :</strong></p>
+<blockquote>
+<div><p>The same keywords are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">ndarray</p>
+<blockquote class="last">
+<div><p>z centroid position history</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>keywords: longitudinal, fort.26</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="impact.result.Result.hzrms">
+<code class="descname">hzrms</code><span class="sig-paren">(</span><em>*args</em>, <em>**kws</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/impact/result.html#Result.hzrms"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#impact.result.Result.hzrms" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns z (phase) rms size history (default unit is [deg]).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>*args :</strong></p>
+<blockquote>
+<div><p>The same arguments are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+<p><strong>**kws :</strong></p>
+<blockquote>
+<div><p>The same keywords are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">ndarray</p>
+<blockquote class="last">
+<div><p>z rms size history</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>keywords: root mean square, envelope, longitudinal, fort.26</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="impact.result.Result.hzpcen">
+<code class="descname">hzpcen</code><span class="sig-paren">(</span><em>*args</em>, <em>**kws</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/impact/result.html#Result.hzpcen"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#impact.result.Result.hzpcen" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns z’(zp, pz) centroid history (default unit is [MeV]).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>*args :</strong></p>
+<blockquote>
+<div><p>The same arguments are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+<p><strong>**kws :</strong></p>
+<blockquote>
+<div><p>The same keywords are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">ndarray</p>
+<blockquote class="last">
+<div><p>z’ centroid history</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>keywords: longitudinal, energy deviation, fort.26</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="impact.result.Result.hzprms">
+<code class="descname">hzprms</code><span class="sig-paren">(</span><em>*args</em>, <em>**kws</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/impact/result.html#Result.hzprms"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#impact.result.Result.hzprms" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns z’(zp, pz) rms spread history (default unit is [MeV]).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>*args :</strong></p>
+<blockquote>
+<div><p>The same arguments are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+<p><strong>**kws :</strong></p>
+<blockquote>
+<div><p>The same keywords are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">ndarray</p>
+<blockquote class="last">
+<div><p>z’ rms spread history</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>keywords: root mean square, envelope, longitudinal, energy deviation, fort.26</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="impact.result.Result.hztwsa">
+<code class="descname">hztwsa</code><span class="sig-paren">(</span><em>*args</em>, <em>**kws</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/impact/result.html#Result.hztwsa"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#impact.result.Result.hztwsa" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns z twiss parameter alpha history (default unit is [1]).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>*args :</strong></p>
+<blockquote>
+<div><p>The same arguments are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+<p><strong>**kws :</strong></p>
+<blockquote>
+<div><p>The same keywords are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">ndarray</p>
+<blockquote class="last">
+<div><p>z twiss parameter alpha history</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>keywords: Courant Snyder parameters, longitudinal, fort.26</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="impact.result.Result.hztwsb">
+<code class="descname">hztwsb</code><span class="sig-paren">(</span><em>*args</em>, <em>**kws</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/impact/result.html#Result.hztwsb"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#impact.result.Result.hztwsb" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns z twiss parameter beta history (default unit is [m]).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>*args :</strong></p>
+<blockquote>
+<div><p>The same arguments are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+<p><strong>**kws :</strong></p>
+<blockquote>
+<div><p>The same keywords are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">ndarray</p>
+<blockquote class="last">
+<div><p>z twiss parameter beta history</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>keywords: Courant Snyder parameters, longitudinal, fort.26</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="impact.result.Result.hzepsn">
+<code class="descname">hzepsn</code><span class="sig-paren">(</span><em>*args</em>, <em>**kws</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/impact/result.html#Result.hzepsn"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#impact.result.Result.hzepsn" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns z normalized emittance history (default unit is [m-rad]).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>*args :</strong></p>
+<blockquote>
+<div><p>The same arguments are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+<p><strong>**kws :</strong></p>
+<blockquote>
+<div><p>The same keywords are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">ndarray</p>
+<blockquote class="last">
+<div><p>z normalized emittance history</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>keywords: longitudinal, fort.26</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="impact.result.Result.hzepsnp">
+<code class="descname">hzepsnp</code><span class="sig-paren">(</span><em>*args</em>, <em>**kws</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/impact/result.html#Result.hzepsnp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#impact.result.Result.hzepsnp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns <cite>n</cite> % z normalized emittance history (default: <cite>n</cite> = 99.9, unit is [m-rad]).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>*args :</strong></p>
+<blockquote>
+<div><p>The same arguments are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+<p><strong>**kws :</strong></p>
+<blockquote>
+<div><p>The same keywords are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">ndarray</p>
+<blockquote class="last">
+<div><p><cite>n</cite> % z normalized emittance history</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>This value is calculated in case of <a class="reference internal" href="impact.input.html#impact.input.Input.Flagdiag" title="impact.input.Input.Flagdiag"><code class="xref py py-func docutils literal"><span class="pre">Flagdiag</span></code></a> equals to 2 or 4.</p>
+<p>The percentage <cite>n</cite> [%] is defined by <a class="reference internal" href="impact.input.html#impact.input.Input.Outputemit" title="impact.input.Input.Outputemit"><code class="xref py py-func docutils literal"><span class="pre">Outputemit</span></code></a>.</p>
+<p>keywords: longitudinal, fort.26</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="impact.result.Result.hzepsnf">
+<code class="descname">hzepsnf</code><span class="sig-paren">(</span><em>*args</em>, <em>**kws</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/impact/result.html#Result.hzepsnf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#impact.result.Result.hzepsnf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns full z normalized emittance history (default unit is [m-rad]).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>*args :</strong></p>
+<blockquote>
+<div><p>The same arguments are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+<p><strong>**kws :</strong></p>
+<blockquote>
+<div><p>The same keywords are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">ndarray</p>
+<blockquote class="last">
+<div><p>full z normalized emittance history</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>This value is calculated in case of <a class="reference internal" href="impact.input.html#impact.input.Input.Flagdiag" title="impact.input.Input.Flagdiag"><code class="xref py py-func docutils literal"><span class="pre">Flagdiag</span></code></a> equals to 2 or 4.</p>
+<p>keywords: longitudinal, fort.26</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="impact.result.Result.hxmax">
+<code class="descname">hxmax</code><span class="sig-paren">(</span><em>*args</em>, <em>**kws</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/impact/result.html#Result.hxmax"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#impact.result.Result.hxmax" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns maximum x position history (default unit is [m]).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>*args :</strong></p>
+<blockquote>
+<div><p>The same arguments are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+<p><strong>**kws :</strong></p>
+<blockquote>
+<div><p>The same keywords are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">ndarray</p>
+<blockquote class="last">
+<div><p>maximum x position history</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>keywords: horizontal, fort.27</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="impact.result.Result.hxpmax">
+<code class="descname">hxpmax</code><span class="sig-paren">(</span><em>*args</em>, <em>**kws</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/impact/result.html#Result.hxpmax"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#impact.result.Result.hxpmax" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns maximum x’ (xp, px) momentum history (default unit is [rad]).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>*args :</strong></p>
+<blockquote>
+<div><p>The same arguments are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+<p><strong>**kws :</strong></p>
+<blockquote>
+<div><p>The same keywords are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">ndarray</p>
+<blockquote class="last">
+<div><p>maximum x’ momentum history</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>keywords: horizontal, fort.27</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="impact.result.Result.hymax">
+<code class="descname">hymax</code><span class="sig-paren">(</span><em>*args</em>, <em>**kws</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/impact/result.html#Result.hymax"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#impact.result.Result.hymax" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns maximum y position history (default unit is [m]).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>*args :</strong></p>
+<blockquote>
+<div><p>The same arguments are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+<p><strong>**kws :</strong></p>
+<blockquote>
+<div><p>The same keywords are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">ndarray</p>
+<blockquote class="last">
+<div><p>maximum y position history</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>keywords: vertical, fort.27</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="impact.result.Result.hypmax">
+<code class="descname">hypmax</code><span class="sig-paren">(</span><em>*args</em>, <em>**kws</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/impact/result.html#Result.hypmax"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#impact.result.Result.hypmax" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns maximum y’ (yp, py) momentum history (default unit is [rad]).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>*args :</strong></p>
+<blockquote>
+<div><p>The same arguments are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+<p><strong>**kws :</strong></p>
+<blockquote>
+<div><p>The same keywords are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">ndarray</p>
+<blockquote class="last">
+<div><p>maximum y’ momentum history</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>keywords: vertical, fort.27</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="impact.result.Result.hzmax">
+<code class="descname">hzmax</code><span class="sig-paren">(</span><em>*args</em>, <em>**kws</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/impact/result.html#Result.hzmax"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#impact.result.Result.hzmax" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns maximum z position (phase) history (default unit is [deg]).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>*args :</strong></p>
+<blockquote>
+<div><p>The same arguments are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+<p><strong>**kws :</strong></p>
+<blockquote>
+<div><p>The same keywords are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">ndarray</p>
+<blockquote class="last">
+<div><p>maximum z position history</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p><code class="docutils literal"><span class="pre">hphimax</span></code> is alias of <code class="docutils literal"><span class="pre">hzmax</span></code> (<code class="docutils literal"><span class="pre">hphimax</span></code> is named in fortran code).</p>
+<p>keywords: longitudinal, fort.27</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="impact.result.Result.hphimax">
+<code class="descname">hphimax</code><span class="sig-paren">(</span><em>*args</em>, <em>**kws</em><span class="sig-paren">)</span><a class="headerlink" href="#impact.result.Result.hphimax" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns maximum z position (phase) history (default unit is [deg]).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>*args :</strong></p>
+<blockquote>
+<div><p>The same arguments are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+<p><strong>**kws :</strong></p>
+<blockquote>
+<div><p>The same keywords are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">ndarray</p>
+<blockquote class="last">
+<div><p>maximum z position history</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p><code class="docutils literal"><span class="pre">hphimax</span></code> is alias of <code class="docutils literal"><span class="pre">hzmax</span></code> (<code class="docutils literal"><span class="pre">hphimax</span></code> is named in fortran code).</p>
+<p>keywords: longitudinal, fort.27</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="impact.result.Result.hzpmax">
+<code class="descname">hzpmax</code><span class="sig-paren">(</span><em>*args</em>, <em>**kws</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/impact/result.html#Result.hzpmax"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#impact.result.Result.hzpmax" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns maximum z’ (zp, pz) history (default unit is [MeV]).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>*args :</strong></p>
+<blockquote>
+<div><p>The same arguments are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+<p><strong>**kws :</strong></p>
+<blockquote>
+<div><p>The same keywords are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">ndarray</p>
+<blockquote class="last">
+<div><p>maximum z’ history</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p><code class="docutils literal"><span class="pre">hdemax</span></code> is alias of <code class="docutils literal"><span class="pre">hzpmax</span></code> (<code class="docutils literal"><span class="pre">hdemax</span></code> is named in fortran code).</p>
+<p>keywords: longitudinal, energy deviation, fort.27</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="impact.result.Result.hdemax">
+<code class="descname">hdemax</code><span class="sig-paren">(</span><em>*args</em>, <em>**kws</em><span class="sig-paren">)</span><a class="headerlink" href="#impact.result.Result.hdemax" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns maximum z’ (zp, pz) history (default unit is [MeV]).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>*args :</strong></p>
+<blockquote>
+<div><p>The same arguments are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+<p><strong>**kws :</strong></p>
+<blockquote>
+<div><p>The same keywords are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">ndarray</p>
+<blockquote class="last">
+<div><p>maximum z’ history</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p><code class="docutils literal"><span class="pre">hdemax</span></code> is alias of <code class="docutils literal"><span class="pre">hzpmax</span></code> (<code class="docutils literal"><span class="pre">hdemax</span></code> is named in fortran code).</p>
+<p>keywords: longitudinal, energy deviation, fort.27</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="impact.result.Result.hlpmin">
+<code class="descname">hlpmin</code><span class="sig-paren">(</span><em>*args</em>, <em>**kws</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/impact/result.html#Result.hlpmin"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#impact.result.Result.hlpmin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns minimum local particle number history (default unit is [1]).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>*args :</strong></p>
+<blockquote>
+<div><p>The same arguments are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+<p><strong>**kws :</strong></p>
+<blockquote>
+<div><p>The same keywords are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">ndarray</p>
+<blockquote class="last">
+<div><p>minimum local particle number history</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>keywords: fort.28</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="impact.result.Result.hlpmax">
+<code class="descname">hlpmax</code><span class="sig-paren">(</span><em>*args</em>, <em>**kws</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/impact/result.html#Result.hlpmax"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#impact.result.Result.hlpmax" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns maximum local particle number history (default unit is [1]).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>*args :</strong></p>
+<blockquote>
+<div><p>The same arguments are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+<p><strong>**kws :</strong></p>
+<blockquote>
+<div><p>The same keywords are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">ndarray</p>
+<blockquote class="last">
+<div><p>maximum local particle number history</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>keywords: fort.28</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="impact.result.Result.hptot">
+<code class="descname">hptot</code><span class="sig-paren">(</span><em>*args</em>, <em>**kws</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/impact/result.html#Result.hptot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#impact.result.Result.hptot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns total particle number history (default unit is [1]).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>*args :</strong></p>
+<blockquote>
+<div><p>The same arguments are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+<p><strong>**kws :</strong></p>
+<blockquote>
+<div><p>The same keywords are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">ndarray</p>
+<blockquote class="last">
+<div><p>total particle number history</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>keywords: fort.28</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="impact.result.Result.hx3rd">
+<code class="descname">hx3rd</code><span class="sig-paren">(</span><em>*args</em>, <em>**kws</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/impact/result.html#Result.hx3rd"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#impact.result.Result.hx3rd" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns x 3rd root of 3rd moment history (default unit is [m]).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>*args :</strong></p>
+<blockquote>
+<div><p>The same arguments are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+<p><strong>**kws :</strong></p>
+<blockquote>
+<div><p>The same keywords are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">ndarray</p>
+<blockquote class="last">
+<div><p>x 3rd moment history</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>This value is calculated in case of <a class="reference internal" href="impact.input.html#impact.input.Input.Flagdiag" title="impact.input.Input.Flagdiag"><code class="xref py py-func docutils literal"><span class="pre">Flagdiag</span></code></a> equals to 1 or 3.</p>
+<p>keywords: horizontal, fort.29</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="impact.result.Result.hxp3rd">
+<code class="descname">hxp3rd</code><span class="sig-paren">(</span><em>*args</em>, <em>**kws</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/impact/result.html#Result.hxp3rd"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#impact.result.Result.hxp3rd" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns x’ (xp, px) 3rd root of 3rd moment history (default unit is [rad]).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>*args :</strong></p>
+<blockquote>
+<div><p>The same arguments are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+<p><strong>**kws :</strong></p>
+<blockquote>
+<div><p>The same keywords are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">ndarray</p>
+<blockquote class="last">
+<div><p>x’ 3rd moment history</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>This value is calculated in case of <a class="reference internal" href="impact.input.html#impact.input.Input.Flagdiag" title="impact.input.Input.Flagdiag"><code class="xref py py-func docutils literal"><span class="pre">Flagdiag</span></code></a> equals to 1 or 3.</p>
+<p>keywords: horizontal, fort.29</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="impact.result.Result.hy3rd">
+<code class="descname">hy3rd</code><span class="sig-paren">(</span><em>*args</em>, <em>**kws</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/impact/result.html#Result.hy3rd"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#impact.result.Result.hy3rd" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns y 3rd root of 3rd moment history (default unit is [m]).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>*args :</strong></p>
+<blockquote>
+<div><p>The same arguments are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+<p><strong>**kws :</strong></p>
+<blockquote>
+<div><p>The same keywords are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">ndarray</p>
+<blockquote class="last">
+<div><p>y 3rd moment history</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>This value is calculated in case of <a class="reference internal" href="impact.input.html#impact.input.Input.Flagdiag" title="impact.input.Input.Flagdiag"><code class="xref py py-func docutils literal"><span class="pre">Flagdiag</span></code></a> equals to 1 or 3.</p>
+<p>keywords: vertical, fort.29</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="impact.result.Result.hyp3rd">
+<code class="descname">hyp3rd</code><span class="sig-paren">(</span><em>*args</em>, <em>**kws</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/impact/result.html#Result.hyp3rd"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#impact.result.Result.hyp3rd" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns y’ (yp, py) 3rd root of 3rd moment history (default unit is [rad]).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>*args :</strong></p>
+<blockquote>
+<div><p>The same arguments are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+<p><strong>**kws :</strong></p>
+<blockquote>
+<div><p>The same keywords are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">ndarray</p>
+<blockquote class="last">
+<div><p>y’ 3rd moment history</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>This value is calculated in case of <a class="reference internal" href="impact.input.html#impact.input.Input.Flagdiag" title="impact.input.Input.Flagdiag"><code class="xref py py-func docutils literal"><span class="pre">Flagdiag</span></code></a> equals to 1 or 3.</p>
+<p>keywords: vertical, fort.29</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="impact.result.Result.hz3rd">
+<code class="descname">hz3rd</code><span class="sig-paren">(</span><em>*args</em>, <em>**kws</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/impact/result.html#Result.hz3rd"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#impact.result.Result.hz3rd" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns z (phase) 3rd root of 3rd moment history (default unit is [deg]).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>*args :</strong></p>
+<blockquote>
+<div><p>The same arguments are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+<p><strong>**kws :</strong></p>
+<blockquote>
+<div><p>The same keywords are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">ndarray</p>
+<blockquote class="last">
+<div><p>z 3rd moment history</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>This value is calculated in case of <a class="reference internal" href="impact.input.html#impact.input.Input.Flagdiag" title="impact.input.Input.Flagdiag"><code class="xref py py-func docutils literal"><span class="pre">Flagdiag</span></code></a> equals to 1 or 3.</p>
+<p>keywords: longitudinal, fort.29</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="impact.result.Result.hzp3rd">
+<code class="descname">hzp3rd</code><span class="sig-paren">(</span><em>*args</em>, <em>**kws</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/impact/result.html#Result.hzp3rd"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#impact.result.Result.hzp3rd" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns z’ (zp, pz) 3rd root of 3rd moment history (default unit is [MeV]).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>*args :</strong></p>
+<blockquote>
+<div><p>The same arguments are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+<p><strong>**kws :</strong></p>
+<blockquote>
+<div><p>The same keywords are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">ndarray</p>
+<blockquote class="last">
+<div><p>z’ 3rd moment history</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>This value is calculated in case of <a class="reference internal" href="impact.input.html#impact.input.Input.Flagdiag" title="impact.input.Input.Flagdiag"><code class="xref py py-func docutils literal"><span class="pre">Flagdiag</span></code></a> equals to 1 or 3.</p>
+<p>keywords: longitudinal, energy deviation, fort.29</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="impact.result.Result.hx4th">
+<code class="descname">hx4th</code><span class="sig-paren">(</span><em>*args</em>, <em>**kws</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/impact/result.html#Result.hx4th"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#impact.result.Result.hx4th" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns x 4th root of 4th moment history (default unit is [m]).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>*args :</strong></p>
+<blockquote>
+<div><p>The same arguments are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+<p><strong>**kws :</strong></p>
+<blockquote>
+<div><p>The same keywords are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">ndarray</p>
+<blockquote class="last">
+<div><p>x 4th moment history</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>This value is calculated in case of <a class="reference internal" href="impact.input.html#impact.input.Input.Flagdiag" title="impact.input.Input.Flagdiag"><code class="xref py py-func docutils literal"><span class="pre">Flagdiag</span></code></a> equals to 1 or 3.</p>
+<p>keywords: horizontal, fort.30</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="impact.result.Result.hxp4th">
+<code class="descname">hxp4th</code><span class="sig-paren">(</span><em>*args</em>, <em>**kws</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/impact/result.html#Result.hxp4th"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#impact.result.Result.hxp4th" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns x’ (xp, px) 4th root of 4th moment history (default unit is [rad]).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>*args :</strong></p>
+<blockquote>
+<div><p>The same arguments are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+<p><strong>**kws :</strong></p>
+<blockquote>
+<div><p>The same keywords are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">ndarray</p>
+<blockquote class="last">
+<div><p>x’ 4th moment history</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>This value is calculated in case of <a class="reference internal" href="impact.input.html#impact.input.Input.Flagdiag" title="impact.input.Input.Flagdiag"><code class="xref py py-func docutils literal"><span class="pre">Flagdiag</span></code></a> equals to 1 or 3.</p>
+<p>keywords: horizontal, fort.30</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="impact.result.Result.hy4th">
+<code class="descname">hy4th</code><span class="sig-paren">(</span><em>*args</em>, <em>**kws</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/impact/result.html#Result.hy4th"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#impact.result.Result.hy4th" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns y 4th root of 4th moment history (default unit is [m]).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>*args :</strong></p>
+<blockquote>
+<div><p>The same arguments are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+<p><strong>**kws :</strong></p>
+<blockquote>
+<div><p>The same keywords are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">ndarray</p>
+<blockquote class="last">
+<div><p>y 4th moment history</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>This value is calculated in case of <a class="reference internal" href="impact.input.html#impact.input.Input.Flagdiag" title="impact.input.Input.Flagdiag"><code class="xref py py-func docutils literal"><span class="pre">Flagdiag</span></code></a> equals to 1 or 3.</p>
+<p>keywords: vertical, fort.30</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="impact.result.Result.hyp4th">
+<code class="descname">hyp4th</code><span class="sig-paren">(</span><em>*args</em>, <em>**kws</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/impact/result.html#Result.hyp4th"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#impact.result.Result.hyp4th" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns y’ (yp, py) 4th root of 4th moment history (default unit is [rad]).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>*args :</strong></p>
+<blockquote>
+<div><p>The same arguments are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+<p><strong>**kws :</strong></p>
+<blockquote>
+<div><p>The same keywords are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">ndarray</p>
+<blockquote class="last">
+<div><p>y’ 4th moment history</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>This value is calculated in case of <a class="reference internal" href="impact.input.html#impact.input.Input.Flagdiag" title="impact.input.Input.Flagdiag"><code class="xref py py-func docutils literal"><span class="pre">Flagdiag</span></code></a> equals to 1 or 3.</p>
+<p>keywords: vertical, fort.30</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="impact.result.Result.hz4th">
+<code class="descname">hz4th</code><span class="sig-paren">(</span><em>*args</em>, <em>**kws</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/impact/result.html#Result.hz4th"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#impact.result.Result.hz4th" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns z (phase) 4th root of 4th moment history (default unit is [deg]).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>*args :</strong></p>
+<blockquote>
+<div><p>The same arguments are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+<p><strong>**kws :</strong></p>
+<blockquote>
+<div><p>The same keywords are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">ndarray</p>
+<blockquote class="last">
+<div><p>z 4th moment history</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>This value is calculated in case of <a class="reference internal" href="impact.input.html#impact.input.Input.Flagdiag" title="impact.input.Input.Flagdiag"><code class="xref py py-func docutils literal"><span class="pre">Flagdiag</span></code></a> equals to 1 or 3.</p>
+<p>keywords: longitudinal, fort.30</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="impact.result.Result.hzp4th">
+<code class="descname">hzp4th</code><span class="sig-paren">(</span><em>*args</em>, <em>**kws</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/impact/result.html#Result.hzp4th"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#impact.result.Result.hzp4th" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns z’ (zp, pz) 4th root of 4th moment history (default unit is [MeV]).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>*args :</strong></p>
+<blockquote>
+<div><p>The same arguments are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+<p><strong>**kws :</strong></p>
+<blockquote>
+<div><p>The same keywords are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">ndarray</p>
+<blockquote class="last">
+<div><p>z’ 4th moment history</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>This value is calculated in case of <a class="reference internal" href="impact.input.html#impact.input.Input.Flagdiag" title="impact.input.Input.Flagdiag"><code class="xref py py-func docutils literal"><span class="pre">Flagdiag</span></code></a> equals to 1 or 3.</p>
+<p>keywords: longitudinal, energy deviation, fort.30</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="impact.result.Result.hrrms">
+<code class="descname">hrrms</code><span class="sig-paren">(</span><em>*args</em>, <em>**kws</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/impact/result.html#Result.hrrms"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#impact.result.Result.hrrms" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns r rms history (default unit is [m]).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>*args :</strong></p>
+<blockquote>
+<div><p>The same arguments are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+<p><strong>**kws :</strong></p>
+<blockquote>
+<div><p>The same keywords are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">ndarray</p>
+<blockquote class="last">
+<div><p>r rms size history</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>This value is calculated in case of <a class="reference internal" href="impact.input.html#impact.input.Input.Flagdiag" title="impact.input.Input.Flagdiag"><code class="xref py py-func docutils literal"><span class="pre">Flagdiag</span></code></a> equals to 2 or 4.</p>
+<p>keywords: root mean square, envelope, radius, fort.29</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="impact.result.Result.hrnpr">
+<code class="descname">hrnpr</code><span class="sig-paren">(</span><em>*args</em>, <em>**kws</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/impact/result.html#Result.hrnpr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#impact.result.Result.hrnpr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns <cite>n</cite> % r size history (default: <cite>n</cite> = 99.9) (default unit is [m]).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>*args :</strong></p>
+<blockquote>
+<div><p>The same arguments are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+<p><strong>**kws :</strong></p>
+<blockquote>
+<div><p>The same keywords are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">ndarray</p>
+<blockquote class="last">
+<div><p><cite>n</cite> % r size history</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>This value is calculated in case of <a class="reference internal" href="impact.input.html#impact.input.Input.Flagdiag" title="impact.input.Input.Flagdiag"><code class="xref py py-func docutils literal"><span class="pre">Flagdiag</span></code></a> equals to 2 or 4.</p>
+<p>The percentage <cite>n</cite> [%] is defined by <a class="reference internal" href="impact.input.html#impact.input.Input.Outputemit" title="impact.input.Input.Outputemit"><code class="xref py py-func docutils literal"><span class="pre">Outputemit</span></code></a>.</p>
+<p>keywords: radius, fort.29</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="impact.result.Result.hrmax">
+<code class="descname">hrmax</code><span class="sig-paren">(</span><em>*args</em>, <em>**kws</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/impact/result.html#Result.hrmax"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#impact.result.Result.hrmax" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns maximum r distance history (default unit is [m]).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>*args :</strong></p>
+<blockquote>
+<div><p>The same arguments are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+<p><strong>**kws :</strong></p>
+<blockquote>
+<div><p>The same keywords are available with <a class="reference internal" href="#impact.result.Result.hrefz" title="impact.result.Result.hrefz"><code class="xref py py-func docutils literal"><span class="pre">hrefz</span></code></a>.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">ndarray</p>
+<blockquote class="last">
+<div><p>maximum r distance history</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>This value is calculated in case of <a class="reference internal" href="impact.input.html#impact.input.Input.Flagdiag" title="impact.input.Input.Flagdiag"><code class="xref py py-func docutils literal"><span class="pre">Flagdiag</span></code></a> equals to 2 or 4.</p>
+<p>keywords: radius, fort.29</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="impact.result.Result.getx">
+<code class="descname">getx</code><span class="sig-paren">(</span><em>*args</em>, <em>**kws</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/impact/result.html#Result.getx"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#impact.result.Result.getx" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns x positions of the particles (default unit is [m]).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>*args :</strong></p>
+<blockquote>
+<div><p>str – Tag name or physical unit.</p>
+<p>int – ID number in the flag element. Default is 0 ( = current distribution).</p>
+</div></blockquote>
+<p><strong>**kws :</strong></p>
+<blockquote>
+<div><p><strong>tag</strong> : str</p>
+<blockquote>
+<div><p>Tag name of the target position.</p>
+</div></blockquote>
+<p><strong>unit</strong> : str</p>
+<blockquote>
+<div><p>Physical unit name of the return value.</p>
+</div></blockquote>
+<p><strong>pid</strong> : int</p>
+<blockquote>
+<div><p>ID number in the flag element.</p>
+</div></blockquote>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">ndarray</p>
+<blockquote class="last">
+<div><p>x positions of the particles</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>keywords: horizontal, distribution</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="impact.result.Result.getxp">
+<code class="descname">getxp</code><span class="sig-paren">(</span><em>*args</em>, <em>**kws</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/impact/result.html#Result.getxp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#impact.result.Result.getxp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns x’ (xp, px) momentums of the particles (default unit is [rad]).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>*args :</strong></p>
+<blockquote>
+<div><p>The same arguments are available with <a class="reference internal" href="#impact.result.Result.getx" title="impact.result.Result.getx"><code class="xref py py-func docutils literal"><span class="pre">getx</span></code></a>.</p>
+</div></blockquote>
+<p><strong>**kws :</strong></p>
+<blockquote>
+<div><p>The same keywords are available with <a class="reference internal" href="#impact.result.Result.getx" title="impact.result.Result.getx"><code class="xref py py-func docutils literal"><span class="pre">getx</span></code></a>.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">ndarray</p>
+<blockquote class="last">
+<div><p>x’ momentums of the particles</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>keywords: horizontal, distribution</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="impact.result.Result.gety">
+<code class="descname">gety</code><span class="sig-paren">(</span><em>*args</em>, <em>**kws</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/impact/result.html#Result.gety"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#impact.result.Result.gety" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns y positions of the particles (default unit is [m]).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>*args :</strong></p>
+<blockquote>
+<div><p>The same arguments are available with <a class="reference internal" href="#impact.result.Result.getx" title="impact.result.Result.getx"><code class="xref py py-func docutils literal"><span class="pre">getx</span></code></a>.</p>
+</div></blockquote>
+<p><strong>**kws :</strong></p>
+<blockquote>
+<div><p>The same keywords are available with <a class="reference internal" href="#impact.result.Result.getx" title="impact.result.Result.getx"><code class="xref py py-func docutils literal"><span class="pre">getx</span></code></a>.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">ndarray</p>
+<blockquote class="last">
+<div><p>y positions of the particles</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>keywords: vertical, distribution</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="impact.result.Result.getyp">
+<code class="descname">getyp</code><span class="sig-paren">(</span><em>*args</em>, <em>**kws</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/impact/result.html#Result.getyp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#impact.result.Result.getyp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns y’ (yp, py) momentums of the particles (default unit is [rad]).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>*args :</strong></p>
+<blockquote>
+<div><p>The same arguments are available with <a class="reference internal" href="#impact.result.Result.getx" title="impact.result.Result.getx"><code class="xref py py-func docutils literal"><span class="pre">getx</span></code></a>.</p>
+</div></blockquote>
+<p><strong>**kws :</strong></p>
+<blockquote>
+<div><p>The same keywords are available with <a class="reference internal" href="#impact.result.Result.getx" title="impact.result.Result.getx"><code class="xref py py-func docutils literal"><span class="pre">getx</span></code></a>.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">ndarray</p>
+<blockquote class="last">
+<div><p>y’ momentums of the particles</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>keywords: vertical, distribution</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="impact.result.Result.getz">
+<code class="descname">getz</code><span class="sig-paren">(</span><em>*args</em>, <em>**kws</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/impact/result.html#Result.getz"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#impact.result.Result.getz" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns z positions (phase) of the particles (default unit is [deg]).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>*args :</strong></p>
+<blockquote>
+<div><p>The same arguments are available with <a class="reference internal" href="#impact.result.Result.getx" title="impact.result.Result.getx"><code class="xref py py-func docutils literal"><span class="pre">getx</span></code></a>.</p>
+</div></blockquote>
+<p><strong>**kws :</strong></p>
+<blockquote>
+<div><p>The same keywords are available with <a class="reference internal" href="#impact.result.Result.getx" title="impact.result.Result.getx"><code class="xref py py-func docutils literal"><span class="pre">getx</span></code></a>.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">ndarray</p>
+<blockquote class="last">
+<div><p>z positions of the particles</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>keywords: longitudinal, distribution</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="impact.result.Result.getzp">
+<code class="descname">getzp</code><span class="sig-paren">(</span><em>*args</em>, <em>**kws</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/impact/result.html#Result.getzp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#impact.result.Result.getzp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns z’ (zp, pz) of the particles (default unit is [MeV]).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>*args :</strong></p>
+<blockquote>
+<div><p>The same arguments are available with <a class="reference internal" href="#impact.result.Result.getx" title="impact.result.Result.getx"><code class="xref py py-func docutils literal"><span class="pre">getx</span></code></a>.</p>
+</div></blockquote>
+<p><strong>**kws :</strong></p>
+<blockquote>
+<div><p>The same keywords are available with <a class="reference internal" href="#impact.result.Result.getx" title="impact.result.Result.getx"><code class="xref py py-func docutils literal"><span class="pre">getx</span></code></a>.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">ndarray</p>
+<blockquote class="last">
+<div><p>z’ momentums of the particles</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>keywords: energy deviation, longitudinal, distribution</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="impact.result.Result.getctm">
+<code class="descname">getctm</code><span class="sig-paren">(</span><em>*args</em>, <em>**kws</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/impact/result.html#Result.getctm"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#impact.result.Result.getctm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns charge to mass ratio of the particles (default unit is [c^2/eV]).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>*args :</strong></p>
+<blockquote>
+<div><p>The same arguments are available with <a class="reference internal" href="#impact.result.Result.getx" title="impact.result.Result.getx"><code class="xref py py-func docutils literal"><span class="pre">getx</span></code></a>.</p>
+</div></blockquote>
+<p><strong>**kws :</strong></p>
+<blockquote>
+<div><p>The same keywords are available with <a class="reference internal" href="#impact.result.Result.getx" title="impact.result.Result.getx"><code class="xref py py-func docutils literal"><span class="pre">getx</span></code></a>.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">ndarray</p>
+<blockquote class="last">
+<div><p>charge to mass ratio of the particles</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="impact.result.Result.getcpmp">
+<code class="descname">getcpmp</code><span class="sig-paren">(</span><em>*args</em>, <em>**kws</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/impact/result.html#Result.getcpmp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#impact.result.Result.getcpmp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns charge per macro particle of the particles (default unit is [1]).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>*args :</strong></p>
+<blockquote>
+<div><p>The same arguments are available with <a class="reference internal" href="#impact.result.Result.getx" title="impact.result.Result.getx"><code class="xref py py-func docutils literal"><span class="pre">getx</span></code></a>.</p>
+</div></blockquote>
+<p><strong>**kws :</strong></p>
+<blockquote>
+<div><p>The same keywords are available with <a class="reference internal" href="#impact.result.Result.getx" title="impact.result.Result.getx"><code class="xref py py-func docutils literal"><span class="pre">getx</span></code></a>.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">ndarray</p>
+<blockquote class="last">
+<div><p>charge per macro-particle of the particles</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="impact.result.Result.getid">
+<code class="descname">getid</code><span class="sig-paren">(</span><em>*args</em>, <em>**kws</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/impact/result.html#Result.getid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#impact.result.Result.getid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns ID number of the particles (default unit is [1]).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>*args :</strong></p>
+<blockquote>
+<div><p>The same arguments are available with <a class="reference internal" href="#impact.result.Result.getx" title="impact.result.Result.getx"><code class="xref py py-func docutils literal"><span class="pre">getx</span></code></a>.</p>
+</div></blockquote>
+<p><strong>**kws :</strong></p>
+<blockquote>
+<div><p>The same keywords are available with <a class="reference internal" href="#impact.result.Result.getx" title="impact.result.Result.getx"><code class="xref py py-func docutils literal"><span class="pre">getx</span></code></a>.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">ndarray</p>
+<blockquote class="last">
+<div><p>ID number of the particles</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="impact.result.Result.getall">
+<code class="descname">getall</code><span class="sig-paren">(</span><em>*args</em>, <em>**kws</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/impact/result.html#Result.getall"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#impact.result.Result.getall" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns full information of the particles).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>*args :</strong></p>
+<blockquote>
+<div><p>The same arguments are available with <a class="reference internal" href="#impact.result.Result.getx" title="impact.result.Result.getx"><code class="xref py py-func docutils literal"><span class="pre">getx</span></code></a>.</p>
+</div></blockquote>
+<p><strong>**kws :</strong></p>
+<blockquote>
+<div><p>The same keywords are available with <a class="reference internal" href="#impact.result.Result.getx" title="impact.result.Result.getx"><code class="xref py py-func docutils literal"><span class="pre">getx</span></code></a>.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">(9, n) shape ndarray</p>
+<blockquote class="last">
+<div><p>All particle information. <em>n</em> is the number of particles.</p>
+<ul class="simple">
+<li>row 1 : x positions [m]</li>
+<li>row 2 : xp momentums [rad]</li>
+<li>row 3 : y positions [m]</li>
+<li>row 4 : yp momentums [rad]</li>
+<li>row 5 : z positions [deg]</li>
+<li>row 6 : zp momentums [MeV]</li>
+<li>row 7 : charge to mass ratios [c^2/eV]</li>
+<li>row 8 : charge per macro-particle weights [1]</li>
+<li>row 9 : ID numbers [1]</li>
+</ul>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="impact.input.html" class="btn btn-neutral" title="Input class / base of Sequence class" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Kei Fukushima.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.0.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

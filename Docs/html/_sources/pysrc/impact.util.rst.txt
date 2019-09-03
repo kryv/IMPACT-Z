@@ -1,0 +1,7 @@
+impact\.util module
+===================
+
+.. automodule:: impact.util
+    :members:
+    :undoc-members:
+    :show-inheritance:

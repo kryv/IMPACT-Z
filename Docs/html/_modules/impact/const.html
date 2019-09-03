@@ -1,0 +1,651 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>impact.const &mdash; Adv. IMPACT 1.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="Adv. IMPACT 1.0.0 documentation" href="../../index.html"/>
+        <link rel="up" title="Module code" href="../index.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Adv. IMPACT
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Table of Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../parallel.html">Parallel Computing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../element.html">Lattice Elements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../classlib.html">Class Library</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Adv. IMPACT</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>impact.const</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for impact.const</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">absolute_import</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">division</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">print_function</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">unicode_literals</span>
+
+<span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">OrderedDict</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">__authors__</span> <span class="o">=</span> <span class="s2">&quot;Kei Fukushima&quot;</span>
+<span class="n">__copyright__</span> <span class="o">=</span> <span class="s2">&quot;(c) 2017, Facility for Rare Isotope beams, Michigan State University&quot;</span>
+<span class="n">__contact__</span> <span class="o">=</span> <span class="s2">&quot;Kei Fukushima &lt;fukushim@frib.msu.edu&gt;&quot;</span>
+
+<span class="n">clight</span> <span class="o">=</span> <span class="mf">299792458.0</span>
+
+<span class="n">ulength</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;m&#39;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span> <span class="s1">&#39;mm&#39;</span><span class="p">:</span> <span class="mf">1e3</span><span class="p">,</span> <span class="s1">&#39;inch&#39;</span><span class="p">:</span> <span class="mf">0.0254</span><span class="p">}</span>
+<span class="n">uradian</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;rad&#39;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span> <span class="s1">&#39;mrad&#39;</span><span class="p">:</span> <span class="mf">1e3</span><span class="p">,</span> <span class="s1">&#39;deg&#39;</span><span class="p">:</span> <span class="mf">180.0</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">}</span>
+<span class="n">udegree</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;deg&#39;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span> <span class="s1">&#39;rad&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mf">180.0</span><span class="p">,</span> <span class="s1">&#39;mrad&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mf">180.0</span><span class="p">)</span><span class="o">*</span><span class="mf">1e3</span><span class="p">}</span>
+<span class="n">uemit</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;m-rad&#39;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span> <span class="s1">&#39;mm-mrad&#39;</span><span class="p">:</span> <span class="mf">1e6</span><span class="p">}</span>
+<span class="n">uenergy</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;eV&#39;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span> <span class="s1">&#39;MeV&#39;</span><span class="p">:</span> <span class="mf">1e-6</span><span class="p">}</span>
+<span class="n">uMenergy</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;eV&#39;</span><span class="p">:</span> <span class="mf">1e6</span><span class="p">,</span> <span class="s1">&#39;MeV&#39;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">}</span>
+<span class="n">uNone</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;1&#39;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">}</span>
+
+<span class="n">uelem</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;xmin&#39;</span><span class="p">:</span> <span class="s1">&#39;[m]&#39;</span><span class="p">,</span> <span class="s1">&#39;xmax&#39;</span><span class="p">:</span> <span class="s1">&#39;[m]&#39;</span><span class="p">,</span> <span class="s1">&#39;ymin&#39;</span><span class="p">:</span> <span class="s1">&#39;[m]&#39;</span><span class="p">,</span> <span class="s1">&#39;ymax&#39;</span><span class="p">:</span> <span class="s1">&#39;[m]&#39;</span><span class="p">,</span>
+         <span class="s1">&#39;xshift&#39;</span><span class="p">:</span> <span class="s1">&#39;[m]&#39;</span><span class="p">,</span> <span class="s1">&#39;xpshift&#39;</span><span class="p">:</span> <span class="s1">&#39;[rad]&#39;</span><span class="p">,</span>
+         <span class="s1">&#39;yshift&#39;</span><span class="p">:</span> <span class="s1">&#39;[m]&#39;</span><span class="p">,</span> <span class="s1">&#39;ypshift&#39;</span><span class="p">:</span> <span class="s1">&#39;[rad]&#39;</span><span class="p">,</span>
+         <span class="s1">&#39;zshift&#39;</span><span class="p">:</span> <span class="s1">&#39;[deg]&#39;</span><span class="p">,</span> <span class="s1">&#39;zpshift&#39;</span><span class="p">:</span> <span class="s1">&#39;[MeV]&#39;</span><span class="p">,</span> <span class="s1">&#39;phase shift&#39;</span><span class="p">:</span> <span class="s1">&#39;[deg]&#39;</span><span class="p">,</span>
+         <span class="s1">&#39;aperture&#39;</span><span class="p">:</span> <span class="s1">&#39;[m]&#39;</span><span class="p">,</span> <span class="s1">&#39;xaperture&#39;</span><span class="p">:</span> <span class="s1">&#39;[m]&#39;</span><span class="p">,</span> <span class="s1">&#39;yaperture&#39;</span><span class="p">:</span> <span class="s1">&#39;[m]&#39;</span><span class="p">,</span>
+         <span class="s1">&#39;dx&#39;</span><span class="p">:</span> <span class="s1">&#39;[m]&#39;</span><span class="p">,</span> <span class="s1">&#39;dy&#39;</span><span class="p">:</span> <span class="s1">&#39;[m]&#39;</span><span class="p">,</span>
+         <span class="s1">&#39;pitch&#39;</span><span class="p">:</span> <span class="s1">&#39;[rad]&#39;</span><span class="p">,</span> <span class="s1">&#39;yaw&#39;</span><span class="p">:</span> <span class="s1">&#39;[rad]&#39;</span><span class="p">,</span> <span class="s1">&#39;roll&#39;</span><span class="p">:</span> <span class="s1">&#39;[rad]&#39;</span><span class="p">,</span>
+         <span class="s1">&#39;bz0&#39;</span><span class="p">:</span> <span class="s1">&#39;[T]&#39;</span><span class="p">,</span> <span class="s1">&#39;gradient&#39;</span><span class="p">:</span> <span class="s1">&#39;[T/m]&#39;</span><span class="p">,</span>
+         <span class="s1">&#39;driven phase&#39;</span><span class="p">:</span> <span class="s1">&#39;[deg]&#39;</span><span class="p">,</span> <span class="s1">&#39;input phase&#39;</span><span class="p">:</span> <span class="s1">&#39;[deg]&#39;</span><span class="p">,</span>
+         <span class="s1">&#39;frequency&#39;</span><span class="p">:</span> <span class="s1">&#39;[Hz]&#39;</span><span class="p">,</span> <span class="s1">&#39;frequency2&#39;</span><span class="p">:</span> <span class="s1">&#39;[Hz]&#39;</span><span class="p">,</span> <span class="s1">&#39;frequency3&#39;</span><span class="p">:</span> <span class="s1">&#39;[Hz]&#39;</span><span class="p">,</span>
+         <span class="s1">&#39;scaling&#39;</span><span class="p">:</span> <span class="s1">&#39;[1]&#39;</span><span class="p">,</span> <span class="s1">&#39;scaling2&#39;</span><span class="p">:</span> <span class="s1">&#39;[1]&#39;</span><span class="p">,</span> <span class="s1">&#39;scaling3&#39;</span><span class="p">:</span> <span class="s1">&#39;[1]&#39;</span><span class="p">,</span>
+         <span class="s1">&#39;frequency ratio 2&#39;</span><span class="p">:</span> <span class="s1">&#39;[1]&#39;</span><span class="p">,</span> <span class="s1">&#39;frequency ratio 3&#39;</span><span class="p">:</span> <span class="s1">&#39;[1]&#39;</span><span class="p">,</span>
+         <span class="s1">&#39;driven phase offset 2&#39;</span><span class="p">:</span> <span class="s1">&#39;[deg]&#39;</span><span class="p">,</span> <span class="s1">&#39;driven phase offset 3&#39;</span><span class="p">:</span> <span class="s1">&#39;[deg]&#39;</span><span class="p">,</span>
+         <span class="s1">&#39;scale error&#39;</span><span class="p">:</span> <span class="s1">&#39;[1]&#39;</span><span class="p">,</span> <span class="s1">&#39;scale error 2&#39;</span><span class="p">:</span> <span class="s1">&#39;[1]&#39;</span><span class="p">,</span> <span class="s1">&#39;scale error 3&#39;</span><span class="p">:</span> <span class="s1">&#39;[1]&#39;</span><span class="p">,</span>
+         <span class="s1">&#39;phase error&#39;</span><span class="p">:</span> <span class="s1">&#39;[deg]&#39;</span><span class="p">,</span> <span class="s1">&#39;phase error 2&#39;</span><span class="p">:</span> <span class="s1">&#39;[deg]&#39;</span><span class="p">,</span> <span class="s1">&#39;phase error 3&#39;</span><span class="p">:</span> <span class="s1">&#39;[deg]&#39;</span><span class="p">,</span>
+         <span class="s1">&#39;synchronous phase offset&#39;</span><span class="p">:</span> <span class="s1">&#39;[deg]&#39;</span>
+         <span class="p">}</span>
+
+<span class="n">ddist</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Rectangle&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;rectangle&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;rc&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+         <span class="s1">&#39;Gaussian&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;gaussian&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;gs&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+         <span class="s1">&#39;Waterbag&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;waterbag&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+         <span class="s1">&#39;Semi-Gaussian&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;semi-gaussian&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;sg&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+         <span class="s1">&#39;KV&#39;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="s1">&#39;kv&#39;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+         <span class="s1">&#39;mc-Waterbag&#39;</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span> <span class="s1">&#39;mc-waterbag&#39;</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span> <span class="s1">&#39;mcwb&#39;</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span> <span class="s1">&#39;wbmc&#39;</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span>
+         <span class="s1">&#39;mc-Gaussian&#39;</span><span class="p">:</span> <span class="mi">17</span><span class="p">,</span> <span class="s1">&#39;mc-gaussian&#39;</span><span class="p">:</span> <span class="mi">17</span><span class="p">,</span> <span class="s1">&#39;mcgs&#39;</span><span class="p">:</span> <span class="mi">17</span><span class="p">,</span> <span class="s1">&#39;gsmc&#39;</span><span class="p">:</span> <span class="mi">17</span><span class="p">,</span>
+         <span class="s1">&#39;User-Input&#39;</span><span class="p">:</span> <span class="mi">19</span><span class="p">,</span> <span class="s1">&#39;user-input&#39;</span><span class="p">:</span> <span class="mi">19</span><span class="p">,</span> <span class="s1">&#39;ui&#39;</span><span class="p">:</span> <span class="mi">19</span>
+         <span class="p">}</span>
+
+<span class="n">elemtype</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">((</span>
+    <span class="p">(</span><span class="s1">&#39;freq jump&#39;</span><span class="p">,</span> <span class="o">-</span><span class="mi">27</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;monitor&#39;</span><span class="p">,</span> <span class="o">-</span><span class="mi">23</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;corrector&#39;</span><span class="p">,</span> <span class="o">-</span><span class="mi">21</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;cor&#39;</span><span class="p">,</span> <span class="o">-</span><span class="mi">21</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;collimator slit&#39;</span><span class="p">,</span> <span class="o">-</span><span class="mi">13</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;col&#39;</span><span class="p">,</span> <span class="o">-</span><span class="mi">13</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;slit&#39;</span><span class="p">,</span> <span class="o">-</span><span class="mi">13</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;drift&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;quadrupole&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;quad&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;constant focusing&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;constfocus&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;solenoid&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;sol&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;solenoid2&#39;</span><span class="p">,</span> <span class="mi">13</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;sol2&#39;</span><span class="p">,</span> <span class="mi">13</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;hsolenoid&#39;</span><span class="p">,</span> <span class="mi">13</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;hsol&#39;</span><span class="p">,</span> <span class="mi">13</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;dipole&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;bend&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;multipole&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;mpole&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;drift tube linac&#39;</span><span class="p">,</span> <span class="mi">101</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;dtl&#39;</span><span class="p">,</span> <span class="mi">101</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;coupled cavity drift tube linac&#39;</span><span class="p">,</span> <span class="mi">102</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;ccdtl&#39;</span><span class="p">,</span> <span class="mi">102</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;coupled cavity linac&#39;</span><span class="p">,</span> <span class="mi">103</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;ccl&#39;</span><span class="p">,</span> <span class="mi">103</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;superconducting cavity&#39;</span><span class="p">,</span> <span class="mi">104</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;scc&#39;</span><span class="p">,</span> <span class="mi">104</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;solenoid-rf&#39;</span><span class="p">,</span> <span class="mi">105</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;solrf&#39;</span><span class="p">,</span> <span class="mi">105</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;rfquadrupole&#39;</span><span class="p">,</span> <span class="mi">106</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;rfquad&#39;</span><span class="p">,</span> <span class="mi">106</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;rfq&#39;</span><span class="p">,</span> <span class="mi">106</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;emfield&#39;</span><span class="p">,</span> <span class="mi">110</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;emfld&#39;</span><span class="p">,</span> <span class="mi">110</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;em field dipole&#39;</span><span class="p">,</span> <span class="mi">114</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;emfdipole&#39;</span><span class="p">,</span> <span class="mi">114</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;emfbend&#39;</span><span class="p">,</span> <span class="mi">114</span><span class="p">)</span>
+<span class="p">))</span>
+
+<span class="n">dopt</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">((</span>
+    <span class="p">(</span><span class="s1">&#39;option1&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;option2&#39;</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;option3&#39;</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;option4&#39;</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;option5&#39;</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;option6&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;option7&#39;</span><span class="p">,</span> <span class="mi">11</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;option8&#39;</span><span class="p">,</span> <span class="mi">12</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;option9&#39;</span><span class="p">,</span> <span class="mi">13</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;option10&#39;</span><span class="p">,</span> <span class="mi">14</span><span class="p">)</span>
+<span class="p">))</span>
+
+<span class="n">dcor</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">((</span>
+    <span class="p">(</span><span class="s1">&#39;aperture&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;aper&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;pipe&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;radius&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;xshift&#39;</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;xpshift&#39;</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;pxshift&#39;</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;theta_x&#39;</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;yshift&#39;</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;ypshift&#39;</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;pyshift&#39;</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;theta_y&#39;</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;zshift&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;zpshift&#39;</span><span class="p">,</span> <span class="mi">11</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;pzshift&#39;</span><span class="p">,</span> <span class="mi">11</span><span class="p">)</span>
+<span class="p">))</span>
+
+<span class="n">dslit</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">((</span>
+    <span class="p">(</span><span class="s1">&#39;xmin&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;xmax&#39;</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;ymin&#39;</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;ymax&#39;</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
+<span class="p">))</span>
+
+<span class="n">dbps</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">((</span>
+    <span class="p">(</span><span class="s1">&#39;parameter id&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;pid&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;min&#39;</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;max&#39;</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;reference energy offset&#39;</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;offset&#39;</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
+<span class="p">))</span>
+
+<span class="n">dfjump</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">((</span>
+    <span class="p">(</span><span class="s1">&#39;dummy&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;frequency&#39;</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;phase shift&#39;</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;zshift&#39;</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;shift&#39;</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
+<span class="p">))</span>
+
+<span class="n">ddrift</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">((</span>
+    <span class="p">(</span><span class="s1">&#39;aperture&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;aper&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;pipe&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;radius&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="p">))</span>
+
+<span class="n">dquad</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">((</span>
+    <span class="p">(</span><span class="s1">&#39;gradient&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;grad&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;b2&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;voltage&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;switch&#39;</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;flag&#39;</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;aperture&#39;</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;aper&#39;</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;pipe&#39;</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;radius&#39;</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;dx&#39;</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;dx0&#39;</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;dy&#39;</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;dy0&#39;</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;pitch&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;dx1&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;yaw&#39;</span><span class="p">,</span> <span class="mi">11</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;dy1&#39;</span><span class="p">,</span> <span class="mi">11</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;roll&#39;</span><span class="p">,</span> <span class="mi">12</span><span class="p">)</span>
+<span class="p">))</span>
+
+<span class="n">dcfcs</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">((</span>
+    <span class="p">(</span><span class="s1">&#39;kx0^2&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;kx2&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;ky0^2&#39;</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;ky2&#39;</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;kz0^2&#39;</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;kz2&#39;</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;aperture&#39;</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;aper&#39;</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;pipe&#39;</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;radius&#39;</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span>
+<span class="p">))</span>
+
+<span class="n">dsol</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">((</span>
+    <span class="p">(</span><span class="s1">&#39;bz0&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;bz&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;fileid&#39;</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;file&#39;</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;aperture&#39;</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;aper&#39;</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;pipe&#39;</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;radius&#39;</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;dx&#39;</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;dx0&#39;</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;dy&#39;</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;dy0&#39;</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;pitch&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;dx1&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;yaw&#39;</span><span class="p">,</span> <span class="mi">11</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;dy1&#39;</span><span class="p">,</span> <span class="mi">11</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;roll&#39;</span><span class="p">,</span> <span class="mi">12</span><span class="p">)</span>
+<span class="p">))</span>
+
+<span class="n">dsol2</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">((</span>
+    <span class="p">(</span><span class="s1">&#39;bz0&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;bz&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;fileid&#39;</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;file&#39;</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;aperture&#39;</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;aper&#39;</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;pipe&#39;</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;radius&#39;</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;by&#39;</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;bx&#39;</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;dx&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;dx0&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;dy&#39;</span><span class="p">,</span> <span class="mi">11</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;dy0&#39;</span><span class="p">,</span> <span class="mi">11</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;pitch&#39;</span><span class="p">,</span> <span class="mi">12</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;dx1&#39;</span><span class="p">,</span> <span class="mi">12</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;yaw&#39;</span><span class="p">,</span> <span class="mi">13</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;dy1&#39;</span><span class="p">,</span> <span class="mi">13</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;roll&#39;</span><span class="p">,</span> <span class="mi">14</span><span class="p">)</span>
+<span class="p">))</span>
+
+<span class="n">ddip</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">((</span>
+    <span class="p">(</span><span class="s1">&#39;angle&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;phi&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;beta*gamma&#39;</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;bg&#39;</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;switch&#39;</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;flag&#39;</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;aperture&#39;</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;aper&#39;</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;pipe&#39;</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;radius&#39;</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;front anlge&#39;</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;angle1&#39;</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;phi1&#39;</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;back angle&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;angle2&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;phi2&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;front curvature&#39;</span><span class="p">,</span> <span class="mi">11</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;curv1&#39;</span><span class="p">,</span> <span class="mi">11</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;back curvature&#39;</span><span class="p">,</span> <span class="mi">12</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;curv2&#39;</span><span class="p">,</span> <span class="mi">12</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;fringe q-term&#39;</span><span class="p">,</span> <span class="mi">13</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;kf&#39;</span><span class="p">,</span> <span class="mi">13</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;main q-term&#39;</span><span class="p">,</span> <span class="mi">14</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="mi">14</span><span class="p">)</span>
+<span class="p">))</span>
+
+<span class="n">dmlt</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">((</span>
+    <span class="p">(</span><span class="s1">&#39;gradient&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;grad&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;b2&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;b3&#39;</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;b4&#39;</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;b5&#39;</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;b6&#39;</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;b7&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;b8&#39;</span><span class="p">,</span> <span class="mi">11</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;aperture&#39;</span><span class="p">,</span> <span class="mi">12</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;aper&#39;</span><span class="p">,</span> <span class="mi">12</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;pipe&#39;</span><span class="p">,</span> <span class="mi">12</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;radius&#39;</span><span class="p">,</span> <span class="mi">12</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;dx&#39;</span><span class="p">,</span> <span class="mi">13</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;dx0&#39;</span><span class="p">,</span> <span class="mi">13</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;dy&#39;</span><span class="p">,</span> <span class="mi">14</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;dy0&#39;</span><span class="p">,</span> <span class="mi">14</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;pitch&#39;</span><span class="p">,</span> <span class="mi">15</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;dx1&#39;</span><span class="p">,</span> <span class="mi">15</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;yaw&#39;</span><span class="p">,</span> <span class="mi">16</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;dx1&#39;</span><span class="p">,</span> <span class="mi">16</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;roll&#39;</span><span class="p">,</span> <span class="mi">17</span><span class="p">)</span>
+<span class="p">))</span>
+
+<span class="n">ddtl</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">((</span>
+    <span class="p">(</span><span class="s1">&#39;scaling&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;scale&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;scl_fac&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;frequency&#39;</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;f&#39;</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;freq&#39;</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;driven phase&#39;</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;phi0&#39;</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;fileid&#39;</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;file&#39;</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;aperture&#39;</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;aper&#39;</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;pipe&#39;</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;radius&#39;</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;quad 1 length&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;q1len&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;quad 1 gradient&#39;</span><span class="p">,</span> <span class="mi">11</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;q1grad&#39;</span><span class="p">,</span> <span class="mi">11</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;quad 2 length&#39;</span><span class="p">,</span> <span class="mi">12</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;q2len&#39;</span><span class="p">,</span> <span class="mi">12</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;quad 2 gradient&#39;</span><span class="p">,</span> <span class="mi">13</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;q2grad&#39;</span><span class="p">,</span> <span class="mi">13</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;dx&#39;</span><span class="p">,</span> <span class="mi">14</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;dx0&#39;</span><span class="p">,</span> <span class="mi">14</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;dy&#39;</span><span class="p">,</span> <span class="mi">15</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;dy0&#39;</span><span class="p">,</span> <span class="mi">15</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;pitch&#39;</span><span class="p">,</span> <span class="mi">16</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;dx1&#39;</span><span class="p">,</span> <span class="mi">16</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;yaw&#39;</span><span class="p">,</span> <span class="mi">17</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;dx1&#39;</span><span class="p">,</span> <span class="mi">17</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;roll&#39;</span><span class="p">,</span> <span class="mi">18</span><span class="p">)</span>
+<span class="p">))</span>
+
+<span class="n">dccdtl</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">((</span>
+    <span class="p">(</span><span class="s1">&#39;scaling&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;scale&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;scl_fac&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;frequency&#39;</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;f&#39;</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;freq&#39;</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;driven phase&#39;</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;phi0&#39;</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;fileid&#39;</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;file&#39;</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;aperture&#39;</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;aper&#39;</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;pipe&#39;</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;radius&#39;</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;dx&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;dx0&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;dy&#39;</span><span class="p">,</span> <span class="mi">11</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;dy0&#39;</span><span class="p">,</span> <span class="mi">11</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;pitch&#39;</span><span class="p">,</span> <span class="mi">12</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;dx1&#39;</span><span class="p">,</span> <span class="mi">12</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;yaw&#39;</span><span class="p">,</span> <span class="mi">13</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;dy1&#39;</span><span class="p">,</span> <span class="mi">13</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;roll&#39;</span><span class="p">,</span> <span class="mi">14</span><span class="p">)</span>
+<span class="p">))</span>
+
+<span class="n">dccl</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">((</span>
+    <span class="p">(</span><span class="s1">&#39;scaling&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;scale&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;scl_fac&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;frequency&#39;</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;f&#39;</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;freq&#39;</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;input phase&#39;</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;phi0&#39;</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;fileid&#39;</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;file&#39;</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;aperture&#39;</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;aper&#39;</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;pipe&#39;</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;radius&#39;</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;dx&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;dx0&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;dy&#39;</span><span class="p">,</span> <span class="mi">11</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;dy0&#39;</span><span class="p">,</span> <span class="mi">11</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;pitch&#39;</span><span class="p">,</span> <span class="mi">12</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;dx1&#39;</span><span class="p">,</span> <span class="mi">12</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;yaw&#39;</span><span class="p">,</span> <span class="mi">13</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;dy1&#39;</span><span class="p">,</span> <span class="mi">13</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;roll&#39;</span><span class="p">,</span> <span class="mi">14</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;synchronous phase flag&#39;</span><span class="p">,</span> <span class="mi">15</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;sync_flag&#39;</span><span class="p">,</span> <span class="mi">15</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;syncflag&#39;</span><span class="p">,</span> <span class="mi">15</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;scale error&#39;</span><span class="p">,</span> <span class="mi">16</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;dscl&#39;</span><span class="p">,</span> <span class="mi">16</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;er_scl&#39;</span><span class="p">,</span> <span class="mi">16</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;phase error&#39;</span><span class="p">,</span> <span class="mi">17</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;dphi&#39;</span><span class="p">,</span> <span class="mi">17</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;er_phi&#39;</span><span class="p">,</span> <span class="mi">17</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;scaling2&#39;</span><span class="p">,</span> <span class="mi">18</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;scale2&#39;</span><span class="p">,</span> <span class="mi">18</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;scl_fac2&#39;</span><span class="p">,</span> <span class="mi">18</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;frequency ratio 2&#39;</span><span class="p">,</span> <span class="mi">19</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;f2&#39;</span><span class="p">,</span> <span class="mi">19</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;freq2&#39;</span><span class="p">,</span> <span class="mi">19</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;driven phase offset 2&#39;</span><span class="p">,</span> <span class="mi">20</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;phi0_2&#39;</span><span class="p">,</span> <span class="mi">20</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;scaling3&#39;</span><span class="p">,</span> <span class="mi">21</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;scale3&#39;</span><span class="p">,</span> <span class="mi">21</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;scl_fac3&#39;</span><span class="p">,</span> <span class="mi">21</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;frequency ratio 3&#39;</span><span class="p">,</span> <span class="mi">22</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;f3&#39;</span><span class="p">,</span> <span class="mi">22</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;freq3&#39;</span><span class="p">,</span> <span class="mi">22</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;driven phase offset 3&#39;</span><span class="p">,</span> <span class="mi">23</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;phi0_3&#39;</span><span class="p">,</span> <span class="mi">23</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;scale error 2&#39;</span><span class="p">,</span> <span class="mi">24</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;dscl2&#39;</span><span class="p">,</span> <span class="mi">24</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;er_scl2&#39;</span><span class="p">,</span> <span class="mi">24</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;phase error 2&#39;</span><span class="p">,</span> <span class="mi">25</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;dphi2&#39;</span><span class="p">,</span> <span class="mi">25</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;er_phi2&#39;</span><span class="p">,</span> <span class="mi">25</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;scale error 3&#39;</span><span class="p">,</span> <span class="mi">26</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;dscl3&#39;</span><span class="p">,</span> <span class="mi">26</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;er_scl3&#39;</span><span class="p">,</span> <span class="mi">26</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;phase error 3&#39;</span><span class="p">,</span> <span class="mi">27</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;dphi3&#39;</span><span class="p">,</span> <span class="mi">27</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;er_phi3&#39;</span><span class="p">,</span> <span class="mi">27</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;synchronous phase offset&#39;</span><span class="p">,</span> <span class="mi">28</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;sync_offset&#39;</span><span class="p">,</span> <span class="mi">28</span><span class="p">)</span>
+<span class="p">))</span>
+
+<span class="n">dsc</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">((</span>
+    <span class="p">(</span><span class="s1">&#39;scaling&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;scale&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;scl_fac&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;frequency&#39;</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;f&#39;</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;freq&#39;</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;driven phase&#39;</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;phi0&#39;</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;fileid&#39;</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;file&#39;</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;aperture&#39;</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;aper&#39;</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;pipe&#39;</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;radius&#39;</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;dx&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;dx0&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;dy&#39;</span><span class="p">,</span> <span class="mi">11</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;dy0&#39;</span><span class="p">,</span> <span class="mi">11</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;pitch&#39;</span><span class="p">,</span> <span class="mi">12</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;dx1&#39;</span><span class="p">,</span> <span class="mi">12</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;yaw&#39;</span><span class="p">,</span> <span class="mi">13</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;dy1&#39;</span><span class="p">,</span> <span class="mi">13</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;roll&#39;</span><span class="p">,</span> <span class="mi">14</span><span class="p">)</span>
+<span class="p">))</span>
+
+<span class="n">dsolrf</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">((</span>
+    <span class="p">(</span><span class="s1">&#39;scaling&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;scale&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;scl_fac&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;frequency&#39;</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;f&#39;</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;freq&#39;</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;driven phase&#39;</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;phi0&#39;</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;fileid&#39;</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;file&#39;</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;aperture&#39;</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;aper&#39;</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;pipe&#39;</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;radius&#39;</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;dx&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;dx0&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;dy&#39;</span><span class="p">,</span> <span class="mi">11</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;dy0&#39;</span><span class="p">,</span> <span class="mi">11</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;pitch&#39;</span><span class="p">,</span> <span class="mi">12</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;dx1&#39;</span><span class="p">,</span> <span class="mi">12</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;yaw&#39;</span><span class="p">,</span> <span class="mi">13</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;dy1&#39;</span><span class="p">,</span> <span class="mi">13</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;roll&#39;</span><span class="p">,</span> <span class="mi">14</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;bz0&#39;</span><span class="p">,</span> <span class="mi">15</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;bz&#39;</span><span class="p">,</span> <span class="mi">15</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
+<span class="p">))</span>
+
+<span class="n">drfq</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">((</span>
+    <span class="p">(</span><span class="s1">&#39;scaling&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;scale&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;scl_fac&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;frequency&#39;</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;f&#39;</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;freq&#39;</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;driven phase&#39;</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;phi0&#39;</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;fileid&#39;</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;file&#39;</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;aperture&#39;</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;aper&#39;</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;pipe&#39;</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;radius&#39;</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;modulation&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;mod&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;dx&#39;</span><span class="p">,</span> <span class="mi">11</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;dx0&#39;</span><span class="p">,</span> <span class="mi">11</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;dy&#39;</span><span class="p">,</span> <span class="mi">12</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;dy0&#39;</span><span class="p">,</span> <span class="mi">12</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;pitch&#39;</span><span class="p">,</span> <span class="mi">13</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;dx1&#39;</span><span class="p">,</span> <span class="mi">13</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;yaw&#39;</span><span class="p">,</span> <span class="mi">14</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;dy1&#39;</span><span class="p">,</span> <span class="mi">14</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;roll&#39;</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
+<span class="p">))</span>
+
+
+<span class="n">demfld</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">((</span>
+    <span class="p">(</span><span class="s1">&#39;scaling&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;scale&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;scl_fac&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;frequency&#39;</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;f&#39;</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;freq&#39;</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;input phase&#39;</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;phi0&#39;</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;fileid&#39;</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;file&#39;</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;xaperture&#39;</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;xaper&#39;</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;xpipe&#39;</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;xradius&#39;</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;yaperture&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;yaper&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;ypipe&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;yradius&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;dx&#39;</span><span class="p">,</span> <span class="mi">11</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;dx0&#39;</span><span class="p">,</span> <span class="mi">11</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;dy&#39;</span><span class="p">,</span> <span class="mi">12</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;dy0&#39;</span><span class="p">,</span> <span class="mi">12</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;pitch&#39;</span><span class="p">,</span> <span class="mi">13</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;dx1&#39;</span><span class="p">,</span> <span class="mi">13</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;yaw&#39;</span><span class="p">,</span> <span class="mi">14</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;dy1&#39;</span><span class="p">,</span> <span class="mi">14</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;roll&#39;</span><span class="p">,</span> <span class="mi">15</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;data type&#39;</span><span class="p">,</span> <span class="mi">16</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="mi">16</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;coordinate&#39;</span><span class="p">,</span> <span class="mi">17</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;coor&#39;</span><span class="p">,</span> <span class="mi">17</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;synchronous phase flag&#39;</span><span class="p">,</span> <span class="mi">18</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;sync_flag&#39;</span><span class="p">,</span> <span class="mi">18</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;syncflag&#39;</span><span class="p">,</span> <span class="mi">18</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;scale error&#39;</span><span class="p">,</span> <span class="mi">19</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;dscl&#39;</span><span class="p">,</span> <span class="mi">19</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;er_scl&#39;</span><span class="p">,</span> <span class="mi">19</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;phase error&#39;</span><span class="p">,</span> <span class="mi">20</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;dphi&#39;</span><span class="p">,</span> <span class="mi">20</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;er_phi&#39;</span><span class="p">,</span> <span class="mi">20</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;scaling2&#39;</span><span class="p">,</span> <span class="mi">21</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;scale2&#39;</span><span class="p">,</span> <span class="mi">21</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;scl_fac2&#39;</span><span class="p">,</span> <span class="mi">21</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;frequency2&#39;</span><span class="p">,</span> <span class="mi">22</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;f2&#39;</span><span class="p">,</span> <span class="mi">22</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;freq2&#39;</span><span class="p">,</span> <span class="mi">22</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;driven phase offset 2&#39;</span><span class="p">,</span> <span class="mi">23</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;phi0_2&#39;</span><span class="p">,</span> <span class="mi">23</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;scaling3&#39;</span><span class="p">,</span> <span class="mi">24</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;scale3&#39;</span><span class="p">,</span> <span class="mi">24</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;scl_fac2&#39;</span><span class="p">,</span> <span class="mi">24</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;frequency3&#39;</span><span class="p">,</span> <span class="mi">25</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;f3&#39;</span><span class="p">,</span> <span class="mi">25</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;freq3&#39;</span><span class="p">,</span> <span class="mi">25</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;driven phase offset 3&#39;</span><span class="p">,</span> <span class="mi">26</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;phi0_3&#39;</span><span class="p">,</span> <span class="mi">26</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;scale error 2&#39;</span><span class="p">,</span> <span class="mi">27</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;dscl2&#39;</span><span class="p">,</span> <span class="mi">27</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;er_scl2&#39;</span><span class="p">,</span> <span class="mi">27</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;phase error 2&#39;</span><span class="p">,</span> <span class="mi">28</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;dphi2&#39;</span><span class="p">,</span> <span class="mi">28</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;er_phi2&#39;</span><span class="p">,</span> <span class="mi">28</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;scale error 3&#39;</span><span class="p">,</span> <span class="mi">29</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;dscl3&#39;</span><span class="p">,</span> <span class="mi">29</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;er_scl3&#39;</span><span class="p">,</span> <span class="mi">29</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;phase error 3&#39;</span><span class="p">,</span> <span class="mi">30</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;dphi3&#39;</span><span class="p">,</span> <span class="mi">30</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;er_phi3&#39;</span><span class="p">,</span> <span class="mi">30</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;synchronous phase offset&#39;</span><span class="p">,</span> <span class="mi">31</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;sync_offset&#39;</span><span class="p">,</span> <span class="mi">31</span><span class="p">)</span>
+<span class="p">))</span>
+
+<span class="n">dbndfld</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">((</span>
+    <span class="p">(</span><span class="s1">&#39;scaling&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;scale&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;scl_fac&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;angle&#39;</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;phi&#39;</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;fringe length&#39;</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;flen&#39;</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;fileid&#39;</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;file&#39;</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;xaperture&#39;</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;xaper&#39;</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;xpipe&#39;</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;xwidth&#39;</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;yaperture&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;yaper&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;ypipe&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;ywidth&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;dx&#39;</span><span class="p">,</span> <span class="mi">11</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;dx0&#39;</span><span class="p">,</span> <span class="mi">11</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;dy&#39;</span><span class="p">,</span> <span class="mi">12</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;dy0&#39;</span><span class="p">,</span> <span class="mi">12</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;pitch&#39;</span><span class="p">,</span> <span class="mi">13</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;dx1&#39;</span><span class="p">,</span> <span class="mi">13</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;yaw&#39;</span><span class="p">,</span> <span class="mi">14</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;dy1&#39;</span><span class="p">,</span> <span class="mi">14</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;roll&#39;</span><span class="p">,</span> <span class="mi">15</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;xoffset&#39;</span><span class="p">,</span> <span class="mi">16</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;xoff&#39;</span><span class="p">,</span> <span class="mi">16</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;yoffset&#39;</span><span class="p">,</span> <span class="mi">17</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;yoff&#39;</span><span class="p">,</span> <span class="mi">17</span><span class="p">),</span>
+<span class="p">))</span>
+
+
+<div class="viewcode-block" id="vrdct"><a class="viewcode-back" href="../../pysrc/impact.const.html#impact.const.vrdct">[docs]</a><span class="k">def</span> <span class="nf">vrdct</span><span class="p">(</span><span class="n">typ</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">typ</span> <span class="o">==</span> <span class="o">-</span><span class="mi">27</span><span class="p">:</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="n">dfjump</span>
+    <span class="k">elif</span> <span class="n">typ</span> <span class="o">==</span> <span class="o">-</span><span class="mi">21</span><span class="p">:</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="n">dcor</span>
+    <span class="k">elif</span> <span class="n">typ</span> <span class="o">==</span> <span class="o">-</span><span class="mi">14</span><span class="p">:</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="n">dbps</span>
+    <span class="k">elif</span> <span class="n">typ</span> <span class="o">==</span> <span class="o">-</span><span class="mi">13</span><span class="p">:</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="n">dslit</span>
+    <span class="k">elif</span> <span class="n">typ</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="n">dopt</span>
+    <span class="k">elif</span> <span class="n">typ</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="n">ddrift</span>
+    <span class="k">elif</span> <span class="n">typ</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="n">dquad</span>
+    <span class="k">elif</span> <span class="n">typ</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="n">dcfcs</span>
+    <span class="k">elif</span> <span class="n">typ</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="n">dsol</span>
+    <span class="k">elif</span> <span class="n">typ</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="n">ddip</span>
+    <span class="k">elif</span> <span class="n">typ</span> <span class="o">==</span> <span class="mi">5</span><span class="p">:</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="n">dmlt</span>
+    <span class="k">elif</span> <span class="n">typ</span> <span class="o">==</span> <span class="mi">13</span><span class="p">:</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="n">dsol2</span>
+    <span class="k">elif</span> <span class="n">typ</span> <span class="o">==</span> <span class="mi">101</span><span class="p">:</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="n">ddtl</span>
+    <span class="k">elif</span> <span class="n">typ</span> <span class="o">==</span> <span class="mi">102</span><span class="p">:</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="n">dccdtl</span>
+    <span class="k">elif</span> <span class="n">typ</span> <span class="o">==</span> <span class="mi">103</span><span class="p">:</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="n">dccl</span>
+    <span class="k">elif</span> <span class="n">typ</span> <span class="o">==</span> <span class="mi">104</span><span class="p">:</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="n">dsc</span>
+    <span class="k">elif</span> <span class="n">typ</span> <span class="o">==</span> <span class="mi">105</span><span class="p">:</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="n">dsolrf</span>
+    <span class="k">elif</span> <span class="n">typ</span> <span class="o">==</span> <span class="mi">106</span><span class="p">:</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="n">drfq</span>
+    <span class="k">elif</span> <span class="n">typ</span> <span class="o">==</span> <span class="mi">110</span><span class="p">:</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="n">demfld</span>
+    <span class="k">elif</span> <span class="n">typ</span> <span class="o">==</span> <span class="mi">114</span><span class="p">:</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="n">dbndfld</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="k">return</span> <span class="n">ret</span></div>
+
+
+<div class="viewcode-block" id="vrlen"><a class="viewcode-back" href="../../pysrc/impact.const.html#impact.const.vrlen">[docs]</a><span class="k">def</span> <span class="nf">vrlen</span><span class="p">(</span><span class="n">typ</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">typ</span> <span class="o">==</span> <span class="o">-</span><span class="mi">27</span><span class="p">:</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="mi">3</span>
+    <span class="k">if</span> <span class="n">typ</span> <span class="o">==</span> <span class="o">-</span><span class="mi">14</span><span class="p">:</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="mi">4</span>
+    <span class="k">elif</span> <span class="n">typ</span> <span class="o">==</span> <span class="o">-</span><span class="mi">13</span><span class="p">:</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="mi">4</span>
+    <span class="k">elif</span> <span class="n">typ</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="mi">7</span>
+    <span class="k">elif</span> <span class="n">typ</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">elif</span> <span class="n">typ</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="mi">8</span>
+    <span class="k">elif</span> <span class="n">typ</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="mi">4</span>
+    <span class="k">elif</span> <span class="n">typ</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="mi">8</span>
+    <span class="k">elif</span> <span class="n">typ</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="mi">10</span>
+    <span class="k">elif</span> <span class="n">typ</span> <span class="o">==</span> <span class="mi">5</span><span class="p">:</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="mi">13</span>
+    <span class="k">elif</span> <span class="n">typ</span> <span class="o">==</span> <span class="mi">13</span><span class="p">:</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="mi">10</span>
+    <span class="k">elif</span> <span class="n">typ</span> <span class="o">==</span> <span class="mi">101</span><span class="p">:</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="mi">24</span>
+    <span class="k">elif</span> <span class="n">typ</span> <span class="o">==</span> <span class="mi">102</span><span class="p">:</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="mi">10</span>
+    <span class="k">elif</span> <span class="n">typ</span> <span class="o">==</span> <span class="mi">103</span><span class="p">:</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="mi">24</span>
+    <span class="k">elif</span> <span class="n">typ</span> <span class="o">==</span> <span class="mi">104</span><span class="p">:</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="mi">10</span>
+    <span class="k">elif</span> <span class="n">typ</span> <span class="o">==</span> <span class="mi">105</span><span class="p">:</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="mi">11</span>
+    <span class="k">elif</span> <span class="n">typ</span> <span class="o">==</span> <span class="mi">106</span><span class="p">:</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="mi">11</span>
+    <span class="k">elif</span> <span class="n">typ</span> <span class="o">==</span> <span class="mi">110</span><span class="p">:</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="mi">27</span>
+    <span class="k">elif</span> <span class="n">typ</span> <span class="o">==</span> <span class="mi">114</span><span class="p">:</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="mi">13</span>
+
+    <span class="k">return</span> <span class="n">ret</span></div>
+</pre></div>
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Kei Fukushima.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'1.0.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

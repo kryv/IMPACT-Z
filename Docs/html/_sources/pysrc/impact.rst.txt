@@ -1,0 +1,21 @@
+impact package
+==============
+
+Submodules
+----------
+
+.. toctree::
+
+   impact.const
+   impact.control
+   impact.input
+   impact.result
+   impact.util
+
+Module contents
+---------------
+
+.. automodule:: impact
+    :members:
+    :undoc-members:
+    :show-inheritance:

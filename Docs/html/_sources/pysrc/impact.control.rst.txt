@@ -1,0 +1,7 @@
+Sequence class -- run control API
+=================================
+
+.. automodule:: impact.control
+    :members:
+    :undoc-members:
+    :show-inheritance:
